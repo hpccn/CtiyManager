@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true" android:color="@color/radio_pressed"/>
+    <item android:state_active="true" android:color="@color/radio_selected"/>
+    <!-- not selected 
+    <item android:color="@color/radio_unselected"/>
+    -->
+    <item android:color="@color/radio_selected" android:state_checked="true" />
+    <item android:color="@color/radio_unselected" android:state_checked="false" />
+    
+</selector>

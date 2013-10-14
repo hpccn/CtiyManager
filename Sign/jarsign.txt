@@ -1,0 +1,39 @@
+
+Android创建私钥并为APK文件签名的相关命令
+
+创建私钥命令：
+keytool -genkey -keystore <path>.keystore -keyalg RSA -validity <days> -alias <private key>
+该命令位于jdk安装目录的bin目录下，用于创建签名用的私钥。
+其中:
+-genkey 表示创建私钥。
+-keystore 后面跟私钥仓库的名称，如果指定的仓库不存在，则创建一个新的仓库文件。
+-keyalg 表示加密方式，一般跟RSA即可。
+-validity 表示有效期限，单位为天，可以指定36500，即100年。
+-alias 表示要添加的私钥名称，这个名称会被添加并存储到仓库文件中。
+命令执行后，需要再输入一些信息，最后输入Y确认。
+其中涉及到两个密码，一个是私钥仓库的密码，一个是具体私钥的密码，可以相同。
+当输入完私钥的密码后，命令执行完成。
+
+签名命令：
+jarsigner -verbose -keystore <path>.keystore -signedjar <signed>.apk <unsigned>.apk <private key>
+该命令位于jdk安装目录的bin目录下，用于使用私钥对未签名APK进行签名。
+其中：
+-verbose 表示输出相关信息。
+-keystore 后面跟签名时使用的私钥所在的仓库文件。
+-signedjar 表示对文件进行签名，后面跟三个参数：
+第一个为签名后的文件名。
+第二个为未签名的文件名，可以使用Eclipse的插件Android Tools导出未签名APK。
+第三个是使用的私钥名称。
+命令执行后，需要输入相关密码，然后输出相关信息，直到命令结束。
+另外需要注意的是，如果是JDK1.7的版本，需要在签名命令后边添加如下参数：
+-digestalg SHA1 -sigalg MD5withRSA
+否则，最后签名的APK不能被安装，会提示以下错误：
+Failure [INSTALL_PARSE_FAILED_NO_CERTIFICATES]
+
+对齐优化命令：
+zipalign -v 4 <unaligned>.apk <aligned>.apk
+该命令位于sdk安装目录下的tools目录下，用于对已签名APK进行对齐优化。
+其中：
+-v 表示对齐的字节数，一般指定为4即可。
+后面紧跟的两个参数分别为未对齐优化的文件名和优化后的文件名。
+对已签名文件进行对齐优化后，可以得到更好的执行速度。

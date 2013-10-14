@@ -1,0 +1,56 @@
+{"transport":{
+		"kind":"food",
+		"id":10,
+		"session":100,
+		"content":[{
+			"level":1,
+			"status":2,
+			"business_licence":true,
+			"hygiene_licence":true,
+			"note":"note1",
+			"enterprise":"海天",
+			"principal":"茅台",
+			"time":1380962998588, 
+			"address":"bj aa",
+			"latitude":"38.112",
+			"longitude":"116.002",
+			"extra":[{ 
+				"key":"pic",
+				"value":"http://a.b.c/aa.jpg"
+				}]
+		}
+		,{
+			"level":2,
+			"status":2,
+			"business_licence":false,
+			"hygiene_licence":true,
+			"note":"note22222222222222222222222",
+			"enterprise":"海天2",
+			"principal":"李二",
+			"time":1380952998588, 
+			"address":"bj aa",
+			"latitude":"38.112",
+			"longitude":"116.002",
+			"extra":[{ 
+				"key":"pic",
+				"value":"http://a.b.c/aa22.jpg"
+				}]
+		}
+		,{
+			"level":3,
+			"status":2,
+			"business_licence":false,
+			"hygiene_licence":false,
+			"note":"海天3 note333333333333333333333333333",
+			"enterprise":"海天3",
+			"principal":"张三",
+			"time":1380942998588, 
+			"address":"bj aa",
+			"latitude":"38.112",
+			"longitude":"116.002",
+			"extra":[{ 
+				"key":"pic",
+				"value":"http://a.b.c/aabb.jpg"
+				}]
+		}]
+	}}

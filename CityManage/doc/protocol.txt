@@ -1,0 +1,113 @@
+
+快传通讯协议草稿
+
+V0.1.20130909	
+
+通信协议使用UTF-8编码。
+
+应用层与传输层数据交换格式使用json.
+
+
+// content 内容键值动态 增减，不同的事件写入不同的键值对。
+	{
+		"operate":"",
+		"session":100,
+		"content":[{
+			"type":, 
+			"sub_type":,
+			"level3_type":,
+			"level":, //等级
+			"status":, //状态
+			"title":"",// 
+			"content":"",//
+			"enterprise":"",
+			"principal":[""],
+			"time":[发现时间,提交时间,解决时间],
+			"address",
+			"latitude":"",
+			"longitude":"",
+			"extra":[{ // 扩展信息
+				"key":"",
+				"value":""
+				}...]
+		},...]
+	}
+
+
+访问Web接口时返回Json格式的页面。可以从浏览器中打开。
+
+1 用户名、密码，以post的方式发送
+2 
+
+
+// 食品 数据模板
+	{"transport":{
+		"kind":"food",
+		"id":
+		"session":100,
+		"content":[{
+			"level":, //等级
+			"status":, //状态
+			"business_licence":true|false, //营业执照
+			"hygiene_licence":true|false,//卫生许可证
+			"note":"",//
+			"enterprise":"",
+			"principal":[""],//负责人
+			"time":,//检查时间long 
+			"address":"",//
+			"latitude":"",
+			"longitude":"",
+			"extra":[{ // 扩展信息
+				"key":"pic",
+				"value":"http://a.b.c/aa.jpg"
+				},]
+		},]
+	}}
+	
+// 医疗诊所 数据模板
+	{"transport":{
+		"kind":"medical",
+		"id":
+		"session":100,
+		"content":[{
+			"level":, //等级
+			"status":, //状态
+			"business_licence":true|false, //营业执照
+			"medical_licence":true|false,//医生许可证
+			"note":"",//
+			"enterprise":"",
+			"principal":[""],//负责人
+			"time":,//检查时间long 
+			"address":"",//
+			"latitude":"",
+			"longitude":"",
+			"extra":[{ // 扩展信息
+				"key":"pic",
+				"value":"http://a.b.c/aa.jpg"
+				},]
+		},]
+	}}	
+	
+// 医疗诊所 数据模板
+	{"transport":{
+		"kind":"drug",
+		"id":
+		"session":100,
+		"content":[{
+			"level":, //等级
+			"status":, //状态
+			"business_licence":true|false, //营业执照
+			"drug_licence":true|false,//药品许可证
+			"note":"",//
+			"enterprise":"",
+			"principal":[""],//负责人
+			"time":,//检查时间long 
+			"address":"",//
+			"latitude":"",
+			"longitude":"",
+			"extra":[{ // 扩展信息
+				"key":"pic",
+				"value":"http://a.b.c/aa.jpg"
+				},]
+		},]
+	}}	

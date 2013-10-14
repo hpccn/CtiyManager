@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <color name ="transparent">#00000000</color>
+    
+    <!--  -->
+    <color name="separate_line">#40AEA595</color>
+
+    <color name="radio_selected">#FFffff00</color>
+    <color name="radio_pressed">#FF000080</color>
+    <color name="radio_unselected">#FF00ff00</color>
+    
+    <color name="title_background">#aF336633</color>
+	<color name="title_text">#aF0000FF</color>
+	
+    <!-- 架子 -->
+    <color name="shelf_toolbar_text">#FFFFFFFF</color>
+    <color name ="listnoselector">#00000000</color>
+    <color name="list_item_color">#a58555</color>
+    <!-- 全局 -->
+    <color name="titlebar_title_font_color">#FF333333</color>
+    <color name="titlebar_title_font_pressed_color">#FF33B5E5</color>
+    <color name="title2_font_color">#FFFFFFFF</color>
+    
+  
+   
+    <color name="banner_item_title_bg">#B2000000</color>
+    
+    <color name="gridview_item_selector">#00404040</color>
+    
+    <color name="edit_gridview_item_mask">#40FFFFFF</color>
+    
+</resources>
