@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">CityManage</string>
+    <string name="app_name">高丽营镇综合服务平台</string>
     <string name="action_settings">Settings</string>
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
+    
+    <string name="event_manager">事件管理</string>
+    <string name="essential_manager">基本信息</string>
+    <string name="main_title">高丽营镇综合服务平台</string> 
+    
+    
+    <string name="welcome">掌上高丽营欢迎您!</string> 
     
     <string name="discovery_time">发现时间</string>
     <string name="submission_time">提交时间</string>
@@ -27,7 +34,9 @@
     <string name="hint_time">时间</string>
     
     <string name="business_licence">营业执照</string>
-     
+    
+    <string name="add_event">请点击此处新增事件</string>
+    
     <!-- 食品、药品 -->
     <string name="food_drug_examination">食品、药品安全隐患</string>
     <string name="food_drug_examination_sub_title">餐饮企业卫生许可证、从业人员健康证等信息的提交</string>

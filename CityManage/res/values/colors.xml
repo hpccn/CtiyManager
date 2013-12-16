@@ -3,12 +3,22 @@
 
     <color name ="transparent">#00000000</color>
     
+    <color name ="bottom_toolbar_background">#FF191919</color>
+    <color name ="bottom_background">#FF00a3f8</color>
+    
+    <color name ="welcome_background">#FF00cbff</color>
+    
+    <!-- top button -->
+    <color name ="btn_category_normal">#FFC5C5C5</color>
+    <color name ="btn_category_focus">#FF68E9FE</color>
+      
+     <color name="titlebar_text">#FFFFFFFF</color>  
     <!--  -->
     <color name="separate_line">#40AEA595</color>
 
-    <color name="radio_selected">#FFffff00</color>
-    <color name="radio_pressed">#FF000080</color>
-    <color name="radio_unselected">#FF00ff00</color>
+    <color name="radio_selected">#FFffffff</color>
+    <color name="radio_pressed">#FF000000</color>
+    <color name="radio_unselected">#FF000000</color>
     
     <color name="title_background">#aF336633</color>
 	<color name="title_text">#aF0000FF</color>

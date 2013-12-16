@@ -28,8 +28,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="vertical"
-             >
+            android:orientation="vertical" >
 
             <LinearLayout style="@style/horizontalCenter" >
 
@@ -39,30 +38,42 @@
 
                 <CheckBox
                     android:id="@+id/cb_infringement_personal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_column="1"
                     android:text="@string/infringement_personal" />
 
                 <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/cb_property_violation"
                     android:layout_column="1"
                     android:text="@string/property_violation" />
 
                 <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/cb_economic_crime"
                     android:layout_column="1"
                     android:text="@string/economic_crime" />
 
                 <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/cb_public_security"
                     android:layout_column="1"
                     android:text="@string/public_security" />
 
                 <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/cb_duty_crime"
                     android:layout_column="1"
                     android:text="@string/duty_crime" />
 
                 <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/cb_endanger_society"
                     android:layout_column="1"
                     android:text="@string/endanger_society" />
@@ -71,11 +82,15 @@
             <LinearLayout style="@style/horizontalCenter" >
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_column="0"
                     android:layout_gravity="right"
                     android:text="@string/legal_person" />
 
                 <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/et_legal_person"
                     android:ems="10" />
             </LinearLayout>
@@ -83,11 +98,15 @@
             <LinearLayout style="@style/horizontalCenter" >
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_column="0"
                     android:layout_gravity="right"
                     android:text="@string/address" />
 
                 <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/et_address"
                     android:ems="10" />
             </LinearLayout>
@@ -95,11 +114,15 @@
             <LinearLayout style="@style/horizontalCenter" >
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_column="0"
                     android:layout_gravity="right"
                     android:text="@string/discovery_time" />
 
                 <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/discovery_date_time"
                     android:ems="10" />
             </LinearLayout>
@@ -107,11 +130,15 @@
             <LinearLayout style="@style/horizontalCenter" >
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_column="0"
                     android:layout_gravity="right"
                     android:text="@string/submission_time" />
 
                 <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/submission_date_time"
                     android:ems="10" />
             </LinearLayout>
@@ -119,16 +146,22 @@
             <LinearLayout style="@style/horizontalCenter" >
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_column="0"
                     android:layout_gravity="right"
                     android:text="@string/additional_content" />
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_column="0"
                     android:layout_gravity="right"
                     android:text="@string/village" />
 
                 <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/village"
                     android:ems="10" />
             </LinearLayout>
@@ -136,11 +169,15 @@
             <LinearLayout style="@style/horizontalCenter" >
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_column="0"
                     android:layout_gravity="right"
                     android:text="@string/district_code" />
 
                 <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/district_code"
                     android:ems="10" />
             </LinearLayout>
@@ -148,11 +185,15 @@
             <LinearLayout style="@style/horizontalCenter" >
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_column="0"
                     android:layout_gravity="right"
                     android:text="@string/district_administrator" />
 
                 <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/district_administrator"
                     android:ems="10" />
             </LinearLayout>
@@ -160,11 +201,15 @@
             <LinearLayout style="@style/horizontalCenter" >
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_column="0"
                     android:layout_gravity="right"
                     android:text="@string/danger_code" />
 
                 <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/danger_code"
                     android:ems="10" />
             </LinearLayout>
@@ -172,11 +217,15 @@
             <LinearLayout style="@style/horizontalCenter" >
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_column="0"
                     android:layout_gravity="right"
                     android:text="@string/danger_level" />
 
                 <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/danger_level"
                     android:ems="10" />
             </LinearLayout>
@@ -184,6 +233,8 @@
             <LinearLayout style="@style/horizontalCenter" >
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_column="0"
                     android:layout_gravity="right"
                     android:text="@string/status" />
@@ -218,11 +269,15 @@
             <LinearLayout style="@style/horizontalCenter" >
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_column="0"
                     android:layout_gravity="right"
                     android:text="@string/solution_process" />
 
                 <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/solution_process"
                     android:ems="10" />
             </LinearLayout>
@@ -255,11 +310,15 @@
                 -->
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_column="0"
                     android:layout_gravity="right"
                     android:text="@string/completion_time" />
 
                 <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/completion_date_time"
                     android:ems="10" />
             </LinearLayout>

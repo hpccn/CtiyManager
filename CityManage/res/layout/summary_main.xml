@@ -1,22 +1,47 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/main_backguard_repeat"
     android:orientation="vertical" >
 
+    <!--
+    <TextView
+        android:id="@+id/main_title"
+        style="@style/mainTitle"
+        android:textColor="@color/title_text" />
+    -->
+
     <include
-        android:visibility="gone"
+        android:id="@+id/id_titlebar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
-        layout="@layout/toolbar" />
+        android:layout_alignParentTop="true"
+        layout="@layout/summary_titlebar" />
 
-
-    <ListView
-        android:id="@+id/summary_list"
+    <include
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:fadeScrollbars="true"
-        android:fadingEdge="vertical"
-        android:fadingEdgeLength="20dp" />
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/id_add_event"
+        android:layout_below="@+id/id_titlebar"
+        layout="@layout/summary_layout" />
 
-</LinearLayout>
+    <Button
+        android:id="@+id/id_add_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_event"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/btn_default_holo_light"
+        android:drawableLeft="@drawable/ic_add_event"
+        android:layout_above="@+id/id_bottom_toolbar"
+         />
+
+    <include
+        android:id="@+id/id_bottom_toolbar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        layout="@layout/bottom_toolbar" />
+
+</RelativeLayout>
