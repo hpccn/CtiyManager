@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+ >
+
+    
+    <include
+        
+        android:id="@+id/id_bottom_toolbar_grade_manager"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/bottom_toolbar" />
+    
+    <include
+        android:id="@+id/id_bottom_toolbar_event_manager"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/bottom_toolbar_event_manager" />
+    
+
+</FrameLayout>

@@ -1,0 +1,149 @@
+{
+    "transport": {
+        "kind": "IllegalStructure",
+        "id": 10,
+        "session": 100,
+        "content": [
+            {
+                "netid": 1,
+                "villagename": "村名",
+                "netname": "网格名称",
+                "eventtype": "事件类型",
+                "eventid": "事件ID",
+                "committime": 1380962998588,
+                "discoverername": "发现人",
+                "discovererlevel": "发现人级别",
+                "leaderinstruction": "领导批示",
+                "voiceinstruction": "语音批示",
+                "instructiontime": "批示日期",
+                "leaderid": "批示人id",
+                "leadername": "批示人姓名",
+                "netleadername": "格长姓名",
+                "netleadertel": "格长电话",
+                "updatename": "最近更新人",
+                "updatelevel": "更新人级别",
+                "updatetime": 1380962998588,
+                "updateid": "更新人id",
+                "remark": "备注",
+                "yinhuanaddress": "违法建设具体位置",
+                "weijianxiangduiren": "违法建设相对人",
+                "yinhuanxiangqing": "隐患描述",
+                "landstatus": "土地性质",
+                "landarea": "占地面积（亩）",
+                "construction": "建筑结构",
+                "jianzhumianji": 100,
+                "buildtime": 1380962998588,
+                "solvemethod": "当日新发现和拆除情况",
+                "yinhuanren": "涉及人姓名",
+                "yinhuanlianluo": "涉及人联系方式",
+                "jianshedate": 1380962998588,
+                "solvestatus": "解决状态",
+                "solvetime": 1380962998588,
+                "unsolvedreason": "未解决原因",
+                "latitude": "38.112",
+                "longitude": "116.002",
+                "photo": [
+                    {
+                        "uploaddate": 1380962998588,
+                        "position": "照片地理信息",
+                        "loadperson": "照片上传人",
+                        "photouploadlevel": "照片上传人级别",
+                        "url": "http: //a.b.c/potho1.jpg",
+                        "latitude": 38.112,
+                        "longitude": 116.002
+                    }
+                ],
+                "video": [
+                    {
+                        "uploaddate": 1380962998588,
+                        "position": "视频地理信息",
+                        "loadperson": "视频上传人",
+                        "photouploadlevel": "视频上传人级别",
+                        "url": "http: //a.b.c/video1.mp4",
+                        "latitude": "38.112",
+                        "longitude": "116.002"
+                    }
+                ]
+            },
+            {
+                "netid": 1,
+                "villagename": "村名",
+                "netname": "网格名称",
+                "eventtype": "事件类型",
+                "eventid": "事件ID",
+                "committime": 1380962998588,
+                "discoverername": "发现人",
+                "discovererlevel": "发现人级别",
+                "leaderinstruction": "领导批示",
+                "voiceinstruction": "语音批示",
+                "instructiontime": "批示日期",
+                "leaderid": "批示人id",
+                "leadername": "批示人姓名",
+                "netleadername": "格长姓名",
+                "netleadertel": "格长电话",
+                "updatename": "最近更新人",
+                "updatelevel": "更新人级别",
+                "updatetime": 1380962998588,
+                "updateid": "更新人id",
+                "remark": "备注",
+                "yinhuanaddress": "违法建设具体位置",
+                "weijianxiangduiren": "违法建设相对人",
+                "yinhuanxiangqing": "隐患描述",
+                "landstatus": "土地性质",
+                "landarea": "占地面积（亩）",
+                "construction": "建筑结构",
+                "jianzhumianji": 100,
+                "buildtime": 1380962998588,
+                "solvemethod": "当日新发现和拆除情况",
+                "yinhuanren": "涉及人姓名",
+                "yinhuanlianluo": "涉及人联系方式",
+                "jianshedate": 1380962998588,
+                "solvestatus": "解决状态",
+                "solvetime": 1380962998588,
+                "unsolvedreason": "未解决原因",
+                "latitude": "38.112",
+                "longitude": "116.002",
+                "photo": [
+                    {
+                        "uploaddate": 1380962998588,
+                        "position": "照片地理信息",
+                        "loadperson": "照片上传人",
+                        "photouploadlevel": "照片上传人级别",
+                        "url": "http: //a.b.c/potho1.jpg",
+                        "latitude": 38.112,
+                        "longitude": 116.002
+                    },
+                    {
+                        "uploaddate": 1380962998588,
+                        "position": "照片地理信息2",
+                        "loadperson": "照片上传人2",
+                        "photouploadlevel": "照片上传人级别2",
+                        "url": "http: //a.b.c/potho2.jpg",
+                        "latitude": 38.112,
+                        "longitude": 116.002
+                    }
+                ],
+                "video": [
+                    {
+                        "uploaddate": 1380962998588,
+                        "position": "视频地理信息",
+                        "loadperson": "视频上传人",
+                        "photouploadlevel": "视频上传人级别",
+                        "url": "http: //a.b.c/video1.mp4",
+                        "latitude": "38.112",
+                        "longitude": "116.002"
+                    },
+                    {
+                        "uploaddate": 1380962998588,
+                        "position": "视频地理信息2",
+                        "loadperson": "视频上传人2",
+                        "photouploadlevel": "视频上传人级别2",
+                        "url": "http: //a.b.c/video2.mp4",
+                        "latitude": "38.212",
+                        "longitude": "116.002"
+                    }
+                ]
+            }
+        ]
+    }
+}

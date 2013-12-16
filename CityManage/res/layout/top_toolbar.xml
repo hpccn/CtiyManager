@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <RadioGroup
+        android:id="@+id/radio_manager"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/btn_event_manager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_category_selector"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center_horizontal"
+            android:padding="5sp"
+            android:text="@string/event_manager"
+            android:textColor="@color/color_selector_top_toolbar" />
+
+        <RadioButton
+            android:padding="5sp"
+            android:id="@+id/btn_grade_manager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/essential_manager"
+            android:gravity="center_horizontal"
+            android:background="@drawable/btn_category_selector"
+            android:textColor="@color/color_selector_top_toolbar"
+            android:button="@null" />
+    </RadioGroup>
+
+</LinearLayout>
