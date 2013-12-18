@@ -53,14 +53,14 @@ public class SummaryActivity extends Activity {
 	List <BaseContent> events;
 	private void init(final Context context) throws JSONException, IOException{
 		
-		tvTitle = (TextView)this.findViewById(R.id.id_title);
+		tvTitle = (TextView)this.findViewById(R.id.id_titlebar_title);
 //		tvTitle.setText(category);
 
 
 		
 		
 		StringBuilder sb=new StringBuilder();
-		InputStream is = this.getAssets().open("IllegalStructure.json");//("food.txt");
+		InputStream is = this.getAssets().open("IllegalStructure.json");//("food.txt");//
 		InputStreamReader isr = new InputStreamReader(is);
 		BufferedReader br = new BufferedReader(isr);
 		String str = null;

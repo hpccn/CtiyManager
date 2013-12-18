@@ -1,15 +1,13 @@
 package cn.city.manager.fragment;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import cn.city.manager.R;
@@ -28,8 +26,12 @@ public class FoodDrugFragment extends BaseFragment {
 	private String jsonData;
 	private FoodEvent foodEvent;
 	private View contentView;
+	private ViewGroup parent;
+	private Context context;
 	@Override
-	public View getView(Context context) {
+	public View getView(Context context, ViewGroup parent) {
+		this.parent= parent;
+		this.context = context;
 		contentView = View.inflate(context, R.layout.fragment_food_drug, null);
 		invalidateView(context, contentView);
 		return contentView;
@@ -40,7 +42,9 @@ public class FoodDrugFragment extends BaseFragment {
 	@Override
 	public String getTitle() {
 		// TODO Auto-generated method stub
-		return "食品药品";
+		return context.getResources().getString(R.string.food_drug_examination);
+		
+
 	}
 
 
@@ -90,14 +94,15 @@ public class FoodDrugFragment extends BaseFragment {
 		cb = (CheckBox) contentView.findViewById(R.id.cb_hygiene_licence);
 		cb.setChecked(foodEvent.isHygieneLicence());
 		
-		contentView.findViewById(R.id.commit).setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				
-				
-			}
-		});
+		
+//		contentView.findViewById(R.id.commit).setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				
+//				
+//			}
+//		});
 	}
 
 
@@ -106,5 +111,12 @@ public class FoodDrugFragment extends BaseFragment {
 	public BaseContent getBaseContent() {
 		// TODO Auto-generated method stub
 		return foodEvent;
+	}
+
+
+
+	@Override
+	public String getSubTitle() {
+		return context.getResources().getString(R.string.food_drug_examination_sub_title);
 	}
 }

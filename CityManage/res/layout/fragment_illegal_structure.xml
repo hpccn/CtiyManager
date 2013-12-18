@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -9,212 +9,133 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity$DummySectionFragment" >
 
-    <TextView
-        android:id="@+id/id_title"
-        style="@style/mainTitle"
-        android:text="@string/illegal_structure_examination" />
-
-    <TextView
-        android:id="@+id/id_sub_title"
-        style="@style/subTitle"
-        android:text="@string/illegal_structure_examination_sub_title" />
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_weight="1" >
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical" >
+        <LinearLayout style="@style/horizontalCenter" >
 
-            <LinearLayout style="@style/horizontalCenter" >
+            <TextView
+                style="@style/thirdTitle"
+                android:text="@string/landlord" />
 
-                <TextView
-                    style="@style/thirdTitle"
-                    android:text="@string/examination_time" />
+            <EditText
+                android:id="@+id/et_landlord"
+                style="@style/generalEditText"
+                android:ems="10"
+                android:hint="@string/illegal_structure_landlord" />
+        </LinearLayout>
 
-                <EditText
-                    android:id="@+id/examination_date_time"
-                    style="@style/generalEditText"
-                    android:ems="10"
-                    android:hint="@string/hint_time" />
-            </LinearLayout>
+        <LinearLayout style="@style/horizontalCenter" >
 
-            <LinearLayout style="@style/horizontalCenter" >
+            <TextView
+                style="@style/thirdTitle"
+                android:text="@string/land_property" />
 
-                <TextView
-                    style="@style/thirdTitle"
-                    android:text="@string/address" />
+            <EditText
+                android:id="@+id/et_land_property"
+                style="@style/generalEditText"
+                android:ems="10"
+                android:hint="@string/land_property" />
+        </LinearLayout>
 
-                <EditText
-                    android:id="@+id/et_address"
-                    style="@style/generalEditText"
-                    android:ems="10"
-                    android:hint="@string/illegal_structure_address" />
-            </LinearLayout>
+        <LinearLayout style="@style/horizontalCenter" >
 
-            <LinearLayout style="@style/horizontalCenter" >
+            <TextView
+                style="@style/thirdTitle"
+                android:text="@string/land_area" />
 
-                <TextView
-                    style="@style/thirdTitle"
-                    android:text="@string/landlord" />
+            <EditText
+                android:id="@+id/et_land_area"
+                style="@style/generalEditText"
+                android:ems="10"
+                android:hint="@string/land_area" />
+        </LinearLayout>
 
-                <EditText
-                    android:id="@+id/et_landlord"
-                    style="@style/generalEditText"
-                    android:ems="10"
-                    android:hint="@string/illegal_structure_landlord" />
-            </LinearLayout>
+        <LinearLayout style="@style/horizontalCenter" >
 
-            <LinearLayout style="@style/horizontalCenter" >
+            <TextView
+                style="@style/thirdTitle"
+                android:text="@string/building_structure" />
 
-                <TextView
-                    style="@style/thirdTitle"
-                    android:text="@string/land_property" />
+            <EditText
+                android:id="@+id/et_building_structure"
+                style="@style/generalEditText"
+                android:hint="@string/building_structure" />
+        </LinearLayout>
 
-                <EditText
-                    android:id="@+id/et_land_property"
-                    style="@style/generalEditText"
-                    android:ems="10"
-                    android:hint="@string/land_property" />
-            </LinearLayout>
+        <LinearLayout style="@style/horizontalCenter" >
 
-            <LinearLayout style="@style/horizontalCenter" >
+            <TextView
+                style="@style/thirdTitle"
+                android:text="@string/building_area" />
 
-                <TextView
-                    style="@style/thirdTitle"
-                    android:text="@string/land_area" />
+            <EditText
+                android:id="@+id/et_building_area"
+                style="@style/generalEditText"
+                android:ems="10"
+                android:hint="@string/building_area" />
+        </LinearLayout>
 
-                <EditText
-                    android:id="@+id/et_land_area"
-                    style="@style/generalEditText"
-                    android:ems="10"
-                    android:hint="@string/land_area" />
-            </LinearLayout>
+        <LinearLayout style="@style/horizontalCenter" >
 
-            <LinearLayout style="@style/horizontalCenter" >
+            <TextView
+                style="@style/thirdTitle"
+                android:text="@string/construction_time" />
 
-                <TextView
-                    style="@style/thirdTitle"
-                    android:text="@string/building_structure" />
+            <EditText
+                android:id="@+id/et_construction_time"
+                style="@style/generalEditText"
+                android:ems="10"
+                android:hint="@string/construction_time" />
+        </LinearLayout>
 
-                <EditText
-                    android:id="@+id/et_building_structure"
-                    style="@style/generalEditText"
-                    android:hint="@string/building_structure" />
-            </LinearLayout>
+        <LinearLayout style="@style/horizontalCenter" >
 
-            <LinearLayout style="@style/horizontalCenter" >
+            <TextView
+                style="@style/thirdTitle"
+                android:text="@string/discovery_time" />
 
-                <TextView
-                    style="@style/thirdTitle"
-                    android:text="@string/building_area" />
+            <EditText
+                android:id="@+id/et_discovery_time"
+                style="@style/generalEditText"
+                android:ems="10"
+                android:hint="@string/discovery_time" />
+        </LinearLayout>
 
-                <EditText
-                    android:id="@+id/et_building_area"
-                    style="@style/generalEditText"
-                    android:ems="10"
-                    android:hint="@string/building_area" />
-            </LinearLayout>
+        <LinearLayout style="@style/horizontalCenter" >
 
-            <LinearLayout style="@style/horizontalCenter" >
+            <TextView
+                style="@style/thirdTitle"
+                android:text="@string/circumstance_category" />
 
-                <TextView
-                    style="@style/thirdTitle"
-                    android:text="@string/construction_time" />
+            <RadioGroup
+                android:id="@+id/radiogroup_circumstance_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
 
-                <EditText
-                    android:id="@+id/et_construction_time"
-                    style="@style/generalEditText"
-                    android:ems="10"
-                    android:hint="@string/construction_time" />
-            </LinearLayout>
-
-            <LinearLayout style="@style/horizontalCenter" >
-
-                <TextView
-                    style="@style/thirdTitle"
-                    android:text="@string/discovery_time" />
-
-                <EditText
-                    android:id="@+id/et_discovery_time"
-                    style="@style/generalEditText"
-                    android:ems="10"
-                    android:hint="@string/discovery_time" />
-            </LinearLayout>
-
-            <LinearLayout style="@style/horizontalCenter" >
-
-                <TextView
-                    style="@style/thirdTitle"
-                    android:text="@string/circumstance_category" />
-
-                <RadioGroup
-                    android:id="@+id/radiogroup_circumstance_category"
+                <RadioButton
+                    android:id="@+id/rb_circumstance_category_newfound"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:checked="true"
+                    android:text="@string/circumstance_category_newfound" />
 
-                    <RadioButton
-                        android:id="@+id/rb_circumstance_category_newfound"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="@string/circumstance_category_newfound" />
+                <RadioButton
+                    android:id="@+id/rb_circumstance_category_dismantlement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/circumstance_category_dismantlement" />
 
-                    <RadioButton
-                        android:id="@+id/rb_circumstance_category_dismantlement"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/circumstance_category_dismantlement" />
-
-                    <RadioButton
-                        android:id="@+id/rb_circumstance_category_outher"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/circumstance_category_outher" />
-                </RadioGroup>
-            </LinearLayout>
-
-            <LinearLayout style="@style/horizontalCenter" >
-
-                <TextView
-                    style="@style/thirdTitle"
-                    android:text="@string/note" />
-
-                <EditText
-                    android:id="@+id/et_note"
-                    style="@style/generalEditText"
-                    android:ems="10"
-                    android:hint="@string/note" />
-            </LinearLayout>
+                <RadioButton
+                    android:id="@+id/rb_circumstance_category_outher"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/circumstance_category_outher" />
+            </RadioGroup>
         </LinearLayout>
-    </ScrollView>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginTop="20dp"
-        android:layout_weight="0" >
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="20dp"
-            android:layout_weight="0"
-            android:text="@string/commit" />
-
-        <Button
-            android:id="@+id/cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:text="@string/cancel" />
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

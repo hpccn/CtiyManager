@@ -6,19 +6,19 @@
     android:orientation="horizontal" >
 
     <Button
-        android:id="@+id/btn_add_picture"
+        android:id="@+id/btn_add_video"
         style="@style/thirdTitle"
-        android:text="@string/snapshot" />
+        android:text="@string/videotape" />
 
     <ImageSwitcher
-        android:id="@+id/picture"
+        android:id="@+id/video"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minHeight="20dp"
         android:minWidth="20dp" />
 
     <Gallery
-        android:id="@+id/gallery"
+        android:id="@+id/gallery_video"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="#55000000"

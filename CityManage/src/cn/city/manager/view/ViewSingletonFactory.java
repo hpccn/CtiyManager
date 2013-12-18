@@ -46,6 +46,11 @@ public class ViewSingletonFactory {
 			, "环境安全", "食品安全", "药品安全"
 			, "违章建筑", "卫生所检查", "无照经营"
 			, "矛盾排查", "刑事案件", "交通安全"};
+	final private String[] eventCategoryEn = {"生产安全", "消防安全", "煤气中毒"
+			, "环境安全", "食品安全", "药品安全"
+			, "IllegalStructure", "卫生所检查", "无照经营"
+			, "矛盾排查", "刑事案件", "交通安全"};
+
 	final private Class<?>[] clzCategorys = {GeneralFragment.class, GeneralFragment.class, GeneralFragment.class
 			, SanitationFragment.class, FoodDrugFragment.class, FoodDrugFragment.class
 			, IllegalStructureFragment.class, GeneralFragment.class, UnlicensedVendorFragment.class
@@ -65,6 +70,11 @@ public class ViewSingletonFactory {
 		for (int i = 0, length = eventCategory.length; i < length; ++i){
 			categorys.put(eventCategory[i], clzCategorys[i]);
 		}
+		for (int i = 0, length = eventCategoryEn.length; i < length; ++i){
+			categorys.put(eventCategoryEn[i], clzCategorys[i]);
+		}
+		
+		
 	}
 	private void init2(){
 //		fragments.add(MainFragment.class);

@@ -1,15 +1,20 @@
 package cn.city.manager.model.food;
 
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 import cn.city.manager.model.BaseContent;
 
 
 
-public class FoodEvent implements BaseContent {
+public class FoodEvent extends BaseContent {
 
 	private int level;
 	private String status; //状态
@@ -20,13 +25,26 @@ public class FoodEvent implements BaseContent {
 	private String principal;//负责人
 	private long time;//检查时间long 
 	private String address;//
-	private String latitude;
-	private String longitude;
+	private double latitude;
+	private double longitude;
 	
+	String[] properties = {"level",
+	"status", //状态
+	"businessLicence", //营业执照
+	"hygieneLicence",//卫生许可证
+	"note",//
+	"enterprise",
+	"principal",//负责人
+	"time",//检查时间long 
+	"address",//
+	"latitude",
+	"longitude"
+	};
 	public final static String category = "food";
 	
 	public FoodEvent(){
 		time = System.currentTimeMillis();
+		init();
 	}
 	
 	public FoodEvent(JSONObject jObj){
@@ -34,6 +52,7 @@ public class FoodEvent implements BaseContent {
 			time = System.currentTimeMillis();
 			return;
 		}
+		init();
 		try {
 			fromJSONObject(jObj);
 		} catch (Exception e) {
@@ -58,53 +77,63 @@ public class FoodEvent implements BaseContent {
 	@Override
 	public BaseContent fromJSONObject(JSONObject jObj) throws JSONException {
 		if (null == jObj) return null;
+		Object obj;
+		for (String property : properties) {
+			if (jObj.has(property)){
+				obj = jObj.get(property);
+				Log.d("", property + " : " + obj);
+				setProperty("set"+property, obj);
+			}
+		}
+
+
 		
-		if (jObj.has("level")){
-			level = jObj.getInt("level");
-		}
-		
-		if (jObj.has("status")){
-			status = jObj.getString("status");
-		}
-
-		if (jObj.has("business_licence")){
-			businessLicence = jObj.getBoolean("business_licence");
-		}
-		
-		if (jObj.has("hygiene_licence")){
-			hygieneLicence = jObj.getBoolean("hygiene_licence");//卫生许可证
-		}
-
-		if (jObj.has("note")){
-			note = jObj.getString("note");
-		}
-		
-
-		if (jObj.has("enterprise")){
-			enterprise = jObj.getString("enterprise");
-		}
-
-		if (jObj.has("principal")){
-			principal = jObj.getString("principal");//负责人
-		}
-		
-
-		if (jObj.has("time")){
-			time = jObj.getLong("time");//检查时间long 
-		}
-
-		if (jObj.has("address")){
-			address = jObj.getString("address");
-		}
-
-
-		if (jObj.has("latitude")){
-			latitude = jObj.getString("latitude");
-		}
-
-		if (jObj.has("longitude")){
-			longitude = jObj.getString("longitude");
-		}
+//		if (jObj.has("level")){
+//			level = jObj.getInt("level");
+//		}
+//		
+//		if (jObj.has("status")){
+//			status = jObj.getString("status");
+//		}
+//
+//		if (jObj.has("business_licence")){
+//			businessLicence = jObj.getBoolean("business_licence");
+//		}
+//		
+//		if (jObj.has("hygiene_licence")){
+//			hygieneLicence = jObj.getBoolean("hygiene_licence");//卫生许可证
+//		}
+//
+//		if (jObj.has("note")){
+//			note = jObj.getString("note");
+//		}
+//		
+//
+//		if (jObj.has("enterprise")){
+//			enterprise = jObj.getString("enterprise");
+//		}
+//
+//		if (jObj.has("principal")){
+//			principal = jObj.getString("principal");//负责人
+//		}
+//		
+//
+//		if (jObj.has("time")){
+//			time = jObj.getLong("time");//检查时间long 
+//		}
+//
+//		if (jObj.has("address")){
+//			address = jObj.getString("address");
+//		}
+//
+//
+//		if (jObj.has("latitude")){
+//			latitude = jObj.getDouble("latitude");
+//		}
+//
+//		if (jObj.has("longitude")){
+//			longitude = jObj.getDouble("longitude");
+//		}
 		
 		return this;
 	}
@@ -165,16 +194,16 @@ public class FoodEvent implements BaseContent {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(String latitude) {
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
-	public String getLongitude() {
+	public double getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(String longitude) {
+	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
 

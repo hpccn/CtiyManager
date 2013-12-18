@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import cn.city.manager.R;
@@ -28,8 +29,10 @@ public class GeneralFragment extends BaseFragment {
 	private String jsonData;
 	private FoodEvent foodEvent;
 	private View contentView;
+	private ViewGroup parent;
 	@Override
-	public View getView(Context context) {
+	public View getView(Context context, ViewGroup parent) {
+		this.parent= parent;
 		contentView = View.inflate(context, R.layout.fragment_food_drug, null);
 		invalidateView(context, contentView);
 		return contentView;
@@ -106,5 +109,13 @@ public class GeneralFragment extends BaseFragment {
 	public BaseContent getBaseContent() {
 		// TODO Auto-generated method stub
 		return foodEvent;
+	}
+
+
+
+	@Override
+	public String getSubTitle() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

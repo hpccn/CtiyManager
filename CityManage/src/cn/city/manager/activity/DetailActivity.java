@@ -16,11 +16,13 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Gallery;
+import android.widget.TextView;
 import cn.city.manager.R;
 import cn.city.manager.location.Location;
 import cn.city.manager.location.LocationListener;
@@ -45,12 +47,19 @@ public class DetailActivity extends Activity {
 	private Gallery gallery;
 	private ImageAdapter imageAdapter;
 	private BaseContent baseContent;
+	private View mainView;
+	private TextView tvMainTitle, tvSubTitle;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		Log.i("", "" + System.currentTimeMillis());
-		setContentView(R.layout.detail_main);
+		mainView = View.inflate(this, R.layout.detail_main, null);
+		setContentView(mainView);//(R.layout.detail_main);
+		
+		tvMainTitle = (TextView) mainView.findViewById(R.id.id_main_title);
+		tvSubTitle = (TextView) mainView.findViewById(R.id.id_sub_title);
+		
 		jsonValue = this.getIntent().getStringExtra("jsonValue");
 		if (null != jsonValue)
 			Log.i("", jsonValue);
@@ -118,7 +127,7 @@ public class DetailActivity extends Activity {
 		fragment.setJsonData(jsonValue);
 		FrameLayout fl = (FrameLayout) this.findViewById(R.id.detail_container);
 		fl.removeAllViews();
-		fl.addView(fragment.getView(this));
+		fl.addView(fragment.getView(this, (ViewGroup)mainView));
 		try {
 			init();
 		} catch (Exception e) {
@@ -137,14 +146,16 @@ public class DetailActivity extends Activity {
 				
 				
 				// TODO Auto-generated method stub
-				baseContent.setLatitude("" + latitude);
-				baseContent.setLongitude("" + longitude);
+				baseContent.setLatitude(latitude);
+				baseContent.setLongitude(longitude);
 				baseContent.setAddress(address);
 				
 				((EditText) findViewById(R.id.et_address)).setText(address + ", latitude:" + latitude + ", longitude:" + longitude);
 			}
 			
 		});
+		tvMainTitle.setText(fragment.getTitle());
+		tvSubTitle.setText(fragment.getSubTitle());
 	}
 	
 	private void invalidate(){
@@ -284,7 +295,7 @@ public class DetailActivity extends Activity {
 	 };
 
 	private void setDateTime(){
-		 DateTimePickerDialog dateTimePicKDialog = new DateTimePickerDialog(this);
+		DateTimePickerDialog dateTimePicKDialog = new DateTimePickerDialog(this);
 		dateTimePicKDialog.dateTimePicKDialog(listener, baseContent.getTime());
 		
 	}

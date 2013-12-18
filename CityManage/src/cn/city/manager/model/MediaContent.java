@@ -1,7 +1,7 @@
 package cn.city.manager.model;
 
 public class MediaContent {
-    private long uploadDate;//": 1380962998588,
+    private long uploaddate;//": 1380962998588,
     private String position;//": "照片地理信息",
     private String loadperson;//": "照片上传人",
     private String photouploadlevel;//": "照片上传人级别",
@@ -11,12 +11,7 @@ public class MediaContent {
     private double longitude;//": 116.002
     
     
-	public long getUploadDate() {
-		return uploadDate;
-	}
-	public void setUploadDate(long uploadDate) {
-		this.uploadDate = uploadDate;
-	}
+
 	public String getPosition() {
 		return position;
 	}
@@ -58,5 +53,11 @@ public class MediaContent {
 	}
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
+	}
+	public long getUploaddate() {
+		return uploaddate;
+	}
+	public void setUploaddate(long uploaddate) {
+		this.uploaddate = uploaddate;
 	}
 }

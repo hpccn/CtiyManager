@@ -91,13 +91,22 @@
                 android:text="@string/hygiene_licence" />
         </LinearLayout>
 
+        <FrameLayout
+            android:id="@+id/detail_container"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
         <include
-            android:id="@+id/layout_picture"
+            android:id="@+id/id_layout_note"
+            layout="@layout/layout_note" />
+
+        <include
+            android:id="@+id/id_layout_picture"
             layout="@layout/layout_picture" />
 
         <include
-            android:id="@+id/layout_note"
-            layout="@layout/layout_note" />
+            android:id="@+id/id_layout_video"
+            layout="@layout/layout_video" />
     </LinearLayout>
 
 </ScrollView>

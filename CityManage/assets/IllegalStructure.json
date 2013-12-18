@@ -130,7 +130,7 @@
                         "loadperson": "视频上传人",
                         "photouploadlevel": "视频上传人级别",
                         "url": "http: //a.b.c/video1.mp4",
-                        "latitude": 38.112",
+                        "latitude": 38.112,
                         "longitude": 116.002
                     },
                     {
@@ -140,7 +140,7 @@
                         "photouploadlevel": "视频上传人级别2",
                         "url": "http: //a.b.c/video2.mp4",
                         "latitude": 38.212,
-                        "longitude": 116.002"
+                        "longitude": 116.002
                     }
                 ]
             }

@@ -17,8 +17,10 @@ import cn.city.manager.model.BaseFragment;
 public class SanitationFragment extends BaseFragment {
 	public static final String ARG_SECTION_NUMBER = "section_number";
 	
+	private ViewGroup parent;
 	@Override
-	public View getView(Context context) {
+	public View getView(Context context, ViewGroup parent) {
+		this.parent= parent;
 		View rootView = View.inflate(context, R.layout.fragment_sanitation,
 				null);
 		
@@ -45,6 +47,14 @@ public class SanitationFragment extends BaseFragment {
 
 	@Override
 	public BaseContent getBaseContent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public String getSubTitle() {
 		// TODO Auto-generated method stub
 		return null;
 	}

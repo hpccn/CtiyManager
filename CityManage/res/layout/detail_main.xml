@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="fill_parent"
     android:background="@drawable/main_backguard_repeat"
     android:orientation="vertical" >
 
+    <!--
+         android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    -->
     <!--
     <TextView
         android:id="@+id/main_title"
@@ -19,13 +25,46 @@
         android:layout_alignParentTop="true"
         layout="@layout/summary_titlebar" />
 
-    <FrameLayout
-        android:id="@+id/detail_container"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/id_titlebar"
-	 />
+        android:layout_above="@+id/id_detail_bottom_toolbar"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/id_main_title"
+            style="@style/mainTitle"
+            android:text="@string/illegal_structure_examination" />
+
+        <TextView
+            android:id="@+id/id_sub_title"
+            style="@style/subTitle"
+            android:text="@string/illegal_structure_examination_sub_title" />
+
+        <include
+            android:id="@+id/id_detail_general"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            layout="@layout/detail_general" />
 <!-- 
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1" >
+
+            <FrameLayout
+                android:id="@+id/detail_container"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+        </ScrollView>
+ -->
+             <!-- android:layout_below="@+id/id_titlebar" -->
+
+        <!--
         android:layout_above="@+id/id_add_event"
 
     <Button
@@ -37,12 +76,14 @@
         android:background="@drawable/btn_default_holo_light"
         android:drawableLeft="@drawable/ic_add_event"
         android:text="@string/add_event" />
+        -->
 
+    </LinearLayout>
     <include
-        android:id="@+id/id_bottom_toolbar"
+        android:id="@+id/id_detail_bottom_toolbar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        layout="@layout/bottom_toolbar" />
- -->
+        layout="@layout/detail_bottom_toolbar" />
+    
 </RelativeLayout>

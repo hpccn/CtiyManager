@@ -1,21 +1,23 @@
 package cn.city.manager.model.structure;
 
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import cn.city.manager.model.BaseContent;
 import cn.city.manager.model.MediaContent;
 
-public class StructureEvent implements BaseContent {
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+public class StructureEvent extends BaseContent {
 	public final static String category = "IllegalStructure";
 
 //	private long time;
@@ -59,11 +61,18 @@ public class StructureEvent implements BaseContent {
 	private double longitude;// ": "116.002"
 	private List<MediaContent> photos = new ArrayList<MediaContent>();
 	private List<MediaContent> videos = new ArrayList<MediaContent>();
-
-	private String[] jsDoubles = {"jianzhumianji", "landarea", "latitude",
-            "longitude"};
-	private String[] jsLongs = {"netid", "committime","instructiontime","updatetime", "buildtime", "jianshedate","solvetime"};
-	private String[] jsStrings = {"villagename", "netname", "eventtype",
+	
+	private String[] medias = {"photo", "video"};
+	
+	private String[] jsStrings = {
+			//double
+			"jianzhumianji", "landarea"
+			, "latitude", "longitude"
+			// long
+			,"netid", "committime","instructiontime"
+			,"updatetime", "buildtime", "jianshedate","solvetime"
+			// string
+			,"villagename", "netname", "eventtype",
             "eventid",
             "discoverername",
             "discovererlevel",
@@ -96,12 +105,12 @@ public class StructureEvent implements BaseContent {
            };
 	
 	public StructureEvent() {
-		init();
+		super();
 //		time = System.currentTimeMillis();
 	}
 
 	public StructureEvent(JSONObject jObj) {
-		init();
+		super();
 //		if (null == jObj) {
 //			time = System.currentTimeMillis();
 //			return;
@@ -133,45 +142,49 @@ public class StructureEvent implements BaseContent {
 		
 //		yinhuanxiangqing = jObj.getString("yinhuanxiangqing");
 
-		String tmp = null;
+		Object obj = null;
 		for (String str : jsStrings){
 			if (jObj.has(str)) {
-				tmp = jObj.getString(str);
-				setProperty("set"+str, tmp);
+//				Log.d("", str);
+				obj = jObj.get(str);
+				setProperty("set"+str, obj);
 
 //				 Field field = this.getClass().getDeclaredField(str);
 //				 boolean accessible = field.isAccessible();
 //				field.setAccessible(true);
-//				field.set(this, tmp);
+//				field.set(this, obj);
 //				field.setAccessible(accessible);
 			}
 		}
 		
-		for (String str : jsDoubles){
-			if (jObj.has(str)) {
-				setProperty("set"+str, jObj.getDouble(str));
-//				this.getClass().getDeclaredField(str).setDouble(str, jObj.getDouble(str));
-				
-//				 Field field = this.getClass().getDeclaredField(str);
-//				 boolean accessible = field.isAccessible();
-//				field.setAccessible(true);
-//				field.set(this, jObj.getDouble(str));
-//				field.setAccessible(accessible);
-			}
-		}
 		
-		for (String str : jsLongs){
-			if (jObj.has(str)) {
-				setProperty("set"+str, jObj.getLong(str));
+		Type listType = new TypeToken<LinkedList<MediaContent>>(){}.getType();
+		Gson gson = new Gson();
+		LinkedList<MediaContent> extras;
 
-//				
-//				 Field field = this.getClass().getDeclaredField(str);
-//				 boolean accessible = field.isAccessible();
-//				field.setAccessible(true);
-//				field.set(this, jObj.getLong(str));
-//				field.setAccessible(accessible);
-			}
+		
+		String listExtra = "photo";
+		if (jObj.has(listExtra)){
+			obj = jObj.get(listExtra);
+			extras = gson.fromJson(obj.toString(), listType);
+			photos.addAll(extras);
 		}
+		
+//		for (Iterator iterator = users.iterator(); iterator.hasNext();) {
+//			MediaContent media = (MediaContent) iterator.next();
+//			System.out.println(media.getFile());
+//		}
+
+		listExtra = "video";
+		if (jObj.has(listExtra)){
+			obj = jObj.get(listExtra);
+			extras = gson.fromJson(obj.toString(), listType);
+			videos.addAll(extras);
+
+		}
+
+		
+
 		
 		return this;
 	}
@@ -212,17 +225,7 @@ public class StructureEvent implements BaseContent {
 
 	}
 
-	@Override
-	public void setLatitude(String latitude) {
-		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public void setLongitude(String longitude) {
-		// TODO Auto-generated method stub
-
-	}
 
 	public int getNetid() {
 		return netid;
@@ -534,31 +537,6 @@ public class StructureEvent implements BaseContent {
 
 	public void setVideos(List<MediaContent> videos) {
 		this.videos = videos;
-	}
-
-	
-	final private Map <String, Method> methodMap = new HashMap<String, Method>();
-	private void init(){
-		Class<?> userClass = this.getClass();//Class.forName(this.getClass());// 加载类
-		Method[] methods = userClass.getDeclaredMethods();// 获得类的方法集合
-		for (int i = 0; i < methods.length; i++){
-			if (methods[i].getName().startsWith("set")) {
-				methodMap.put(methods[i].getName().toLowerCase(), methods[i]);
-//				Object object = methods[i].invoke(o);
-//				System.out.println(" " + methods[i].getName() + "() : " + object);
-			}
-		}
-
-	}
-	private void setProperty(String property, Object v){
-		Method method = methodMap.get(property.toLowerCase());
-		try {
-//			this.getClass().getDeclaredField(property).set(property, v);
-			method.invoke(this, v);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	@Override
