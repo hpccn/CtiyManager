@@ -196,5 +196,17 @@ public class FoodEvent implements BaseContent {
 		return null;
 	}
 
+	@Override
+	public String getVillage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getCell() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

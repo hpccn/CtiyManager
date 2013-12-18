@@ -42,8 +42,17 @@ public class SummaryAdapter extends BaseAdapter {
 		if (null == convertView) {
 			convertView = View.inflate(context, R.layout.summary_listitem, null);
 		}
-		TextView tv = (TextView) convertView.findViewById(R.id.id_summary_item_title);
+		
+		
+		
+		TextView tv = (TextView) convertView.findViewById(R.id.id_summary_item_hidden_danger);
 		tv.setText(list.get(position).getContent());
+		
+		tv = (TextView) convertView.findViewById(R.id.id_summary_item_village);
+		tv.setText(list.get(position).getVillage());
+		
+		tv = (TextView) convertView.findViewById(R.id.id_summary_item_cell);
+		tv.setText(list.get(position).getCell());
 		return convertView;
 	}
 

@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -18,6 +19,7 @@ import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 import cn.city.manager.R;
 import cn.city.manager.model.CategoryMeta;
 import cn.city.manager.view.ActionAdapter;
@@ -156,21 +158,34 @@ public class EntryActivity extends Activity {
 	private GridView liveGridView;
 	private ActionAdapter actionAdapter;
 
-	private View browse(Context context, List<CategoryMeta> categoryMetas){
+	private View browse(final Context context, List<CategoryMeta> categoryMetas){
 //		setMainTitle("分类浏览");
 		actionAdapter = new ActionAdapter(context, categoryMetas);//ViewSingletonFactory.getInstance().getEventCategory());
 		View rootView = View.inflate(context, R.layout.fragment_live_grid, null);
+		// 获取屏幕密度 
+		DisplayMetrics dm = new DisplayMetrics();  
+		dm = getResources().getDisplayMetrics();  
 		
+//		  
+//		float density = dm.density;        // 屏幕密度（像素比例：0.75/1.0/1.5/2.0）  
+//		BitmapFactory.Options opts = new BitmapFactory.Options();
+//        opts.inScaled = false;
+//		Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), categoryMetas.get(0).getDrawableId(), opts);
+
 		Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), categoryMetas.get(0).getDrawableId());
 		int w = bmp.getWidth();
 		int h = bmp.getHeight();
 		int columnWidth = w > h ? w: h;
-		columnWidth = columnWidth + w /4;
-		
+		columnWidth = columnWidth + w / 8;
+//		columnWidth /= density;
+//		int column = dm.widthPixels / (columnWidth + columnWidth / 4);
 		liveGridView =  (GridView) rootView.findViewById(R.id.live_gridview);
+		
+
 		liveGridView.setColumnWidth(columnWidth);
+//		liveGridView.setNumColumns(column);
 		liveGridView.setAdapter(actionAdapter);
-		liveGridView.setVerticalSpacing(h / 2);
+		liveGridView.setVerticalSpacing(h / 8);
 		liveGridView.setOnItemClickListener(new OnItemClickListener(){
 
 			@Override
@@ -178,6 +193,10 @@ public class EntryActivity extends Activity {
 					int position, long id) {
 				// TODO Auto-generated method stub
 //				onNavigationItemSelected(position, id);
+				if (position != 0 || R.id.btn_event_manager != radioManager.getCheckedRadioButtonId()){
+					Toast.makeText(context, "我们的攻城师正在夜以继日的开发中, 更多功能, 请您稍候!", Toast.LENGTH_LONG).show();
+					return;
+				}
 				Intent intent = new Intent(EntryActivity.this, SummaryActivity.class);
 				CategoryMeta cm = eventCategory.getCategoryMeta(position);
 				String category = null;

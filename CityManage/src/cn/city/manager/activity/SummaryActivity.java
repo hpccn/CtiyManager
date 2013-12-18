@@ -60,7 +60,7 @@ public class SummaryActivity extends Activity {
 		
 		
 		StringBuilder sb=new StringBuilder();
-		InputStream is = this.getAssets().open("food.txt");
+		InputStream is = this.getAssets().open("IllegalStructure.json");//("food.txt");
 		InputStreamReader isr = new InputStreamReader(is);
 		BufferedReader br = new BufferedReader(isr);
 		String str = null;

@@ -6,8 +6,8 @@
         "content": [
             {
                 "netid": 1,
-                "villagename": "村名",
-                "netname": "网格名称",
+                "villagename": "村名1",
+                "netname": "网格99",
                 "eventtype": "事件类型",
                 "eventid": "事件ID",
                 "committime": 1380962998588,
@@ -15,7 +15,7 @@
                 "discovererlevel": "发现人级别",
                 "leaderinstruction": "领导批示",
                 "voiceinstruction": "语音批示",
-                "instructiontime": "批示日期",
+                "instructiontime": 1380962998588,
                 "leaderid": "批示人id",
                 "leadername": "批示人姓名",
                 "netleadername": "格长姓名",
@@ -29,9 +29,9 @@
                 "weijianxiangduiren": "违法建设相对人",
                 "yinhuanxiangqing": "隐患描述",
                 "landstatus": "土地性质",
-                "landarea": "占地面积（亩）",
+                "landarea": 100.2,
                 "construction": "建筑结构",
-                "jianzhumianji": 100,
+                "jianzhumianji": 100.3,
                 "buildtime": 1380962998588,
                 "solvemethod": "当日新发现和拆除情况",
                 "yinhuanren": "涉及人姓名",
@@ -40,8 +40,8 @@
                 "solvestatus": "解决状态",
                 "solvetime": 1380962998588,
                 "unsolvedreason": "未解决原因",
-                "latitude": "38.112",
-                "longitude": "116.002",
+                "latitude": 38.112,
+                "longitude": 116.002,
                 "photo": [
                     {
                         "uploaddate": 1380962998588,
@@ -60,15 +60,15 @@
                         "loadperson": "视频上传人",
                         "photouploadlevel": "视频上传人级别",
                         "url": "http: //a.b.c/video1.mp4",
-                        "latitude": "38.112",
-                        "longitude": "116.002"
+                        "latitude": 38.112,
+                        "longitude": 116.002
                     }
                 ]
             },
             {
                 "netid": 1,
-                "villagename": "村名",
-                "netname": "网格名称",
+                "villagename": "村名2",
+                "netname": "网格2",
                 "eventtype": "事件类型",
                 "eventid": "事件ID",
                 "committime": 1380962998588,
@@ -76,7 +76,7 @@
                 "discovererlevel": "发现人级别",
                 "leaderinstruction": "领导批示",
                 "voiceinstruction": "语音批示",
-                "instructiontime": "批示日期",
+                "instructiontime": 1380962998588,
                 "leaderid": "批示人id",
                 "leadername": "批示人姓名",
                 "netleadername": "格长姓名",
@@ -90,9 +90,9 @@
                 "weijianxiangduiren": "违法建设相对人",
                 "yinhuanxiangqing": "隐患描述",
                 "landstatus": "土地性质",
-                "landarea": "占地面积（亩）",
+                "landarea": 300.5,
                 "construction": "建筑结构",
-                "jianzhumianji": 100,
+                "jianzhumianji": 200.5,
                 "buildtime": 1380962998588,
                 "solvemethod": "当日新发现和拆除情况",
                 "yinhuanren": "涉及人姓名",
@@ -101,8 +101,8 @@
                 "solvestatus": "解决状态",
                 "solvetime": 1380962998588,
                 "unsolvedreason": "未解决原因",
-                "latitude": "38.112",
-                "longitude": "116.002",
+                "latitude": 38.112,
+                "longitude": 116.002,
                 "photo": [
                     {
                         "uploaddate": 1380962998588,
@@ -130,8 +130,8 @@
                         "loadperson": "视频上传人",
                         "photouploadlevel": "视频上传人级别",
                         "url": "http: //a.b.c/video1.mp4",
-                        "latitude": "38.112",
-                        "longitude": "116.002"
+                        "latitude": 38.112",
+                        "longitude": 116.002
                     },
                     {
                         "uploaddate": 1380962998588,
@@ -139,8 +139,8 @@
                         "loadperson": "视频上传人2",
                         "photouploadlevel": "视频上传人级别2",
                         "url": "http: //a.b.c/video2.mp4",
-                        "latitude": "38.212",
-                        "longitude": "116.002"
+                        "latitude": 38.212,
+                        "longitude": 116.002"
                     }
                 ]
             }

@@ -17,6 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import cn.city.manager.model.food.FoodEvent;
+import cn.city.manager.model.structure.StructureEvent;
 
 import android.util.Log;
 
@@ -48,6 +49,7 @@ public class EventSingletonFactory {
 		}
 
 		strategy.put(FoodEvent.category, FoodEvent.class);
+		strategy.put(StructureEvent.category, StructureEvent.class);
 		// strategy.put(RoutineHelper.GENERAL_MANAGER_POLICY,
 		// EbenManager.class);
 		//
@@ -135,14 +137,14 @@ public class EventSingletonFactory {
 		List<BaseContent> list = null;
 		try {
 			list = parse(jObj);
-		} catch (JSONException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list;
 	}
 
-	public List<BaseContent> parse(JSONObject jObj) throws JSONException {
+	public List<BaseContent> parse(JSONObject jObj) throws Exception {
 		if (null == jObj)
 			return null;
 		if (!jObj.has("transport"))

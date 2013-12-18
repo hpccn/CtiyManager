@@ -1,6 +1,5 @@
 package cn.city.manager.model;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.graphics.drawable.Drawable;
@@ -9,8 +8,11 @@ public interface BaseContent {
 	public boolean isMe(String category);
 	public String getCategory();
 	public JSONObject toJSONObject();
-	public BaseContent fromJSONObject(JSONObject jObj)throws JSONException;
+	public BaseContent fromJSONObject(JSONObject jObj)throws Exception;
 	public String getContent();
+	public String getVillage();
+	public String getCell();
+
 	public Drawable getIcon(); 
 	
 	public long getTime();
