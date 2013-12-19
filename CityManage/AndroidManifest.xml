@@ -21,14 +21,16 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
-        android:name="cn.city.manager.MainApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_lanucher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-
+<!--         android:name="cn.city.manager.MainApplication"
+ -->
         <!-- 百度定位 key -->
         <meta-data
             android:name="baidu_loc_key"
@@ -51,8 +53,8 @@
         </activity>
         <activity
             android:name="cn.city.manager.activity.LaunchActivity"
-            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

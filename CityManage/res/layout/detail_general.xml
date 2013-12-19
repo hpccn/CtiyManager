@@ -32,27 +32,11 @@
 
             <TextView
                 style="@style/thirdTitle"
-                android:text="@string/enterprise_name" />
-
-            <EditText
-                android:id="@+id/et_enterprise_name"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/enterprise_name" />
-        </LinearLayout>
-
-        <LinearLayout style="@style/horizontalCenter" >
-
-            <TextView
-                style="@style/thirdTitle"
                 android:text="@string/legal_person" />
 
             <EditText
                 android:id="@+id/et_legal_person"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
+                style="@style/generalEditText"
                 android:hint="@string/legal_person" />
         </LinearLayout>
 
@@ -64,38 +48,57 @@
 
             <EditText
                 android:id="@+id/et_address"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
+                style="@style/generalEditText"
                 android:hint="@string/address" />
         </LinearLayout>
+
 
         <LinearLayout style="@style/horizontalCenter" >
 
             <TextView
                 style="@style/thirdTitle"
-                android:text="@string/examination_content" />
+                android:text="@string/villagename" />
 
-            <CheckBox
-                android:id="@+id/cb_business_licence"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:text="@string/business_licence" />
-
-            <CheckBox
-                android:id="@+id/cb_hygiene_licence"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:text="@string/hygiene_licence" />
+            <EditText
+                android:id="@+id/et_villagename"
+                style="@style/generalEditText"
+                android:hint="@string/villagename" />
         </LinearLayout>
-
+   
+		<include
+            android:id="@+id/id_net"
+            layout="@layout/detail_general_net" />
+        
+        
+		<include
+            android:id="@+id/id_event"
+            layout="@layout/detail_general_event" />
+        
+		<include
+            android:id="@+id/id_discoverer"
+            layout="@layout/detail_general_discoverer" />
+        
+		<include
+            android:id="@+id/id_leader"
+            layout="@layout/detail_general_leader" />
+        
+		<include
+            android:id="@+id/id_netleader"
+            layout="@layout/detail_general_netleader" />
+		
+		<include
+            android:id="@+id/id_updater"
+            layout="@layout/detail_general_updater" />
+		
+        
+        
+        
+<!-- 非公有属性 -->        
         <FrameLayout
             android:id="@+id/detail_container"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
-
+<!-- 公有属性 -->    
         <include
             android:id="@+id/id_layout_note"
             layout="@layout/layout_note" />

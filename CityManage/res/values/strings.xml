@@ -30,7 +30,7 @@
     <string name="environmental_health">操作间环境卫生</string>
     
     <string name="commit">提交</string>
-    <string name="cancel">取消</string>
+    <string name="cancel">返回</string>
     <string name="hint_time">时间</string>
     
     <string name="business_licence">营业执照</string>
@@ -140,4 +140,27 @@
     <string name="browse_category">分类浏览</string>
     <string name="new_category">新的事件</string>
     
+    <!-- 公用 -->
+    <string name="netid">网格ID</string>
+    <string name="netname">网格名称</string>
+    <string name="villagename">村名</string>
+    <string name="eventtype">事件类型</string>
+    <string name="eventid">事件ID</string>    
+    <string name="discoverername">发现人</string>    
+    <string name="discovererlevel">发现人级别</string>    
+    <string name="leaderid">批示人ID</string>    
+    <string name="leadername">批示人姓名</string>    
+    <string name="netleadername">格长姓名</string>    
+    <string name="netleadertel">格长电话</string>    
+    <!-- 
+    <string name=""></string>    
+    <string name=""></string>    
+    <string name=""></string>    
+    <string name=""></string>    
+    <string name=""></string>    
+    <string name=""></string>    
+    <string name=""></string>    
+    <string name=""></string>    
+    <string name=""></string>    
+     -->
 </resources>

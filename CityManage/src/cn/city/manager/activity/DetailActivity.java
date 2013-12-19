@@ -4,8 +4,13 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.os.Bundle;
@@ -35,14 +40,19 @@ import cn.city.manager.view.ViewSingletonFactory;
 public class DetailActivity extends Activity {
 	public static final int NONE = 0;
 
-	public static final int PHOTOHRAPH = 1;// 拍照
+	public static final int IMAGE_CAPTURE = 1;// 拍照
 
 	public static final int PHOTOZOOM = 2; // 缩放
 
 	public static final int PHOTORESOULT = 3;// 结果
 
+	
+	
 	public static final String IMAGE_UNSPECIFIED = "image/*";
 
+	public static final int VIDEO_CAPTURE = 4;// 拍照
+
+	
 	private String jsonValue;
 	private Gallery gallery;
 	private ImageAdapter imageAdapter;
@@ -149,8 +159,16 @@ public class DetailActivity extends Activity {
 				baseContent.setLatitude(latitude);
 				baseContent.setLongitude(longitude);
 				baseContent.setAddress(address);
-				
-				((EditText) findViewById(R.id.et_address)).setText(address + ", latitude:" + latitude + ", longitude:" + longitude);
+				JSONObject jObj = new JSONObject();
+				try {
+					jObj.put("latitude", latitude);
+					jObj.put("longitude", longitude);
+					jObj.put("address", address);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				((EditText) findViewById(R.id.et_address)).setText(jObj.toString());
 			}
 			
 		});
@@ -163,24 +181,10 @@ public class DetailActivity extends Activity {
 	}
 
 	private void  init () throws NullPointerException{
-		this.findViewById(R.id.btn_add_picture).setOnClickListener(
-				new View.OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						Intent intent = new Intent(
-								MediaStore.ACTION_IMAGE_CAPTURE);
-
-						// intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri
-						// .fromFile(new File(Environment
-						// .getExternalStorageDirectory(),
-						// "temp.jpg")));
-
-						startActivityForResult(intent, PHOTOHRAPH);
-
-					}
-				});
-
+		findViewById(R.id.btn_add_picture).setOnClickListener(onClickListener);
+		findViewById(R.id.btn_add_video).setOnClickListener(onClickListener);
+		findViewById(R.id.btn_commit).setOnClickListener(onClickListener);
+		findViewById(R.id.btn_cancel).setOnClickListener(onClickListener);
 		gallery = (Gallery) findViewById(R.id.gallery);
 		imageAdapter = new ImageAdapter(this);
 		gallery.setAdapter(imageAdapter);
@@ -203,6 +207,8 @@ public class DetailActivity extends Activity {
 		
 		initToolBar();
 	}
+	
+	
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -211,14 +217,11 @@ public class DetailActivity extends Activity {
 
 			return;
 
-		// 拍照
-
-		if (requestCode == PHOTOHRAPH) {
-
+		switch(requestCode){
+		case IMAGE_CAPTURE: {// 拍照//if (requestCode == PHOTOHRAPH)
 			// 设置文件保存路径这里放在跟目录下
 
-			File pictureFile = new File(
-					Environment.getExternalStorageDirectory() + "/temp.jpg");
+			File pictureFile = new File(Environment.getExternalStorageDirectory() + "/temp.jpg");
 			Bundle extras = data.getExtras();
 			Bitmap b = (Bitmap) extras.get("data");
 			Bitmap bmp = small(b);
@@ -227,6 +230,28 @@ public class DetailActivity extends Activity {
 			imageAdapter.notifyDataSetChanged();
 			// startPhotoZoom(Uri.fromFile(picture));
 
+		} 
+		break;
+		case VIDEO_CAPTURE:	 {
+			Cursor cursor = getContentResolver().query(data.getData(), null,
+					null, null, null);
+			cursor.moveToFirst();
+			String mediaFilePath = cursor.getString(1);
+			cursor.close();
+			File mMediaFile = new File(mediaFilePath);
+			Log.d("", "VIDEO_CAPTURE : " + mediaFilePath);
+//			File pictureFile = new File(
+//					Environment.getExternalStorageDirectory() + "/temp.jpg");
+//			Bundle extras = data.getExtras();
+//			Bitmap b = (Bitmap) extras.get("data");
+//			Bitmap bmp = small(b);
+//
+//			imageAdapter.addBitmap(bmp);// (pictureFile);
+//			imageAdapter.notifyDataSetChanged();
+			// startPhotoZoom(Uri.fromFile(picture));
+
+		} 
+		break;
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
@@ -266,21 +291,53 @@ public class DetailActivity extends Activity {
 		}
 	}
 	
-	private View.OnClickListener onClickListener = new View.OnClickListener() {
+	final protected View.OnClickListener onClickListener = new View.OnClickListener() {
 		
 		@Override
 		public void onClick(View v) {
 			switch (v.getId()){
+			case R.id.btn_cancel:
+				DetailActivity.this.finish();
+				break;
+			case R.id.btn_commit:
+				break;
 			case R.id.examination_date_time:
 				setDateTime();
 				break;
+				
+			case R.id.btn_add_picture:{
+				Intent intent = new Intent(
+						MediaStore.ACTION_IMAGE_CAPTURE);
+
+				// intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri
+				// .fromFile(new File(Environment
+				// .getExternalStorageDirectory(),
+				// "temp.jpg")));
+
+				startActivityForResult(intent, IMAGE_CAPTURE);
+			}
+				break;
+			case R.id.btn_add_video:{
+				Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+				
+				// intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri
+				// .fromFile(new File(Environment
+				// .getExternalStorageDirectory(),
+				// "temp.jpg")));
+
+				startActivityForResult(intent, VIDEO_CAPTURE);
+			}
+				break;
+				
+			
 			default:
 			}
 			
 		}
 	};
 	
-	 DateTimePickerDialog.OnDateTimeChangedListener listener  = new DateTimePickerDialog.OnDateTimeChangedListener(){
+
+	final protected DateTimePickerDialog.OnDateTimeChangedListener listener  = new DateTimePickerDialog.OnDateTimeChangedListener(){
 
 		@Override
 		public void onDateTimeChanged(long millisecond) {
