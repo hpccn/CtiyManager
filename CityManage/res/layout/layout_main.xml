@@ -11,26 +11,41 @@
         style="@style/mainTitle"
         android:textColor="@color/title_text" />
     -->
+
     <include
         android:id="@+id/id_titlebar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         layout="@layout/titlebar" />
-    
-    <include
-        android:id="@+id/id_top_toolbar"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-         android:layout_below="@+id/id_titlebar"
-        layout="@layout/top_toolbar" />
 
     <FrameLayout
         android:id="@+id/main_container"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_above="@+id/id_bottom_toolbar"
-        android:layout_below="@+id/id_top_toolbar" />
+        android:layout_below="@+id/id_titlebar"
+        android:orientation="vertical"
+         >
+         <include
+            android:id="@+id/id_top_toolbar"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            layout="@layout/event_main_frame" />
+<!-- 
+        <include
+            android:id="@+id/id_top_toolbar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/top_toolbar" />
+
+        <FrameLayout
+            android:id="@+id/main_container"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+ -->
+        <!-- android:layout_below="@+id/id_top_toolbar" -->
+    </FrameLayout>
 
     <include
         android:id="@+id/id_bottom_toolbar"

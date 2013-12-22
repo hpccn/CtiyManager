@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/main_backguard_repeat"
+    android:orientation="vertical" >
+<!-- android:background="@drawable/main_backguard_repeat" 
+
+    <TextView
+        android:id="@+id/main_title"
+        style="@style/mainTitle"
+        android:text="更多功能,"
+        android:textColor="@color/title_text" />
+-->
+
+    <Button
+        android:id="@+id/btn_upgrade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/btn_default_holo_light"
+        android:gravity="center"
+        android:text="@string/check_upgrade" />
+</LinearLayout>

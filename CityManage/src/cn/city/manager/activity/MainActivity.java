@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Menu;
-import android.widget.Toast;
 import cn.city.manager.R;
 import cn.city.manager.view.ViewSingletonFactory;
 
@@ -19,7 +18,7 @@ public class MainActivity extends FragmentActivity
 	 * The serialization (saved instance state) Bundle key representing the
 	 * current dropdown position.
 	 */
-	private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
+//	private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
 
 
 	@Override
@@ -162,7 +161,7 @@ public class MainActivity extends FragmentActivity
 //		System.exit(0);
 		
 	}
-	private long exitTime = 0;   
+//	private long exitTime = 0;   
 
 //	private void openMain(){
 //

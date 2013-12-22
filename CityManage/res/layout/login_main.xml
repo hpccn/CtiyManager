@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/main_backguard_repeat"
+    android:orientation="vertical"
+    android:padding="0dip" >
+
+    <include
+        android:id="@+id/id_titlebar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/summary_titlebar" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dip"
+        android:gravity="center"
+        android:text="@string/login_main"
+        android:textSize="@dimen/main_title_text_size" />
+
+    <EditText
+        android:id="@+id/et_user_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_holo_dark"
+        android:clickable="true"
+        android:hint="@string/user_name"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/et_user_mobile"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_holo_dark"
+        android:clickable="true"
+        android:hint="@string/user_mobile"
+        android:singleLine="true"
+        android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_holo_light"
+        android:clickable="true"
+        android:hint="@string/password"
+        android:password="true"
+        android:singleLine="true" />
+
+    <CheckBox
+        android:id="@+id/chk_save_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:gravity="center"
+        android:text="@string/save_login" />
+
+    <CheckBox
+        android:id="@+id/chk_auto_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:gravity="center"
+        android:text="@string/auto_login" />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/btn_default_holo_light"
+        android:gravity="center"
+        android:text="@string/login" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dip"
+        android:layout_weight="0"
+        android:autoLink="all"
+        android:gravity="right"
+        android:text="@string/login_tips"
+        android:visibility="gone" />
+
+</LinearLayout>

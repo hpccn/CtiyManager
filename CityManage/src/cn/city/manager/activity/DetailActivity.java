@@ -1,20 +1,16 @@
 package cn.city.manager.activity;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
@@ -91,10 +87,10 @@ public class DetailActivity extends Activity {
 		public void dispatchMessage(Message msg) {
 			switch (msg.what) {
 			case 0x1001:
-				Bundle b = msg.getData();
-				double latitude = b.getDouble("latitude");
-				double longitude = b.getDouble("longitude");
-				String address = b.getString("address");
+//				Bundle b = msg.getData();
+//				double latitude = b.getDouble("latitude");
+//				double longitude = b.getDouble("longitude");
+//				String address = b.getString("address");
 
 				break;
 			default:
@@ -176,9 +172,7 @@ public class DetailActivity extends Activity {
 		tvSubTitle.setText(fragment.getSubTitle());
 	}
 	
-	private void invalidate(){
-		
-	}
+
 
 	private void  init () throws NullPointerException{
 		findViewById(R.id.btn_add_picture).setOnClickListener(onClickListener);
@@ -221,7 +215,7 @@ public class DetailActivity extends Activity {
 		case IMAGE_CAPTURE: {// 拍照//if (requestCode == PHOTOHRAPH)
 			// 设置文件保存路径这里放在跟目录下
 
-			File pictureFile = new File(Environment.getExternalStorageDirectory() + "/temp.jpg");
+//			File pictureFile = new File(Environment.getExternalStorageDirectory() + "/temp.jpg");
 			Bundle extras = data.getExtras();
 			Bitmap b = (Bitmap) extras.get("data");
 			Bitmap bmp = small(b);
@@ -238,7 +232,7 @@ public class DetailActivity extends Activity {
 			cursor.moveToFirst();
 			String mediaFilePath = cursor.getString(1);
 			cursor.close();
-			File mMediaFile = new File(mediaFilePath);
+//			File mMediaFile = new File(mediaFilePath);
 			Log.d("", "VIDEO_CAPTURE : " + mediaFilePath);
 //			File pictureFile = new File(
 //					Environment.getExternalStorageDirectory() + "/temp.jpg");

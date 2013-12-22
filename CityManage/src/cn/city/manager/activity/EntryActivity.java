@@ -1,7 +1,5 @@
 package cn.city.manager.activity;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
@@ -9,32 +7,33 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 import cn.city.manager.R;
 import cn.city.manager.model.CategoryMeta;
+import cn.city.manager.model.Page;
 import cn.city.manager.view.ActionAdapter;
 import cn.city.manager.view.BaseCategory;
 import cn.city.manager.view.DateTimePickerDialog;
 import cn.city.manager.view.EventCategory;
 import cn.city.manager.view.GradeCategory;
-import cn.city.manager.view.ViewSingletonFactory;
+import cn.city.manager.view.More;
+import cn.city.manager.view.Statistics;
 
 public class EntryActivity extends Activity {
 
-	private FrameLayout mainFrameLayout;
+	private FrameLayout eventFrameLayout, mainFrameLayout;
 	private View toolbarGrade, toolbarEvent;
 	private Context context;
-	private RadioGroup radioManager;
+	private RadioGroup radioManager, toolbarMini, toolbarFull;
+	
+	private Page statistics, more;
 //	TextView tvTitle;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +43,19 @@ public class EntryActivity extends Activity {
 		init();
 		setContentView(R.layout.layout_main);
 //		tvTitle = (TextView) this.findViewById(R.id.main_title);
+		
 		mainFrameLayout = (FrameLayout) this.findViewById(R.id.main_container);
-		mainFrameLayout.removeAllViews();
+		eventFrameLayout = (FrameLayout) this.findViewById(R.id.event_main_container);
+		eventFrameLayout.removeAllViews();
 		
 		radioManager = (RadioGroup)this.findViewById(R.id.radio_manager);
 		
 		toolbarGrade = this.findViewById(R.id.id_bottom_toolbar_grade_manager);
 		toolbarEvent = this.findViewById(R.id.id_bottom_toolbar_event_manager);
+		
+		toolbarMini = (RadioGroup) this.findViewById(R.id.id_bottom_toolbar_mini);
+		toolbarFull = (RadioGroup) this.findViewById(R.id.id_bottom_toolbar_full);
+		
 		
 		toolbarGrade.setVisibility(View.GONE);
 		toolbarEvent.setVisibility(View.VISIBLE);
@@ -63,6 +68,9 @@ public class EntryActivity extends Activity {
 	private void init(){
 		eventCategory = new EventCategory();
 		gradeCategory = new GradeCategory();
+		
+		statistics = new Statistics(this);
+		more = new More(this);
 	}
 	
 //	private void selectTab(int id){
@@ -86,40 +94,81 @@ public class EntryActivity extends Activity {
 		}
 	}
 	
+	private void initEventOnClickListener(){
+		eventFrameLayout = (FrameLayout) this.findViewById(R.id.event_main_container);
+		eventFrameLayout.removeAllViews();
+		int [] ids = {R.id.btn_event_manager, R.id.btn_grade_manager};//, R.id.btn_login, R.id.btn_fun
+		for (int id : ids) {
+			View v = this.findViewById(id);
+			if (null != v){
+				v.setOnClickListener(onClickListener);
+			}
+		}
+	}
+	private void showBottomToolbarMini(int id){
+		toolbarGrade.setVisibility(View.GONE);
+		toolbarEvent.setVisibility(View.VISIBLE);
+	}
+	private void showBottomToolbarFull(int id){
+		toolbarEvent.setVisibility(View.GONE);
+		toolbarGrade.setVisibility(View.VISIBLE);
+	}
+	
+
+	private View viewChild;
+	
 	final private View.OnClickListener onClickListener = new View.OnClickListener() {
 		
 		@Override
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.btn_event_manager:
-				toolbarGrade.setVisibility(View.GONE);
-				toolbarEvent.setVisibility(View.VISIBLE);
+				showBottomToolbarMini(v.getId());
 				// launch("main");
 				browse(EntryActivity.this, eventCategory.getCategorys());
 				break;
 			case R.id.btn_grade_manager:
-				toolbarEvent.setVisibility(View.GONE);
-				toolbarGrade.setVisibility(View.VISIBLE);
 				browse(EntryActivity.this, gradeCategory.getCategorys());
+				showBottomToolbarFull(v.getId());
 				// launch("main");
 				// newEvent(EntryActivity.this);
 				break;
 			case R.id.btn_home:
 			case R.id.btn_home2:
-				toolbarGrade.setVisibility(View.GONE);
-				toolbarEvent.setVisibility(View.VISIBLE);
-				radioManager.check(R.id.btn_event_manager);
+				mainFrameLayout.removeAllViews();
+				viewChild = View.inflate(context, R.layout.event_main_frame, null);
+				mainFrameLayout.addView(viewChild);
+				initEventOnClickListener();
+				
+//				toolbarGrade.setVisibility(View.GONE);
+//				toolbarEvent.setVisibility(View.VISIBLE);
+//				radioManager.check(R.id.btn_event_manager);
 				browse(context, eventCategory.getCategorys());
+				toolbarFull.check(R.id.btn_home);
+				toolbarMini.check(R.id.btn_home2);
+				showBottomToolbarMini(v.getId());
+
 				break;
 			case R.id.btn_statistics:
-
+				showBottomToolbarFull(v.getId());
+				mainFrameLayout.removeAllViews();
+				viewChild = statistics.getView();//View.inflate(context, R.layout.statistics_main_frame, null);
+				mainFrameLayout.addView(viewChild);
 				break;
 			case R.id.btn_area:
-
+				showBottomToolbarFull(v.getId());
+				mainFrameLayout.removeAllViews();
+				viewChild = View.inflate(context, R.layout.township_map_main_frame, null);
+				mainFrameLayout.addView(viewChild);
+				
 				break;
 			case R.id.btn_more:
 			case R.id.btn_more2:
-
+				showBottomToolbarFull(v.getId());
+				mainFrameLayout.removeAllViews();
+				viewChild = more.getView();//View.inflate(context, R.layout.more_main_frame, null);
+				mainFrameLayout.addView(viewChild);
+				toolbarFull.check(R.id.btn_more);
 				break;
 			case R.id.btn_fun:
 				fun();
@@ -130,14 +179,14 @@ public class EntryActivity extends Activity {
 		}
 	};
 	
-	 DateTimePickerDialog.OnDateTimeChangedListener listener  = new DateTimePickerDialog.OnDateTimeChangedListener(){
+	 final private DateTimePickerDialog.OnDateTimeChangedListener listener  = new DateTimePickerDialog.OnDateTimeChangedListener(){
 
 		@Override
 		public void onDateTimeChanged(long millisecond) {
 			// TODO Auto-generated method stub
-			Date date = new Date(millisecond);
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			String dateTime = sdf.format(date);
+//			Date date = new Date(millisecond);
+//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//			String dateTime = sdf.format(date);
 //			tvTitle.setText(dateTime);
 		}
 		 
@@ -149,12 +198,12 @@ public class EntryActivity extends Activity {
 		
 	}
 	
-	private void launch(String category) {
-		Intent i = new Intent(this, DetailActivity.class);
-		i.putExtra("category", category);
-		startActivity(i);
-
-	}
+//	private void launch(String category) {
+//		Intent i = new Intent(this, DetailActivity.class);
+//		i.putExtra("category", category);
+//		startActivity(i);
+//
+//	}
 	private GridView liveGridView;
 	private ActionAdapter actionAdapter;
 
@@ -163,8 +212,8 @@ public class EntryActivity extends Activity {
 		actionAdapter = new ActionAdapter(context, categoryMetas);//ViewSingletonFactory.getInstance().getEventCategory());
 		View rootView = View.inflate(context, R.layout.fragment_live_grid, null);
 		// 获取屏幕密度 
-		DisplayMetrics dm = new DisplayMetrics();  
-		dm = getResources().getDisplayMetrics();  
+//		DisplayMetrics dm = new DisplayMetrics();  
+//		dm = getResources().getDisplayMetrics();  
 		
 //		  
 //		float density = dm.density;        // 屏幕密度（像素比例：0.75/1.0/1.5/2.0）  
@@ -210,8 +259,8 @@ public class EntryActivity extends Activity {
 			
 		});
 
-		mainFrameLayout.removeAllViews();
-		mainFrameLayout.addView(rootView);
+		eventFrameLayout.removeAllViews();
+		eventFrameLayout.addView(rootView);
 
 		return rootView;
 	}
@@ -245,8 +294,8 @@ public class EntryActivity extends Activity {
 //
 //	}
 	
-	private void setMainTitle(String text){
-//		tvTitle.setText(text);
-		this.setTitle(text);
-	}
+//	private void setMainTitle(String text){
+////		tvTitle.setText(text);
+//		this.setTitle(text);
+//	}
 }

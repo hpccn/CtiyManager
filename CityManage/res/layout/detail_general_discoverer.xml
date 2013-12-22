@@ -1,8 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     tools:context=".MainActivity$DummySectionFragment" >
 
     <LinearLayout style="@style/horizontalCenter" >
@@ -27,6 +27,19 @@
             android:id="@+id/et_discoverername"
             style="@style/generalEditText"
             android:hint="@string/discoverername" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/discovery_time" />
+
+        <EditText
+            android:id="@+id/et_discovery_time"
+            style="@style/generalEditText"
+            android:ems="10"
+            android:hint="@string/discovery_time" />
     </LinearLayout>
 
 </LinearLayout>

@@ -13,13 +13,11 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
 import cn.city.manager.model.food.FoodEvent;
 import cn.city.manager.model.structure.StructureEvent;
-
-import android.util.Log;
 
 public class EventSingletonFactory {
 	private final static String TAG = EventSingletonFactory.class

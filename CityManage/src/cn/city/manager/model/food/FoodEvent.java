@@ -1,15 +1,10 @@
 package cn.city.manager.model.food;
 
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.graphics.drawable.Drawable;
 import android.util.Log;
-
 import cn.city.manager.model.BaseContent;
 
 
@@ -210,7 +205,7 @@ public class FoodEvent extends BaseContent {
 	@Override
 	public boolean isMe(String category) {
 		// TODO Auto-generated method stub
-		return this.category.equals(category);
+		return FoodEvent.category.equals(category);
 	}
 
 	@Override

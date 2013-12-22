@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/main_backguard_repeat"
+    android:orientation="vertical" >
+
+    <!-- android:background="@drawable/main_backguard_repeat" -->
+
+    <Button
+        android:id="@+id/statistics_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/btn_default_holo_light"
+        android:gravity="center"
+        android:text="@string/statistics_category" />
+
+    <TextView
+        android:id="@+id/main_title"
+        style="@style/mainTitle"
+        android:background="@drawable/img_township_map"
+        android:textColor="@color/title_text" />
+
+</LinearLayout>

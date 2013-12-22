@@ -7,7 +7,6 @@ import java.util.Map;
 import org.json.JSONObject;
 
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 
 public  abstract class BaseContent {
 	public abstract  boolean isMe(String category);

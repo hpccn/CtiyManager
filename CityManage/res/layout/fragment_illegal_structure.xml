@@ -87,18 +87,7 @@
                 android:hint="@string/construction_time" />
         </LinearLayout>
 
-        <LinearLayout style="@style/horizontalCenter" >
 
-            <TextView
-                style="@style/thirdTitle"
-                android:text="@string/discovery_time" />
-
-            <EditText
-                android:id="@+id/et_discovery_time"
-                style="@style/generalEditText"
-                android:ems="10"
-                android:hint="@string/discovery_time" />
-        </LinearLayout>
 
         <LinearLayout style="@style/horizontalCenter" >
 

@@ -3,14 +3,12 @@ package cn.city.manager.model.structure;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.json.JSONObject;
 
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import cn.city.manager.model.BaseContent;
 import cn.city.manager.model.MediaContent;
 
@@ -62,7 +60,7 @@ public class StructureEvent extends BaseContent {
 	private List<MediaContent> photos = new ArrayList<MediaContent>();
 	private List<MediaContent> videos = new ArrayList<MediaContent>();
 	
-	private String[] medias = {"photo", "video"};
+//	private String[] medias = {"photo", "video"};
 	
 	private String[] jsStrings = {
 			//double
@@ -192,7 +190,7 @@ public class StructureEvent extends BaseContent {
 	@Override
 	public boolean isMe(String category) {
 		// TODO Auto-generated method stub
-		return this.category.equals(category);
+		return StructureEvent.category.equals(category);
 	}
 
 	@Override

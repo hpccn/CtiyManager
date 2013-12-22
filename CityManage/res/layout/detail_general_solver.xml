@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    tools:context=".MainActivity$DummySectionFragment" >
+
+       
+
+        
+        <LinearLayout style="@style/horizontalCenter" >
+
+            <TextView
+                style="@style/thirdTitle"
+                android:text="@string/solvestatus" />
+
+            <EditText
+                android:id="@+id/et_solvestatus"
+                style="@style/generalEditText"
+                android:hint="@string/solvestatus" />
+        </LinearLayout>
+        
+        
+        <LinearLayout style="@style/horizontalCenter" >
+
+            <TextView
+                style="@style/thirdTitle"
+                android:text="@string/solvetime" />
+
+            <EditText
+                android:id="@+id/et_solvetime"
+                style="@style/generalEditText"
+                android:hint="@string/solvetime" />
+        </LinearLayout>
+        
+        
+        
+        <LinearLayout style="@style/horizontalCenter" >
+
+            <TextView
+                style="@style/thirdTitle"
+                android:text="@string/unsolvedreason" />
+
+            <EditText
+                android:id="@+id/et_unsolvedreason"
+                style="@style/generalEditText"
+                android:hint="@string/unsolvedreason" />
+        </LinearLayout>
+
+</LinearLayout>

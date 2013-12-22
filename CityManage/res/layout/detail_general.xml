@@ -13,6 +13,14 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context=".MainActivity$DummySectionFragment" >
 
+        <include
+            android:id="@+id/id_layout_picture"
+            layout="@layout/layout_picture" />
+        <include
+            android:id="@+id/id_yinhuan"
+            layout="@layout/detail_general_yinhuan" />
+        
+        
         <LinearLayout style="@style/horizontalCenter" >
 
             <TextView
@@ -27,7 +35,18 @@
                 android:ems="10"
                 android:hint="@string/hint_time" />
         </LinearLayout>
+        <LinearLayout style="@style/horizontalCenter" >
 
+            <TextView
+                style="@style/thirdTitle"
+                android:text="@string/address" />
+
+            <EditText
+                android:id="@+id/et_address"
+                style="@style/generalEditText"
+                android:hint="@string/address" />
+        </LinearLayout>
+        
         <LinearLayout style="@style/horizontalCenter" >
 
             <TextView
@@ -44,19 +63,6 @@
 
             <TextView
                 style="@style/thirdTitle"
-                android:text="@string/address" />
-
-            <EditText
-                android:id="@+id/et_address"
-                style="@style/generalEditText"
-                android:hint="@string/address" />
-        </LinearLayout>
-
-
-        <LinearLayout style="@style/horizontalCenter" >
-
-            <TextView
-                style="@style/thirdTitle"
                 android:text="@string/villagename" />
 
             <EditText
@@ -64,48 +70,50 @@
                 style="@style/generalEditText"
                 android:hint="@string/villagename" />
         </LinearLayout>
-   
-		<include
+
+        <include
             android:id="@+id/id_net"
             layout="@layout/detail_general_net" />
-        
-        
-		<include
+
+        <include
             android:id="@+id/id_event"
             layout="@layout/detail_general_event" />
-        
-		<include
+
+        <include
             android:id="@+id/id_discoverer"
             layout="@layout/detail_general_discoverer" />
-        
-		<include
+
+        <include
             android:id="@+id/id_leader"
             layout="@layout/detail_general_leader" />
-        
-		<include
+
+        <include
             android:id="@+id/id_netleader"
             layout="@layout/detail_general_netleader" />
-		
-		<include
+
+        <include
             android:id="@+id/id_updater"
             layout="@layout/detail_general_updater" />
-		
+<!-- 
+        <include
+            android:id="@+id/id_yinhuan"
+            layout="@layout/detail_general_yinhuan" />
+ -->
+        <include
+            android:id="@+id/id_solver"
+            layout="@layout/detail_general_solver" />
         
-        
-        
-<!-- 非公有属性 -->        
+        <!-- 非公有属性 -->
+
         <FrameLayout
             android:id="@+id/detail_container"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
-<!-- 公有属性 -->    
+        <!-- 公有属性 -->
+
         <include
             android:id="@+id/id_layout_note"
             layout="@layout/layout_note" />
-
-        <include
-            android:id="@+id/id_layout_picture"
-            layout="@layout/layout_picture" />
 
         <include
             android:id="@+id/id_layout_video"

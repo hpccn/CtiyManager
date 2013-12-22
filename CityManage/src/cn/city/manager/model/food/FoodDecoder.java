@@ -15,6 +15,6 @@ public class FoodDecoder implements BaseContentDecoder {
 
 	public BaseContent parse(JSONObject json){
 		BaseContent ev = new FoodEvent();
-		return null;
+		return ev;
 	}
 }

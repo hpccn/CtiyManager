@@ -5,46 +5,54 @@
     android:orientation="vertical"
     tools:context=".MainActivity$DummySectionFragment" >
 
-       
-<!-- 
-        
-        <LinearLayout style="@style/horizontalCenter" >
+    <LinearLayout style="@style/horizontalCenter" >
 
-            <TextView
-                style="@style/thirdTitle"
-                android:text="@string/" />
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/updateid" />
 
-            <EditText
-                android:id="@+id/et_"
-                style="@style/generalEditText"
-                android:hint="@string/" />
-        </LinearLayout>
-        
-        
-        <LinearLayout style="@style/horizontalCenter" >
+        <EditText
+            android:id="@+id/et_updateid"
+            style="@style/generalEditText"
+            android:hint="@string/updateid" />
+    </LinearLayout>
 
-            <TextView
-                style="@style/thirdTitle"
-                android:text="@string/" />
+    <LinearLayout style="@style/horizontalCenter" >
 
-            <EditText
-                android:id="@+id/et_"
-                style="@style/generalEditText"
-                android:hint="@string/" />
-        </LinearLayout>
-        
-        
-        
-        <LinearLayout style="@style/horizontalCenter" >
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/updatename" />
 
-            <TextView
-                style="@style/thirdTitle"
-                android:text="@string/" />
+        <EditText
+            android:id="@+id/et_updatename"
+            style="@style/generalEditText"
+            android:hint="@string/updatename" />
+    </LinearLayout>
 
-            <EditText
-                android:id="@+id/et_"
-                style="@style/generalEditText"
-                android:hint="@string/" />
-        </LinearLayout>
- -->
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/updatelevel" />
+
+        <EditText
+            android:id="@+id/et_updatelevel"
+            style="@style/generalEditText"
+            android:hint="@string/updatelevel" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/updatetime" />
+
+        <EditText
+            android:id="@+id/et_updatetime"
+            style="@style/generalEditText"
+            android:hint="@string/updatetime" />
+    </LinearLayout>
+
+
+
 </LinearLayout>

@@ -1,24 +1,15 @@
 package cn.city.manager.activity;
 
-import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Point;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.EditText;
 import android.widget.ImageView;
+import cn.city.manager.Configuration;
 import cn.city.manager.R;
 
 public class LaunchActivity extends Activity {
@@ -70,21 +61,29 @@ public class LaunchActivity extends Activity {
 	}
 
 	private void gotoMain() {
-		startActivity(new Intent(this, EntryActivity.class));
-//		startActivity(new Intent(this, SummaryActivity.class));
-//		startActivity(new Intent(this, MainActivity.class));
 		
+		Configuration configuration;
+		configuration = new Configuration(this);
+		configuration.load();
+		if (configuration.isAutoLogin()) {
+			startActivity(new Intent(this, EntryActivity.class));
+		} else {
+			startActivity(new Intent(this, LoginActivity.class));
+	//		startActivity(new Intent(this, EntryActivity.class));
+	//		startActivity(new Intent(this, SummaryActivity.class));
+	//		startActivity(new Intent(this, MainActivity.class));
+		}
 		finish();
 	}
 	
-	private boolean isUrl(String url){
-		Pattern p = Pattern.compile("^(http|www|ftp|)?(://)?(\\w+(-\\w+)*)(\\.(\\w+(-\\w+)*))*((:\\d+)?)(/(\\w+(-\\w+)*))*(\\.?(\\w)*)(\\?)?(((\\w*%)*(\\w*\\?)*(\\w*:)*(\\w*\\+)*(\\w*\\.)*(\\w*&)*(\\w*-)*(\\w*=)*(\\w*%)*(\\w*\\?)*(\\w*:)*(\\w*\\+)*(\\w*\\.)*(\\w*&)*(\\w*-)*(\\w*=)*)*(\\w*)*)$",Pattern.CASE_INSENSITIVE );   
-		Matcher m = p.matcher(url);
-
-		return m.find();
-		
-
-	}
+//	private boolean isUrl(String url){
+//		Pattern p = Pattern.compile("^(http|www|ftp|)?(://)?(\\w+(-\\w+)*)(\\.(\\w+(-\\w+)*))*((:\\d+)?)(/(\\w+(-\\w+)*))*(\\.?(\\w)*)(\\?)?(((\\w*%)*(\\w*\\?)*(\\w*:)*(\\w*\\+)*(\\w*\\.)*(\\w*&)*(\\w*-)*(\\w*=)*(\\w*%)*(\\w*\\?)*(\\w*:)*(\\w*\\+)*(\\w*\\.)*(\\w*&)*(\\w*-)*(\\w*=)*)*(\\w*)*)$",Pattern.CASE_INSENSITIVE );   
+//		Matcher m = p.matcher(url);
+//
+//		return m.find();
+//		
+//
+//	}
 	
 	private Animation mLogoEntry;
 	private void showWelcome() {

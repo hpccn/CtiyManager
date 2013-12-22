@@ -3,7 +3,6 @@ package cn.city.manager.location;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.os.Handler;
 import android.os.Vibrator;
 import android.util.Log;
 
@@ -23,11 +22,11 @@ public class Location {
 	
 	public Vibrator mVibrator01;
 	public static String TAG = "Loc";
-	private Handler handler = null;
-	
-	private final Context context;
+//	private Handler handler = null;
+//	
+//	private final Context context;
 	public Location(Context context){
-		this.context = context;
+//		this.context = context;
 		init(context);
 	}
 	private void init(Context context){
@@ -162,7 +161,7 @@ public class Location {
 	};
 	
 	
-	private String getKey(Context context){
+	public String getKey(Context context){
 		String key = null;
 		ApplicationInfo info;
         try {

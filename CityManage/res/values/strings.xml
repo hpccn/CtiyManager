@@ -6,53 +6,43 @@
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
-    
     <string name="event_manager">事件管理</string>
     <string name="essential_manager">基本信息</string>
-    <string name="main_title">高丽营镇综合服务平台</string> 
-    
-    
-    <string name="welcome">掌上高丽营欢迎您!</string> 
-    
+    <string name="main_title">高丽营镇综合服务平台</string>
+    <string name="welcome">掌上高丽营欢迎您!</string>
     <string name="discovery_time">发现时间</string>
     <string name="submission_time">提交时间</string>
     <string name="completion_time">完成时间</string>
     <string name="examination_time">检查时间</string>
-    
     <string name="examination_content">检查内容</string>
     <string name="enterprise_name">企业名称</string>
     <string name="legal_person">责任人</string>
     <string name="address">地址</string>
-    
     <string name="hygiene_licence">卫生许可证</string>
     <string name="emdical_certificate">从业人员健康证</string>
     <string name="operations_beyond_cold_meat">超范围经营冷荤凉菜</string>
     <string name="environmental_health">操作间环境卫生</string>
-    
     <string name="commit">提交</string>
     <string name="cancel">返回</string>
     <string name="hint_time">时间</string>
-    
     <string name="business_licence">营业执照</string>
-    
     <string name="add_event">请点击此处新增事件</string>
-    
+
     <!-- 食品、药品 -->
     <string name="food_drug_examination">食品、药品安全隐患</string>
     <string name="food_drug_examination_sub_title">餐饮企业卫生许可证、从业人员健康证等信息的提交</string>
-    
-	<!-- 餐饮检查 -->
-     <string name="restaurant_examination">餐饮检查</string>
+
+    <!-- 餐饮检查 -->
+    <string name="restaurant_examination">餐饮检查</string>
     <string name="restaurant_examination_sub_title">餐饮企业卫生许可证、从业人员健康证等信息的提交</string>
-    
+
     <!-- 环境、垃圾隐患 -->
     <string name="sanitation_examination">环境、垃圾隐患</string>
     <string name="sanitation_examination_sub_title">生活垃圾或建筑垃圾堆放位置等信息的提交</string>
     <string name="trash_weight">垃圾数量（吨）</string>
     <string name="trash_category">垃圾种类</string>
-    
-    
-     <!-- 交通安全隐患 -->
+
+    <!-- 交通安全隐患 -->
     <string name="traffic_examination">交通安全隐患</string>
     <string name="traffic_examination_sub_title">无照驾驶、无牌上路、超载超限等隐患信息的提交</string>
     <string name="traffic_safe">交通安全</string>
@@ -60,27 +50,23 @@
     <string name="traffic_safe_unlicensed_car">无牌上路</string>
     <string name="traffic_safe_overload">超载超限</string>
     <string name="traffic_picture">照片</string>
-    
     <string name="additional_content">附加信息</string>
     <string name="village">村庄</string>
     <string name="district_code">网格名称</string>
-	<string name="district_administrator">格长姓名</string>
+    <string name="district_administrator">格长姓名</string>
     <string name="danger_code">隐患标号</string>
     <string name="danger_level">隐患级别</string>
     <string name="status">状态</string>
-    <string name="status_unsolved">未解决</string> 
+    <string name="status_unsolved">未解决</string>
     <string name="status_solving">解决中</string>
     <string name="status_solved">已解决</string>
-    
     <string name="solution_process">解决过程记录</string>
     <string name="result">解决结果</string>
     <string name="cause">未解决原因</string>
-    
-    
-     <!-- 刑事案件发案 -->
+
+    <!-- 刑事案件发案 -->
     <string name="criminal_examination">刑事案件发案</string>
     <string name="criminal_examination_sub_title">侵犯人身、财产、危害社会等刑事案件的提交</string>
-    
     <string name="criminal_category">刑事案件类型</string>
     <string name="infringement_personal">侵犯人身</string>
     <string name="property_violation">侵犯财产</string>
@@ -88,11 +74,10 @@
     <string name="public_security">公共安全</string>
     <string name="duty_crime">职务犯罪</string>
     <string name="endanger_society">危害社会</string>
-    
-     <!-- 矛盾纠纷排查 -->
+
+    <!-- 矛盾纠纷排查 -->
     <string name="dispute_examination">矛盾纠纷排查</string>
     <string name="dispute_examination_sub_title">邻里纠纷、婚姻家庭纠纷等事件信息的提交</string>
-    
     <string name="dispute_category">纠纷类型</string>
     <string name="dispute_category_neighborhood">邻里纠纷</string>
     <string name="dispute_category_family">婚姻家庭纠纷</string>
@@ -102,13 +87,10 @@
     <string name="dispute_category_other">其它纠纷</string>
     <string name="dispute_personal">纠纷人</string>
     <string name="dispute_result">处理结果</string>
- 
-    
-     <!-- 无照经营 -->
+
+    <!-- 无照经营 -->
     <string name="unlicensed_vendor_examination">无照经营</string>
     <string name="unlicensed_vendor_examination_sub_title">无照经营者姓名，经营场所信息的提交</string>
-    
-   
     <string name="proprietor">经营者姓名</string>
     <string name="lessor">房东姓名</string>
     <string name="business_scope">经营项目</string>
@@ -119,14 +101,11 @@
     <!-- 违章建筑 -->
     <string name="illegal_structure_examination">违章建筑</string>
     <string name="illegal_structure_examination_sub_title">违章建筑位置、建筑面积等信息的提交</string>
-    
-   
     <string name="illegal_structure_address">违章建筑具体位置</string>
     <string name="illegal_structure_landlord">违法建设人</string>
     <string name="landlord">违法建设人</string>
     <string name="land_property">土地性质</string>
     <string name="land_area">占地面积</string>
-    
     <string name="building_structure">建筑结构</string>
     <string name="building_area">建筑面积</string>
     <string name="construction_time">建设时间</string>
@@ -134,25 +113,59 @@
     <string name="circumstance_category_newfound">新发现</string>
     <string name="circumstance_category_dismantlement">拆除</string>
     <string name="circumstance_category_outher">其它</string>
-    
-    
     <string name="login">登录</string>
+    <string name="save_login">保存登录信息</string>
+    <string name="auto_login">自动登录</string>
+    <string name="login_main">系统登录</string>
+    <string name="user_name">用户名</string>
+    <string name="user_mobile">手机号</string>
+    <string name="password">密码</string>
+    <string name="login_tips">\n\n\n登录提示: 默认密码123456. \n 您选输入错误密码看看效果,   \n 更多信息请致电: <b>13901234567.</b>  \n还有问题还要学会搜索:  http://www.google.com  \n 版权所有:  XXX </string>
     <string name="browse_category">分类浏览</string>
     <string name="new_category">新的事件</string>
-    
+    <string name="select_browse_order">排序</string>
+    <string name="select_browse_order_time_forward">正序V</string>
+    <string name="select_browse_order_time_reversed">倒序^</string>
+    <string name="select_browse_category">分类浏览</string>
+    <string name="select_browse_today">当天</string>
+    <string name="select_browse_week">本周</string>
+    <string name="select_browse_month">本月</string>
+    <string name="select_browse_season">本季</string>
+    <string name="select_browse_year">本年</string>
+    <string name="select_browse_all">全部</string>
+
+    <!-- 统计 -->
+    <string name="statistics_category">统计类别</string>
+    <string name="check_upgrade">检查升级</string>
     <!-- 公用 -->
     <string name="netid">网格ID</string>
     <string name="netname">网格名称</string>
     <string name="villagename">村名</string>
     <string name="eventtype">事件类型</string>
-    <string name="eventid">事件ID</string>    
-    <string name="discoverername">发现人</string>    
-    <string name="discovererlevel">发现人级别</string>    
-    <string name="leaderid">批示人ID</string>    
-    <string name="leadername">批示人姓名</string>    
-    <string name="netleadername">格长姓名</string>    
-    <string name="netleadertel">格长电话</string>    
-    <!-- 
+    <string name="eventid">事件ID</string>
+    <string name="discoverername">提交人</string>
+    <string name="discovererlevel">提交人级别</string>
+    <string name="leaderid">批示人ID</string>
+    <string name="leadername">批示人姓名</string>
+    <string name="netleadername">格长姓名</string>
+    <string name="netleadertel">格长电话</string>
+    
+    <string name="yinhuanaddress">违法建设具体位置</string>    
+    <string name="weijianxiangduiren">违法建设相对人</string>    
+    <string name="yinhuanxiangqing">违章描述</string>    
+
+    
+    <string name="yinhuanren">涉及人</string>
+    <string name="yinhuanlianluo">涉及人联系方式</string>
+    <string name="updateid">更新人id</string>
+    <string name="updatename">最近更新人</string>
+    <string name="updatelevel">更新人级别</string>
+    <string name="updatetime">最近更新时间</string>
+    <string name="solvestatus">解决状态</string>
+    <string name="solvetime">解决时间</string>
+    <string name="unsolvedreason">未解决原因</string>
+
+    <!--
     <string name=""></string>    
     <string name=""></string>    
     <string name=""></string>    
@@ -162,5 +175,6 @@
     <string name=""></string>    
     <string name=""></string>    
     <string name=""></string>    
-     -->
+    -->
+
 </resources>
