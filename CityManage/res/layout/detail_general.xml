@@ -15,12 +15,17 @@
 
         <include
             android:id="@+id/id_layout_picture"
-            layout="@layout/layout_picture" />
+            android:layout_gravity="center"
+            layout="@layout/detail_general_picture" />
+
+        <include
+            android:id="@+id/id_layout_video"
+            layout="@layout/detail_general_video" />
+
         <include
             android:id="@+id/id_yinhuan"
             layout="@layout/detail_general_yinhuan" />
-        
-        
+
         <LinearLayout style="@style/horizontalCenter" >
 
             <TextView
@@ -29,12 +34,14 @@
 
             <EditText
                 android:id="@+id/examination_date_time"
+                style="@style/generalEditText"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:editable="false"
                 android:ems="10"
                 android:hint="@string/hint_time" />
         </LinearLayout>
+
         <LinearLayout style="@style/horizontalCenter" >
 
             <TextView
@@ -46,7 +53,7 @@
                 style="@style/generalEditText"
                 android:hint="@string/address" />
         </LinearLayout>
-        
+
         <LinearLayout style="@style/horizontalCenter" >
 
             <TextView
@@ -94,15 +101,16 @@
         <include
             android:id="@+id/id_updater"
             layout="@layout/detail_general_updater" />
-<!-- 
+        <!--
         <include
             android:id="@+id/id_yinhuan"
             layout="@layout/detail_general_yinhuan" />
- -->
+        -->
+
         <include
             android:id="@+id/id_solver"
             layout="@layout/detail_general_solver" />
-        
+
         <!-- 非公有属性 -->
 
         <FrameLayout
@@ -114,10 +122,6 @@
         <include
             android:id="@+id/id_layout_note"
             layout="@layout/layout_note" />
-
-        <include
-            android:id="@+id/id_layout_video"
-            layout="@layout/layout_video" />
     </LinearLayout>
 
 </ScrollView>

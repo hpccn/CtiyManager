@@ -44,7 +44,7 @@ public class LoginActivity  extends Activity{
         configuration.load();
         userName.setText(configuration.getUsername());
         password.setText(configuration.getPassword());
-        
+        cbSaveLogin.setChecked(configuration.isSaveLogin());
     }
     
 	private View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -71,7 +71,7 @@ public class LoginActivity  extends Activity{
             	configuration.setAutoLogin(cbAutoLogin.isChecked());
             	configuration.setUsername(userName.getText().toString());
             	configuration.setPassword(password.getText().toString());
-
+            	configuration.setSaveLogin(cbSaveLogin.isChecked());
         		configuration.store();
         	} else {
             	configuration.setAutoLogin(false);

@@ -11,6 +11,7 @@
 
     <EditText
         android:id="@+id/note"
+        style="@style/generalEditText"
         android:maxLines="6"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

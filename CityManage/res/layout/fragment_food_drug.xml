@@ -93,7 +93,7 @@
 
         <include
             android:id="@+id/layout_picture"
-            layout="@layout/layout_picture" />
+            layout="@layout/detail_general_picture" />
 
         <include
             android:id="@+id/layout_note"

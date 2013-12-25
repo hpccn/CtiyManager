@@ -33,11 +33,13 @@
         android:orientation="vertical" >
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/id_main_title"
             style="@style/mainTitle"
             android:text="@string/illegal_structure_examination" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/id_sub_title"
             style="@style/subTitle"
             android:text="@string/illegal_structure_examination_sub_title" />

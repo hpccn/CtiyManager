@@ -89,7 +89,7 @@
 
 
 
-        <LinearLayout style="@style/horizontalCenter" >
+        <LinearLayout style="@style/horizontalLeft" >
 
             <TextView
                 style="@style/thirdTitle"
@@ -99,8 +99,7 @@
                 android:id="@+id/radiogroup_circumstance_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
+                android:orientation="horizontal">
                 <RadioButton
                     android:id="@+id/rb_circumstance_category_newfound"
                     android:layout_width="wrap_content"

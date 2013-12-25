@@ -96,8 +96,13 @@
     <string name="business_scope">经营项目</string>
     <string name="note">备注</string>
     <string name="picture">照片</string>
-    <string name="snapshot">拍照</string>
-    <string name="videotape">录像</string>
+    <string name="snapshot">现场拍照</string>
+    <string name="videotape">现场拍摄</string>
+    
+    <string name="select_picture">选择照片</string>
+    <string name="select_video">添加视频</string>
+    <string name="video_file">视频文件名</string>
+    
     <!-- 违章建筑 -->
     <string name="illegal_structure_examination">违章建筑</string>
     <string name="illegal_structure_examination_sub_title">违章建筑位置、建筑面积等信息的提交</string>
@@ -109,7 +114,7 @@
     <string name="building_structure">建筑结构</string>
     <string name="building_area">建筑面积</string>
     <string name="construction_time">建设时间</string>
-    <string name="circumstance_category">当日新发现和拆除情况</string>
+    <string name="circumstance_category">当日情况</string>
     <string name="circumstance_category_newfound">新发现</string>
     <string name="circumstance_category_dismantlement">拆除</string>
     <string name="circumstance_category_outher">其它</string>
@@ -124,8 +129,8 @@
     <string name="browse_category">分类浏览</string>
     <string name="new_category">新的事件</string>
     <string name="select_browse_order">排序</string>
-    <string name="select_browse_order_time_forward">正序V</string>
-    <string name="select_browse_order_time_reversed">倒序^</string>
+    <string name="select_browse_order_time_forward">正序▲</string>
+    <string name="select_browse_order_time_reversed">倒序▼</string>
     <string name="select_browse_category">分类浏览</string>
     <string name="select_browse_today">当天</string>
     <string name="select_browse_week">本周</string>
@@ -150,13 +155,13 @@
     <string name="netleadername">格长姓名</string>
     <string name="netleadertel">格长电话</string>
     
-    <string name="yinhuanaddress">违法建设具体位置</string>    
-    <string name="weijianxiangduiren">违法建设相对人</string>    
+    <string name="yinhuanaddress">违建位置</string>    
+    <string name="weijianxiangduiren">违建人</string>    
     <string name="yinhuanxiangqing">违章描述</string>    
 
     
     <string name="yinhuanren">涉及人</string>
-    <string name="yinhuanlianluo">涉及人联系方式</string>
+    <string name="yinhuanlianluo">涉及人电话</string>
     <string name="updateid">更新人id</string>
     <string name="updatename">最近更新人</string>
     <string name="updatelevel">更新人级别</string>

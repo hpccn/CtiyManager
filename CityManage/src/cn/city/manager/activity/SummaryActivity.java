@@ -113,9 +113,11 @@ public class SummaryActivity extends Activity {
 	
 	
 	private void initToolBar(){
-		
-		int [] ids = {R.id.id_add_event, R.id.btn_home, R.id.btn_statistics, R.id.btn_area, R.id.btn_more,
+		int [] ids = {R.id.id_add_event,
 				R.id.id_select_browse_category, R.id.id_select_browse_order};
+		
+//		int [] ids = {R.id.id_add_event, R.id.btn_home, R.id.btn_statistics, R.id.btn_area, R.id.btn_more,
+//				R.id.id_select_browse_category, R.id.id_select_browse_order};
 		
 		for (int id : ids) {
 			this.findViewById(id).setOnClickListener(onClickListener);

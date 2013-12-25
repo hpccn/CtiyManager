@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="2dp"
+    android:layout_gravity="center"
+    android:orientation="vertical" >
+
+    <!--
+    <ImageSwitcher
+        android:id="@+id/picture"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        
+        android:minHeight="20dp"
+        android:minWidth="20dp" />
+    -->
+
+    <Gallery
+        android:id="@+id/gallery"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:background="#55000000"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:spacing="16dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_select_picture"
+            style="@style/generalButtonStyle"
+            android:layout_gravity="center"
+            android:text="@string/select_picture" />
+
+        <Button
+            android:id="@+id/btn_add_picture"
+            style="@style/generalButtonStyle"
+            android:layout_gravity="center"
+            android:text="@string/snapshot" />
+    </LinearLayout>
+
+</LinearLayout>

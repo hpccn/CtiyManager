@@ -23,6 +23,7 @@
             android:orientation="horizontal" >
 
             <TextView
+                style="@style/TextViewStyleCheckinListItemLineMessage"
                 android:id="@+id/id_summary_item_village_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -31,6 +32,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                style="@style/TextViewStyleCheckinListItemLineMessage"
                 android:id="@+id/id_summary_item_village"
                 android:layout_width="60sp"
                 android:layout_height="wrap_content"
@@ -38,6 +40,7 @@
                 android:text="南王村 " />
 
             <TextView
+                style="@style/TextViewStyleCheckinListItemLineMessage"
                 android:id="@+id/id_summary_item_cell_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -47,6 +50,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                style="@style/TextViewStyleCheckinListItemLineMessage"
                 android:id="@+id/id_summary_item_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,6 +59,7 @@
         </LinearLayout>
 
         <TextView
+            style="@style/TextViewStyleCheckinListItemLineMessage"
             android:id="@+id/id_summary_item_hidden_danger_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -64,6 +69,7 @@
             android:text="隐患描述 : " />
 
         <TextView
+            style="@style/TextViewStyleCheckinListItemLineMessage"
             android:id="@+id/id_summary_item_hidden_danger"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
