@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
     <include
-        android:visibility="visible"
+        android:layout_alignWithParentIfMissing="true"
+        android:id="@+id/id_summary_top_toolbar"
+        android:layout_alignParentTop="true"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
-        layout="@layout/summary_top_toolbar" />
-
+        layout="@layout/summary_top_toolbar"
+        android:visibility="visible" />
 
     <ListView
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_below="@+id/id_summary_top_toolbar"
+        android:layout_above="@+id/id_add_event"
         android:id="@+id/summary_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -20,4 +24,16 @@
         android:fadingEdge="vertical"
         android:fadingEdgeLength="20dp" />
 
-</LinearLayout>
+    <Button
+        android:layout_alignParentBottom="true"
+        android:id="@+id/id_add_event"
+        android:layout_gravity="bottom"
+
+        style="@style/generalButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:drawableLeft="@drawable/ic_add_event"
+        android:text="@string/add_event" />
+
+</RelativeLayout>

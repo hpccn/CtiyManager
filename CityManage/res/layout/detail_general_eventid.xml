@@ -1,0 +1,15 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="事件编号" >
+
+    <TextView
+        style="@style/thirdTitle"
+        android:text="@string/eventid" />
+
+    <EditText
+        android:id="@+id/et_eventid"
+        style="@style/generalEditText"
+        android:hint="@string/eventid" />
+
+</LinearLayout>

@@ -10,88 +10,82 @@ import org.apache.http.client.methods.HttpPost;
 
 import android.content.Context;
 import android.net.http.AndroidHttpClient;
-import android.os.Handler;
 import android.util.Log;
-
-
 
 public abstract class HttpStreamThread extends Thread {
 	public static final String TAG = "HttpStreamThread";
-	public static final  int HTTP_TYPE_GET = 0;
-	public static final  int HTTP_TYPE_POST = 1;
-	
-	protected static Object mSyncObject = new Object();
-	protected Context mContext;
-	protected Handler mHandler = null;
-	protected String mUrl;
-	protected int mHttpType;
-	protected AndroidHttpClient mHttpClient = null;
 
-	public HttpStreamThread(Context context, String url, int httpType) {
-		mContext = context;
-		mUrl = url;
-		mHttpType = httpType;
-//		imc = ImageCacheFactory.getInstance(context);
+	protected static Object syncObject = new Object();
+	protected Context context;
+	protected String url;
 
+	protected AndroidHttpClient httpClient = null;
+
+	public HttpStreamThread(Context context, String url) {
+		this.context = context;
+		this.url = url;
 	}
 
-	public HttpStreamThread(Context context, Handler handler, String url, int httpType) {
-		mContext = context;
-		mHandler = handler;
-		mUrl = url;
-		mHttpType = httpType;
-
-	}
 
 	@Override
 	public void run() {
-		if(mUrl == null || mUrl.length() == 0) {
+		if (url == null || url.length() == 0) {
 			Log.e(TAG, "invalid cloud url!");
 			return;
 		}
-		
-		synchronized (mSyncObject) {
-//			Log.d(TAG, "start get cloud info thread!");
+
+		synchronized (syncObject) {
+			// Log.d(TAG, "start get cloud info thread!");
 			obtainRemoteData();
-		}	
+		}
 	}
 
-	public HttpResponse getNetworkResponse() {
+	public HttpResponse obtainHttpGetResponse() {
 		try {
-			Log.d(TAG, "getNetworkResponse url:" + mUrl);
-			if(mHttpType == HTTP_TYPE_GET) {
-				return mHttpClient.execute(new HttpGet(mUrl));
-			} else {
-				HttpPost httppost = new HttpPost(mUrl);
-				setHttpPostParams(httppost);
-	
-				return mHttpClient.execute(httppost);
-			}
+			Log.d(TAG, "getNetworkResponse url:" + url);
+
+			return httpClient.execute(new HttpGet(url));
 		} catch (IOException e) {
 			Log.e(TAG, "getNetworkResponse:" + e.getMessage(), e);
 		}
-		
+
 		return null;
 	}
-	
+
+	public HttpResponse obtainHttpPostResponse() {
+		try {
+			Log.d(TAG, "getNetworkResponse url:" + url);
+
+			HttpPost httppost = new HttpPost(url);
+			setHttpPostParams(httppost);
+
+			return httpClient.execute(httppost);
+
+		} catch (IOException e) {
+			Log.e(TAG, "getNetworkResponse:" + e.getMessage(), e);
+		}
+
+		return null;
+	}
+
 	public boolean obtainRemoteData() {
 		try {
-			mHttpClient = AndroidHttpClient.newInstance("android");
-			if(mHttpClient == null) {
+			httpClient = AndroidHttpClient.newInstance("android");
+			if (httpClient == null) {
 				Log.d(TAG, "getCloudInfo mHttpClient == null");
 				return false;
 			}
-			
-			HttpResponse hr = getNetworkResponse();
-			if(hr != null) {
-				if(hr.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+
+			HttpResponse hr = obtainHttpPostResponse();
+			if (hr != null) {
+				if (hr.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 					InputStream is = hr.getEntity().getContent();
-					boolean bRes = processData(is);
+					boolean bRes = retrieveInputStream(is);
 					is.close();
 					hr.getEntity().consumeContent();
 
 					return bRes;
-				} else if(hr.getStatusLine().getStatusCode() == HttpStatus.SC_NO_CONTENT) {
+				} else if (hr.getStatusLine().getStatusCode() == HttpStatus.SC_NO_CONTENT) {
 					Log.d(TAG, "get no cloud content!");
 
 					return true;
@@ -101,24 +95,21 @@ public abstract class HttpStreamThread extends Thread {
 			/* 线程执行发生中断 */
 			Log.e(TAG, "getCloudInfo: " + e.getMessage(), e);
 		} finally {
-			if(mHttpClient != null) {
-				mHttpClient.close();
-//				Log.d(TAG, "finally mHttpClient closed");
+			if (httpClient != null) {
+				httpClient.close();
+				// Log.d(TAG, "finally mHttpClient closed");
 			}
 		}
-		
+
 		return false;
 	}
 
-	
 	public void setHttpPostParams(HttpPost httpPost) {
 	}
-	
+
 	/*
-	 * Process the file stream from network, such as parsing xml.
-	 * Param is: input file stream from network
-	 * Result:	true - success
-	 * 			false - fail 
+	 * Process the file stream from network, such as parsing xml. Param is:
+	 * input file stream from network Result: true - success false - fail
 	 */
-	public abstract boolean processData(InputStream is);
+	public abstract boolean retrieveInputStream(InputStream is);
 }

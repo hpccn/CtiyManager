@@ -19,6 +19,28 @@
         android:layout_alignParentTop="true"
         layout="@layout/summary_titlebar" />
 
+    <FrameLayout
+        android:id="@+id/summary_main_container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" 
+        android:layout_below="@+id/id_titlebar"
+        android:layout_above="@+id/id_bottom_toolbar">
+
+        <include
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/summary_layout" />
+<!--
+        <Button
+            android:id="@+id/id_add_event"
+            style="@style/generalButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/id_bottom_toolbar"
+            android:layout_centerHorizontal="true"
+            android:drawableLeft="@drawable/ic_add_event"
+            android:text="@string/add_event" />
+        
     <include
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -35,19 +57,20 @@
         android:layout_centerHorizontal="true"
         
         android:drawableLeft="@drawable/ic_add_event"
-        android:layout_alignParentBottom="true"
+		
+        android:layout_above="@+id/id_bottom_toolbar"
         
          />
-<!-- 
-android:background="@drawable/btn_default_holo_light"
-        android:layout_above="@+id/id_bottom_toolbar"
-    
+ android:background="@drawable/btn_default_holo_light"
+        -->
+    </FrameLayout>
+
     <include
         android:id="@+id/id_bottom_toolbar"
-        android:visibility="gone"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         layout="@layout/bottom_toolbar" />
- -->
+    <!--  -->
+
 </RelativeLayout>

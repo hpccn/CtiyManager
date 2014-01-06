@@ -1,0 +1,15 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="解决时间" >
+
+    <TextView
+        style="@style/thirdTitle"
+        android:text="@string/solvetime" />
+
+    <EditText
+        android:id="@+id/et_solvetime"
+        style="@style/generalEditTextReadonly"
+        android:hint="@string/solvetime" />
+
+</LinearLayout>

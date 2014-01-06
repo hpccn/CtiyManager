@@ -86,7 +86,7 @@
 
                 <TextView
                     style="@style/thirdTitle"
-                    android:text="@string/discovery_time" />
+                    android:text="@string/tijiao" />
 
                 <EditText
                     android:id="@+id/discovery_date_time"

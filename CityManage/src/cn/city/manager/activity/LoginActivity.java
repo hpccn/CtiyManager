@@ -30,8 +30,8 @@ public class LoginActivity  extends Activity{
         
         shake = AnimationUtils.loadAnimation(this, R.anim.shake);
 
-        View loginButton = findViewById(R.id.login);
-        loginButton.setOnClickListener(onClickListener);
+        findViewById(R.id.login).setOnClickListener(onClickListener);
+        findViewById(R.id.login_reset).setOnClickListener(onClickListener);
         init();
     }
     
@@ -46,7 +46,11 @@ public class LoginActivity  extends Activity{
         password.setText(configuration.getPassword());
         cbSaveLogin.setChecked(configuration.isSaveLogin());
     }
-    
+	@Override
+	protected void onDestroy() {
+		overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
+		super.onDestroy();
+	}    
 	private View.OnClickListener onClickListener = new View.OnClickListener() {
 		
 		@Override
@@ -59,26 +63,49 @@ public class LoginActivity  extends Activity{
 				onLoginClick();
 				
 				break;
+			case R.id.login_reset:
+				loginReset();
+				
+				break;
 			default:
 			}
 			
+			
 		}
 	};
-    public void onLoginClick() {
+	 private void loginReset() {
+		 userName.setText("");
+		 password.setText("");
+		 cbSaveLogin.setChecked(false);
+		 cbAutoLogin.setChecked(false);
+	 }
+	 private void onLoginClick() {
         if (password.getText().toString().equals("123456")){
         	
-        	if (cbSaveLogin.isChecked()) {
-            	configuration.setAutoLogin(cbAutoLogin.isChecked());
+        	if (cbAutoLogin.isChecked()) {
             	configuration.setUsername(userName.getText().toString());
             	configuration.setPassword(password.getText().toString());
+            	
+            	configuration.setAutoLogin(cbAutoLogin.isChecked());
             	configuration.setSaveLogin(cbSaveLogin.isChecked());
-        		configuration.store();
+        		
+        	} else if (cbSaveLogin.isChecked()) {
+            	
+            	configuration.setUsername(userName.getText().toString());
+            	configuration.setPassword("");//password.getText().toString());
+            	
+            	configuration.setAutoLogin(cbAutoLogin.isChecked());
+            	configuration.setSaveLogin(cbSaveLogin.isChecked());
+        		
         	} else {
             	configuration.setAutoLogin(false);
+            	configuration.setSaveLogin(false);
+            	
             	configuration.setUsername("");
             	configuration.setPassword("");
-            	configuration.store();
+            	
         	}
+        	configuration.store();
         	
         	startActivity(new Intent(this, EntryActivity.class));
         	finish();

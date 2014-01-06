@@ -1,0 +1,15 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="未解决原因" >
+
+    <TextView
+        style="@style/thirdTitle"
+        android:text="@string/unsolvedreason" />
+
+    <EditText
+        android:id="@+id/et_unsolvedreason"
+        style="@style/generalEditText"
+        android:hint="@string/unsolvedreason" />
+
+</LinearLayout>

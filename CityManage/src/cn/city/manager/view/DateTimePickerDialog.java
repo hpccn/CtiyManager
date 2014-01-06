@@ -2,6 +2,7 @@ package cn.city.manager.view;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -157,10 +158,20 @@ public class DateTimePickerDialog implements OnDateChangedListener,
 				R.layout.date_time, null);
 		datePicker = (DatePicker) dateTimeLayout.findViewById(R.id.datepicker);
 		timePicker = (TimePicker) dateTimeLayout.findViewById(R.id.timepicker);
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(millisecond);
+		datePicker.updateDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+		timePicker.setCurrentHour(calendar.get(Calendar.HOUR_OF_DAY));
+		timePicker.setCurrentMinute(calendar.get(Calendar.MINUTE));
 		
+//		Date date = new Date(millisecond);
+//		datePicker.updateDate(date.getYear(), date.getMonth(), date.getDate());
+//		datePicker.init(1900 + date.getYear(), date.getMonth(), date.getDate(), null);
+//		timePicker.setCurrentHour(date.getHours());
+//		timePicker.setCurrentMinute(date.getMinutes());
 //		timePicker.setIs24HourView(true);
 
-		updateView(millisecond);
+//		updateView(millisecond);
 		
 		timePicker.setOnTimeChangedListener(this);
 

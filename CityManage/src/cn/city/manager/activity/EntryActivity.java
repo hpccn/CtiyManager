@@ -16,6 +16,8 @@ import android.widget.GridView;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 import cn.city.manager.R;
+import cn.city.manager.fragment.t_netbaseinfoGrid;
+import cn.city.manager.fragment.t_netbaseinfo;
 import cn.city.manager.model.CategoryMeta;
 import cn.city.manager.model.Page;
 import cn.city.manager.view.ActionAdapter;
@@ -25,6 +27,7 @@ import cn.city.manager.view.EventCategory;
 import cn.city.manager.view.GradeCategory;
 import cn.city.manager.view.More;
 import cn.city.manager.view.Statistics;
+import cn.city.manager.view.TownMap;
 
 public class EntryActivity extends Activity {
 
@@ -33,7 +36,7 @@ public class EntryActivity extends Activity {
 	private Context context;
 	private RadioGroup radioManager, toolbarMini, toolbarFull;
 	
-	private Page statistics, more;
+	private Page statistics, more, townMap;
 //	TextView tvTitle;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +60,9 @@ public class EntryActivity extends Activity {
 		toolbarFull = (RadioGroup) this.findViewById(R.id.id_bottom_toolbar_full);
 		
 		
-		toolbarGrade.setVisibility(View.GONE);
-		toolbarEvent.setVisibility(View.VISIBLE);
-
+//		toolbarGrade.setVisibility(View.GONE);
+//		toolbarEvent.setVisibility(View.VISIBLE);
+		showBottomToolbarMini();
 		browse(this, eventCategory.getCategorys());
 		initOnClickListener();
 	}
@@ -71,6 +74,7 @@ public class EntryActivity extends Activity {
 		
 		statistics = new Statistics(this);
 		more = new More(this);
+		townMap = new TownMap(this);
 	}
 	
 //	private void selectTab(int id){
@@ -105,13 +109,17 @@ public class EntryActivity extends Activity {
 			}
 		}
 	}
-	private void showBottomToolbarMini(int id){
+	private void showBottomToolbarMini(){
 		toolbarGrade.setVisibility(View.GONE);
 		toolbarEvent.setVisibility(View.VISIBLE);
+//		toolbarEvent.setVisibility(View.GONE);
+//		toolbarGrade.setVisibility(View.VISIBLE);
 	}
-	private void showBottomToolbarFull(int id){
-		toolbarEvent.setVisibility(View.GONE);
-		toolbarGrade.setVisibility(View.VISIBLE);
+	private void showBottomToolbarFull(){
+		toolbarGrade.setVisibility(View.GONE);
+		toolbarEvent.setVisibility(View.VISIBLE);
+//		toolbarEvent.setVisibility(View.GONE);
+//		toolbarGrade.setVisibility(View.VISIBLE);
 	}
 	
 
@@ -123,13 +131,13 @@ public class EntryActivity extends Activity {
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.btn_event_manager:
-				showBottomToolbarMini(v.getId());
+				showBottomToolbarMini();
 				// launch("main");
 				browse(EntryActivity.this, eventCategory.getCategorys());
 				break;
 			case R.id.btn_grade_manager:
 				browse(EntryActivity.this, gradeCategory.getCategorys());
-				showBottomToolbarFull(v.getId());
+				showBottomToolbarFull();
 				// launch("main");
 				// newEvent(EntryActivity.this);
 				break;
@@ -146,17 +154,17 @@ public class EntryActivity extends Activity {
 				browse(context, eventCategory.getCategorys());
 				toolbarFull.check(R.id.btn_home);
 				toolbarMini.check(R.id.btn_home2);
-				showBottomToolbarMini(v.getId());
+				showBottomToolbarMini();
 
 				break;
 			case R.id.btn_statistics:
-				showBottomToolbarFull(v.getId());
+				showBottomToolbarFull();
 				mainFrameLayout.removeAllViews();
 				viewChild = statistics.getView();//View.inflate(context, R.layout.statistics_main_frame, null);
 				mainFrameLayout.addView(viewChild);
 				break;
 			case R.id.btn_area:
-				showBottomToolbarFull(v.getId());
+				showBottomToolbarFull();
 				mainFrameLayout.removeAllViews();
 				viewChild = View.inflate(context, R.layout.township_map_main_frame, null);
 				mainFrameLayout.addView(viewChild);
@@ -164,7 +172,7 @@ public class EntryActivity extends Activity {
 				break;
 			case R.id.btn_more:
 			case R.id.btn_more2:
-				showBottomToolbarFull(v.getId());
+				showBottomToolbarFull();
 				mainFrameLayout.removeAllViews();
 				viewChild = more.getView();//View.inflate(context, R.layout.more_main_frame, null);
 				mainFrameLayout.addView(viewChild);
@@ -205,11 +213,11 @@ public class EntryActivity extends Activity {
 //
 //	}
 	private GridView liveGridView;
-	private ActionAdapter actionAdapter;
+//	private ActionAdapter actionAdapter;
 
-	private View browse(final Context context, List<CategoryMeta> categoryMetas){
+	private View browse(final Context context, final List<CategoryMeta> categoryMetas){
 //		setMainTitle("分类浏览");
-		actionAdapter = new ActionAdapter(context, categoryMetas);//ViewSingletonFactory.getInstance().getEventCategory());
+		final ActionAdapter actionAdapter = new ActionAdapter(context, categoryMetas);//ViewSingletonFactory.getInstance().getEventCategory());
 		View rootView = View.inflate(context, R.layout.fragment_live_grid, null);
 		// 获取屏幕密度 
 //		DisplayMetrics dm = new DisplayMetrics();  
@@ -242,19 +250,55 @@ public class EntryActivity extends Activity {
 					int position, long id) {
 				// TODO Auto-generated method stub
 //				onNavigationItemSelected(position, id);
-				if (position != 0 || R.id.btn_event_manager != radioManager.getCheckedRadioButtonId()){
-					Toast.makeText(context, "我们的攻城师正在夜以继日的开发中, 更多功能, 请您稍候!", Toast.LENGTH_LONG).show();
+				
+//				if (position != 0 || R.id.btn_event_manager != radioManager.getCheckedRadioButtonId()){
+//					Toast.makeText(context, "我们的攻城师正在夜以继日的开发中, 更多功能, 请您稍候!", Toast.LENGTH_LONG).show();
+//					return;
+//				}
+				CategoryMeta cm = categoryMetas.get(position);//eventCategory.getCategoryMeta(position);
+				String category = null;
+				if (null == cm) {
+					Toast.makeText(context, "我们的攻城师正在夜以继日的开发中, 更多功能, 请您稍候!", Toast.LENGTH_SHORT).show();
 					return;
 				}
-				Intent intent = new Intent(EntryActivity.this, SummaryActivity.class);
-				CategoryMeta cm = eventCategory.getCategoryMeta(position);
-				String category = null;
-				if (null != cm) {
-					category = cm.getName();
+				category = cm.getTemplate();
+				if (null == category) {
+					Toast.makeText(context, "我们的攻城师正在夜以继日的开发中, 更多功能, 请您稍候!", Toast.LENGTH_SHORT).show();
+					return;
+				} 
+				
+				Intent intent = null;
+				if (category.equals(t_netbaseinfoGrid.class.getSimpleName())){
+					 intent = new Intent(EntryActivity.this, NetGridActivity.class);
+				} else if (category.equals(t_netbaseinfo.class.getSimpleName())){
+					 intent = new Intent(EntryActivity.this, NetGridActivity.class);
+//					 intent = new Intent(EntryActivity.this, SummaryActivity.class);
+				} else {
+					 intent = new Intent(EntryActivity.this, SummaryActivity.class);
 				}
+//				if (category.endsWith("Activity")){
+//					Class<?> clz;
+//					try {
+//						clz = Class.forName(category);
+//						Intent intent = new Intent(EntryActivity.this, clz);
+//						intent.putExtra("category", category);
+//						intent.putExtra("title", cm.getName());
+//						startActivityForResult(intent, 10);
+//					} catch (ClassNotFoundException e) {
+//						e.printStackTrace();
+//					}
+//
+//					return;
+//				}
+				
+//				Intent intent = new Intent(EntryActivity.this, SummaryActivity.class);
 				intent.putExtra("category", category);
-//				startActivity(intent);
+				intent.putExtra("title", cm.getName());
+//					startActivity(intent);
 				startActivityForResult(intent, 10);
+
+
+
 			}
 			
 		});

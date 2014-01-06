@@ -6,16 +6,21 @@
     android:orientation="horizontal" >
 
     <TextView
+        android:drawableLeft="@drawable/ic_graphic_video"
+        android:layout_weight="1"
         android:id="@+id/tv_video_file"
         style="@style/thirdTitle"
         android:text="@string/video_file" />
 
     <Button
+        android:layout_weight="0"
         android:id="@+id/btn_select_video"
         style="@style/generalButtonStyle"
         android:text="@string/select_video" />
 
     <Button
+        android:layout_weight="0"
+        android:layout_marginLeft="20dp"
         android:id="@+id/btn_add_video"
         style="@style/generalButtonStyle"
         android:text="@string/videotape" />

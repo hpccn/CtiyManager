@@ -114,7 +114,11 @@ public class Location {
 				
 				postMsg(location.getLatitude(), location.getLongitude(), location.getAddrStr());
 			}
-			mLocationClient.stop();
+			try{
+				mLocationClient.stop();
+			} catch (Exception e){
+				
+			}
 		}
 		
 		public void onReceivePoi(BDLocation poiLocation) {

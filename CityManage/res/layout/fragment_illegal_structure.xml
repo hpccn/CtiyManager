@@ -27,64 +27,64 @@
 
             <TextView
                 style="@style/thirdTitle"
-                android:text="@string/land_property" />
+                android:text="@string/landstatus" />
 
             <EditText
                 android:id="@+id/et_land_property"
                 style="@style/generalEditText"
                 android:ems="10"
-                android:hint="@string/land_property" />
+                android:hint="@string/landstatus" />
         </LinearLayout>
 
         <LinearLayout style="@style/horizontalCenter" >
 
             <TextView
                 style="@style/thirdTitle"
-                android:text="@string/land_area" />
+                android:text="@string/landarea" />
 
             <EditText
-                android:id="@+id/et_land_area"
+                android:id="@+id/et_landarea"
                 style="@style/generalEditText"
                 android:ems="10"
-                android:hint="@string/land_area" />
+                android:hint="@string/landarea" />
         </LinearLayout>
 
         <LinearLayout style="@style/horizontalCenter" >
 
             <TextView
                 style="@style/thirdTitle"
-                android:text="@string/building_structure" />
+                android:text="@string/construction" />
 
             <EditText
-                android:id="@+id/et_building_structure"
+                android:id="@+id/et_construction"
                 style="@style/generalEditText"
-                android:hint="@string/building_structure" />
+                android:hint="@string/construction" />
         </LinearLayout>
 
         <LinearLayout style="@style/horizontalCenter" >
 
             <TextView
                 style="@style/thirdTitle"
-                android:text="@string/building_area" />
+                android:text="@string/jianzhumianji" />
 
             <EditText
-                android:id="@+id/et_building_area"
-                style="@style/generalEditText"
-                android:ems="10"
-                android:hint="@string/building_area" />
-        </LinearLayout>
-
-        <LinearLayout style="@style/horizontalCenter" >
-
-            <TextView
-                style="@style/thirdTitle"
-                android:text="@string/construction_time" />
-
-            <EditText
-                android:id="@+id/et_construction_time"
+                android:id="@+id/et_jianzhumianji"
                 style="@style/generalEditText"
                 android:ems="10"
-                android:hint="@string/construction_time" />
+                android:hint="@string/jianzhumianji" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/horizontalCenter" >
+
+            <TextView
+                style="@style/thirdTitle"
+                android:text="@string/buildtime" />
+
+            <EditText
+                android:id="@+id/et_buildtime"
+                style="@style/generalEditText"
+                android:ems="10"
+                android:hint="@string/buildtime" />
         </LinearLayout>
 
 
@@ -99,21 +99,26 @@
                 android:id="@+id/radiogroup_circumstance_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
+                
                 <RadioButton
+                    style="@style/generalCheckButtonStyle"
                     android:id="@+id/rb_circumstance_category_newfound"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
+                    
                     android:text="@string/circumstance_category_newfound" />
 
                 <RadioButton
+                    style="@style/generalCheckButtonStyle"
                     android:id="@+id/rb_circumstance_category_dismantlement"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/circumstance_category_dismantlement" />
 
                 <RadioButton
+                    style="@style/generalCheckButtonStyle"
                     android:id="@+id/rb_circumstance_category_outher"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -9,11 +9,25 @@
         android:id="@+id/id_titlebar_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center"
-        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:drawableLeft="@drawable/ic_logo"
+        android:gravity="center_vertical"
         android:text="@string/main_title"
         android:textColor="@color/titlebar_text"
-        android:textSize="@dimen/main_title_text_size" />
+        android:textSize="@dimen/main_title_text_size2" />
+
+    <EditText
+        android:id="@+id/et_titlebar_search"
+        style="@style/generalEditText"
+        android:minWidth="100sp"
+        android:singleLine="true"
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:hint="@string/search"
+        android:textColor="@color/titlebar_text"
+        android:textSize="@dimen/main_title_text_size2"
+        android:visibility="invisible" />
 
 </RelativeLayout>

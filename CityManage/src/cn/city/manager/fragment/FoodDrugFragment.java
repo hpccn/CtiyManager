@@ -11,9 +11,8 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import cn.city.manager.R;
-import cn.city.manager.model.BaseContent;
-import cn.city.manager.model.BaseFragment;
-import cn.city.manager.model.food.FoodEvent;
+import cn.city.manager.fragment.event.BaseEvent;
+import cn.city.manager.fragment.event.FoodEvent;
 
 /**
  * 食品、药品
@@ -108,7 +107,7 @@ public class FoodDrugFragment extends BaseFragment {
 
 
 	@Override
-	public BaseContent getBaseContent() {
+	public BaseEvent getBaseContent() {
 		// TODO Auto-generated method stub
 		return foodEvent;
 	}
@@ -118,5 +117,21 @@ public class FoodDrugFragment extends BaseFragment {
 	@Override
 	public String getSubTitle() {
 		return context.getResources().getString(R.string.food_drug_examination_sub_title);
+	}
+
+
+
+	@Override
+	public void updateView(View rootView) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void updateData(View rootView) {
+		// TODO Auto-generated method stub
+		
 	}
 }

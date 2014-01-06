@@ -1,0 +1,119 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="外来者, 流动人口信息" >
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <!-- 流动人口总数 -->
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/liudongzong" />
+
+        <EditText
+            android:id="@+id/et_liudongzong"
+            style="@style/generalEditText"
+            android:hint="@string/liudongzong" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <!-- 流动人口数（已办暂住证） -->
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/youzanzhu" />
+
+        <EditText
+            android:id="@+id/et_youzanzhu"
+            style="@style/generalEditText"
+            android:hint="@string/youzanzhu" />
+    </LinearLayout>
+    
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <!--流动人口数（未办暂住证总数） -->
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/wuzanzhuzong" />
+
+        <EditText
+            android:id="@+id/et_wuzanzhuzong"
+            style="@style/generalEditText"
+            android:hint="@string/wuzanzhuzong" />
+    </LinearLayout>
+    
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <!-- 流动人口数（未办暂住证，16周岁以上） -->
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/wuzanzhu16shang" />
+
+        <EditText
+            android:id="@+id/et_wuzanzhu16shang"
+            style="@style/generalEditText"
+            android:hint="@string/wuzanzhu16shang" />
+    </LinearLayout>
+    
+    
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <!-- 流动人口数（未办暂住证，16周岁以下） -->
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/wuzanzhu16xia" />
+
+        <EditText
+            android:id="@+id/et_wuzanzhu16xia"
+            style="@style/generalEditText"
+            android:hint="@string/wuzanzhu16xia" />
+    </LinearLayout>
+    
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <!-- 流动人口个体经商户数 -->
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/liudongbusiness" />
+
+        <EditText
+            android:id="@+id/et_liudongbusiness"
+            style="@style/generalEditText"
+            android:hint="@string/liudongbusiness" />
+    </LinearLayout>
+    
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <!-- 流动人口从业人员数 -->
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/liudongwork" />
+
+        <EditText
+            android:id="@+id/et_liudongwork"
+            style="@style/generalEditText"
+            android:hint="@string/liudongwork" />
+    </LinearLayout>            
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <!-- 招用流动人口数 -->
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/liudongemployee" />
+
+        <EditText
+            android:id="@+id/et_liudongemployee"
+            style="@style/generalEditText"
+            android:hint="@string/liudongemployee" />
+    </LinearLayout>
+</LinearLayout>

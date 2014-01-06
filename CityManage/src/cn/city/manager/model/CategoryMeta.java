@@ -1,7 +1,7 @@
 package cn.city.manager.model;
 
 public class CategoryMeta {
-	private String name;
+	private String name, template;
 	private int drawableId;
 
 	public String getName() {
@@ -18,6 +18,14 @@ public class CategoryMeta {
 
 	public void setDrawableId(int drawableId) {
 		this.drawableId = drawableId;
+	}
+
+	public String getTemplate() {
+		return template;
+	}
+
+	public void setTemplate(String template) {
+		this.template = template;
 	}
 
 }

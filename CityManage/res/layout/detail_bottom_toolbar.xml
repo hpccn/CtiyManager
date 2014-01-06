@@ -2,26 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    
     android:orientation="vertical" >
-<!-- android:background="@color/bottom_toolbar_background" -->
+
+    <!-- android:background="@color/bottom_toolbar_background" -->
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+     >
 
         <Button
             android:id="@+id/btn_commit"
+            style="@style/generalButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            style="@style/generalButtonStyle"
             android:text="@string/commit" />
 
         <Button
             android:id="@+id/btn_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:layout_weight="1"
             android:background="@drawable/btn_default_holo_light"
             android:text="@string/cancel" />

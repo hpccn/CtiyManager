@@ -69,9 +69,10 @@
         <activity
             android:name="cn.city.manager.activity.DetailActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" >
         </activity>
+        <!--             android:screenOrientation="portrait"
+         -->
         <activity
             android:name="cn.city.manager.activity.EntryActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" >
@@ -80,6 +81,10 @@
             android:name=".activity.LoginActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" >
         </activity>
-    </application>
+        <activity
+            android:name=".activity.NetGridActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" >
+        </activity>
+        </application>
 
 </manifest>

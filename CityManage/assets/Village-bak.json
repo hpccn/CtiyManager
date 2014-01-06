@@ -1,0 +1,51 @@
+{
+    "event": {
+        "kind": "Village",
+        "id": 10,
+        "session": 100,
+        "content": [
+            {
+                "netid": "网格ID",
+                "villageid": "村ID",
+                "villagename": "村名称",
+                "netname": "网格名称",
+                "nethushu": 100,
+                "netrenkou": 500,
+                "liudongzong": 600,
+                "youzanzhu": 400,
+                "wuzanzhuzong": 200,
+                "wuzanzhu16shang": 100,
+                "wuzanzhu16xia": 50,
+                "liudongbusiness": 700,
+                "liudongwork": 1000,
+                "liudongemployee": 2000,
+                "newcomer": 80,
+                "liudongleave": 90,
+                "chuzuhuzong": 899,
+                "chuzujianzong": 888,
+                "chuzuyuanzong": 323,
+                "zuzhurenshu": 1000,
+                "chuzuyiranyibao": 88,
+                "chuzuwuzhao": 666,
+                "chuzufeifabanxue": 2,
+                "chuzufeipinshougou": 345,
+                "chuzuqunzu": 234,
+                "wuye": 789,
+                "yuling": 988,
+                "qiyeshu": 20,
+                "mendianshu": 22,
+                "feipinzhan": 20,
+                "youyuanpeixun": 8,
+                "zhongyangzhidi": 9,
+                "lujuqunuan": 876,
+                "infouploadname": "最近更新人",
+                "inforuploaddate": 1380962998588,
+                "netleadername": "格长姓名",
+                "netleadertel": "格长电话",
+                "villageleadername": "村治保主任姓名",
+                "villageleadertel": "村治保主任电话",
+                "remark": "备注"
+            }
+        ]
+    }
+}

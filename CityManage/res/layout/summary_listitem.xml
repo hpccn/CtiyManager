@@ -6,10 +6,11 @@
 
     <ImageView
         android:id="@+id/id_summary_item_cover"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:layout_gravity="center_horizontal"
-        android:contentDescription=""
+        android:contentDescription="缩略图"
+        android:background="@drawable/img_photo_background"
         android:src="@drawable/ic_item_gray" />
 
     <LinearLayout
@@ -73,7 +74,7 @@
             android:id="@+id/id_summary_item_hidden_danger"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="left"
             android:gravity="left" />
     </LinearLayout>
 

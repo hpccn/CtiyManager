@@ -1,0 +1,16 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="建筑面积" >
+
+    <TextView
+        style="@style/thirdTitle"
+        android:text="@string/jianzhumianji" />
+
+    <EditText
+        android:id="@+id/et_jianzhumianji"
+        style="@style/generalEditText"
+        android:ems="10"
+        android:hint="@string/jianzhumianji" />
+
+</LinearLayout>

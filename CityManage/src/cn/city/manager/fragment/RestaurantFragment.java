@@ -7,8 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import cn.city.manager.R;
-import cn.city.manager.model.BaseContent;
-import cn.city.manager.model.BaseFragment;
+import cn.city.manager.fragment.event.BaseEvent;
 /**
  * 餐饮, 餐饮检查
  * @author hpc
@@ -43,7 +42,7 @@ public class RestaurantFragment extends BaseFragment {
 
 
 	@Override
-	public BaseContent getBaseContent() {
+	public BaseEvent getBaseContent() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -53,6 +52,20 @@ public class RestaurantFragment extends BaseFragment {
 	public String getSubTitle() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public void updateView(View rootView) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void updateData(View rootView) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

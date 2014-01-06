@@ -1,0 +1,15 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="土地性质" >
+
+    <TextView
+        style="@style/thirdTitle"
+        android:text="@string/landstatus" />
+
+    <EditText
+        android:id="@+id/et_landstatus"
+        style="@style/generalEditTextReadonly"
+        android:hint="@string/landstatus" />
+
+</LinearLayout>

@@ -1,0 +1,15 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="地址" >
+
+    <TextView
+        style="@style/thirdTitle"
+        android:text="@string/address" />
+
+    <EditText
+        android:id="@+id/et_address"
+        style="@style/generalEditText"
+        android:hint="@string/address" />
+
+</LinearLayout>

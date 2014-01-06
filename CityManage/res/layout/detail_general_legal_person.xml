@@ -1,0 +1,15 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="责任人" >
+
+    <TextView
+        style="@style/thirdTitle"
+        android:text="@string/legal_person" />
+
+    <EditText
+        android:id="@+id/et_legal_person"
+        style="@style/generalEditText"
+        android:hint="@string/legal_person" />
+
+</LinearLayout>

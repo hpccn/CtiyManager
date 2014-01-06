@@ -1,0 +1,15 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="解决状态" >
+
+    <TextView
+        style="@style/thirdTitle"
+        android:text="@string/solvestatus" />
+
+    <EditText
+        android:id="@+id/et_solvestatus"
+        style="@style/generalEditText"
+        android:hint="@string/solvestatus" />
+
+</LinearLayout>

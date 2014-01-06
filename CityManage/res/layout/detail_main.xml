@@ -26,6 +26,7 @@
         layout="@layout/summary_titlebar" />
 
     <LinearLayout
+        android:id="@+id/id_detail_main_container"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/id_titlebar"

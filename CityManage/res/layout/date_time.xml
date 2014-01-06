@@ -10,6 +10,7 @@
         android:layout_height="wrap_content" />
 
     <TimePicker
+        android:visibility="gone"
         android:id="@+id/timepicker"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />

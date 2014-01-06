@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.city.manager.R;
+import cn.city.manager.fragment.t_weijian;
 import cn.city.manager.model.CategoryMeta;
 
 
@@ -15,6 +16,15 @@ public class EventCategory  implements BaseCategory{
 			, "卫生所检查"//
 			, "无照经营", "矛盾排查"
 			, "刑事案件", "交通安全"};
+	
+	final private String[] category = {t_weijian.class.getSimpleName(), null, null
+			, null, null
+			, null, null
+			, null//
+			, null, null
+			, null, null
+};
+	
 	final private int[] eventCategoryIconId = {R.drawable.ic_structure, 
 			R.drawable.ic_safe, R.drawable.ic_fire
 			, R.drawable.ic_gas_poisoning, R.drawable.ic_environment
@@ -32,6 +42,7 @@ public class EventCategory  implements BaseCategory{
 	private void init(){
 		for (int i = 0, length = eventCategory.length; i < length; ++i){
 			CategoryMeta c = new CategoryMeta();
+			c.setTemplate(category[i]);
 			c.setName(eventCategory[i]);
 			c.setDrawableId(eventCategoryIconId[i]);
 			eventCategorys.add(c);

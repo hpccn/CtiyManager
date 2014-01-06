@@ -1,0 +1,15 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="违建人" >
+
+    <TextView
+        style="@style/thirdTitle"
+        android:text="@string/weijianxiangduiren" />
+
+    <EditText
+        android:id="@+id/et_weijianxiangduiren"
+        style="@style/generalEditText"
+        android:hint="@string/weijianxiangduiren" />
+
+</LinearLayout>

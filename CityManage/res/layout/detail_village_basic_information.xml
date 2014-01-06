@@ -1,0 +1,80 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context=".MainActivity$DummySectionFragment" >
+
+        <!--
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        -->
+
+        <include
+            android:id="@+id/id_village"
+            layout="@layout/detail_basic_village" />
+
+        <include
+            android:id="@+id/id_net"
+            layout="@layout/detail_general_net" />
+
+        <include layout="@layout/divider_horizontal" />
+
+        <include
+            android:id="@+id/id_nethushu"
+            layout="@layout/detail_basic_nethushu" />
+
+        <include
+            android:id="@+id/id_outcomer"
+            layout="@layout/detail_basic_outcomer" />
+
+        <include layout="@layout/divider_horizontal" />
+
+        <include
+            android:id="@+id/id_rental"
+            layout="@layout/detail_basic_rental" />
+
+        <include layout="@layout/divider_horizontal" />
+
+        <include
+            android:id="@+id/id_unemployed"
+            layout="@layout/detail_basic_unemployed" />
+
+        <include layout="@layout/divider_horizontal" />
+
+        <include
+            android:id="@+id/id_recently_updated"
+            layout="@layout/detail_item_recently_updated" />
+
+        <include
+            android:id="@+id/id_recently_update_time"
+            layout="@layout/detail_item_recently_update_time" />
+
+        <include
+            android:id="@+id/id_grid_leader"
+            layout="@layout/detail_item_grid_leader" />
+
+        <include
+            android:id="@+id/id_grid_leader_tel"
+            layout="@layout/detail_item_grid_leader_tel" />
+
+        <include
+            android:id="@+id/id_village_security_chief"
+            layout="@layout/detail_item_village_security_chief" />
+
+        <include
+            android:id="@+id/id_village_security_chief_tel"
+            layout="@layout/detail_item_village_security_chief_tel" />
+
+        <include
+            android:id="@+id/id_remark"
+            layout="@layout/detail_general_remark" />
+    </LinearLayout>
+
+</ScrollView>

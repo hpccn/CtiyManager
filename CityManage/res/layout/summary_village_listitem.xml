@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="80dp"
+    android:orientation="horizontal" >
+
+    <ImageView
+        android:id="@+id/id_summary_item_cover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="缩略图"
+        android:background="@drawable/img_photo_background"
+        android:src="@drawable/ic_item_gray" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/TextViewStyleCheckinListItemLineMessage"
+                android:id="@+id/id_summary_item_village_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="所属村 : "
+                android:textStyle="bold" />
+
+            <TextView
+                style="@style/TextViewStyleCheckinListItemLineMessage"
+                android:id="@+id/id_summary_item_village"
+                android:layout_width="60sp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="南王村 " />
+
+            <TextView
+                style="@style/TextViewStyleCheckinListItemLineMessage"
+                android:id="@+id/id_summary_item_cell_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:gravity="center_horizontal"
+                android:text="所属格 : "
+                android:textStyle="bold" />
+
+            <TextView
+                style="@style/TextViewStyleCheckinListItemLineMessage"
+                android:id="@+id/id_summary_item_cell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="村东1格" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/TextViewStyleCheckinListItemLineMessage"
+            android:id="@+id/id_summary_item_hidden_danger_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:gravity="left"
+            android:textStyle="bold" 
+            android:text="隐患描述 : " />
+
+        <TextView
+            style="@style/TextViewStyleCheckinListItemLineMessage"
+            android:id="@+id/id_summary_item_hidden_danger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="left" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -2,6 +2,7 @@ package cn.city.manager.view;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -9,15 +10,17 @@ import cn.city.manager.fragment.CriminalFragment;
 import cn.city.manager.fragment.DisputeFragment;
 import cn.city.manager.fragment.FoodDrugFragment;
 import cn.city.manager.fragment.GeneralFragment;
-import cn.city.manager.fragment.IllegalStructureFragment;
+import cn.city.manager.fragment.t_weijian;
 import cn.city.manager.fragment.ImportantPersonFragment;
 import cn.city.manager.fragment.LoginFragment;
 import cn.city.manager.fragment.MainFragment;
+import cn.city.manager.fragment.t_netbaseinfoGrid;
 import cn.city.manager.fragment.OutcastFragment;
 import cn.city.manager.fragment.RestaurantFragment;
 import cn.city.manager.fragment.SanitationFragment;
 import cn.city.manager.fragment.TrafficFragment;
 import cn.city.manager.fragment.UnlicensedVendorFragment;
+import cn.city.manager.fragment.t_netbaseinfo;
 
 
 
@@ -53,11 +56,18 @@ public class ViewSingletonFactory {
 
 	final private Class<?>[] clzCategorys = {GeneralFragment.class, GeneralFragment.class, GeneralFragment.class
 			, SanitationFragment.class, FoodDrugFragment.class, FoodDrugFragment.class
-			, IllegalStructureFragment.class, GeneralFragment.class, UnlicensedVendorFragment.class
+			, t_weijian.class, GeneralFragment.class, UnlicensedVendorFragment.class
 			, DisputeFragment.class, CriminalFragment.class, TrafficFragment.class};
 	final private List <Class<?>> categorysClz = new ArrayList<Class<?>>();
 	
 	final private List <String> categoryName = new ArrayList<String>();
+	
+	/**
+	 * 没有新增事件的类
+	 */
+	final private HashSet<String> cannotAddEvent = new HashSet<String>();
+
+	
 	private void init(){
 		for (String e : eventCategory){
 			categoryName.add(e);
@@ -74,6 +84,8 @@ public class ViewSingletonFactory {
 			categorys.put(eventCategoryEn[i], clzCategorys[i]);
 		}
 		
+		cannotAddEvent.add(t_netbaseinfo.class.getSimpleName());
+		cannotAddEvent.add(t_netbaseinfoGrid.class.getSimpleName());
 		
 	}
 	private void init2(){
@@ -88,7 +100,7 @@ public class ViewSingletonFactory {
 		fragments.add(OutcastFragment.class);
 		fragments.add(ImportantPersonFragment.class);
 		fragments.add(DisputeFragment.class);
-		fragments.add(IllegalStructureFragment.class);
+		fragments.add(t_weijian.class);
 		fragments.add(UnlicensedVendorFragment.class);
 //		
 //		fragments.add(.class);
@@ -126,7 +138,7 @@ public class ViewSingletonFactory {
 		categorys.put("outcast", OutcastFragment.class);
 		categorys.put("importantPerson", ImportantPersonFragment.class);
 		categorys.put("dispute", DisputeFragment.class);
-		categorys.put("illegalStructure", IllegalStructureFragment.class);
+		categorys.put("illegalStructure", t_weijian.class);
 		categorys.put("unlicensedVendor", UnlicensedVendorFragment.class);
 		position = 0;
 	}
@@ -176,4 +188,12 @@ public class ViewSingletonFactory {
 		return categoryName;
 	}
 
+
+	public HashSet<String> getCannotAddEvent() {
+		return cannotAddEvent;
+	}
+
+	public boolean canNewEvent(final String category){
+		return !cannotAddEvent.contains(category);
+	}
 }

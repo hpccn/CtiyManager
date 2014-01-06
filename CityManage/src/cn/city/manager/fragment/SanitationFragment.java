@@ -7,8 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import cn.city.manager.R;
-import cn.city.manager.model.BaseContent;
-import cn.city.manager.model.BaseFragment;
+import cn.city.manager.fragment.event.BaseEvent;
 /**
  * 环境卫生,环境、垃圾隐患
  * @author hpc
@@ -46,7 +45,7 @@ public class SanitationFragment extends BaseFragment {
 
 
 	@Override
-	public BaseContent getBaseContent() {
+	public BaseEvent getBaseContent() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -57,6 +56,22 @@ public class SanitationFragment extends BaseFragment {
 	public String getSubTitle() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+
+	@Override
+	public void updateView(View rootView) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void updateData(View rootView) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    
+    <string name="search">搜索</string>
+    
 
+    
     <string name="app_name">高丽营镇综合服务平台</string>
     <string name="action_settings">Settings</string>
     <string name="title_section1">Section 1</string>
@@ -10,7 +14,7 @@
     <string name="essential_manager">基本信息</string>
     <string name="main_title">高丽营镇综合服务平台</string>
     <string name="welcome">掌上高丽营欢迎您!</string>
-    <string name="discovery_time">发现时间</string>
+    <string name="tijiao">提交时间</string>
     <string name="submission_time">提交时间</string>
     <string name="completion_time">完成时间</string>
     <string name="examination_time">检查时间</string>
@@ -61,7 +65,6 @@
     <string name="status_solving">解决中</string>
     <string name="status_solved">已解决</string>
     <string name="solution_process">解决过程记录</string>
-    <string name="result">解决结果</string>
     <string name="cause">未解决原因</string>
 
     <!-- 刑事案件发案 -->
@@ -100,7 +103,7 @@
     <string name="videotape">现场拍摄</string>
     
     <string name="select_picture">选择照片</string>
-    <string name="select_video">添加视频</string>
+    <string name="select_video">选择视频</string>
     <string name="video_file">视频文件名</string>
     
     <!-- 违章建筑 -->
@@ -109,22 +112,24 @@
     <string name="illegal_structure_address">违章建筑具体位置</string>
     <string name="illegal_structure_landlord">违法建设人</string>
     <string name="landlord">违法建设人</string>
-    <string name="land_property">土地性质</string>
-    <string name="land_area">占地面积</string>
-    <string name="building_structure">建筑结构</string>
-    <string name="building_area">建筑面积</string>
-    <string name="construction_time">建设时间</string>
+    <string name="landstatus">土地性质</string>
+    <string name="landarea">占地面积(亩)</string>
+    <string name="construction">建筑结构</string>
+    <string name="jianzhumianji">建筑面积</string>
+    <string name="buildtime">建设时间</string>
     <string name="circumstance_category">当日情况</string>
     <string name="circumstance_category_newfound">新发现</string>
     <string name="circumstance_category_dismantlement">拆除</string>
     <string name="circumstance_category_outher">其它</string>
+    <string name="login_reset">重置</string>
+    <string name="login_commit">提交</string>
     <string name="login">登录</string>
-    <string name="save_login">保存登录信息</string>
+    <string name="save_login">记住用户名</string>
     <string name="auto_login">自动登录</string>
     <string name="login_main">系统登录</string>
     <string name="user_name">用户名</string>
     <string name="user_mobile">手机号</string>
-    <string name="password">密码</string>
+    <string name="password">密　码</string>
     <string name="login_tips">\n\n\n登录提示: 默认密码123456. \n 您选输入错误密码看看效果,   \n 更多信息请致电: <b>13901234567.</b>  \n还有问题还要学会搜索:  http://www.google.com  \n 版权所有:  XXX </string>
     <string name="browse_category">分类浏览</string>
     <string name="new_category">新的事件</string>
@@ -144,17 +149,19 @@
     <string name="check_upgrade">检查升级</string>
     <!-- 公用 -->
     <string name="netid">网格ID</string>
-    <string name="netname">网格名称</string>
-    <string name="villagename">村名</string>
+    <string name="netname">格名称</string>
+    <string name="villagename">村名称</string>
     <string name="eventtype">事件类型</string>
-    <string name="eventid">事件ID</string>
+    <string name="eventid">事件编号</string>
     <string name="discoverername">提交人</string>
     <string name="discovererlevel">提交人级别</string>
     <string name="leaderid">批示人ID</string>
     <string name="leadername">批示人姓名</string>
-    <string name="netleadername">格长姓名</string>
-    <string name="netleadertel">格长电话</string>
+
     
+    <string name="belong_village">所属村</string>
+    <string name="belong_netgrid">所属格</string>
+
     <string name="yinhuanaddress">违建位置</string>    
     <string name="weijianxiangduiren">违建人</string>    
     <string name="yinhuanxiangqing">违章描述</string>    
@@ -169,7 +176,56 @@
     <string name="solvestatus">解决状态</string>
     <string name="solvetime">解决时间</string>
     <string name="unsolvedreason">未解决原因</string>
+    
+    <string name="solvemethod">当日新发现和拆除情况</string>
+    <string name="result">解决结果</string>
 
+    
+    <!-- 村信息 -->
+    <string name="village_basic_information_title">村信息</string>
+    <string name="village_basic_information_sub_title">按村信息查看</string>
+    
+    <string name="nethushu">常驻户数</string>
+    <string name="netrenkou">常驻人口</string>
+    <string name="liudongzong">流动人口总数</string>    
+    <string name="youzanzhu">已办暂住证</string>    
+    <string name="wuzanzhuzong">未办暂住证总数</string>    
+    <string name="wuzanzhu16shang">未办暂住证，16周岁以上</string>    
+    <string name="wuzanzhu16xia">未办暂住证，16周岁以下</string>    
+    <string name="liudongbusiness">流动人口个体经商户数</string>    
+    <string name="liudongwork">流动人口从业人员数</string>    
+    <string name="liudongemployee">招用流动人口数</string>    
+
+    
+    <string name="chuzuhuzong">出租房屋总户数</string>    
+    <string name="chuzujianzong">出租房屋总间数</string>    
+    <string name="chuzuyuanzong">出租大院户数</string>    
+    <string name="zuzhurenshu">租住人员数</string>    
+    <string name="chuzuyiranyibao">利用出租房屋存放易燃易爆危险化学品</string>    
+    <string name="chuzuwuzhao">利用出租房屋无照经营</string>    
+    <string name="chuzufeifabanxue">利用出租房屋非法办学</string>    
+    <string name="chuzufeipinshougou">利用出租房屋收购废品</string>    
+    <string name="chuzuqunzu">利用出租房屋群租</string>    
+    
+    
+    <string name="wuye">无业人员数</string>    
+    <string name="yuling">育龄妇女数</string>    
+    <string name="qiyeshu">企业数</string>    
+    <string name="mendianshu">门店数</string>    
+    <string name="feipinzhan">废品收购站数</string>    
+    <string name="youyuanpeixun">幼儿园或培训机构数</string>    
+    <string name="zhongyangzhidi">种养殖地数</string>    
+    <string name="lujuqunuan">炉具取暖户数</string>    
+ 
+    <string name="infouploadname">最近更新人</string>    
+    <string name="inforuploaddate">最近更新时间</string>    
+    <string name="netleadername">格长姓名</string>    
+    <string name="netleadertel">格长电话</string>    
+    <string name="villageleadername">村治保主任姓名</string>    
+    <string name="villageleadertel">村治保主任电话</string>    
+    <string name="remark">备注</string>    
+    
+    
     <!--
     <string name=""></string>    
     <string name=""></string>    
@@ -180,6 +236,7 @@
     <string name=""></string>    
     <string name=""></string>    
     <string name=""></string>    
-    -->
+    -->    
+    <string name="netgrid_id">网格ID</string>
 
 </resources>

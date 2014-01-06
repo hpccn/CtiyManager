@@ -36,27 +36,44 @@
     </style>
 
     <style name="thirdTitle">
-        <item name="android:layout_width">100sp</item>
+        <item name="android:layout_width">120sp</item>
         <item name="android:textSize">14dip</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:gravity">right</item>
+        <item name="android:gravity">left</item>
+        <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginTop">0dp</item>
         <item name="android:layout_marginRight">0dp</item>
     </style>
-
+    
+    <style name="midTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:gravity">left</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginTop">5dp</item>
+    </style>
+    
     <style name="generalEditText">
         <item name="android:ems">10</item>
         <item name="android:background">@drawable/edit_text_holo_dark</item>
         <item name="android:layout_width">fill_parent</item>
-        <item name="android:textSize">14dip</item>
+        <item name="android:textSize">14dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">left</item>
         <item name="android:gravity">left</item>
+        <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginTop">0dp</item>
         <item name="android:layout_marginRight">0dp</item>
     </style>
 
+    
+    <style name="generalEditTextReadonly" parent="generalEditText">
+        <item name="android:editable">false</item>
+    </style>
+    
+    
     <style name="horizontalRight">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:baselineAligned">true</item>
@@ -88,6 +105,16 @@
         <item name="android:maxHeight">26dip</item>
     </style>
 
+    <style name="generalCheckButtonStyle">
+         <item name="android:button">@drawable/btn_check_holo_light</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">12.0sp</item>
+        <item name="android:textStyle">bold</item>
+        
+    </style>
     
     
     <style name="generalButtonStyle">
@@ -123,16 +150,25 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/grey_end</item>
     </style>
-
-    <style name="TextViewStyleCheckinListItemLineMessage">
+    <style name="TextViewStyleCheckinListItemLineMessage1">
         <item name="android:textSize">13.0dip</item>
         <item name="android:textColor">@color/grey_end</item>
+    </style>
+
+    <style name="TextViewStyleCheckinListItemLineMessageBigger1">
+        <item name="android:textSize">15.0dip</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/grey_end</item>
+    </style>
+    <style name="TextViewStyleCheckinListItemLineMessage">
+        <item name="android:textSize">13.0dip</item>
+        <item name="android:textColor">@color/black_end</item>
     </style>
 
     <style name="TextViewStyleCheckinListItemLineMessageBigger">
         <item name="android:textSize">15.0dip</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/grey_end</item>
+        <item name="android:textColor">@color/black_end</item>
     </style>
 
     <style name="TextViewStyleCheckinListItemLineAddress">

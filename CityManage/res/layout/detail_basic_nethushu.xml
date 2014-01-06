@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="常驻户数,常驻人口数" >
+
+        <LinearLayout style="@style/horizontalCenter" >
+
+            <TextView
+                style="@style/thirdTitle"
+                android:text="@string/nethushu" />
+
+            <EditText
+                android:id="@+id/et_nethushu"
+                style="@style/generalEditText"
+                android:hint="@string/nethushu" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/horizontalCenter" >
+
+            <TextView
+                style="@style/thirdTitle"
+                android:text="@string/netrenkou" />
+
+            <EditText
+                android:id="@+id/et_netrenkou"
+                style="@style/generalEditText"
+                android:hint="@string/netrenkou" />
+        </LinearLayout>
+        
+</LinearLayout>

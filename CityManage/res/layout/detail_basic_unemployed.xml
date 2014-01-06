@@ -1,0 +1,119 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="无业者，等信息" >
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <!-- 无业人员数 -->
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/wuye" />
+
+        <EditText
+            android:id="@+id/et_wuye"
+            style="@style/generalEditText"
+            android:hint="@string/wuye" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <!-- 育龄妇女数 -->
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/yuling" />
+
+        <EditText
+            android:id="@+id/et_yuling"
+            style="@style/generalEditText"
+            android:hint="@string/yuling" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <!--企业数  -->
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/qiyeshu" />
+
+        <EditText
+            android:id="@+id/et_qiyeshu"
+            style="@style/generalEditText"
+            android:hint="@string/qiyeshu" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <!-- 门店数 -->
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/mendianshu" />
+
+        <EditText
+            android:id="@+id/et_mendianshu"
+            style="@style/generalEditText"
+            android:hint="@string/mendianshu" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <!-- 废品收购站数 -->
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/feipinzhan" />
+
+        <EditText
+            android:id="@+id/et_feipinzhan"
+            style="@style/generalEditText"
+            android:hint="@string/feipinzhan" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <!-- 幼儿园或培训机构数 -->
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/youyuanpeixun" />
+
+        <EditText
+            android:id="@+id/et_youyuanpeixun"
+            style="@style/generalEditText"
+            android:hint="@string/youyuanpeixun" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <!-- 种养殖地数 -->
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/zhongyangzhidi" />
+
+        <EditText
+            android:id="@+id/et_zhongyangzhidi"
+            style="@style/generalEditText"
+            android:hint="@string/zhongyangzhidi" />
+    </LinearLayout>
+    
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <!-- 炉具取暖户数 -->
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/lujuqunuan" />
+
+        <EditText
+            android:id="@+id/et_lujuqunuan"
+            style="@style/generalEditText"
+            android:hint="@string/lujuqunuan" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,15 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="村庄信息" >
+
+    <TextView
+        style="@style/thirdTitle"
+        android:text="@string/villagename" />
+
+    <EditText
+        android:id="@+id/et_villagename"
+        style="@style/generalEditTextReadonly"
+        android:hint="@string/villagename" />
+
+</LinearLayout>

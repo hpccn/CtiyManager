@@ -1,0 +1,16 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="占地面积" >
+
+    <TextView
+        style="@style/thirdTitle"
+        android:text="@string/landarea" />
+
+    <EditText
+        android:id="@+id/et_landarea"
+        style="@style/generalEditText"
+        android:ems="10"
+        android:hint="@string/landarea" />
+
+</LinearLayout>

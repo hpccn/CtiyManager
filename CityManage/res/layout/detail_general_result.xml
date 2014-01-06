@@ -1,0 +1,17 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="解决结果" >
+
+    <TextView
+        style="@style/thirdTitle"
+        android:text="@string/result" />
+
+    <EditText
+        android:id="@+id/et_result"
+        android:minLines="2"
+        style="@style/generalEditTextReadonly"
+        android:ems="10"
+        android:hint="@string/result" />
+
+</LinearLayout>

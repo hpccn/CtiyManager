@@ -1,0 +1,19 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="检查时间" >
+
+    <TextView
+        style="@style/thirdTitle"
+        android:text="@string/examination_time" />
+
+    <EditText
+        android:id="@+id/examination_date_time"
+        style="@style/generalEditText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:editable="false"
+        android:ems="10"
+        android:hint="@string/hint_time" />
+
+</LinearLayout>

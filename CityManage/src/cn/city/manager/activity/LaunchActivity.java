@@ -56,7 +56,7 @@ public class LaunchActivity extends Activity {
 
 	@Override
 	protected void onDestroy() {
-
+		overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
 		super.onDestroy();
 	}
 

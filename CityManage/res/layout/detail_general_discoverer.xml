@@ -3,8 +3,31 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".MainActivity$DummySectionFragment" >
+    tools:context="提交人信息" >
 
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/tijiao" />
+
+        <EditText
+            android:id="@+id/et_tijiao"
+            style="@style/generalEditTextReadonly"
+            android:ems="10"
+            android:hint="@string/tijiao" />
+    </LinearLayout>
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/discoverername" />
+
+        <EditText
+            android:id="@+id/et_discoverername"
+            style="@style/generalEditText"
+            android:hint="@string/discoverername" />
+    </LinearLayout>
     <LinearLayout style="@style/horizontalCenter" >
 
         <TextView
@@ -17,29 +40,6 @@
             android:hint="@string/discovererlevel" />
     </LinearLayout>
 
-    <LinearLayout style="@style/horizontalCenter" >
 
-        <TextView
-            style="@style/thirdTitle"
-            android:text="@string/discoverername" />
-
-        <EditText
-            android:id="@+id/et_discoverername"
-            style="@style/generalEditText"
-            android:hint="@string/discoverername" />
-    </LinearLayout>
-
-    <LinearLayout style="@style/horizontalCenter" >
-
-        <TextView
-            style="@style/thirdTitle"
-            android:text="@string/discovery_time" />
-
-        <EditText
-            android:id="@+id/et_discovery_time"
-            style="@style/generalEditText"
-            android:ems="10"
-            android:hint="@string/discovery_time" />
-    </LinearLayout>
 
 </LinearLayout>

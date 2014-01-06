@@ -1,0 +1,16 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="备注" >
+
+    <TextView
+        style="@style/thirdTitle"
+        android:text="@string/remark" />
+
+    <EditText
+        android:id="@+id/et_remark"
+        style="@style/generalEditText"
+        android:minLines="2"
+        android:hint="@string/remark" />
+
+</LinearLayout>

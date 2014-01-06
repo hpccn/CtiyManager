@@ -1,0 +1,57 @@
+{
+    "event": {
+        "kind": "IllegalStructure",
+        "id": 10,
+        "session": 100,
+        "content": [
+            {
+"netid":"网格ID",
+"villageid":"村ID",
+"villagename":"村名称",
+"netname":"网格名称",
+"nethushu":100,	常驻户数
+"netrenkou":500,	常驻人口数
+"liudongzong":600,	流动人口总数
+"youzanzhu":400,	流动人口数（已办暂住证）
+"wuzanzhuzong":200,	流动人口数（未办暂住证总数）
+"wuzanzhu16shang":100,	流动人口数（未办暂住证，16周岁以上）
+"wuzanzhu16xia":50,	流动人口数（未办暂住证，16周岁以下）
+"liudongbusiness":700,	流动人口个体经商户数
+"liudongwork":1000	流动人口从业人员数
+"liudongemployee":2000,	招用流动人口数
+
+"newcomer":80,	新来京人员数量 // 不显示
+"liudongleave":90,	已离开流动人口数量  // 不显示
+
+
+"chuzuhuzong":899,	出租房屋总户数
+"chuzujianzong":888,	出租房屋总间数
+"chuzuyuanzong":323,	出租大院户数
+"zuzhurenshu":"1000,租住人员数
+"chuzuyiranyibao":88,	利用出租房屋存放易燃易爆危险化学品
+"chuzuwuzhao":666,	利用出租房屋无照经营
+"chuzufeifabanxue":2,	利用出租房屋非法办学
+"chuzufeipinshougou":345,	利用出租房屋收购废品
+"chuzuqunzu":234,	利用出租房屋群租
+
+
+"wuye":789,	无业人员数
+"yuling":988,	育龄妇女数
+"qiyeshu":20,	企业数
+"mendianshu":22,	门店数
+"feipinzhan":20,	废品收购站数
+"youyuanpeixun":8,	幼儿园或培训机构数
+"zhongyangzhidi":9,	种养殖地数
+"lujuqunuan":876,	炉具取暖户数
+
+"infouploadname":"最近更新人",
+"inforuploaddate":1380962998588,	更新日期
+"netleadername":"格长姓名"
+"netleadertel":"格长电话"
+"villageleadername":"村治保主任姓名"
+"villageleadertel":"村治保主任电话"
+"remark":"	备注"
+            }
+        ]
+    }
+}

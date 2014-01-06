@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".MainActivity$DummySectionFragment" >
-
+<!-- 
     <LinearLayout style="@style/horizontalCenter" >
 
         <TextView
@@ -16,7 +16,7 @@
             style="@style/generalEditText"
             android:hint="@string/updateid" />
     </LinearLayout>
-
+ -->
     <LinearLayout style="@style/horizontalCenter" >
 
         <TextView
@@ -25,7 +25,7 @@
 
         <EditText
             android:id="@+id/et_updatename"
-            style="@style/generalEditText"
+            style="@style/generalEditTextReadonly"
             android:hint="@string/updatename" />
     </LinearLayout>
 
@@ -49,7 +49,7 @@
 
         <EditText
             android:id="@+id/et_updatetime"
-            style="@style/generalEditText"
+            style="@style/generalEditTextReadonly"
             android:hint="@string/updatetime" />
     </LinearLayout>
 
