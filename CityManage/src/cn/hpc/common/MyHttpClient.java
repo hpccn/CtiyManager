@@ -21,6 +21,8 @@ public class MyHttpClient  {
     private HttpResponse httpResponse;
     public static String PHPSESSID = null;
 
+    public final static String cookie_Key = "SESS273b99b6acbccb3052ab6aa8f50fc105";
+    public static String cookie = null;
     private static String BASEPATH = "http://127.0.0.1:8000/";
     public String executeRequest(String path, List<NameValuePair> params) {
         String ret = "none";

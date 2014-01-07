@@ -28,6 +28,7 @@ import android.widget.ZoomButtonsController;
 import cn.city.manager.Constants;
 import cn.city.manager.R;
 import cn.city.manager.model.Page;
+import cn.hpc.common.HttpStreamThread;
 
 public class Statistics implements Page{
 	private Context context;
@@ -132,11 +133,11 @@ WebView代码
 
 	 * @param url4load
 	 */
-	private void session(String url4load){
+	protected void session(String url4load){
 		//String url4load = "登录域名下你要访问的地址";
 		CookieSyncManager.createInstance(context);
 		CookieManager cookieManager = CookieManager.getInstance();
-		Cookie sessionCookie = this.sessionCookie;
+		Cookie sessionCookie = HttpStreamThread.sessionCookie;//this.sessionCookie;
 		if (sessionCookie != null) {
 			String cookieString = sessionCookie.getName() + "=" + sessionCookie.getValue() + "; domain=" + sessionCookie.getDomain();
 			cookieManager.setCookie(url4load, cookieString);
@@ -153,9 +154,9 @@ WebView代码
 	final private Handler mHandler = new Handler(); 
 	
 	protected void initData(){
-		session(Constants.weijian_statics);
-        webView.loadUrl(Constants.weijian_statics);     
-       
+		
+        webView.loadUrl(Constants.weijian_tongji);     
+        session(Constants.weijian_tongji);
 	}
 	
 //	private void showSelectBrowse(){

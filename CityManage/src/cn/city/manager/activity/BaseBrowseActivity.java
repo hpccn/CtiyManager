@@ -79,15 +79,17 @@ public abstract class BaseBrowseActivity extends Activity {
 			e.printStackTrace();
 			this.finishActivity(1000);
 		}
-		initToolBar();
-		updateClickListent();
+//		initToolBar();
+//		updateClickListent();
 	}
 	
 	protected void onEventLoad(){
-		if (null == events) return;
+
+//		if (null == events) return;
 		updateView();
-//		initToolBar();
-//		updateClickListent();
+		initToolBar();
+		updateClickListent();
+
 	}
 	
 	protected abstract View obtainView();

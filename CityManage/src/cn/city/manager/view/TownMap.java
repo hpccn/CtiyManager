@@ -11,7 +11,8 @@ public class TownMap extends Statistics{
 	}
 
 	protected void initData(){
-		 webView.loadUrl(Constants.town_map); 
+		 webView.loadUrl(Constants.weijian_zhenyutu); 
+		 session(Constants.weijian_zhenyutu);
 	}
 
 }

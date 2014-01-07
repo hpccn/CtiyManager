@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
+import cn.city.manager.Constants;
 import cn.city.manager.R;
 import cn.city.manager.fragment.event.BaseEvent;
 import cn.city.manager.model.EventHttpStreamThread;
@@ -52,9 +53,9 @@ public class SummaryActivity extends BaseBrowseActivity {
 		
 //		String url = "https://code.csdn.net/hpccn/citymanager/blob/master/CityManage/assets/t_weijian.json";//"http://192.168.6.55:8000/t_weijian.json";
 //		String url = "http://192.168.6.55:8000/t_weijian.json";
-		String url = "http://longhorn.free3v.net/t_weijian.html";
-		StringCacheFactory scf = StringCacheFactory.getInstance(this);
-		scf.scheduleLoadString(10, Uri.parse(url));
+		String url = Constants.weijian_list;//"http://longhorn.free3v.net/t_weijian.html";
+//		StringCacheFactory scf = StringCacheFactory.getInstance(this);
+//		scf.scheduleLoadString(10, Uri.parse(url));
 		
 		HttpStreamThread hst = new EventHttpStreamThread(this, url, onStringLoadListener);
 		hst.start();
@@ -108,6 +109,14 @@ public class SummaryActivity extends BaseBrowseActivity {
 				e.printStackTrace();
 			}
 			handler.sendEmptyMessage(100);
+		}
+
+		@Override
+		public void onMoved(String url) {
+			// TODO Auto-generated method stub
+			HttpStreamThread hst = new EventHttpStreamThread(SummaryActivity.this, url, onStringLoadListener);
+			hst.start();
+
 		}
 		
 	};

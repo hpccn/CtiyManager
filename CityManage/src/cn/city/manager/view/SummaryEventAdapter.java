@@ -22,7 +22,7 @@ public class SummaryEventAdapter extends BaseAdapter {
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return list.size();
+		return null == list ? 0 : list.size();
 	}
 
 	@Override
@@ -39,6 +39,7 @@ public class SummaryEventAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+		if (null == list) return convertView;
 		if (null == convertView) {
 			convertView = View.inflate(context, R.layout.summary_listitem, null);
 		}
