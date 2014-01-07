@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -35,6 +37,7 @@ import org.apache.http.protocol.HttpContext;
 import cn.city.manager.fragment.event.BaseEvent;
 
 import android.net.http.AndroidHttpClient;
+import android.os.Handler;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
@@ -44,6 +47,10 @@ public class HttpUploadHelper {
 	// private final static String report_url =
 	// "http://";
 	protected AndroidHttpClient client = null;
+	protected Handler handler;
+	public HttpUploadHelper(Handler handler){
+		this.handler = handler;
+	}
 	
 	public void httpPostEvent(final String url, final BaseEvent baseEvent) {
 		Thread th = new Thread() {
@@ -60,7 +67,12 @@ public class HttpUploadHelper {
 		th.start();
 
 	}
-
+	private final SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM");
+	private String getDateText(long millisecond) {
+		Date date = new Date(millisecond);
+		String dateTime = sdf2.format(date);
+		return dateTime;
+	}
 	private int postEvent(String url, final BaseEvent baseEvent) {
 		if (null == baseEvent) return 400;
 
@@ -76,6 +88,13 @@ public class HttpUploadHelper {
 		
 
 		try {
+			// 用户名
+			entity.addPart("s_netid", new StringBody(
+					"010101",
+					Charset.forName("utf-8")));
+			entity.addPart("s_yearmonth", new StringBody(
+					getDateText(System.currentTimeMillis()),
+					Charset.forName("utf-8")));
 			entity.addPart("kind", new StringBody(
 					baseEvent.getCategory(),
 					Charset.forName("utf-8")));
@@ -121,6 +140,7 @@ public class HttpUploadHelper {
 
 			if (200 == response.getStatusLine().getStatusCode()) {
 				Log.d("response ok ", "ok" + status);
+				
 			} else {
 				Log.d("response error ", "error" + status);
 			}
@@ -128,6 +148,7 @@ public class HttpUploadHelper {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		handler.sendEmptyMessage(status);
 		return status;
 	}
 

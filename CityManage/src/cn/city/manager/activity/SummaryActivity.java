@@ -12,6 +12,7 @@ import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import cn.city.manager.Constants;
@@ -19,6 +20,7 @@ import cn.city.manager.R;
 import cn.city.manager.fragment.event.BaseEvent;
 import cn.city.manager.model.EventHttpStreamThread;
 import cn.city.manager.model.EventSingletonFactory;
+import cn.city.manager.view.Statistics;
 import cn.city.manager.view.SummaryEventAdapter;
 import cn.city.manager.view.ViewSingletonFactory;
 import cn.hpc.common.HttpStreamThread;
@@ -30,6 +32,14 @@ public class SummaryActivity extends BaseBrowseActivity {
 	@Override
 	protected View obtainView() {
 		View view = View.inflate(this, R.layout.summary_main, null);
+
+		// 使用Web方式浏览
+		view.findViewById(R.id.id_summary_top_toolbar).setVisibility(View.GONE);
+		Statistics wange = new Statistics(this, Constants.weijian_list);
+		FrameLayout frame = (FrameLayout) view.findViewById(R.id.summary_content_container);
+//		frame.removeAllViews();
+		frame.addView(wange.getView());
+
 		return view;
 	}
 
@@ -42,7 +52,7 @@ public class SummaryActivity extends BaseBrowseActivity {
 		}
 		tvTitle = (TextView)this.findViewById(R.id.id_titlebar_title);
 		ListView summaryView = (ListView) this.findViewById(R.id.summary_list); 
-
+		
 		selectEventSummary(summaryView);
 
 	}
@@ -133,6 +143,7 @@ public class SummaryActivity extends BaseBrowseActivity {
 
 	};
 	private void selectEventSummary(ListView summaryView){
+		if (null == summaryView || null == events) return;
 		SummaryEventAdapter adapter = new SummaryEventAdapter(context, events); 
 		summaryView.setAdapter(adapter);
 		summaryView.setOnItemClickListener(new OnItemClickListener(){

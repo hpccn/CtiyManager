@@ -35,11 +35,14 @@ public class Statistics implements Page{
 	private View view;
 //	private Button btnCategory;
 	protected WebView webView;
+	protected String url;
+	
 //	private String selectBrowseCategoryItems[] = {"常驻人口", "常驻户数", "流动人口总数", "出租屋总户数"};
 //	private int selectBrowseCategory;
-	public Statistics(Context context){
+	public Statistics(Context context, String url){
 		this.context = context;
-		init();
+		this.url = url;
+		init(url);
 	}
 	
 	public View getView(){
@@ -145,18 +148,20 @@ WebView代码
 		}
 
 	}
-	private void init(){
+	private void init(String url){
 
 		
 		getView();
-		initData();
+		initData(url);
 	}
 	final private Handler mHandler = new Handler(); 
 	
-	protected void initData(){
+	protected void initData(String url){
+        webView.loadUrl(url);     
+        session(url);
 		
-        webView.loadUrl(Constants.weijian_tongji);     
-        session(Constants.weijian_tongji);
+//        webView.loadUrl(Constants.weijian_tongji);     
+//        session(Constants.weijian_tongji);
 	}
 	
 //	private void showSelectBrowse(){

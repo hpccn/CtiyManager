@@ -5,8 +5,12 @@ import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.http.HttpStatus;
+
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -26,6 +30,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import cn.city.manager.Constants;
 import cn.city.manager.R;
 import cn.city.manager.fragment.BaseFragment;
@@ -90,7 +95,7 @@ public class DetailActivity extends Activity {
 
 	}
 
-	Handler handler = new Handler() {
+	final private Handler handler = new Handler() {
 
 		@Override
 		public void dispatchMessage(Message msg) {
@@ -102,7 +107,20 @@ public class DetailActivity extends Activity {
 				// String address = b.getString("address");
 
 				break;
+			case 0x1002:
+				DetailActivity.this.finish();
+				break;
+			case HttpStatus.SC_OK:
+				alertDialog.setMessage("上传事件成功");
+				hideProcess();
+				Toast.makeText(DetailActivity.this, "上传事件成功", Toast.LENGTH_LONG).show();
+				
+				handler.sendEmptyMessageDelayed(0x1002, 200);
+				
 			default:
+				hideProcess();
+//				showMessage("上传事件错误, 请重新上传");
+				
 				super.dispatchMessage(msg);
 			}
 
@@ -122,6 +140,7 @@ public class DetailActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
+
 		super.onDestroy();
 	}
 	
@@ -388,8 +407,9 @@ public class DetailActivity extends Activity {
 				break;
 			case R.id.btn_commit:
 				if (null != fragment){
+					showProcess();
 					fragment.updateData(mainView);
-					HttpUploadHelper uploader = new HttpUploadHelper();
+					HttpUploadHelper uploader = new HttpUploadHelper(handler);
 					uploader.httpPostEvent(uploadUrl, baseContent);
 				}
 				break;
@@ -445,6 +465,35 @@ public class DetailActivity extends Activity {
 
 		}
 	};
+	
+	
+	AlertDialog alertDialog;
+	private void hideProcess(){
+	    alertDialog.dismiss();
+	}
+	private void showProcess(){
+
+		
+	    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	    builder.setIcon(R.drawable.ic_logo);
+	    builder.setTitle("正在上传数据,请稍候");
+	    builder.setMessage("正在上传数据,请稍候");
+	    builder.setCancelable(false);
+	    alertDialog = builder.create();  
+	    alertDialog.show();
+	}
+	
+	private void showMessage(String message){
+
+		
+	    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	    builder.setIcon(R.drawable.ic_logo);
+	    builder.setTitle("正在上传数据");
+	    builder.setMessage(message);
+	    builder.setCancelable(true);
+	    alertDialog = builder.create();  
+	    alertDialog.show();
+	}
 //	private void setDateTime(int viewId) {
 //		DateTimeChanger dtc = new DateTimeChanger(this, (TextView)this.findViewById(viewId), baseContent);
 //	}
@@ -467,4 +516,13 @@ public class DetailActivity extends Activity {
 //		dateTimePicKDialog.dateTimePicKDialog(listener, baseContent.getTime());
 //
 //	}
+
+	@Override
+	protected void onStop() {
+		if (null != alertDialog){
+			alertDialog.cancel();
+			alertDialog.dismiss();
+		}
+		super.onStop();
+	}
 }

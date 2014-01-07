@@ -23,6 +23,7 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import cn.city.manager.Constants;
 import cn.city.manager.R;
 import cn.city.manager.fragment.t_netbaseinfo;
 import cn.city.manager.fragment.t_netbaseinfoGrid;
@@ -33,7 +34,6 @@ import cn.city.manager.view.More;
 import cn.city.manager.view.NetGridAdapter;
 import cn.city.manager.view.Statistics;
 import cn.city.manager.view.SummaryEventAdapter;
-import cn.city.manager.view.TownMap;
 import cn.hpc.common.JSONHelper;
 
 public abstract class BaseBrowseActivity extends Activity {
@@ -79,16 +79,16 @@ public abstract class BaseBrowseActivity extends Activity {
 			e.printStackTrace();
 			this.finishActivity(1000);
 		}
-//		initToolBar();
-//		updateClickListent();
+		initToolBar();
+		updateClickListent();
 	}
 	
 	protected void onEventLoad(){
 
 //		if (null == events) return;
 		updateView();
-		initToolBar();
-		updateClickListent();
+//		initToolBar();
+//		updateClickListent();
 
 	}
 	
@@ -233,9 +233,20 @@ public abstract class BaseBrowseActivity extends Activity {
 		selectBrowseCategory = 0;
 		selectBrowseOrder = 0;
 		
-		statistics = new Statistics(this);
+		// 初始化统计类别
+		if (category.equals(t_netbaseinfoGrid.class.getSimpleName())){
+			statistics = new Statistics(this, Constants.wangge_tongji);
+			townMap = new Statistics(this, Constants.wangge_zhenyutu);
+		} else if (category.equals(t_netbaseinfo.class.getSimpleName())){
+			statistics = new Statistics(this, Constants.wangge_tongji);
+			townMap = new Statistics(this, Constants.wangge_zhenyutu);
+		}else {
+			statistics = new Statistics(this, Constants.weijian_tongji);
+			townMap = new Statistics(this, Constants.weijian_zhenyutu);
+		}
+//		statistics = new Statistics(this);
 		more = new More(this);
-		townMap = new TownMap(this);
+//		townMap = new TownMap(this);
 		mainFrameLayout = (FrameLayout) this.findViewById(R.id.summary_main_container);
 	}
 	

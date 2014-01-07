@@ -16,8 +16,8 @@ import android.widget.GridView;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 import cn.city.manager.R;
-import cn.city.manager.fragment.t_netbaseinfoGrid;
 import cn.city.manager.fragment.t_netbaseinfo;
+import cn.city.manager.fragment.t_netbaseinfoGrid;
 import cn.city.manager.model.CategoryMeta;
 import cn.city.manager.model.Page;
 import cn.city.manager.view.ActionAdapter;
@@ -27,7 +27,6 @@ import cn.city.manager.view.EventCategory;
 import cn.city.manager.view.GradeCategory;
 import cn.city.manager.view.More;
 import cn.city.manager.view.Statistics;
-import cn.city.manager.view.TownMap;
 
 public class EntryActivity extends Activity {
 
@@ -72,9 +71,9 @@ public class EntryActivity extends Activity {
 		eventCategory = new EventCategory();
 		gradeCategory = new GradeCategory();
 		
-		statistics = new Statistics(this);
+//		statistics = new Statistics(this);
 		more = new More(this);
-		townMap = new TownMap(this);
+//		townMap = new TownMap(this);
 	}
 	
 //	private void selectTab(int id){

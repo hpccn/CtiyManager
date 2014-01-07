@@ -5,34 +5,39 @@
     android:orientation="vertical" >
 
     <include
-        android:layout_alignWithParentIfMissing="true"
         android:id="@+id/id_summary_top_toolbar"
-        android:layout_alignParentTop="true"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignWithParentIfMissing="true"
         layout="@layout/summary_top_toolbar"
         android:visibility="visible" />
 
-    <ListView
-        android:layout_alignWithParentIfMissing="true"
-        android:layout_below="@+id/id_summary_top_toolbar"
-        android:layout_above="@+id/id_add_event"
-        android:id="@+id/summary_list"
+    <FrameLayout
+        android:id="@+id/summary_content_container"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:fadeScrollbars="true"
-        android:fadingEdge="vertical"
-        android:fadingEdgeLength="20dp" />
+        android:layout_above="@+id/id_add_event"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_below="@+id/id_summary_top_toolbar" >
+
+        <ListView
+            android:id="@+id/summary_list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:fadeScrollbars="true"
+            android:fadingEdge="vertical"
+            android:fadingEdgeLength="20dp" />
+    </FrameLayout>
 
     <Button
-        android:layout_alignParentBottom="true"
         android:id="@+id/id_add_event"
-        android:layout_gravity="bottom"
-
         style="@style/generalButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom"
         android:drawableLeft="@drawable/ic_add_event"
         android:text="@string/add_event" />
 
