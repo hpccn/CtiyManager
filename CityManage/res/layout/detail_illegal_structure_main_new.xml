@@ -1,0 +1,104 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context=".MainActivity$DummySectionFragment" >
+
+        <!--
+         android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        -->
+
+        <include
+            android:id="@+id/id_layout_picture"
+            android:layout_gravity="center"
+            layout="@layout/detail_general_picture" />
+
+        <include
+            android:id="@+id/id_layout_video"
+            layout="@layout/detail_general_video" />
+
+        <include layout="@layout/divider_horizontal" />
+
+        <include
+            android:id="@+id/id_yinhuanxiangqing"
+            layout="@layout/detail_general_yinhuanxiangqing" />
+
+        <include
+            android:id="@+id/id_yinhuanaddress"
+            layout="@layout/detail_general_yinhuanaddress" />
+
+        <include
+            android:id="@+id/id_belong_village"
+            layout="@layout/detail_general_belong_village" />
+
+        <include
+            android:id="@+id/id_belong_netgrid"
+            layout="@layout/detail_general_belong_netgrid" />
+
+        <include
+            android:id="@+id/id_weijianxiangduiren"
+            layout="@layout/detail_general_weijianxiangduiren" />
+
+        <include
+            android:id="@+id/id_landstatus"
+            layout="@layout/detail_general_landstatus" />
+
+        <include
+            android:id="@+id/id_landarea"
+            layout="@layout/detail_general_landarea" />
+
+        <include
+            android:id="@+id/id_construction"
+            layout="@layout/detail_general_construction" />
+
+        <include
+            android:id="@+id/id_jianzhumianji"
+            layout="@layout/detail_general_jianzhumianji" />
+
+        <include
+            android:id="@+id/id_buildtime"
+            layout="@layout/detail_general_buildtime" />
+
+        <include
+            android:id="@+id/id_solvemethod"
+            layout="@layout/detail_general_solvemethod" />
+
+        <include
+            android:id="@+id/id_yinhuanren"
+            layout="@layout/detail_general_yinhuanren" />
+
+        <include
+            android:id="@+id/id_yinhuanlianluo"
+            layout="@layout/detail_general_yinhuanlianluo" />
+
+        <include
+            android:id="@+id/id_solvestatus"
+            layout="@layout/detail_general_solvestatus" />
+        
+	    <include
+	        android:id="@+id/id_result"
+	        layout="@layout/detail_general_result" />
+	
+	    <include
+	        android:id="@+id/id_solvetime"
+	        layout="@layout/detail_general_solvetime" />
+	        
+        <include
+            android:id="@+id/id_unsolvedreason"
+            layout="@layout/detail_general_unsolvedreason" />
+
+ 
+        <include
+            android:id="@+id/id_remark"
+            layout="@layout/detail_general_remark" />
+    </LinearLayout>
+
+</ScrollView>
