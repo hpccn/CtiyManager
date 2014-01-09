@@ -6,7 +6,7 @@
     <TextView
         style="@style/thirdTitle"
         android:text="@string/yinhuanxiangqing" />
-
+	<include layout="@layout/must_input_mark"/>
     <EditText
         android:id="@+id/et_yinhuanxiangqing"
         android:minLines="2"

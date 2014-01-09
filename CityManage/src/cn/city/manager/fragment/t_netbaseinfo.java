@@ -77,6 +77,65 @@ public class t_netbaseinfo extends BaseFragment {
 	}
 
 
+	private void setReadOnly(){
+		int [] ids = {
+		R.id.et_netid,
+		R.id.et_villagename,
+		R.id.et_netname,
+		R.id.et_nethushu,
+		R.id.et_netrenkou,
+		R.id.et_liudongzong,
+		R.id.et_youzanzhu,
+		R.id.et_wuzanzhuzong,
+		R.id.et_wuzanzhu16shang,
+		R.id.et_wuzanzhu16xia,
+		R.id.et_liudongbusiness,
+		R.id.et_liudongwork,
+		R.id.et_liudongemployee,
+		
+		R.id.et_chuzuhuzong,
+		R.id.et_chuzujianzong,
+		R.id.et_chuzuyuanzong,
+		R.id.et_zuzhurenshu,
+		R.id.et_chuzuyiranyibao,
+		R.id.et_chuzuwuzhao,
+		R.id.et_chuzufeifabanxue,
+		R.id.et_chuzufeipinshougou,
+		R.id.et_chuzuqunzu,
+		
+		
+		R.id.et_wuye,
+		R.id.et_yuling,
+		R.id.et_qiyeshu,
+		R.id.et_mendianshu,
+		R.id.et_feipinzhan,
+		R.id.et_youyuanpeixun,
+		R.id.et_zhongyangzhidi,
+		R.id.et_lujuqunuan,
+		
+		
+		
+		R.id.et_infouploadname,
+		R.id.et_inforuploaddate,
+		R.id.et_netleadername,
+		R.id.et_netleadertel,
+		R.id.et_villageleadername,
+		R.id.et_villageleadertel,
+		R.id.et_remark
+		};
+		
+		EditText et;
+		for (int id : ids){
+			et = ((EditText)rootView.findViewById(id));
+			if (null != et){
+				et.setClickable(false);
+				et.setCursorVisible(false);
+				et.setFocusable(false);
+				et.setFocusableInTouchMode(false); 
+			}
+		}
+	
+	}
 
 	@Override
 	public void updateView(View rootView) {
@@ -84,6 +143,7 @@ public class t_netbaseinfo extends BaseFragment {
 		this.rootView = rootView;
 		if (null == rootView) return;
 //		
+		setReadOnly();
 		
 		((EditText)rootView.findViewById(R.id.et_netid)).setText(content.getS_netid());
 		((EditText)rootView.findViewById(R.id.et_villagename)).setText(content.getS_villagename());

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.city.manager.R;
-import cn.city.manager.activity.NetGridActivity;
+import cn.city.manager.activity.NetBaseInfoActivity;
 import cn.city.manager.fragment.t_netbaseinfoGrid;
 import cn.city.manager.fragment.t_netbaseinfo;
 import cn.city.manager.model.CategoryMeta;

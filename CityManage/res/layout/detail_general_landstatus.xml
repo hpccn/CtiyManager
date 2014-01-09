@@ -7,9 +7,11 @@
         style="@style/thirdTitle"
         android:text="@string/landstatus" />
 
+    <include layout="@layout/must_input_mark" />
+
     <EditText
         android:id="@+id/et_landstatus"
-        style="@style/generalEditTextReadonly"
+        style="@style/generalEditText"
         android:hint="@string/landstatus" />
 
 </LinearLayout>

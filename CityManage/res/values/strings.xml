@@ -14,10 +14,10 @@
     <string name="essential_manager">基本信息</string>
     <string name="main_title">高丽营镇综合服务平台</string>
     <string name="welcome">掌上高丽营欢迎您!</string>
-    <string name="tijiao">提交时间</string>
-    <string name="submission_time">提交时间</string>
-    <string name="completion_time">完成时间</string>
-    <string name="examination_time">检查时间</string>
+    <string name="tijiao">提交日期</string>
+    <string name="submission_time">提交日期</string>
+    <string name="completion_time">完成日期</string>
+    <string name="examination_time">检查日期</string>
     <string name="examination_content">检查内容</string>
     <string name="enterprise_name">企业名称</string>
     <string name="legal_person">责任人</string>
@@ -116,7 +116,7 @@
     <string name="landarea">占地面积(亩)</string>
     <string name="construction">建筑结构</string>
     <string name="jianzhumianji">建筑面积</string>
-    <string name="buildtime">建设时间</string>
+    <string name="buildtime">建设日期</string>
     <string name="circumstance_category">当日情况</string>
     <string name="circumstance_category_newfound">新发现</string>
     <string name="circumstance_category_dismantlement">拆除</string>
@@ -150,6 +150,7 @@
     <!-- 公用 -->
     <string name="netid">网格ID</string>
     <string name="netname">格名称</string>
+    <string name="villageid">村ID</string>
     <string name="villagename">村名称</string>
     <string name="eventtype">事件类型</string>
     <string name="eventid">事件编号</string>
@@ -163,18 +164,18 @@
     <string name="belong_netgrid">所属格</string>
 
     <string name="yinhuanaddress">违建位置</string>    
-    <string name="weijianxiangduiren">违建人</string>    
+    <string name="weijianxiangduiren">违建相对人</string>    
     <string name="yinhuanxiangqing">违章描述</string>    
 
     
-    <string name="yinhuanren">涉及人</string>
+    <string name="yinhuanren">涉及人姓名</string>
     <string name="yinhuanlianluo">涉及人电话</string>
     <string name="updateid">更新人id</string>
     <string name="updatename">最近更新人</string>
     <string name="updatelevel">更新人级别</string>
-    <string name="updatetime">最近更新时间</string>
+    <string name="updatetime">最近更新日期</string>
     <string name="solvestatus">解决状态</string>
-    <string name="solvetime">解决时间</string>
+    <string name="solvetime">解决日期</string>
     <string name="unsolvedreason">未解决原因</string>
     
     <string name="solvemethod">当日新发现和拆除情况</string>
@@ -201,7 +202,7 @@
     <string name="chuzujianzong">出租房屋总间数</string>    
     <string name="chuzuyuanzong">出租大院户数</string>    
     <string name="zuzhurenshu">租住人员数</string>    
-    <string name="chuzuyiranyibao">利用出租房屋存放易燃易爆危险化学品</string>    
+    <string name="chuzuyiranyibao">利用出租屋存放易燃易爆危险化学品</string>    
     <string name="chuzuwuzhao">利用出租房屋无照经营</string>    
     <string name="chuzufeifabanxue">利用出租房屋非法办学</string>    
     <string name="chuzufeipinshougou">利用出租房屋收购废品</string>    
@@ -218,14 +219,16 @@
     <string name="lujuqunuan">炉具取暖户数</string>    
  
     <string name="infouploadname">最近更新人</string>    
-    <string name="inforuploaddate">最近更新时间</string>    
+    <string name="inforuploaddate">最近更新日期</string>    
     <string name="netleadername">格长姓名</string>    
     <string name="netleadertel">格长电话</string>    
     <string name="villageleadername">村治保主任姓名</string>    
     <string name="villageleadertel">村治保主任电话</string>    
     <string name="remark">备注</string>    
     
-    
+    <string name="more_option">查看更多选项►</string>    
+     <string name="village_baseinfo">各村基本信息表</string>    
+     <string name="netgrid_baseinfo">各网格基本信息表</string>    
     <!--
     <string name=""></string>    
     <string name=""></string>    

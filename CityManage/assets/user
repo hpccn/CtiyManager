@@ -9,6 +9,6 @@ s_name	nvarchar(50)	真实姓名	no
 s_contact	nvarchar(50)	联系方式	no
 s_level	nvarchar(50)	所属级别	no
 s_department	nvarchar(50)	所属部门	yes
-s_position	nvarchar(50)	职务	no
+s_title	nvarchar(50)	职务	no
 t_createdate	datetime	创建时间	no
-i_effective	int	是否有效	no
+s_effective	int	是否有效	no

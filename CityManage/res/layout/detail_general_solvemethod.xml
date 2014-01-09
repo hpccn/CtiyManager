@@ -1,11 +1,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/horizontalCenter"
-    tools:context="建设时间" >
+    tools:context="当日新发现和拆除情况" >
 
     <TextView
         style="@style/thirdTitle"
         android:text="@string/solvemethod" />
+
+    <include layout="@layout/must_input_mark" />
 
     <EditText
         android:id="@+id/et_solvemethod"

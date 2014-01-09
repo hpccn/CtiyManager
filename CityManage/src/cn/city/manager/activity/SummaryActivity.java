@@ -6,13 +6,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import cn.city.manager.Constants;
@@ -20,12 +18,10 @@ import cn.city.manager.R;
 import cn.city.manager.fragment.event.BaseEvent;
 import cn.city.manager.model.EventHttpStreamThread;
 import cn.city.manager.model.EventSingletonFactory;
-import cn.city.manager.view.Statistics;
 import cn.city.manager.view.SummaryEventAdapter;
 import cn.city.manager.view.ViewSingletonFactory;
 import cn.hpc.common.HttpStreamThread;
 import cn.hpc.common.JSONHelper;
-import cn.hpc.common.cache.StringCacheFactory;
 
 public class SummaryActivity extends BaseBrowseActivity {
 
@@ -34,11 +30,11 @@ public class SummaryActivity extends BaseBrowseActivity {
 		View view = View.inflate(this, R.layout.summary_main, null);
 
 		// 使用Web方式浏览
-		view.findViewById(R.id.id_summary_top_toolbar).setVisibility(View.GONE);
-		Statistics wange = new Statistics(this, Constants.weijian_list);
-		FrameLayout frame = (FrameLayout) view.findViewById(R.id.summary_content_container);
-//		frame.removeAllViews();
-		frame.addView(wange.getView());
+//		view.findViewById(R.id.id_summary_top_toolbar).setVisibility(View.GONE);
+//		Statistics wange = new Statistics(this, Constants.weijian_list);
+//		FrameLayout frame = (FrameLayout) view.findViewById(R.id.summary_content_container);
+////		frame.removeAllViews();
+//		frame.addView(wange.getView());
 
 		return view;
 	}
@@ -52,7 +48,7 @@ public class SummaryActivity extends BaseBrowseActivity {
 		}
 		tvTitle = (TextView)this.findViewById(R.id.id_titlebar_title);
 		ListView summaryView = (ListView) this.findViewById(R.id.summary_list); 
-		
+		this.listView = summaryView;
 		selectEventSummary(summaryView);
 
 	}
@@ -66,7 +62,7 @@ public class SummaryActivity extends BaseBrowseActivity {
 		String url = Constants.weijian_list;//"http://longhorn.free3v.net/t_weijian.html";
 //		StringCacheFactory scf = StringCacheFactory.getInstance(this);
 //		scf.scheduleLoadString(10, Uri.parse(url));
-		
+		ViewSingletonFactory.getInstance().showProcessDialog(context, null, "正在下载数据,请稍候...");
 		HttpStreamThread hst = new EventHttpStreamThread(this, url, onStringLoadListener);
 		hst.start();
 		return null;
@@ -119,6 +115,7 @@ public class SummaryActivity extends BaseBrowseActivity {
 				e.printStackTrace();
 			}
 			handler.sendEmptyMessage(100);
+			
 		}
 
 		@Override
@@ -127,6 +124,12 @@ public class SummaryActivity extends BaseBrowseActivity {
 			HttpStreamThread hst = new EventHttpStreamThread(SummaryActivity.this, url, onStringLoadListener);
 			hst.start();
 
+		}
+
+		@Override
+		public void onResponse(int code) {
+			// TODO Auto-generated method stub
+			ViewSingletonFactory.getInstance().hideProcessDialog();
 		}
 		
 	};
@@ -145,6 +148,7 @@ public class SummaryActivity extends BaseBrowseActivity {
 	private void selectEventSummary(ListView summaryView){
 		if (null == summaryView || null == events) return;
 		SummaryEventAdapter adapter = new SummaryEventAdapter(context, events); 
+		this.adapter = adapter;
 		summaryView.setAdapter(adapter);
 		summaryView.setOnItemClickListener(new OnItemClickListener(){
 
@@ -174,6 +178,16 @@ public class SummaryActivity extends BaseBrowseActivity {
 		for (int id : ids) {
 			this.findViewById(id).setOnClickListener(onClickListener);
 		}		
+	}
+
+	String date[]= {"day","week","month","year","all"}; 
+	@Override
+	protected void onSelectDateView(int select) {
+		// TODO Auto-generated method stub
+		String url = String.format(Constants.weijian_list_option, date[select]);
+		
+		HttpStreamThread hst = new EventHttpStreamThread(this, url, onStringLoadListener);
+		hst.start();
 	}
 	
 }

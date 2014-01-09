@@ -3,12 +3,15 @@
     style="@style/horizontalCenter"
     tools:context="涉及人电话" >
 
-        <TextView
-            style="@style/thirdTitle"
-            android:text="@string/yinhuanlianluo" />
+    <TextView
+        style="@style/thirdTitle"
+        android:text="@string/yinhuanlianluo" />
 
-        <EditText
-            android:id="@+id/et_yinhuanlianluo"
-            style="@style/generalEditText"
-            android:hint="@string/yinhuanlianluo" />
+    <include layout="@layout/must_input_mark" />
+
+    <EditText
+        android:id="@+id/et_yinhuanlianluo"
+        style="@style/generalEditText"
+        android:hint="@string/yinhuanlianluo" />
+
 </LinearLayout>

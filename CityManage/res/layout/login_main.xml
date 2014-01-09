@@ -38,14 +38,16 @@
             >
 
             <TextView
-                style="@style/midTitle"
+                style="@style/thirdTitle"
                 android:layout_width="80sp"
                 android:layout_gravity="top"
                 android:text="@string/user_name"
                 android:textColor="@color/login_text"
-                android:textSize="@dimen/main_title_text_size" />
+                />
 
             <EditText
+                style="@style/generalEditText"
+                android:background="@drawable/login_edit_background"
                 android:id="@+id/et_user_name"
                 android:layout_width="200sp"
                 android:layout_height="wrap_content"
@@ -62,6 +64,7 @@
         </LinearLayout>
 
         <EditText
+            style="@style/generalEditText"
             android:id="@+id/et_user_mobile"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -76,14 +79,16 @@
         	android:layout_marginBottom="5dp">
 
             <TextView
-                style="@style/midTitle"
+                style="@style/thirdTitle"
                 android:layout_width="80sp"
                 android:layout_gravity="top"
                 android:text="@string/password"
                 android:textColor="@color/login_text"
-                android:textSize="@dimen/main_title_text_size" />
+                />
 
             <EditText
+                android:background="@drawable/login_edit_background"
+                style="@style/generalEditText"
                 android:id="@+id/et_password"
                 android:layout_width="200sp"
                 android:layout_height="wrap_content"
@@ -107,6 +112,7 @@
                 android:layout_gravity="right"
                 android:gravity="center"
                 android:textColor="@color/login_text"
+                android:textSize="12sp"
                 android:text="@string/save_login" />
 
             <CheckBox
@@ -116,6 +122,7 @@
                 android:layout_gravity="right"
                 android:layout_marginLeft="40dp"
                 android:gravity="center"
+                android:textSize="12sp"
                 android:textColor="@color/login_text"
                 android:text="@string/auto_login" />
         </LinearLayout>

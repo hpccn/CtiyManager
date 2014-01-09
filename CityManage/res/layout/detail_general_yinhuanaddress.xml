@@ -3,14 +3,16 @@
     style="@style/horizontalCenter"
     tools:context="违建位置" >
 
-        <TextView
-            style="@style/thirdTitle"
-            android:text="@string/yinhuanaddress" />
+    <TextView
+        style="@style/thirdTitle"
+        android:text="@string/yinhuanaddress" />
 
-        <EditText
-            android:id="@+id/et_yinhuanaddress"
-            android:minLines="2"
-            style="@style/generalEditText"
-            android:hint="@string/yinhuanaddress" />
+    <include layout="@layout/must_input_mark" />
+
+    <EditText
+        android:id="@+id/et_yinhuanaddress"
+        style="@style/generalEditText"
+        android:hint="@string/yinhuanaddress"
+        android:minLines="2" />
 
 </LinearLayout>

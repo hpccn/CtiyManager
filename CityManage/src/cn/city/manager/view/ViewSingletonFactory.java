@@ -1,26 +1,16 @@
 package cn.city.manager.view;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 
-import cn.city.manager.fragment.CriminalFragment;
-import cn.city.manager.fragment.DisputeFragment;
-import cn.city.manager.fragment.FoodDrugFragment;
-import cn.city.manager.fragment.GeneralFragment;
-import cn.city.manager.fragment.t_weijian;
-import cn.city.manager.fragment.ImportantPersonFragment;
-import cn.city.manager.fragment.LoginFragment;
-import cn.city.manager.fragment.MainFragment;
-import cn.city.manager.fragment.t_netbaseinfoGrid;
-import cn.city.manager.fragment.OutcastFragment;
-import cn.city.manager.fragment.RestaurantFragment;
-import cn.city.manager.fragment.SanitationFragment;
-import cn.city.manager.fragment.TrafficFragment;
-import cn.city.manager.fragment.UnlicensedVendorFragment;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+
+import cn.city.manager.R;
 import cn.city.manager.fragment.t_netbaseinfo;
+import cn.city.manager.fragment.t_netbaseinfoGrid;
+
 
 
 
@@ -37,30 +27,10 @@ public class ViewSingletonFactory {
     
     private ViewSingletonFactory(){
     	init();
-    	init2();
+//    	init2();
     }
     
-    private int position;
-	final private List<Class<?>> fragments = new ArrayList<Class<?>>();
-	final private List <String> titles = new ArrayList<String>();
-	final private Map <String, Class<?>> categorys = new HashMap<String, Class<?>>();
-	
-	final private String[] eventCategory = {"生产安全", "消防安全", "煤气中毒"
-			, "环境安全", "食品安全", "药品安全"
-			, "违章建筑", "卫生所检查", "无照经营"
-			, "矛盾排查", "刑事案件", "交通安全"};
-	final private String[] eventCategoryEn = {"生产安全", "消防安全", "煤气中毒"
-			, "环境安全", "食品安全", "药品安全"
-			, "IllegalStructure", "卫生所检查", "无照经营"
-			, "矛盾排查", "刑事案件", "交通安全"};
 
-	final private Class<?>[] clzCategorys = {GeneralFragment.class, GeneralFragment.class, GeneralFragment.class
-			, SanitationFragment.class, FoodDrugFragment.class, FoodDrugFragment.class
-			, t_weijian.class, GeneralFragment.class, UnlicensedVendorFragment.class
-			, DisputeFragment.class, CriminalFragment.class, TrafficFragment.class};
-	final private List <Class<?>> categorysClz = new ArrayList<Class<?>>();
-	
-	final private List <String> categoryName = new ArrayList<String>();
 	
 	/**
 	 * 没有新增事件的类
@@ -69,131 +39,57 @@ public class ViewSingletonFactory {
 
 	
 	private void init(){
-		for (String e : eventCategory){
-			categoryName.add(e);
-		}
-		
-		for (Class<?> clz : clzCategorys){
-			categorysClz.add(clz);
-		}
-		
-		for (int i = 0, length = eventCategory.length; i < length; ++i){
-			categorys.put(eventCategory[i], clzCategorys[i]);
-		}
-		for (int i = 0, length = eventCategoryEn.length; i < length; ++i){
-			categorys.put(eventCategoryEn[i], clzCategorys[i]);
-		}
+
 		
 		cannotAddEvent.add(t_netbaseinfo.class.getSimpleName());
 		cannotAddEvent.add(t_netbaseinfoGrid.class.getSimpleName());
 		
 	}
-	private void init2(){
-//		fragments.add(MainFragment.class);
-//		fragments.add(LoginFragment.class);
-		
-		fragments.add(FoodDrugFragment.class);
-		fragments.add(RestaurantFragment.class);
-		fragments.add(SanitationFragment.class);
-		fragments.add(TrafficFragment.class);
-		fragments.add(CriminalFragment.class);
-		fragments.add(OutcastFragment.class);
-		fragments.add(ImportantPersonFragment.class);
-		fragments.add(DisputeFragment.class);
-		fragments.add(t_weijian.class);
-		fragments.add(UnlicensedVendorFragment.class);
-//		
-//		fragments.add(.class);
-
-//		fragments.add(.class);
-		titles.clear();
-//		for (Class c : fragments) {
-//			String tmp = c.getSimpleName().replace("Fragment", "");
-//			
-//			titles.add(tmp);
-//		}
-//		titles.add("主菜单");
-//		titles.add("登录");
-		
-		titles.add("食品、药品");
-		titles.add("餐饮检查");
-		titles.add("环境、垃圾隐患");
-		titles.add("交通安全隐患");
-		titles.add("刑事案件发案");
-		titles.add("流动人口服务管理");
-		titles.add("重点人、重点部位管控");
-		titles.add("矛盾纠纷排查");
-		titles.add("违章建筑");
-		titles.add("无照经营");
-		
-
-		categorys.put("main", MainFragment.class);
-		categorys.put("login", LoginFragment.class);
-		
-		categorys.put("food", FoodDrugFragment.class);
-		categorys.put("restaurant", RestaurantFragment.class);
-		categorys.put("sanitation", SanitationFragment.class);
-		categorys.put("traffic", TrafficFragment.class);
-		categorys.put("criminal", CriminalFragment.class);
-		categorys.put("outcast", OutcastFragment.class);
-		categorys.put("importantPerson", ImportantPersonFragment.class);
-		categorys.put("dispute", DisputeFragment.class);
-		categorys.put("illegalStructure", t_weijian.class);
-		categorys.put("unlicensedVendor", UnlicensedVendorFragment.class);
-		position = 0;
-	}
 
 
-//	public List<Class> getFragments() {
-//		return fragments;
-//	}
-//	
-//
-	public List<String> getTitles() {
-		return titles;
-	}
-	
-	public final Class<?> getFragment(int position) {
-		return fragments.get(position);
-	}
-	
-	public final String getTitles(int position) {
-		return titles.get(position);
-	}
-
-	public final Class<?> getFragment() {
-		return fragments.get(position);
-	}
-	
-	public int getPosition() {
-		return position;
-	}
-
-
-	public void setPosition(int position) {
-		this.position = position;
-	}
-
-
-	public Map<String, Class<?>> getCategorys() {
-		return categorys;
-	}
-
-	public final Class<?> getFragment(final String category) {
-		return categorys.get(category);
-	}
-
-
-	public List<String> getEventCategory() {
-		return categoryName;
-	}
-
-
-	public HashSet<String> getCannotAddEvent() {
-		return cannotAddEvent;
-	}
 
 	public boolean canNewEvent(final String category){
 		return !cannotAddEvent.contains(category);
+	}
+	
+	
+	
+	private ProgressDialog progressDialog;
+	public void hideProcessDialog(){
+		if (null != progressDialog)
+			progressDialog.dismiss();
+	}
+	public void showProcessDialog(Context context, String title, String message){
+		progressDialog = new ProgressDialog(context);
+		progressDialog.setTitle(title); 
+		progressDialog.setMessage(message); 
+		progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+		progressDialog.setIndeterminate(true);
+//		progressDialog.setCancelable(false);
+		progressDialog.setCanceledOnTouchOutside(false);
+		
+	    progressDialog.show();
+	}
+	
+	public interface OnChangedListener{
+		public void onChanged(int id, String value);
+	}	
+	
+	public void showSingleChoiceItems(Context context, final int id, final String []items, final OnChangedListener listener) {
+	    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+	    builder.setIcon(R.drawable.ic_logo);
+	    builder.setCancelable(true);
+	    
+	    builder.setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener(){
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+
+				listener.onChanged(id, items[which]);
+				dialog.dismiss();
+	    }});
+	    
+	    AlertDialog ad = builder.create();  
+		ad.show();
 	}
 }

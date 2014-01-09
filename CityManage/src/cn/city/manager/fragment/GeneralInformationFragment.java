@@ -1,22 +1,26 @@
 package cn.city.manager.fragment;
 
-import org.json.JSONObject;
-
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import cn.city.manager.R;
-import cn.city.manager.activity.DetailActivity;
 import cn.city.manager.fragment.event.BaseEvent;
 import cn.city.manager.location.Location;
 import cn.city.manager.location.LocationListener;
+import cn.city.manager.view.DateTimePickerDialog;
 
 public class GeneralInformationFragment {
+	
+	public interface OnChangedListener{
+		public void onChanged(int key, String value);
+	}
 	public static final int NONE = 0;
 
 	public static final int IMAGE_CAPTURE = 1;// 拍照
@@ -59,6 +63,7 @@ public class GeneralInformationFragment {
 	}
 	
 	
+	
 	public void updateLocation(final Context context, final EditText etAddress, final BaseEvent baseContent){
 		Location location = new Location(context);
 		location.asyncLoc(new LocationListener(){
@@ -67,7 +72,7 @@ public class GeneralInformationFragment {
 			public void onLocation(double latitude, double longitude,
 					String address) {
 				
-				
+				if (address.contains("error")) return;
 				// TODO Auto-generated method stub
 				baseContent.setL_latitude(latitude);
 				baseContent.setD_longitude(longitude);
@@ -135,4 +140,22 @@ public class GeneralInformationFragment {
 			
 		}
 	};
+
+	public void setSingleChoiceItems(final int id, final String []items, final OnChangedListener listener) {
+	    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+	    builder.setIcon(R.drawable.ic_logo);
+	    builder.setCancelable(true);
+	    
+	    builder.setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener(){
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+
+				listener.onChanged(id, items[which]);
+				dialog.dismiss();
+	    }});
+	    
+	    AlertDialog ad = builder.create();  
+		ad.show();
+	}
 }

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Collections;
 import java.util.List;
 
 import org.json.JSONException;
@@ -18,6 +19,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ListView;
@@ -31,7 +33,7 @@ import cn.city.manager.fragment.event.BaseEvent;
 import cn.city.manager.model.EventSingletonFactory;
 import cn.city.manager.model.Page;
 import cn.city.manager.view.More;
-import cn.city.manager.view.NetGridAdapter;
+import cn.city.manager.view.NetBaseInfoNetGridAdapter;
 import cn.city.manager.view.Statistics;
 import cn.city.manager.view.SummaryEventAdapter;
 import cn.hpc.common.JSONHelper;
@@ -50,7 +52,8 @@ public abstract class BaseBrowseActivity extends Activity {
 	protected Page statistics, more, townMap;
 
 	protected View rootView;
-	
+	protected ListView listView;
+	protected BaseAdapter adapter;
 	@Override
 	protected void onDestroy() {
 		overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
@@ -95,10 +98,12 @@ public abstract class BaseBrowseActivity extends Activity {
 	protected abstract View obtainView();
 	protected abstract void updateView();
 	protected abstract void updateClickListent();
+
+	protected abstract void onSelectDateView(int select);
 	
 	protected abstract List <BaseEvent> loadEvents() throws Exception;
 	
-	List <BaseEvent> events;
+	protected List <BaseEvent> events;
 	private void init(final Context context) throws JSONException, IOException{
 		
 		tvTitle = (TextView)this.findViewById(R.id.id_titlebar_title);
@@ -148,7 +153,8 @@ public abstract class BaseBrowseActivity extends Activity {
 
 	}
 	private void selectNetGrid(ListView summaryView){
-		NetGridAdapter adapter = new NetGridAdapter(context, events); 
+		
+		NetBaseInfoNetGridAdapter adapter = new NetBaseInfoNetGridAdapter(context, events); 
 		summaryView.setAdapter(adapter);
 		summaryView.setOnItemClickListener(new OnItemClickListener(){
 
@@ -218,7 +224,7 @@ public abstract class BaseBrowseActivity extends Activity {
 				context.getResources().getString(R.string.select_browse_today),
 				context.getResources().getString(R.string.select_browse_week),
 				context.getResources().getString(R.string.select_browse_month),
-				context.getResources().getString(R.string.select_browse_season),
+//				context.getResources().getString(R.string.select_browse_season),
 				context.getResources().getString(R.string.select_browse_year),
 				context.getResources().getString(R.string.select_browse_all)
 
@@ -230,9 +236,10 @@ public abstract class BaseBrowseActivity extends Activity {
 
 		};
 		selectBrowseOrderItems = OrderItems;
-		selectBrowseCategory = 0;
+		selectBrowseCategory = 2;
 		selectBrowseOrder = 0;
-		
+		if (null != btnCategory)
+			btnCategory.setText(selectBrowseCategoryItems[selectBrowseCategory]);
 		// 初始化统计类别
 		if (category.equals(t_netbaseinfoGrid.class.getSimpleName())){
 			statistics = new Statistics(this, Constants.wangge_tongji);
@@ -290,6 +297,7 @@ public abstract class BaseBrowseActivity extends Activity {
 			case R.id.id_select_browse_order:
 				showSelectOrder();
 				break;
+
 			default:
 			}
 			
@@ -319,7 +327,7 @@ public abstract class BaseBrowseActivity extends Activity {
 				Toast.makeText(context, "选择 : " + selectBrowseCategoryItems[which], Toast.LENGTH_SHORT).show();
 				selectBrowseCategory = which;
 				btnCategory.setText(selectBrowseCategoryItems[which]);
-				
+				onSelectDateView(which);
 				dialog.dismiss();
 	    }});
 	    
@@ -341,6 +349,13 @@ public abstract class BaseBrowseActivity extends Activity {
 				selectBrowseOrder = which;
 				btnOrder.setText(selectBrowseOrderItems[which]);
 				dialog.dismiss();
+				Collections.sort(events);
+				if (1 == which) {
+					Collections.reverse(events);
+				}
+				if (null != listView) {
+					adapter.notifyDataSetChanged();
+				}
 	    }});
 	    
 	    AlertDialog ad = builder.create();  

@@ -2,6 +2,8 @@ package cn.city.manager.fragment.event;
 
 import org.json.JSONObject;
 
+import com.google.gson.Gson;
+
 import android.graphics.drawable.Drawable;
 
 public class t_registerEvent extends BaseEvent {
@@ -19,15 +21,16 @@ public class t_registerEvent extends BaseEvent {
 	private String s_contact;//	联系方式	no
 	private String s_level;//	所属级别	no
 	private String s_department;//	所属部门	yes
-	private String s_position;//	职务	no
+	private String s_title;//	职务	no
 	private String t_createdate;//	datetime	创建时间	no
-	private int i_effective;//	int	是否有效	no
+	private String s_effective;//	int	是否有效	no
 	
 	
 	@Override
 	public BaseEvent fromJSONObject(JSONObject jObj) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Gson gson = new Gson();
+		t_registerEvent event = gson.fromJson(jObj.toString(), this.getClass());
+		return event;
 	}
 
 	@Override
@@ -39,7 +42,7 @@ public class t_registerEvent extends BaseEvent {
 	@Override
 	public String getVillage() {
 		// TODO Auto-generated method stub
-		return null;
+		return s_villagename;
 	}
 
 	@Override
@@ -54,17 +57,7 @@ public class t_registerEvent extends BaseEvent {
 		return null;
 	}
 
-	@Override
-	public long getTime() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
-	@Override
-	public void setTime(long time) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void setAddress(String address) {
@@ -193,13 +186,7 @@ public class t_registerEvent extends BaseEvent {
 		this.s_department = s_department;
 	}
 
-	public String getS_position() {
-		return s_position;
-	}
 
-	public void setS_position(String s_position) {
-		this.s_position = s_position;
-	}
 
 	public String getT_createdate() {
 		return t_createdate;
@@ -209,12 +196,27 @@ public class t_registerEvent extends BaseEvent {
 		this.t_createdate = t_createdate;
 	}
 
-	public int getI_effective() {
-		return i_effective;
+	public String getS_title() {
+		return s_title;
 	}
 
-	public void setI_effective(int i_effective) {
-		this.i_effective = i_effective;
+	public void setS_title(String s_title) {
+		this.s_title = s_title;
 	}
+
+	public String getS_effective() {
+		return s_effective;
+	}
+
+	public void setS_effective(String s_effective) {
+		this.s_effective = s_effective;
+	}
+
+	@Override
+	public String getSortValue() {
+		// TODO Auto-generated method stub
+		return s_netid;
+	}
+
 
 }

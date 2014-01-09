@@ -18,3 +18,25 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-keepclassmembers class * {
+   public <init>(org.json.JSONObject);
+}
+
+-keep public class android.support.**{
+  public *;
+}
+
+-keep public class org.apache.**{
+  public *;
+}
+
+-keep public class com.google.**{
+  public *;
+}
+
+
+-keep public class com.baidu.**{
+  public *;
+  native <methods>;
+}

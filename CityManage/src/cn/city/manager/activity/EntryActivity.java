@@ -26,7 +26,6 @@ import cn.city.manager.view.DateTimePickerDialog;
 import cn.city.manager.view.EventCategory;
 import cn.city.manager.view.GradeCategory;
 import cn.city.manager.view.More;
-import cn.city.manager.view.Statistics;
 
 public class EntryActivity extends Activity {
 
@@ -268,9 +267,9 @@ public class EntryActivity extends Activity {
 				
 				Intent intent = null;
 				if (category.equals(t_netbaseinfoGrid.class.getSimpleName())){
-					 intent = new Intent(EntryActivity.this, NetGridActivity.class);
+					 intent = new Intent(EntryActivity.this, NetBaseInfoActivity.class);
 				} else if (category.equals(t_netbaseinfo.class.getSimpleName())){
-					 intent = new Intent(EntryActivity.this, NetGridActivity.class);
+					 intent = new Intent(EntryActivity.this, NetBaseInfoActivity.class);
 //					 intent = new Intent(EntryActivity.this, SummaryActivity.class);
 				} else {
 					 intent = new Intent(EntryActivity.this, SummaryActivity.class);

@@ -34,6 +34,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 
+import cn.city.manager.Configuration;
 import cn.city.manager.fragment.event.BaseEvent;
 
 import android.net.http.AndroidHttpClient;
@@ -90,7 +91,7 @@ public class HttpUploadHelper {
 		try {
 			// 用户名
 			entity.addPart("s_netid", new StringBody(
-					"010101",
+					 Configuration.getInstance().getRegister().getS_netid(),
 					Charset.forName("utf-8")));
 			entity.addPart("s_yearmonth", new StringBody(
 					getDateText(System.currentTimeMillis()),
@@ -105,7 +106,7 @@ public class HttpUploadHelper {
 //					baseEvent.toJSONObject().toString(),
 //					Charset.forName("utf-8")));
 
-			if (null != baseEvent.getS_photo()) {
+			if (null != baseEvent.getS_photo() && !baseEvent.getS_video().startsWith("http://")) {
 				File picFile = new File(baseEvent.getS_photo());
 				if (null != picFile && picFile.isFile() && picFile.canRead()) {
 					MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
@@ -116,7 +117,7 @@ public class HttpUploadHelper {
 				}
 			}
 			
-			if (null != baseEvent.getS_video()) {
+			if (null != baseEvent.getS_video() && !baseEvent.getS_video().startsWith("http://")) {
 				File file = new File(baseEvent.getS_video());
 				if (null != file && file.isFile() && file.canRead()) {
 					MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();

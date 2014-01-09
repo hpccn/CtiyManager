@@ -76,9 +76,9 @@ import android.widget.ImageView;
  *
  *使用方法：
  *
- *1 初始化ImageCache imc = ImageCache.getInstance(context);
- *2 应用中增加 implements ImageCache.OnImageLoadListener
- *3 imc.scheduleLoadImage(imgId, mUri, -1, -1); 之后，-1， -1 原始图片大小
+ *1 初始化ImageCacheFactory imc = ImageCacheFactory.getInstance(context);
+ *2 应用中增加 implements ImageCacheFactory.OnImageLoadListener
+ *3 imc.loadImage(imgId, mUri, -1, -1); 之后，-1， -1 原始图片大小
  *4 在图片下载完成之后回调 onImageLoaded(long id, Uri imageUri, Drawable image)，处理下载完的图片
  *5 使用前需要注册Listener：imc.registerOnImageLoadListener(OnImageLoadListener);
  *6 使用完后注销Listener： imc.unregisterOnImageLoadListener(OnImageLoadListener);
@@ -286,14 +286,14 @@ public class ImageCacheFactory extends DiskCache<String, Bitmap> {
 	}
 
 	private class LoadResult {
-		public LoadResult(long id, Uri image, Drawable drawable) {
+		public LoadResult(int id, Uri image, Drawable drawable) {
 			this.id = id;
 			this.drawable = drawable;
 			this.image = image;
 		}
 
 		final Uri image;
-		final long id;
+		final int id;
 		final Drawable drawable;
 	}
 
@@ -452,7 +452,7 @@ public class ImageCacheFactory extends DiskCache<String, Bitmap> {
 
 		@Override
 		protected LoadResult doInBackground(Object... params) {
-			final long id = (Long) params[0];
+			final int id = (Integer) params[0];
 			final Uri uri = (Uri) params[1];
 			final int width = (Integer) params[2];
 			final int height = (Integer) params[3];
@@ -462,14 +462,6 @@ public class ImageCacheFactory extends DiskCache<String, Bitmap> {
 
 				// TODO this exception came about, no idea why:
 				// java.lang.IllegalArgumentException: Parser may not be null
-			} catch (final IllegalArgumentException e) {
-				Log.e(TAG, e.getLocalizedMessage(), e);
-			} catch (final OutOfMemoryError oom) {
-				oomClear();
-			} catch (final ClientProtocolException e) {
-				Log.e(TAG, e.getLocalizedMessage(), e);
-			} catch (final IOException e) {
-				Log.e(TAG, e.getLocalizedMessage(), e);
 			} catch (final Exception e) {
 				Log.e(TAG, e.getLocalizedMessage(), e);
 			} 
@@ -516,7 +508,7 @@ public class ImageCacheFactory extends DiskCache<String, Bitmap> {
 	 * @return the cached bitmap if it's available immediately or null if it
 	 *         needs to be loaded asynchronously.
 	 */
-	public Drawable loadImage(long id, Uri image, int width, int height) throws IOException {
+	public Drawable loadImage(int id, Uri image, int width, int height) throws IOException {
 		final Drawable res = getDrawable(getKey(image, width, height));
 		if (res == null) {
 			scheduleLoadImage(id, image, width, height);
@@ -541,7 +533,7 @@ public class ImageCacheFactory extends DiskCache<String, Bitmap> {
 	 * @param height
 	 *            the maximum height of the resulting image
 	 */
-	public void scheduleLoadImage(long id, Uri image, int width, int height) {
+	public void scheduleLoadImage(int id, Uri image, int width, int height) {
 		if (DEBUG){
 			Log.d(TAG, "executing new ImageLoadTask");
 		}
@@ -714,6 +706,6 @@ public class ImageCacheFactory extends DiskCache<String, Bitmap> {
 		 * @param imageUri the uri of the image that was originally requested
 		 * @param image the loaded and scaled image
 		 */
-		public void onImageLoaded(long id, Uri imageUri, Drawable image);
+		public void onImageLoaded(int id, Uri imageUri, Drawable image);
 	}
 }

@@ -62,9 +62,9 @@ public class LaunchActivity extends Activity {
 
 	private void gotoMain() {
 		
-		Configuration configuration;
-		configuration = new Configuration(this);
-		configuration.load();
+		Configuration configuration = Configuration.getInstance();
+		
+		configuration.load(this);
 		if (configuration.isAutoLogin()) {
 			startActivity(new Intent(this, EntryActivity.class));
 		} else {

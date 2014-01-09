@@ -7,25 +7,27 @@ import java.util.Date;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import cn.city.manager.R;
-import cn.city.manager.activity.DetailActivity;
 import cn.city.manager.fragment.event.BaseEvent;
 import cn.city.manager.fragment.event.t_weijianEvent;
-import cn.city.manager.view.DateTimeChanger;
 import cn.city.manager.view.DateTimePickerDialog;
+import cn.hpc.common.cache.ImageCacheFactory;
+import cn.city.manager.Configuration;
 
 /**
  * 违章建筑
  * @author hpc
  *
  */
-public class t_weijian extends BaseFragment {
+public class t_weijian extends BaseFragment implements ImageCacheFactory.OnImageLoadListener{
 	public static final String ARG_SECTION_NUMBER = "section_number";
 	
 	private ViewGroup parent;
@@ -34,6 +36,9 @@ public class t_weijian extends BaseFragment {
 
 	private GeneralInformationFragment general;// = new GeneralInformationFragment();
 	private View rootView;
+	private ImageView imageView;
+	private ImageCacheFactory imc;
+	
 	@Override
 	public View getView(Context context, ViewGroup parent) {
 		this.context = context;
@@ -45,7 +50,12 @@ public class t_weijian extends BaseFragment {
 //		View illegalStructure = View.inflate(context, R.layout.fragment_illegal_structure,
 //				null);
 //		fl.addView(illegalStructure);
-		View v = View.inflate(context, R.layout.detail_illegal_structure_main, null);
+		View v = null;
+		if (null == jsonData){
+			v = View.inflate(context, R.layout.detail_illegal_structure_main_new, null);
+		} else {
+			v = View.inflate(context, R.layout.detail_illegal_structure_main, null);
+		}
 		return v;
 	}
 
@@ -77,6 +87,8 @@ public class t_weijian extends BaseFragment {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+
 	}
 
 
@@ -101,22 +113,120 @@ public class t_weijian extends BaseFragment {
 		if (null == general){
 			general = new GeneralInformationFragment(context);
 		}
-//		TextView tvMainTitle = (TextView) rootView.findViewById(R.id.id_main_title);
-//		TextView tvSubTitle = (TextView) rootView.findViewById(R.id.id_sub_title);
+		//新建 
+		if (null == jsonData) {
+			// 位置
+			general.updateLocation(context, (EditText) rootView.findViewById(R.id.et_yinhuanaddress), content);
+			initSelectChanger();
+		} else {
+			updateView1(rootView);
+			initSelectChanger();
+//			setReadOnly();
+		}
+	}
+
+	protected void setReadOnly(){
+		int []ids = {R.id.et_yinhuanxiangqing, R.id.et_villagename, R.id.et_yinhuanaddress,
+				R.id.et_villagename,
+			    R.id.et_netname,
+			                                  
+				                              	
+				R.id.et_jianzhumianji,
+				R.id.et_landstatus,
+				                              	
+				R.id.et_construction,
+				R.id.et_landarea,
+			    R.id.et_buildtime,
+			                                  
+			                                  
+			                                  
+			    R.id.et_yinhuanaddress,
+			    R.id.et_weijianxiangduiren,
+			    R.id.et_yinhuanren,
+			    R.id.et_yinhuanlianluo,
+				                        
+				R.id.et_solvemethod,	    
+				R.id.et_solvestatus,    
+				R.id.et_solvetime,
+				                        	    
+				R.id.et_unsolvedreason,
+				                        	    
+				R.id.et_result,
+				                        	    
+				                        	    
+				R.id.et_remark,
+				  
+				R.id.et_eventid,
+				                         
+				R.id.et_discovererlevel,
+				R.id.et_discoverername,
+				R.id.et_tijiao,
+				                         
+				R.id.et_updatename,
+				R.id.et_updatelevel,
+				R.id.et_updatetime,
+				                         
+				                         
+				R.id.et_netleadername,
+				R.id.et_netleadertel
+			    
+			};
+			EditText et;
+			for (int id : ids){
+				et = ((EditText)rootView.findViewById(id));
+				if (null != et){
+					et.setClickable(false);
+					et.setCursorVisible(false);
+					et.setFocusable(false);
+					et.setFocusableInTouchMode(false); 
+				}
+			}
+	}
+	
+	private void updateView1(View rootView){
+		
 
 		
-		String strAddress = content.getS_yinhuanaddress();
-		if (null == strAddress || strAddress.length() < 2)
-			general.updateLocation(context, (EditText) rootView.findViewById(R.id.et_yinhuanaddress), content);
-		general.updateTitle(context, rootView, this);
+//		TextView tvMainTitle = (TextView) rootView.findViewById(R.id.id_main_title);
+//		TextView tvSubTitle = (TextView) rootView.findViewById(R.id.id_sub_title);
 		
+		imageView = (ImageView) rootView.findViewById(R.id.picture);
+		
+		imc = ImageCacheFactory.getInstance(context);
+		
+		if (null != content && null != content.getS_photo()){
+			Uri uri = Uri.parse(content.getS_photo());
+			if (null != uri && uri.getHost() != null)
+				
+				try {
+					Drawable drawable = imc.loadImage(R.id.picture, uri, -1, -1);
+					if (null == drawable) {
+						imc.registerOnImageLoadListener(this);
+					}
+					imageView.setImageDrawable(drawable);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+		}
 		
 		((TextView)rootView.findViewById(R.id.tv_video_file)).setText(content.getS_video());
 		
+		((EditText)rootView.findViewById(R.id.et_yinhuanxiangqing)).setText(content.getS_yinhuanxiangqing());
+		
+		if (null == jsonData) {
+//		String strAddress = content.getS_yinhuanaddress();
+//		if (null == strAddress || strAddress.length() < 2)
+			general.updateLocation(context, (EditText) rootView.findViewById(R.id.et_yinhuanaddress), content);
+		}
+		general.updateTitle(context, rootView, this);
+		
+		
+	
 		//
 		((EditText)rootView.findViewById(R.id.et_villagename)).setText(content.getS_villagename());
 		((EditText)rootView.findViewById(R.id.et_netname)).setText(content.getS_netname());
-		((EditText)rootView.findViewById(R.id.et_eventid)).setText(content.getS_eventid());
+		
 		
 		((EditText)rootView.findViewById(R.id.et_jianzhumianji)).setText("" + content.getD_jianzhumianji());
 		((EditText)rootView.findViewById(R.id.et_landstatus)).setText(content.getS_landstatus());
@@ -127,16 +237,11 @@ public class t_weijian extends BaseFragment {
 		
 		
 		//yinhuan
-		((EditText)rootView.findViewById(R.id.et_yinhuanxiangqing)).setText(content.getS_yinhuanxiangqing());
 		((EditText)rootView.findViewById(R.id.et_yinhuanaddress)).setText(content.getS_yinhuanaddress());
 		((EditText)rootView.findViewById(R.id.et_weijianxiangduiren)).setText(content.getS_weijianxiangduiren());
 		((EditText)rootView.findViewById(R.id.et_yinhuanren)).setText(content.getS_yinhuanren());
 		((EditText)rootView.findViewById(R.id.et_yinhuanlianluo)).setText(content.getS_yinhuanlianluo());
 		
-		//discoverer
-		((EditText)rootView.findViewById(R.id.et_discovererlevel)).setText(content.getS_discovererlevel());
-		((EditText)rootView.findViewById(R.id.et_discoverername)).setText(content.getS_discoverername());
-		((EditText)rootView.findViewById(R.id.et_tijiao)).setText(content.getS_tijiao());
 		
 		//event
 //		((EditText)rootView.findViewById(R.id.et_eventtype)).setText(content.getEventtype());
@@ -151,9 +256,6 @@ public class t_weijian extends BaseFragment {
 //		((EditText)rootView.findViewById(R.id.et_netname)).setText(content.getNetname());
 		
 		
-		//netleader
-		((EditText)rootView.findViewById(R.id.et_netleadername)).setText(content.getS_netleadername());
-		((EditText)rootView.findViewById(R.id.et_netleadertel)).setText(content.getS_netleadertel());
 		
 		//solve
 		
@@ -165,27 +267,33 @@ public class t_weijian extends BaseFragment {
 		//
 		((EditText)rootView.findViewById(R.id.et_result)).setText(content.getS_result());
 		
+		
+		((EditText)rootView.findViewById(R.id.et_remark)).setText(content.getS_remark());
+		
+		
+		updateView2(rootView);
+//		initModifyTime();
+	}
+	
+	
+	protected void updateView2(View rootView){
+		if (null == jsonData) return;
+		((EditText)rootView.findViewById(R.id.et_eventid)).setText(content.getS_eventid());
+		//discoverer
+		((EditText)rootView.findViewById(R.id.et_discovererlevel)).setText(content.getS_discovererlevel());
+		((EditText)rootView.findViewById(R.id.et_discoverername)).setText(content.getS_discoverername());
+		((EditText)rootView.findViewById(R.id.et_tijiao)).setText(content.getS_tijiao());
+		
 		//updater
 //		((EditText)rootView.findViewById(R.id.et_updateid)).setText(content.getUpdateid());
 		((EditText)rootView.findViewById(R.id.et_updatename)).setText(content.getS_updatename());
 		((EditText)rootView.findViewById(R.id.et_updatelevel)).setText(content.getS_updatelevel());
 		((EditText)rootView.findViewById(R.id.et_updatetime)).setText(content.getT_updatetime());
 		
-		((EditText)rootView.findViewById(R.id.et_remark)).setText(content.getS_remark());
-		
-		
-//		((EditText)rootView.findViewById(R.id.)).setText(event);
-//		((EditText)rootView.findViewById(R.id.)).setText(event);
-//		((EditText)rootView.findViewById(R.id.)).setText(event);
-//		((EditText)rootView.findViewById(R.id.)).setText(event);
-//		((EditText)rootView.findViewById(R.id.)).setText(event);
-//		((EditText)rootView.findViewById(R.id.)).setText(event);		
-//		((EditText)rootView.findViewById(R.id.)).setText(event);
-//		((EditText)rootView.findViewById(R.id.)).setText(event);
-//		((EditText)rootView.findViewById(R.id.)).setText(event);
-//		((EditText)rootView.findViewById(R.id.)).setText(event);
-//		((EditText)rootView.findViewById(R.id.)).setText(event);
-		initModifyTime();
+		//netleader
+		((EditText)rootView.findViewById(R.id.et_netleadername)).setText(content.getS_netleadername());
+		((EditText)rootView.findViewById(R.id.et_netleadertel)).setText(content.getS_netleadertel());
+
 	}
 	
 	@Override
@@ -203,13 +311,13 @@ public class t_weijian extends BaseFragment {
 		//
 		content.setS_villagename(((EditText)rootView.findViewById(R.id.et_villagename)).getText().toString());
 		content.setS_netname(((EditText)rootView.findViewById(R.id.et_netname)).getText().toString());
-		content.setS_eventid(((EditText)rootView.findViewById(R.id.et_eventid)).getText().toString());
 		
-		content.setD_jianzhumianji(Double.parseDouble(((EditText)rootView.findViewById(R.id.et_jianzhumianji)).getText().toString()));
+		content.setD_jianzhumianji(string2Double(((EditText)rootView.findViewById(R.id.et_jianzhumianji)).getText().toString()));
 		content.setS_landstatus(((EditText)rootView.findViewById(R.id.et_landstatus)).getText().toString());
 
 		content.setS_construction(((EditText)rootView.findViewById(R.id.et_construction)).getText().toString());
-		content.setD_landarea(Double.parseDouble(((EditText)rootView.findViewById(R.id.et_landarea)).getText().toString()));
+		content.setD_landarea(string2Double(((EditText)rootView.findViewById(R.id.et_landarea)).getText().toString()));
+
 //		((EditText)rootView.findViewById(R.id.et_buildtime)).getText().toString()millisecondToString(content.getBuildtime()));
 		
 		
@@ -220,10 +328,6 @@ public class t_weijian extends BaseFragment {
 		content.setS_yinhuanren(((EditText)rootView.findViewById(R.id.et_yinhuanren)).getText().toString());
 		content.setS_yinhuanlianluo(((EditText)rootView.findViewById(R.id.et_yinhuanlianluo)).getText().toString());
 		
-		//discoverer
-		content.setS_discovererlevel(((EditText)rootView.findViewById(R.id.et_discovererlevel)).getText().toString());
-		content.setS_discoverername(((EditText)rootView.findViewById(R.id.et_discoverername)).getText().toString());
-//		((EditText)rootView.findViewById(R.id.et_tijiao)).getText().toString()millisecondToString(content.setTijiao());
 		
 		//event
 //		((EditText)rootView.findViewById(R.id.et_eventtype)).setText(content.getEventtype());
@@ -238,9 +342,6 @@ public class t_weijian extends BaseFragment {
 //		((EditText)rootView.findViewById(R.id.et_netname)).setText(content.getNetname());
 		
 		
-		//netleader
-		content.setS_netleadername(((EditText)rootView.findViewById(R.id.et_netleadername)).getText().toString());
-		content.setS_netleadertel(((EditText)rootView.findViewById(R.id.et_netleadertel)).getText().toString());
 		
 		//solve
 		
@@ -252,26 +353,44 @@ public class t_weijian extends BaseFragment {
 		//
 		content.setS_result(((EditText)rootView.findViewById(R.id.et_result)).getText().toString());
 		
+		
+		content.setS_remark(((EditText)rootView.findViewById(R.id.et_remark)).getText().toString());
+		updateData2(rootView);
+	}
+	
+	private void updateData2(View rootView){
+		if (null == jsonData) return;
+		content.setS_eventid(((EditText)rootView.findViewById(R.id.et_eventid)).getText().toString());
+		
+		//discoverer
+		content.setS_discovererlevel(((EditText)rootView.findViewById(R.id.et_discovererlevel)).getText().toString());
+		content.setS_discoverername(((EditText)rootView.findViewById(R.id.et_discoverername)).getText().toString());
+//		((EditText)rootView.findViewById(R.id.et_tijiao)).getText().toString()millisecondToString(content.setTijiao());
+		
+		//netleader
+		content.setS_netleadername(((EditText)rootView.findViewById(R.id.et_netleadername)).getText().toString());
+		content.setS_netleadertel(((EditText)rootView.findViewById(R.id.et_netleadertel)).getText().toString());
+		
 		//updater
 //		((EditText)rootView.findViewById(R.id.et_updateid)).setTextcontent.setUpdateid());
 		content.setS_updatename(((EditText)rootView.findViewById(R.id.et_updatename)).getText().toString());
 		content.setS_updatelevel(((EditText)rootView.findViewById(R.id.et_updatelevel)).getText().toString());
 //		((EditText)rootView.findViewById(R.id.et_updatetime)).getText().toString((millisecondToStringcontent.setUpdatetime()));
-		
-		content.setS_remark(((EditText)rootView.findViewById(R.id.et_remark)).getText().toString());
-		
+
 	}
 	
-	private void initModifyTime() {
+	private void initSelectChanger() {
 //		etTime = (EditText) this.findViewById(R.id.examination_date_time);
 //		int[] ids = { R.id.examination_date_time };
-		int[] ids = {R.id.et_buildtime, R.id.et_solvetime, R.id.et_tijiao, R.id.et_updatetime};
+		int[] ids = {R.id.et_buildtime, R.id.et_solvetime, R.id.et_solvestatus, R.id.et_villagename, R.id.et_netname, R.id.et_solvemethod};//, R.id.et_tijiao, R.id.et_updatetime};
 
 		for (int id : ids) {
 //			rootView.findViewById(id).setOnClickListener(onClickListener);
 //			rootView.findViewById(id).setOnFocusChangeListener(onFocusChangeListener);
 			rootView.findViewById(id).setOnTouchListener(onTouchListener);
 		}
+		
+
 	}
 	View.OnTouchListener onTouchListener = new View.OnTouchListener() {
 
@@ -337,7 +456,63 @@ public class t_weijian extends BaseFragment {
 						}, content.getT_buildtime());
 
 				break;
+			case R.id.et_solvestatus:
+			{
+				// 解决状态
+				String []status = {"未解决","已解决"};
+				general.setSingleChoiceItems( R.id.et_solvestatus, status, new GeneralInformationFragment.OnChangedListener() {
+					@Override
+					public void onChanged(int id, String value) {
+						// TODO Auto-generated method stub
+						((EditText)rootView.findViewById(id)).setText(value);
+					}
+				});
+			}
+				break;
+				
+			case R.id.et_villagename:
+			{
+				// 村
+				String []status = {Configuration.getInstance().getRegister().getS_villagename() , "other"};
+				general.setSingleChoiceItems( R.id.et_villagename, status, new GeneralInformationFragment.OnChangedListener() {
+					@Override
+					public void onChanged(int id, String value) {
+						// TODO Auto-generated method stub
+						((EditText)rootView.findViewById(id)).setText(value);
+					}
+				});
+			}
 
+				break;
+			case R.id.et_netname:
+			{
+				
+				//格
+				String []status = {Configuration.getInstance().getRegister().getS_netname() , "other"};
+				general.setSingleChoiceItems( R.id.et_netname, status, new GeneralInformationFragment.OnChangedListener() {
+					@Override
+					public void onChanged(int id, String value) {
+						// TODO Auto-generated method stub
+						((EditText)rootView.findViewById(id)).setText(value);
+					}
+				});
+			}
+
+					break;
+			case R.id.et_solvemethod:
+			{
+				// 当日新发现和拆除情况
+				String []status = {"新发现","已经拆除"};
+				general.setSingleChoiceItems( R.id.et_solvemethod, status, new GeneralInformationFragment.OnChangedListener() {
+					@Override
+					public void onChanged(int id, String value) {
+						// TODO Auto-generated method stub
+						((EditText)rootView.findViewById(id)).setText(value);
+					}
+				});
+				
+			}
+			break;
 			default:
 
 			}
@@ -414,14 +589,17 @@ public class t_weijian extends BaseFragment {
 		}
 	};
 	
+	
+	
 	private void setDateTime(DateTimePickerDialog.OnDateTimeChangedListener listener, String strDate) {
-		if(null == strDate) return;
-		DateTimePickerDialog dateTimePicKDialog = new DateTimePickerDialog(context);
 		
-		String[] data = strDate.split("-");
-		if (data.length < 2) return;
+		DateTimePickerDialog dateTimePicKDialog = new DateTimePickerDialog(context);
 		Calendar calendar = Calendar.getInstance();
-		calendar.set(Integer.parseInt(data[0]), Integer.parseInt(data[1]) - 1, Integer.parseInt(data[2]));
+		if (null != strDate) {
+			String[] data = strDate.split("-");
+			if (data.length > 2);
+				calendar.set(Integer.parseInt(data[0]), Integer.parseInt(data[1]) - 1, Integer.parseInt(data[2]));
+		}
 //		Date date = new Date();
 //		date.setYear(Integer.parseInt(data[0]));
 //		date.setMonth(Integer.parseInt(data[1]) - 1);
@@ -445,4 +623,17 @@ public class t_weijian extends BaseFragment {
 	}
 
 
+	@Override
+	public void onImageLoaded(int id, Uri imageUri, Drawable image) {
+		((ImageView) rootView.findViewById(id)).setImageDrawable(image);
+		imc.unregisterOnImageLoadListener(this);
+	}
+
+	private double string2Double(String str){
+		try{
+			return Double.parseDouble(str);
+		} catch (Exception e ){
+			return 0;
+		}
+	}
 }

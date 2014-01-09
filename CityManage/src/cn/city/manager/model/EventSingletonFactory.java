@@ -1,7 +1,9 @@
 package cn.city.manager.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -21,12 +23,40 @@ public class EventSingletonFactory {
 	}
 
 	private EventSingletonFactory() {
-
+		init();
 	}
 
 	public List<BaseEvent> events;
 
+	private Map<String, String> eventClzMap = new HashMap<String, String>();
+	
+	private void init(){
+		eventClzMap.put("s_netid", "t_netbaseinfo");
+		eventClzMap.put("s_villageid", "t_netbaseinfo");
+	}
+	
 
+	private Class<?> createClzFromKind(String kind){
+		
+		if (null == kind || kind.length() < 1) return null;
+
+		
+		String clsName = eventClzMap.get(kind);
+		if (null == clsName) {
+			clsName = kind;
+		}
+		
+		String pkg = BaseEvent.class.getPackage().getName();
+		Class<?> clz = null;
+		try {
+			clz = Class.forName(pkg + "." + clsName + "Event");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return clz;
+		
+	}
 	public List<BaseEvent> create(JSONObject jObj) {
 		List<BaseEvent> list = null;
 		try {
@@ -49,11 +79,15 @@ public class EventSingletonFactory {
 			return null;
 
 		String kind = jTransport.getString("kind");
-		String pkg = BaseEvent.class.getPackage().getName();
-		Class<?> clz = Class.forName(pkg + "." + kind + "Event");
+//		if ("s_netid".equals(kind) || "s_villageid".equals(kind)) {
+//			kind = "t_netbaseinfo";
+//		} 
+//		String pkg = BaseEvent.class.getPackage().getName();
+//		Class<?> clz = Class.forName(pkg + "." + kind + "Event");
+		Class<?> clz = createClzFromKind(kind);
 //		Class<?> clz = strategy.get(kind);
-//		if (null == clz)
-//			return null;
+		if (null == clz)
+			return null;
 
 		BaseEvent event = null;
 		try {

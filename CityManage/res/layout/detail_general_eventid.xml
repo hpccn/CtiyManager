@@ -9,7 +9,7 @@
 
     <EditText
         android:id="@+id/et_eventid"
-        style="@style/generalEditText"
+        style="@style/generalEditTextReadonly"
         android:hint="@string/eventid" />
 
 </LinearLayout>

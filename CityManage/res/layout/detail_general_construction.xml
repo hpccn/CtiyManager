@@ -7,6 +7,8 @@
         style="@style/thirdTitle"
         android:text="@string/construction" />
 
+    <include layout="@layout/must_input_mark" />
+
     <EditText
         android:id="@+id/et_construction"
         style="@style/generalEditText"

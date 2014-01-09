@@ -7,6 +7,8 @@
         style="@style/thirdTitle"
         android:text="@string/belong_netgrid" />
 
+    <include layout="@layout/must_input_mark" />
+
     <EditText
         android:id="@+id/et_netname"
         style="@style/generalEditTextReadonly"

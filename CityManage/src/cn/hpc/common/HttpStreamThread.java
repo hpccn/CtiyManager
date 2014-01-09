@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -14,10 +15,17 @@ import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.content.Context;
-import android.net.http.AndroidHttpClient;
 import android.util.Log;
 
 public abstract class HttpStreamThread extends Thread {
+	
+	
+	public interface OnStringLoadListener {
+		public void onStringLoaded(String url, String string);
+		public void onMoved(String url);
+		public void onResponse(int code);
+	}
+	
 	public static final String TAG = "HttpStreamThread";
 
 	protected static Object syncObject = new Object();
@@ -31,10 +39,11 @@ public abstract class HttpStreamThread extends Thread {
 	public static String cookie_value = null;
 	
 	public static Cookie sessionCookie = null;
-	
-	public HttpStreamThread(Context context, String url) {
+	protected OnStringLoadListener listener;
+	public HttpStreamThread(Context context, String url, OnStringLoadListener listener) {
 		this.context = context;
 		this.url = url;
+		this.listener = listener;
 	}
 
 
@@ -63,8 +72,7 @@ public abstract class HttpStreamThread extends Thread {
 		return null;
 	}
 
-	public HttpResponse obtainHttpPostResponse() {
-		try {
+	public HttpResponse obtainHttpPostResponse() throws Exception {
 			Log.d(TAG, "getNetworkResponse url:" + url);
 
 			HttpPost httppost = new HttpPost(url);
@@ -74,11 +82,6 @@ public abstract class HttpStreamThread extends Thread {
 			}
 			return httpClient.execute(httppost);
 
-		} catch (IOException e) {
-			Log.e(TAG, "getNetworkResponse:" + e.getMessage(), e);
-		}
-
-		return null;
 	}
 
 	public boolean obtainRemoteData() {
@@ -91,11 +94,13 @@ public abstract class HttpStreamThread extends Thread {
 
 			HttpResponse hr = obtainHttpPostResponse();
 			if (hr != null) {
+				listener.onResponse(hr.getStatusLine().getStatusCode());
+
 				switch (hr.getStatusLine().getStatusCode()) {
 				case HttpStatus.SC_MOVED_TEMPORARILY:
 					Header header = hr.getFirstHeader("Location");
 					String gateway = header.getValue();
-					moved(gateway);
+					listener.onMoved(gateway);
 					break;
 				case HttpStatus.SC_OK:
 					
@@ -126,7 +131,6 @@ public abstract class HttpStreamThread extends Thread {
 				default:
 
 				}
-
 			}
 		} catch (Exception e) {
 			/* 线程执行发生中断 */
@@ -143,8 +147,6 @@ public abstract class HttpStreamThread extends Thread {
 
 	public abstract void setHttpPostParams(HttpPost httpPost);
 	
-	public abstract void moved(String url);
-
 	/*
 	 * Process the file stream from network, such as parsing xml. Param is:
 	 * input file stream from network Result: true - success false - fail

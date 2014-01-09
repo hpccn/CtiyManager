@@ -9,7 +9,9 @@ import org.apache.http.HttpStatus;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -39,6 +41,7 @@ import cn.city.manager.fragment.t_netbaseinfo;
 import cn.city.manager.fragment.event.BaseEvent;
 import cn.city.manager.view.DateTimeChanger;
 import cn.city.manager.view.DateTimePickerDialog;
+import cn.city.manager.view.ViewSingletonFactory;
 import cn.hpc.common.HttpUploadHelper;
 
 public class DetailActivity extends Activity {
@@ -57,20 +60,22 @@ public class DetailActivity extends Activity {
 	public static final int VIDEO_SELECT = 6;// 拍照
 
 
-	private String jsonValue;
-//	private Gallery gallery;
-//	private ImageAdapter imageAdapter;
-	private ImageView imageView;
-	private BaseEvent baseContent;
-	private BaseFragment fragment;
-	private View mainView;
-	// private TextView tvMainTitle, tvSubTitle;
-	private LinearLayout detailMainContainer;
-	private TextView tvVideoFile;
+	protected String jsonValue;
+//	protected Gallery gallery;
+//	protected ImageAdapter imageAdapter;
+	protected ImageView imageView;
+	protected BaseEvent baseContent;
+	protected BaseFragment fragment;
+	protected View mainView;
+	// protected TextView tvMainTitle, tvSubTitle;
+	protected LinearLayout detailMainContainer;
+	protected TextView tvVideoFile;
+	protected Context context;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		context = this;
 		Log.i("", "" + System.currentTimeMillis());
 		mainView = View.inflate(this, R.layout.detail_main, null);
 		setContentView(mainView);// (R.layout.detail_main);
@@ -95,7 +100,7 @@ public class DetailActivity extends Activity {
 
 	}
 
-	final private Handler handler = new Handler() {
+	final protected Handler handler = new Handler() {
 
 		@Override
 		public void dispatchMessage(Message msg) {
@@ -108,17 +113,21 @@ public class DetailActivity extends Activity {
 
 				break;
 			case 0x1002:
+				ViewSingletonFactory.getInstance().hideProcessDialog();
 				DetailActivity.this.finish();
 				break;
 			case HttpStatus.SC_OK:
-				alertDialog.setMessage("上传事件成功");
-				hideProcess();
+//				alertDialog.setMessage("上传事件成功");
+//				progressDialog.setMessage("上传事件成功");
+//				progressDialog.setTitle("上传事件成功");
+				ViewSingletonFactory.getInstance().hideProcessDialog();
+				ViewSingletonFactory.getInstance().showProcessDialog(context, null, "上传事件成功");
 				Toast.makeText(DetailActivity.this, "上传事件成功", Toast.LENGTH_LONG).show();
 				
-				handler.sendEmptyMessageDelayed(0x1002, 200);
+				handler.sendEmptyMessageDelayed(0x1002, 500);
 				
 			default:
-				hideProcess();
+				ViewSingletonFactory.getInstance().hideProcessDialog();
 //				showMessage("上传事件错误, 请重新上传");
 				
 				super.dispatchMessage(msg);
@@ -144,7 +153,7 @@ public class DetailActivity extends Activity {
 		super.onDestroy();
 	}
 	
-	private void selectView(String category) {
+	protected void selectView(String category) {
 		
 		String pkg = BaseFragment.class.getPackage().getName();
 		try {
@@ -207,9 +216,22 @@ public class DetailActivity extends Activity {
 
 	// StructureView structureView;
 
-	private void init() throws NullPointerException {
+	protected void init() throws NullPointerException {
 //		findViewById(R.id.btn_commit).setOnClickListener(onClickListener);
 //		findViewById(R.id.btn_cancel).setOnClickListener(onClickListener);
+		
+		//是否允行编辑
+//		if (null != jsonValue){
+//			int []ids = {R.id.btn_commit,
+//					R.id.btn_add_picture, R.id.btn_add_video, 
+//					R.id.btn_select_picture, R.id.btn_select_video };
+//			for (int id : ids){
+//				findViewById(id).setVisibility(View.INVISIBLE);
+//			}
+//			findViewById(R.id.btn_cancel).setOnClickListener(onClickListener);
+//			return;
+//		}
+		
 		tvVideoFile  = (TextView) findViewById(R.id.tv_video_file);
 		int []ids = {R.id.btn_commit, R.id.btn_cancel,
 				R.id.btn_add_picture, R.id.btn_add_video, 
@@ -358,7 +380,7 @@ public class DetailActivity extends Activity {
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
-	private static Bitmap small(Bitmap bitmap) {
+	protected static Bitmap small(Bitmap bitmap) {
 		// int w = b.getWidth();
 		// int h = b.getHeight();
 		// int wScale = 1;
@@ -383,9 +405,9 @@ public class DetailActivity extends Activity {
 		return resizeBmp;
 	}
 
-//	private EditText etTime;
+//	protected EditText etTime;
 //
-//	private void initModifyTime() {
+//	protected void initModifyTime() {
 //		etTime = (EditText) this.findViewById(R.id.examination_date_time);
 ////		int[] ids = { R.id.examination_date_time };
 //		int[] ids = {R.id.et_buildtime, R.id.et_solvetime, R.id.et_tijiao, R.id.et_updatename};
@@ -394,9 +416,9 @@ public class DetailActivity extends Activity {
 //			this.findViewById(id).setOnClickListener(onClickListener);
 //		}
 //	}
-	private final String imgPath = Environment.getExternalStorageDirectory() + "/photo.jpg";
+	protected final String imgPath = Environment.getExternalStorageDirectory() + "/photo.jpg";
 
-	private final String uploadUrl = Constants.weijian_commit;//"http://192.168.1.2:8080/upload";//
+//	protected final String uploadUrl = Constants.weijian_commit_new;//"http://192.168.1.2:8080/upload";//
 	
 	final protected View.OnClickListener onClickListener = new View.OnClickListener() {
 		@Override
@@ -407,9 +429,15 @@ public class DetailActivity extends Activity {
 				break;
 			case R.id.btn_commit:
 				if (null != fragment){
-					showProcess();
+					ViewSingletonFactory.getInstance().showProcessDialog(context, null, "正在上传数据,请稍候...");
 					fragment.updateData(mainView);
 					HttpUploadHelper uploader = new HttpUploadHelper(handler);
+					String uploadUrl = null;
+					if (null != jsonValue) {
+						uploadUrl = Constants.weijian_commit_update;
+					} else {
+						uploadUrl = Constants.weijian_commit_new;
+					}
 					uploader.httpPostEvent(uploadUrl, baseContent);
 				}
 				break;
@@ -468,22 +496,9 @@ public class DetailActivity extends Activity {
 	
 	
 	AlertDialog alertDialog;
-	private void hideProcess(){
-	    alertDialog.dismiss();
-	}
-	private void showProcess(){
-
-		
-	    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	    builder.setIcon(R.drawable.ic_logo);
-	    builder.setTitle("正在上传数据,请稍候");
-	    builder.setMessage("正在上传数据,请稍候");
-	    builder.setCancelable(false);
-	    alertDialog = builder.create();  
-	    alertDialog.show();
-	}
 	
-	private void showMessage(String message){
+
+	protected void showMessage(String message){
 
 		
 	    AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -494,7 +509,7 @@ public class DetailActivity extends Activity {
 	    alertDialog = builder.create();  
 	    alertDialog.show();
 	}
-//	private void setDateTime(int viewId) {
+//	protected void setDateTime(int viewId) {
 //		DateTimeChanger dtc = new DateTimeChanger(this, (TextView)this.findViewById(viewId), baseContent);
 //	}
 //	final protected DateTimePickerDialog.OnDateTimeChangedListener listener = new DateTimePickerDialog.OnDateTimeChangedListener() {
@@ -511,7 +526,7 @@ public class DetailActivity extends Activity {
 //
 //	};
 //
-//	private void setDateTime() {
+//	protected void setDateTime() {
 //		DateTimePickerDialog dateTimePicKDialog = new DateTimePickerDialog(this);
 //		dateTimePicKDialog.dateTimePicKDialog(listener, baseContent.getTime());
 //

@@ -1,12 +1,10 @@
 package cn.city.manager.view;
 
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.protocol.ClientContext;
@@ -25,7 +23,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ZoomButtonsController;
-import cn.city.manager.Constants;
 import cn.city.manager.R;
 import cn.city.manager.model.Page;
 import cn.hpc.common.HttpStreamThread;
@@ -50,8 +47,11 @@ public class Statistics implements Page{
 			view = View.inflate(context, R.layout.statistics_main_frame, null);
 		
 		webView = (WebView) view.findViewById(R.id.main_webview);
+		webView.setInitialScale(50);
         WebSettings webSettings = webView.getSettings();       
         webSettings.setJavaScriptEnabled(true);       
+        webSettings.setDefaultZoom(WebSettings.ZoomDensity.CLOSE);
+        webSettings.setUseWideViewPort(false);
         webSettings.setBuiltInZoomControls(true);
         webSettings.setSupportZoom(true);  
 //        setZoomControlGone(webView);
@@ -73,6 +73,13 @@ public class Statistics implements Page{
 				// 重写此方法表明点击网页里面的链接还是在当前的webview里跳转，不跳到浏览器那边
 				view.loadUrl(url);
 				return true;
+			}
+
+			@Override
+			public void onPageFinished(WebView view, String url) {
+				
+				super.onPageFinished(view, url);
+				ViewSingletonFactory.getInstance().hideProcessDialog();
 			}
 		});
         

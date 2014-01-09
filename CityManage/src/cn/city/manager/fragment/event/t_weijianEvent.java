@@ -1,7 +1,6 @@
 package cn.city.manager.fragment.event;
 
 
-import java.lang.reflect.Type;
 
 import org.json.JSONObject;
 
@@ -199,17 +198,7 @@ public class t_weijianEvent extends BaseEvent {
 		return null;
 	}
 
-	@Override
-	public long getTime() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
-	@Override
-	public void setTime(long time) {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public void setAddress(String address) {
@@ -622,6 +611,13 @@ public class t_weijianEvent extends BaseEvent {
 	public void setS_videouploadlevel(String videouploadlevel) {
 		this.s_videouploadlevel = videouploadlevel;
 	}
+
+	@Override
+	public String getSortValue() {
+		// TODO Auto-generated method stub
+		return t_tijiao;
+	}
+
 
 
 

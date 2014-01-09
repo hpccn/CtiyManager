@@ -1,18 +1,12 @@
 package cn.city.manager.fragment.event;
 
-import java.lang.reflect.Method;
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.json.JSONObject;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import android.graphics.drawable.Drawable;
 
-public  abstract class BaseEvent {
+import com.google.gson.Gson;
+
+public  abstract class BaseEvent implements Comparable<BaseEvent>{
 	public boolean isMe(String category){
 		return this.getClass().getSimpleName().equals(category);
 	}
@@ -27,8 +21,7 @@ public  abstract class BaseEvent {
 	}
 	
 	
-	public String toJSONObject()
-	{
+	public String toJSONObject() {
 		Gson gson = new Gson(); 
 		String json = gson.toJson(this);  
 		return json;
@@ -38,10 +31,11 @@ public  abstract class BaseEvent {
 	public abstract String getVillage();
 	public abstract String getCell();
 
+	public abstract String getSortValue();
+	
 	public abstract Drawable getIcon(); 
 	
-	public abstract long getTime();
-	public abstract void setTime(long time);
+
 	public abstract void setAddress(String address);
 	public abstract void setL_latitude(double latitude);
 	public abstract void setD_longitude(double longitude);
@@ -80,5 +74,13 @@ public  abstract class BaseEvent {
 //			e.printStackTrace();
 //		}
 //	}
+	@Override
+	public int compareTo(BaseEvent ev) {
+		if (ev == null || ev.getSortValue() == null)
+			return 1;
+		if (null == getSortValue())
+			return 0;
+		return getSortValue().compareTo(ev.getSortValue());
+	}
 
 }

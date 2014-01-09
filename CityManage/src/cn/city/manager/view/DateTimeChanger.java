@@ -29,14 +29,14 @@ public class DateTimeChanger {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String dateTime = sdf.format(date);
 			timeView.setText(dateTime);
-			baseContent.setTime(millisecond);
+//			baseContent.setTime(millisecond);
 		}
 
 	};
 
 	private void setDateTime() {
 		DateTimePickerDialog dateTimePicKDialog = new DateTimePickerDialog(context);
-		dateTimePicKDialog.dateTimePicKDialog(listener, baseContent.getTime());
+		dateTimePicKDialog.dateTimePicKDialog(listener, System.currentTimeMillis());//baseContent.getTime());
 		
 	}
 }

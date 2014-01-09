@@ -93,17 +93,7 @@ public class t_netbaseinfoEvent extends BaseEvent {
 		return null;
 	}
 
-	@Override
-	public long getTime() {
 
-		return 0;
-	}
-
-	@Override
-	public void setTime(long time) {
-
-
-	}
 
 	@Override
 	public void setAddress(String address) {
@@ -465,6 +455,12 @@ public class t_netbaseinfoEvent extends BaseEvent {
 	public void setS_video(String video) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public String getSortValue() {
+		// TODO Auto-generated method stub
+		return s_netid;
 	}
 
 }
