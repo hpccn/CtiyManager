@@ -17,6 +17,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import cn.city.manager.Configuration;
 import cn.city.manager.Constants;
 import cn.city.manager.R;
 import cn.city.manager.fragment.t_netbaseinfo;
@@ -39,6 +40,7 @@ public class NetBaseInfoActivity extends BaseBrowseActivity {
 		View view = null;
 		view = View.inflate(this, R.layout.netbaseinfo_main, null);
 
+		view.findViewById(R.id.id_browse_mode).setVisibility(View.GONE);
 		// 按网格查看
 //		if (t_netbaseinfoGrid.class.getSimpleName().equals(category)) {
 //			wange = new Statistics(this, Constants.wangge_netbaseinfo);
@@ -67,20 +69,29 @@ public class NetBaseInfoActivity extends BaseBrowseActivity {
 			// 安村查看
 			fields.add("villageid");
 			fields.add("villagename");
-			fields.add("netname");
+			fields.add("villageleadername");
 			fields.add("nethushu");
 
 			((TextView)this.findViewById(R.id.id_summary_item_title_1)).setText(R.string.villageid);
+			((TextView)this.findViewById(R.id.id_summary_item_title_2)).setText(R.string.villagename);
+			((TextView)this.findViewById(R.id.id_summary_item_title_3)).setText("治保主任");
+
 //			adapter = new NetBaseInfoAdapter(context, events, fields); 
 		} else if (t_netbaseinfoGrid.class.getSimpleName().equals(category)){
 			// 按格查看
 			fields.add("netid");
-			fields.add("villagename");
 			fields.add("netname");
+			fields.add("villagename");
 			fields.add("nethushu");
 
 //			adapter = new NetBaseInfoAdapter(context, events, fields); 
 			((TextView)this.findViewById(R.id.id_summary_item_title_1)).setText(R.string.netgrid_id);
+			((TextView)this.findViewById(R.id.id_summary_item_title_2)).setText(R.string.netname);
+			((TextView)this.findViewById(R.id.id_summary_item_title_3)).setText("所属村");
+
+			findViewById(R.id.id_summary_item_title_4).setVisibility(View.VISIBLE);
+			
+			tvCustomTitle = (TextView)this.findViewById(R.id.id_summary_item_title_4);
 		}
 	}
 
@@ -116,7 +127,13 @@ public class NetBaseInfoActivity extends BaseBrowseActivity {
 		initTitle();
 		
 		ViewSingletonFactory.getInstance().showProcessDialog(context, null, "正在下载数据,请稍候...");
-		String url = Constants.wangge_village_netbaseinfo;
+		String url = null;
+		if (category.equals(t_netbaseinfoGrid.class.getSimpleName())){
+			url = Constants.obtainNetbaseinfoListUrl("s_netid", Configuration.getInstance().getUsername());
+		} else if (category.equals(t_netbaseinfo.class.getSimpleName())){
+			url = Constants.obtainNetbaseinfoListUrl("s_villageid", Configuration.getInstance().getUsername());
+		}
+//		String url = Constants.wangge_village_netbaseinfo_list;
 		HttpStreamThread hst = new EventHttpStreamThread(this, url, onStringLoadListener);
 		hst.start();
 		return null;
@@ -237,6 +254,7 @@ public class NetBaseInfoActivity extends BaseBrowseActivity {
 				i.putExtra("jsonValue", js);
 				i.putExtra("category", category);//events.get(position).getCategory());//
 				startActivity(i);
+				overridePendingTransition(R.anim.zoom_in, R.anim.zoom_in); 
 			}			
 		});
 
@@ -325,6 +343,12 @@ public class NetBaseInfoActivity extends BaseBrowseActivity {
 	};
 	@Override
 	protected void onSelectDateView(int select) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void invalidateEvent() {
 		// TODO Auto-generated method stub
 		
 	}

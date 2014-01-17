@@ -37,7 +37,7 @@ public class GeneralFragment extends BaseFragment {
 
 
 	@Override
-	public String getTitle() {
+	public String getTitle(final Context context) {
 		// TODO Auto-generated method stub
 		return "食品药品";
 	}
@@ -75,7 +75,7 @@ public class GeneralFragment extends BaseFragment {
 
 
 	@Override
-	public String getSubTitle() {
+	public String getSubTitle(final Context context) {
 		// TODO Auto-generated method stub
 		return null;
 	}

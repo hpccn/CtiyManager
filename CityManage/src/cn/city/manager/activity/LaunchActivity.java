@@ -33,7 +33,7 @@ public class LaunchActivity extends Activity {
 		//
 		// }
 //		Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.color.welcome_background);
-
+//		this.setContentView(R.layout.layout_welcome);
 		showWelcome();
 //		System.out.println("http://192.168.1.1 isUrl:? " + isUrl("http://192.168.1.1"));
 //		System.out.println("http://www.eben.cn isUrl: ? " + isUrl("http://www.eben.cn"));
@@ -56,7 +56,7 @@ public class LaunchActivity extends Activity {
 
 	@Override
 	protected void onDestroy() {
-		overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
+//		overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
 		super.onDestroy();
 	}
 
@@ -74,6 +74,7 @@ public class LaunchActivity extends Activity {
 	//		startActivity(new Intent(this, MainActivity.class));
 		}
 		finish();
+	    overridePendingTransition(R.anim.zoom_in, R.anim.zoom_in);    
 	}
 	
 //	private boolean isUrl(String url){
@@ -90,11 +91,12 @@ public class LaunchActivity extends Activity {
 
 	
 	    // Load the high-resolution "zoomed-in" image.
-	    final ImageView welcomeView = (ImageView) View.inflate(this, R.layout.layout_welcome, null); 
+	    final View welcomeView =  View.inflate(this, R.layout.layout_welcome, null); 
 	    		//(ImageView) findViewById(R.id.expanded_image);
 	    
+		this.setContentView(welcomeView);
 	
-	    mLogoEntry = AnimationUtils.loadAnimation(this, R.anim.zoom_enter);
+	    mLogoEntry = AnimationUtils.loadAnimation(this, R.anim.zoom_in);//android.R.anim.fade_in);//
 		// mLogoEntry = AnimUtil.createOpenbookAnimation(this);
 		mLogoEntry.setAnimationListener(new Animation.AnimationListener() {
 
@@ -116,9 +118,8 @@ public class LaunchActivity extends Activity {
 
 		});
 
-		welcomeView.startAnimation(mLogoEntry);
+		this.findViewById(R.id.iv_welcome).startAnimation(mLogoEntry);
 	
-		this.setContentView(welcomeView);
 	}
 
 }

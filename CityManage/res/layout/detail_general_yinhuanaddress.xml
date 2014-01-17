@@ -13,6 +13,6 @@
         android:id="@+id/et_yinhuanaddress"
         style="@style/generalEditText"
         android:hint="@string/yinhuanaddress"
-        android:minLines="2" />
+         />
 
 </LinearLayout>

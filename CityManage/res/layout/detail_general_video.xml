@@ -3,26 +3,37 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="20dp"
-    android:orientation="horizontal" >
+    android:orientation="vertical" >
 
     <TextView
-        android:drawableLeft="@drawable/ic_graphic_video"
-        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:singleLine="true"
         android:id="@+id/tv_video_file"
         style="@style/thirdTitle"
-        android:text="@string/video_file" />
+        android:layout_weight="1"
+        android:drawableLeft="@drawable/ic_graphic_video"
+        android:hint="@string/video_file" />
 
-    <Button
-        android:layout_weight="0"
-        android:id="@+id/btn_select_video"
-        style="@style/generalButtonStyle"
-        android:text="@string/select_video" />
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal" >
 
-    <Button
-        android:layout_weight="0"
-        android:layout_marginLeft="20dp"
-        android:id="@+id/btn_add_video"
-        style="@style/generalButtonStyle"
-        android:text="@string/videotape" />
+        <Button
+            android:id="@+id/btn_select_video"
+            style="@style/generalButtonStyle"
+            android:layout_weight="0"
+            android:text="@string/select_video" />
+
+        <Button
+            android:id="@+id/btn_add_video"
+            style="@style/generalButtonStyle"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="0"
+            android:text="@string/videotape" />
+    </LinearLayout>
 
 </LinearLayout>

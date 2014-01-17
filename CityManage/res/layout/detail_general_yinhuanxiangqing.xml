@@ -9,7 +9,6 @@
 	<include layout="@layout/must_input_mark"/>
     <EditText
         android:id="@+id/et_yinhuanxiangqing"
-        android:minLines="2"
         style="@style/generalEditText"
         android:hint="@string/yinhuanxiangqing" />
 

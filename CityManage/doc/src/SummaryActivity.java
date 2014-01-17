@@ -140,6 +140,7 @@ public class SummaryActivity extends Activity {
 				i.putExtra("jsonValue", js);
 				i.putExtra("category", category);//events.get(position).getCategory());//
 				startActivity(i);
+				overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out); 
 			}
 			
 		});
@@ -163,6 +164,7 @@ public class SummaryActivity extends Activity {
 				i.putExtra("jsonValue", js);
 				i.putExtra("category", category);//events.get(position).getCategory());//
 				startActivity(i);
+				overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out); 
 			}
 			
 		});
@@ -244,6 +246,7 @@ public class SummaryActivity extends Activity {
 				Intent i = new Intent(context, DetailActivity.class);
 				i.putExtra("category", category);//events.get(position).getCategory());//
 				startActivity(i);
+				overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out); 
 				
 				break;
 				

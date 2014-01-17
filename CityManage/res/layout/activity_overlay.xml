@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title_backguard_repeat"
+        android:orientation="horizontal" >
+        
+        <Button
+            android:id="@+id/id_return"
+            style="@style/generalButtonStyle"
+            android:layout_gravity="center"
+            android:text="@string/browse_list_mode" />
+<!--
+
+        <TextView 
+            android:text="@string/illegal_structure_examination"
+            android:id="@+id/id_kind_title"
+            style="@style/generalButtonStyle"
+            />
+ 
+        <Button
+            android:id="@+id/clear"
+            style="@style/generalButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dip"
+            android:layout_weight="1"
+            android:onClick="clearOverlay"
+            android:padding="10dip"
+            android:text="清除(clear)" />
+
+        <Button
+            android:id="@+id/resert"
+            style="@style/generalButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dip"
+            android:layout_weight="1"
+            android:onClick="resetOverlay"
+            android:text="重置(reset)" />
+ -->
+        <RadioGroup
+            android:id="@+id/RadioGroup"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/normal"
+                style="@style/generalCheckButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:onClick="setMapMode"
+                android:text="普通图" />
+
+            <RadioButton
+                style="@style/generalCheckButtonStyle"
+                android:id="@+id/statellite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="setMapMode"
+                android:text="卫星图" />
+        </RadioGroup>
+
+        <CheckBox
+            android:visibility="gone"
+            android:id="@+id/traffice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:onClick="setTraffic"
+            android:text="交通图" />
+    </LinearLayout>
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/bmapView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:clickable="true" />
+
+</LinearLayout>

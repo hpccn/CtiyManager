@@ -37,7 +37,7 @@
 
         <EditText
             android:id="@+id/et_updatelevel"
-            style="@style/generalEditText"
+            style="@style/generalEditTextReadonly"
             android:hint="@string/updatelevel" />
     </LinearLayout>
 

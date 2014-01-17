@@ -7,6 +7,7 @@ import java.util.Date;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.MotionEvent;
@@ -61,7 +62,7 @@ public class t_weijian extends BaseFragment implements ImageCacheFactory.OnImage
 
 
 	@Override
-	public String getTitle() {
+	public String getTitle(final Context context) {
 		return context.getResources().getString(R.string.illegal_structure_examination);
 	}
 
@@ -100,7 +101,7 @@ public class t_weijian extends BaseFragment implements ImageCacheFactory.OnImage
 
 
 	@Override
-	public String getSubTitle() {
+	public String getSubTitle(final Context context) {
 		return context.getResources().getString(R.string.illegal_structure_examination_sub_title);
 		
 	}
@@ -117,7 +118,9 @@ public class t_weijian extends BaseFragment implements ImageCacheFactory.OnImage
 		if (null == jsonData) {
 			// 位置
 			general.updateLocation(context, (EditText) rootView.findViewById(R.id.et_yinhuanaddress), content);
+			
 			initSelectChanger();
+			initNewEvent();
 		} else {
 			updateView1(rootView);
 			initSelectChanger();
@@ -125,6 +128,8 @@ public class t_weijian extends BaseFragment implements ImageCacheFactory.OnImage
 		}
 	}
 
+
+	
 	protected void setReadOnly(){
 		int []ids = {R.id.et_yinhuanxiangqing, R.id.et_villagename, R.id.et_yinhuanaddress,
 				R.id.et_villagename,
@@ -194,7 +199,7 @@ public class t_weijian extends BaseFragment implements ImageCacheFactory.OnImage
 		
 		imc = ImageCacheFactory.getInstance(context);
 		
-		if (null != content && null != content.getS_photo()){
+		if (null != content && null != content.getS_photo() && content.getS_photo().length() > 4){
 			Uri uri = Uri.parse(content.getS_photo());
 			if (null != uri && uri.getHost() != null)
 				
@@ -278,7 +283,9 @@ public class t_weijian extends BaseFragment implements ImageCacheFactory.OnImage
 	
 	protected void updateView2(View rootView){
 		if (null == jsonData) return;
-		((EditText)rootView.findViewById(R.id.et_eventid)).setText(content.getS_eventid());
+		//事件ID更改一下
+//		((EditText)rootView.findViewById(R.id.et_eventid)).setText(content.getS_eventid());
+		((EditText)rootView.findViewById(R.id.et_eventid)).setText("" + content.getId());
 		//discoverer
 		((EditText)rootView.findViewById(R.id.et_discovererlevel)).setText(content.getS_discovererlevel());
 		((EditText)rootView.findViewById(R.id.et_discoverername)).setText(content.getS_discoverername());
@@ -360,7 +367,16 @@ public class t_weijian extends BaseFragment implements ImageCacheFactory.OnImage
 	
 	private void updateData2(View rootView){
 		if (null == jsonData) return;
-		content.setS_eventid(((EditText)rootView.findViewById(R.id.et_eventid)).getText().toString());
+//		content.setS_eventid(((EditText)rootView.findViewById(R.id.et_eventid)).getText().toString());
+		String tmp = ((EditText)rootView.findViewById(R.id.et_eventid)).getText().toString();
+		if (null != tmp && tmp.length() > 0){
+			try {
+				int id = Integer.parseInt(tmp);
+				content.setId(id);
+			} catch (Exception e ){
+				
+			}
+		}
 		
 		//discoverer
 		content.setS_discovererlevel(((EditText)rootView.findViewById(R.id.et_discovererlevel)).getText().toString());
@@ -389,9 +405,170 @@ public class t_weijian extends BaseFragment implements ImageCacheFactory.OnImage
 //			rootView.findViewById(id).setOnFocusChangeListener(onFocusChangeListener);
 			rootView.findViewById(id).setOnTouchListener(onTouchListener);
 		}
+	}
+	
+	private void initNewEvent(){
+		((EditText)rootView.findViewById(R.id.et_solvestatus)).setText("未解决");
+		String []status = Configuration.getInstance().getVillageNames();
+		if (null != status && status.length > 0){
+			((EditText)rootView.findViewById(R.id.et_villagename)).setText(status[0]);
+		} 
 		
+		status = Configuration.getInstance().getNetNames();
+		if (null != status && status.length > 0){
+			((EditText)rootView.findViewById(R.id.et_netname)).setText(status[0]);
+		}
+		((EditText)rootView.findViewById(R.id.et_solvemethod)).setText("新发现");
+	}
+	
+	
+	private void onAction(int id){
+		switch (id) {
+		
+		case R.id.btn_cancel:
+			break;
+		case R.id.btn_commit:
+			break;
+			
+		case R.id.et_buildtime:
+
+			setDateTime(
+					new DateTimePickerDialog.OnDateTimeChangedListener() {
+
+						@Override
+						public void onDateTimeChanged(long millisecond) {
+							// TODO Auto-generated method stub
+							
+							content.setT_buildtime(getDateText(millisecond));
+							setViewText(R.id.et_buildtime, millisecond);
+						}
+
+					}, content.getT_buildtime());
+			break;
+		case R.id.et_solvetime:
+			setDateTime(
+					new DateTimePickerDialog.OnDateTimeChangedListener() {
+
+						@Override
+						public void onDateTimeChanged(long millisecond) {
+							// TODO Auto-generated method stub
+							content.setT_solvetime(getDateText(millisecond));
+							setViewText(R.id.et_solvetime, millisecond);
+						}
+
+					}, content.getT_solvetime());
+			break;
+		case R.id.et_tijiao:
+			setDateTime(
+					new DateTimePickerDialog.OnDateTimeChangedListener() {
+
+						@Override
+						public void onDateTimeChanged(long millisecond) {
+							// TODO Auto-generated method stub
+							content.setS_tijiao(getDateText(millisecond));
+							setViewText(R.id.et_tijiao, millisecond);
+						}
+
+					}, content.getS_tijiao());
+
+			break;
+		case R.id.et_updatetime:
+			setDateTime(
+					new DateTimePickerDialog.OnDateTimeChangedListener() {
+
+						@Override
+						public void onDateTimeChanged(long millisecond) {
+							// TODO Auto-generated method stub
+							content.setT_solvetime(getDateText(millisecond));
+							setViewText(R.id.et_updatetime, millisecond);
+						}
+
+					}, content.getT_buildtime());
+
+			break;
+		case R.id.et_solvestatus:
+		{
+			// 解决状态
+			String []status = {"未解决","已解决"};
+			general.setSingleChoiceItems( R.id.et_solvestatus, status, 0, new GeneralInformationFragment.OnChangedListener() {
+				@Override
+				public void onChanged(int id, int which, String value) {
+					// TODO Auto-generated method stub
+					((EditText)rootView.findViewById(id)).setText(value);
+				}
+			});
+		}
+			break;
+			
+		case R.id.et_villagename:
+		{
+			// 村
+			String []status = Configuration.getInstance().getVillageNames();
+			if (null == status || status.length == 0){
+//				((EditText)rootView.findViewById(R.id.et_villagename)).setText(Configuration.getInstance().getRegister().getS_villagename());
+			} else if (status.length == 1){
+				((EditText)rootView.findViewById(R.id.et_villagename)).setText(status[0]);
+			} else {
+//				{Configuration.getInstance().getRegister().getS_villagename() , "other"};
+				general.setSingleChoiceItems( R.id.et_villagename, status, 0, new GeneralInformationFragment.OnChangedListener() {
+					@Override
+					public void onChanged(int id, int which, String value) {
+						// TODO Auto-generated method stub
+						((EditText)rootView.findViewById(id)).setText(value);
+					}
+				});
+			}
+		}
+
+			break;
+		case R.id.et_netname:
+		{
+			
+			//格
+			String []status = Configuration.getInstance().getNetNames();
+//			String []status = {Configuration.getInstance().getRegister().getS_netname() , "other"};
+			if (null == status || status.length == 0){
+//				((EditText)rootView.findViewById(R.id.et_netname)).setText(Configuration.getInstance().getRegister().getS_netname());
+			} else if (status.length == 1){
+				((EditText)rootView.findViewById(R.id.et_netname)).setText(status[0]);
+			} else {
+				general.setSingleChoiceItems( R.id.et_netname, status, 0, new GeneralInformationFragment.OnChangedListener() {
+					@Override
+					public void onChanged(int id, int which, String value) {
+						// TODO Auto-generated method stub
+						((EditText)rootView.findViewById(id)).setText(value);
+					}
+				});
+			}
+		}
+
+				break;
+		case R.id.et_solvemethod:
+		{
+			// 当日新发现和拆除情况
+			String []status = {"新发现","已经拆除"};
+			general.setSingleChoiceItems( R.id.et_solvemethod, status, 0, new GeneralInformationFragment.OnChangedListener() {
+				@Override
+				public void onChanged(int id, int which, String value) {
+					// TODO Auto-generated method stub
+					((EditText)rootView.findViewById(id)).setText(value);
+				}
+			});
+			
+		}
+		break;
+		
+		case R.id.tv_video_file:
+//			showVideo();
+			
+			break;
+		default:
+
+		}
 
 	}
+	
+	
 	View.OnTouchListener onTouchListener = new View.OnTouchListener() {
 
 		@Override
@@ -399,193 +576,18 @@ public class t_weijian extends BaseFragment implements ImageCacheFactory.OnImage
 			if (event.getAction() != MotionEvent.ACTION_UP){
 				return false;
 			}
-			switch (v.getId()) {
-			case R.id.et_buildtime:
-
-				setDateTime(
-						new DateTimePickerDialog.OnDateTimeChangedListener() {
-
-							@Override
-							public void onDateTimeChanged(long millisecond) {
-								// TODO Auto-generated method stub
-								
-								content.setT_buildtime(getDateText(millisecond));
-								setViewText(R.id.et_buildtime, millisecond);
-							}
-
-						}, content.getT_buildtime());
-				break;
-			case R.id.et_solvetime:
-				setDateTime(
-						new DateTimePickerDialog.OnDateTimeChangedListener() {
-
-							@Override
-							public void onDateTimeChanged(long millisecond) {
-								// TODO Auto-generated method stub
-								content.setT_solvetime(getDateText(millisecond));
-								setViewText(R.id.et_solvetime, millisecond);
-							}
-
-						}, content.getT_solvetime());
-				break;
-			case R.id.et_tijiao:
-				setDateTime(
-						new DateTimePickerDialog.OnDateTimeChangedListener() {
-
-							@Override
-							public void onDateTimeChanged(long millisecond) {
-								// TODO Auto-generated method stub
-								content.setS_tijiao(getDateText(millisecond));
-								setViewText(R.id.et_tijiao, millisecond);
-							}
-
-						}, content.getS_tijiao());
-
-				break;
-			case R.id.et_updatetime:
-				setDateTime(
-						new DateTimePickerDialog.OnDateTimeChangedListener() {
-
-							@Override
-							public void onDateTimeChanged(long millisecond) {
-								// TODO Auto-generated method stub
-								content.setT_solvetime(getDateText(millisecond));
-								setViewText(R.id.et_updatetime, millisecond);
-							}
-
-						}, content.getT_buildtime());
-
-				break;
-			case R.id.et_solvestatus:
-			{
-				// 解决状态
-				String []status = {"未解决","已解决"};
-				general.setSingleChoiceItems( R.id.et_solvestatus, status, new GeneralInformationFragment.OnChangedListener() {
-					@Override
-					public void onChanged(int id, String value) {
-						// TODO Auto-generated method stub
-						((EditText)rootView.findViewById(id)).setText(value);
-					}
-				});
-			}
-				break;
-				
-			case R.id.et_villagename:
-			{
-				// 村
-				String []status = {Configuration.getInstance().getRegister().getS_villagename() , "other"};
-				general.setSingleChoiceItems( R.id.et_villagename, status, new GeneralInformationFragment.OnChangedListener() {
-					@Override
-					public void onChanged(int id, String value) {
-						// TODO Auto-generated method stub
-						((EditText)rootView.findViewById(id)).setText(value);
-					}
-				});
-			}
-
-				break;
-			case R.id.et_netname:
-			{
-				
-				//格
-				String []status = {Configuration.getInstance().getRegister().getS_netname() , "other"};
-				general.setSingleChoiceItems( R.id.et_netname, status, new GeneralInformationFragment.OnChangedListener() {
-					@Override
-					public void onChanged(int id, String value) {
-						// TODO Auto-generated method stub
-						((EditText)rootView.findViewById(id)).setText(value);
-					}
-				});
-			}
-
-					break;
-			case R.id.et_solvemethod:
-			{
-				// 当日新发现和拆除情况
-				String []status = {"新发现","已经拆除"};
-				general.setSingleChoiceItems( R.id.et_solvemethod, status, new GeneralInformationFragment.OnChangedListener() {
-					@Override
-					public void onChanged(int id, String value) {
-						// TODO Auto-generated method stub
-						((EditText)rootView.findViewById(id)).setText(value);
-					}
-				});
-				
-			}
-			break;
-			default:
-
-			}
-
+			onAction(v.getId());
 			return true;
 		}
 		
 	};
 
+
+	
 	final protected View.OnClickListener onClickListener = new View.OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			switch (v.getId()) {
-			case R.id.btn_cancel:
-				break;
-			case R.id.btn_commit:
-				break;
-				
-			case R.id.et_buildtime:
-				
-				setDateTime(new DateTimePickerDialog.OnDateTimeChangedListener(){
-
-					@Override
-					public void onDateTimeChanged(long millisecond) {
-						// TODO Auto-generated method stub
-						content.setT_buildtime(getDateText(millisecond));
-						setViewText(R.id.et_buildtime, millisecond);
-					}
-					
-				}, content.getT_buildtime());
-				break;
-			case R.id.et_solvetime:
-				setDateTime(new DateTimePickerDialog.OnDateTimeChangedListener(){
-
-					@Override
-					public void onDateTimeChanged(long millisecond) {
-						// TODO Auto-generated method stub
-						content.setT_solvetime(getDateText(millisecond));
-						setViewText(R.id.et_solvetime, millisecond);
-					}
-					
-				}, content.getT_solvetime());
-				break;
-			case R.id.et_tijiao:
-				setDateTime(new DateTimePickerDialog.OnDateTimeChangedListener(){
-
-					@Override
-					public void onDateTimeChanged(long millisecond) {
-						// TODO Auto-generated method stub
-						content.setS_tijiao(getDateText(millisecond));
-						setViewText(R.id.et_tijiao, millisecond);
-					}
-					
-				}, content.getS_tijiao());
-				
-				break;
-			case R.id.et_updatetime:
-				setDateTime(new DateTimePickerDialog.OnDateTimeChangedListener(){
-
-					@Override
-					public void onDateTimeChanged(long millisecond) {
-						// TODO Auto-generated method stub
-						content.setT_solvetime(getDateText(millisecond));
-						setViewText(R.id.et_updatetime, millisecond);
-					}
-					
-				}, content.getT_buildtime());
-
-				break;
-			
-			default:
-				
-			}
+			onAction(v.getId());
 		}
 	};
 	

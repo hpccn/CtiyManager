@@ -15,8 +15,8 @@ import android.view.ViewGroup;
 public abstract class BaseFragment {
 	public static final String ARG_SECTION_NUMBER = "section_number";
 	
-	public abstract String getTitle();
-	public abstract String getSubTitle();
+	public abstract String getTitle(final Context context);
+	public abstract String getSubTitle(final Context context);
 	public abstract View getView(final Context context, ViewGroup parent);
 	public abstract void setJsonData(final String jsonData);
 	public abstract BaseEvent getBaseContent();

@@ -19,7 +19,7 @@ import cn.city.manager.view.DateTimePickerDialog;
 public class GeneralInformationFragment {
 	
 	public interface OnChangedListener{
-		public void onChanged(int key, String value);
+		public void onChanged(int id, int which, String whichValue);
 	}
 	public static final int NONE = 0;
 
@@ -48,17 +48,17 @@ public class GeneralInformationFragment {
 		TextView tvMainTitle = (TextView) rootView.findViewById(R.id.id_main_title);
 		TextView tvSubTitle = (TextView) rootView.findViewById(R.id.id_sub_title);
 		if (null != tvMainTitle)
-			tvMainTitle.setText(fragment.getTitle());
+			tvMainTitle.setText(fragment.getTitle(context));
 		if (null != tvSubTitle)
-			tvSubTitle.setText(fragment.getSubTitle());
+			tvSubTitle.setText(fragment.getSubTitle(context));
 
 	}
 
 	public void updatePhoto(final Context context, final View rootView, final BaseFragment fragment){
 		TextView tvMainTitle = (TextView) rootView.findViewById(R.id.id_main_title);
 		TextView tvSubTitle = (TextView) rootView.findViewById(R.id.id_sub_title);
-		tvMainTitle.setText(fragment.getTitle());
-		tvSubTitle.setText(fragment.getSubTitle());
+		tvMainTitle.setText(fragment.getTitle(context));
+		tvSubTitle.setText(fragment.getSubTitle(context));
 
 	}
 	
@@ -141,17 +141,17 @@ public class GeneralInformationFragment {
 		}
 	};
 
-	public void setSingleChoiceItems(final int id, final String []items, final OnChangedListener listener) {
+	public void setSingleChoiceItems(final int id, final String []items, int checkedItem, final OnChangedListener listener) {
 	    AlertDialog.Builder builder = new AlertDialog.Builder(context);
 	    builder.setIcon(R.drawable.ic_logo);
 	    builder.setCancelable(true);
 	    
-	    builder.setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener(){
+	    builder.setSingleChoiceItems(items, checkedItem, new DialogInterface.OnClickListener(){
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 
-				listener.onChanged(id, items[which]);
+				listener.onChanged(id, which, items[which]);
 				dialog.dismiss();
 	    }});
 	    

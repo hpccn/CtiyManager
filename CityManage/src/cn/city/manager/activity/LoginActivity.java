@@ -113,7 +113,7 @@ public class LoginActivity extends Activity {
 //				// TODO Auto-generated catch block
 //				e.printStackTrace();
 //			}
-			if (null == string || string.length() < 10 || null == configuration.getRegister()) {
+			if (null == string || string.length() < 10) {// || null == configuration.getRegister()
 				configuration.setUserJson(string);
 //				if (userName.getText().toString().equals("010101") &&  password.getText().toString().equals("123456")){
 //					handler.sendEmptyMessage(100);
@@ -204,6 +204,7 @@ public class LoginActivity extends Activity {
 
 			startActivity(new Intent(this, EntryActivity.class));
 			finish();
+			overridePendingTransition(R.anim.zoom_in, R.anim.zoom_in); 
 		}
 
 		password.startAnimation(shake);
@@ -241,10 +242,12 @@ public class LoginActivity extends Activity {
 
 		}
 		configuration.store(this);
+		configuration.setUsername(userName.getText().toString());
+		configuration.setPassword(password.getText().toString());
 
 		startActivity(new Intent(this, EntryActivity.class));
 		finish();
-
+		overridePendingTransition(R.anim.zoom_in, R.anim.zoom_in); 
 	}
 	
 

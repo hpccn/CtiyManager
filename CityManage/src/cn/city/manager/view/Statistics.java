@@ -15,39 +15,88 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 
 import android.content.Context;
-import android.os.Handler;
 import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ZoomButtonsController;
+import cn.city.manager.Configuration;
+import cn.city.manager.Constants;
 import cn.city.manager.R;
+import cn.city.manager.fragment.GeneralInformationFragment;
 import cn.city.manager.model.Page;
 import cn.hpc.common.HttpStreamThread;
 
 public class Statistics implements Page{
-	private Context context;
-	private View view;
+	protected Context context;
+	protected View view;
 //	private Button btnCategory;
 	protected WebView webView;
 	protected String url;
 	
 //	private String selectBrowseCategoryItems[] = {"常驻人口", "常驻户数", "流动人口总数", "出租屋总户数"};
 //	private int selectBrowseCategory;
+	protected int scaleInPercent;
 	public Statistics(Context context, String url){
 		this.context = context;
 		this.url = url;
-		init(url);
+//		init(url);
 	}
 	
-	public View getView(){
+	protected String []selectItems;
+	protected String selectUrl;
+	
+	public void setSelect(String []selectItems, String selectUrl){
+		this.selectItems = selectItems;
+		this.selectUrl = selectUrl;
+	}
+	
+	protected Button selectButton;
+	
+	public View getView(int scaleInPercent){
 		if (null == view)
 			view = View.inflate(context, R.layout.statistics_main_frame, null);
 		
+		if (null != selectItems){
+			selectButton = (Button) view.findViewById(R.id.statistics_category);
+			selectButton.setVisibility(View.VISIBLE);
+			if (selectItems.length > 0){
+				selectButton.setText(selectItems[0]);
+			}
+			if (selectItems.length < 2){
+				selectButton.setCompoundDrawables(null, null, null, null);
+			}
+			if (selectItems.length > 1 && null != selectUrl) {
+				selectButton.setOnClickListener(new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						GeneralInformationFragment general = new GeneralInformationFragment(context);
+	//					String []status = {"未解决","已解决"};
+						general.setSingleChoiceItems( R.id.et_solvestatus, selectItems, 0, new GeneralInformationFragment.OnChangedListener() {
+							@Override
+							public void onChanged(int id, int which, String value) {
+								// TODO Auto-generated method stub
+	//							((EditText)view.findViewById(id)).setText(value);
+	//							 Constants.obtainNetbaseinfoZhenyuUrl(value);
+								url = String.format(selectUrl, Configuration.getInstance().getUsername(), value);
+								loadUrl(url);
+								selectButton.setText(value);
+							}
+						});
+	
+					}
+				});
+			}
+		}
+		
 		webView = (WebView) view.findViewById(R.id.main_webview);
-		webView.setInitialScale(50);
+		
+		webView.setInitialScale(scaleInPercent);
         WebSettings webSettings = webView.getSettings();       
         webSettings.setJavaScriptEnabled(true);       
         webSettings.setDefaultZoom(WebSettings.ZoomDensity.CLOSE);
@@ -86,6 +135,7 @@ public class Statistics implements Page{
 		
 //		btnCategory = (Button) view.findViewById(R.id.statistics_category);
 //		btnCategory.setOnClickListener(onClickListener);
+		loadUrl(url);
 		return view;
 	}
 	
@@ -147,25 +197,46 @@ WebView代码
 		//String url4load = "登录域名下你要访问的地址";
 		CookieSyncManager.createInstance(context);
 		CookieManager cookieManager = CookieManager.getInstance();
-		Cookie sessionCookie = HttpStreamThread.sessionCookie;//this.sessionCookie;
-		if (sessionCookie != null) {
-			String cookieString = sessionCookie.getName() + "=" + sessionCookie.getValue() + "; domain=" + sessionCookie.getDomain();
-			cookieManager.setCookie(url4load, cookieString);
-			CookieSyncManager.getInstance().sync();
-		}
+//		Cookie sessionCookie = HttpStreamThread.sessionCookie;//this.sessionCookie;
+//		if (sessionCookie != null) {
+//			String cookieString = sessionCookie.getName() + "=" + sessionCookie.getValue() + "; domain=" + sessionCookie.getDomain();
+//			cookieManager.setCookie(url4load, cookieString);
+//			CookieSyncManager.getInstance().sync();
+//		}
 
+		CookieStore cookieStore = HttpStreamThread.cookieStore;
+		if (null != cookieStore){
+			List<Cookie> cookies = cookieStore.getCookies();
+			StringBuilder sb = new StringBuilder();
+			if (null  != cookies){
+				for (int i = 0; i < cookies.size(); i++) {
+                //这里是读取Cookie['PHPSESSID']的值存在静态变量中，保证每次都是同一个值
+//                if (cookie_key.equals(cookies.get(i).getName())) {
+//                	cookie_value = cookies.get(i).getValue();
+//                	sessionCookie = cookies.get(i);
+//                }
+                sb.append(cookies.get(i).getName() + "=" + cookies.get(i).getValue() + "; domain=" + cookies.get(i).getDomain() + " ");
+				}
+			}
+			
+			cookieManager.setCookie(url4load, sb.toString());
+			CookieSyncManager.getInstance().sync();
+
+		}
+		
 	}
 	private void init(String url){
 
 		
-		getView();
-		initData(url);
+//		getView(100);
+		loadUrl(url);
 	}
-	final private Handler mHandler = new Handler(); 
+//	final private Handler mHandler = new Handler(); 
 	
-	protected void initData(String url){
-        webView.loadUrl(url);     
+	protected void loadUrl(String url){
         session(url);
+
+        webView.loadUrl(url);     
 		
 //        webView.loadUrl(Constants.weijian_tongji);     
 //        session(Constants.weijian_tongji);

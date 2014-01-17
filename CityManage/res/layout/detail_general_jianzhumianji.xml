@@ -13,6 +13,8 @@
         android:id="@+id/et_jianzhumianji"
         style="@style/generalEditText"
         android:ems="10"
-        android:hint="@string/jianzhumianji" />
+        android:text="0"
+        android:hint="@string/jianzhumianji"
+        android:inputType="numberDecimal" />
 
 </LinearLayout>

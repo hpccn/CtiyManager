@@ -34,7 +34,7 @@ public class t_netbaseinfo extends BaseFragment {
 
 
 	@Override
-	public String getTitle() {
+	public String getTitle(final Context context) {
 		return context.getResources().getString(R.string.village_basic_information_title);
 	}
 
@@ -72,7 +72,7 @@ public class t_netbaseinfo extends BaseFragment {
 
 
 	@Override
-	public String getSubTitle() {
+	public String getSubTitle(final Context context) {
 		return context.getResources().getString(R.string.village_basic_information_sub_title);
 	}
 

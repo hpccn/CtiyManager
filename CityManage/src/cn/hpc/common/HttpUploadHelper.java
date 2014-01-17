@@ -90,12 +90,16 @@ public class HttpUploadHelper {
 
 		try {
 			// 用户名
-			entity.addPart("s_netid", new StringBody(
-					 Configuration.getInstance().getRegister().getS_netid(),
+			entity.addPart("id", new StringBody(
+					Configuration.getInstance().getUsername(),
 					Charset.forName("utf-8")));
-			entity.addPart("s_yearmonth", new StringBody(
-					getDateText(System.currentTimeMillis()),
-					Charset.forName("utf-8")));
+
+//			entity.addPart("s_netid", new StringBody(
+//					 Configuration.getInstance().getUsername(),// .getRegister().getS_netid(),
+//					Charset.forName("utf-8")));
+//			entity.addPart("s_yearmonth", new StringBody(
+//					getDateText(System.currentTimeMillis()),
+//					Charset.forName("utf-8")));
 			entity.addPart("kind", new StringBody(
 					baseEvent.getCategory(),
 					Charset.forName("utf-8")));

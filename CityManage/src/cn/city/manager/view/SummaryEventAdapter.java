@@ -4,20 +4,26 @@ import java.util.List;
 
 import cn.city.manager.R;
 import cn.city.manager.fragment.event.BaseEvent;
+import cn.hpc.common.cache.ImageCacheFactory;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class SummaryEventAdapter extends BaseAdapter {
 
+	
+	private ImageCacheFactory imc;
 	final private Context context;
 	final private List <BaseEvent> list;
 	public SummaryEventAdapter(Context context, List <BaseEvent> list){
 		this.context = context;
 		this.list = list;
+		imc  = ImageCacheFactory.getInstance(context);
 	}
 	@Override
 	public int getCount() {
@@ -43,6 +49,21 @@ public class SummaryEventAdapter extends BaseAdapter {
 		if (null == convertView) {
 			convertView = View.inflate(context, R.layout.summary_listitem, null);
 		}
+		
+		String image = list.get(position).getS_photo();
+		ImageView imageView =  (ImageView) convertView.findViewById(R.id.id_summary_item_cover);
+		
+		if (null != image) {
+			try {
+				imageView.setImageDrawable(imc.getImage(Uri.parse(image), 72, 72));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			imageView.setImageResource(R.drawable.ic_item_gray);
+		}
+		
 		TextView tv = null;
 		tv = (TextView) convertView.findViewById(R.id.id_summary_item_hidden_danger);
 		TextView tvTitle = (TextView) convertView.findViewById(R.id.id_summary_item_hidden_danger_title);
@@ -64,7 +85,7 @@ public class SummaryEventAdapter extends BaseAdapter {
 		tv.setText(list.get(position).getVillage());
 		
 		tv = (TextView) convertView.findViewById(R.id.id_summary_item_cell);
-		tv.setText(list.get(position).getCell());
+		tv.setText(list.get(position).getNetGridId());
 		return convertView;
 	}
 

@@ -9,7 +9,6 @@
 
     <EditText
         android:id="@+id/et_result"
-        android:minLines="2"
         style="@style/generalEditText"
         android:ems="10"
         android:hint="@string/result" />

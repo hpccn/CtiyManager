@@ -477,9 +477,12 @@ public class ImageCacheFactory extends DiskCache<String, Bitmap> {
 			if (DEBUG) {
 				Log.d(TAG, "OnImageLoadListener");
 			}
-
-			for (final OnImageLoadListener listener : mImageLoadListeners) {
-				listener.onImageLoaded(result.id, result.image, result.drawable);
+			try {
+				for (final OnImageLoadListener listener : mImageLoadListeners) {
+					listener.onImageLoaded(result.id, result.image, result.drawable);
+				}
+			} catch (Exception e ){
+				
 			}
 		};
 	}

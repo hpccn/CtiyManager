@@ -34,11 +34,12 @@ public abstract class HttpStreamThread extends Thread {
 
 	protected DefaultHttpClient httpClient = null;
 
-	public static List<Cookie> cookies = null;
-	public final static String cookie_key = "SESS273b99b6acbccb3052ab6aa8f50fc105";
-	public static String cookie_value = null;
+	public static CookieStore cookieStore = null;
+//	public static List<Cookie> cookies = null;
+//	public final static String cookie_key = "login_status_android";//"SESS273b99b6acbccb3052ab6aa8f50fc105";
+//	public static String cookie_value = null;
 	
-	public static Cookie sessionCookie = null;
+//	public static Cookie sessionCookie = null;
 	protected OnStringLoadListener listener;
 	public HttpStreamThread(Context context, String url, OnStringLoadListener listener) {
 		this.context = context;
@@ -77,8 +78,11 @@ public abstract class HttpStreamThread extends Thread {
 
 			HttpPost httppost = new HttpPost(url);
 			setHttpPostParams(httppost);
-			if(null != cookie_value) {
-				httppost.addHeader("Cookie", cookie_key + "=" + cookie_value);
+//			if(null != cookie_value) {
+//				httppost.addHeader("Cookie", cookie_key + "=" + cookie_value);
+//			}
+			if (null != cookieStore) {
+				httpClient.setCookieStore(cookieStore);
 			}
 			return httpClient.execute(httppost);
 
@@ -104,19 +108,23 @@ public abstract class HttpStreamThread extends Thread {
 					break;
 				case HttpStatus.SC_OK:
 					
-					if (null == cookies) {
-						 CookieStore mCookieStore = httpClient.getCookieStore();
-			             cookies = mCookieStore.getCookies();
+					if (null == cookieStore){
+						cookieStore = httpClient.getCookieStore();
 					}
-					for (int i = 0; i < cookies.size(); i++) {
-	                    //这里是读取Cookie['PHPSESSID']的值存在静态变量中，保证每次都是同一个值
-	                    if (cookie_key.equals(cookies.get(i).getName())) {
-	                    	cookie_value = cookies.get(i).getValue();
-	                    	sessionCookie = cookies.get(i);
-	                        break;
-	                    }
-
-	                }
+//					if (null == cookies) {
+//						
+//						 CookieStore mCookieStore = httpClient.getCookieStore();
+//			             cookies = mCookieStore.getCookies();
+//					}
+//					for (int i = 0; i < cookies.size(); i++) {
+//	                    //这里是读取Cookie['PHPSESSID']的值存在静态变量中，保证每次都是同一个值
+//	                    if (cookie_key.equals(cookies.get(i).getName())) {
+//	                    	cookie_value = cookies.get(i).getValue();
+//	                    	sessionCookie = cookies.get(i);
+//	                        break;
+//	                    }
+//
+//	                }
 					InputStream is = hr.getEntity().getContent();
 					boolean bRes = retrieveInputStream(is);
 					is.close();

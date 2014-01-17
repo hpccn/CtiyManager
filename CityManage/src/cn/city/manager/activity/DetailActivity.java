@@ -7,6 +7,8 @@ import java.util.Date;
 
 import org.apache.http.HttpStatus;
 
+import com.baidu.platform.comapi.basestruct.GeoPoint;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -28,6 +30,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -39,9 +42,12 @@ import cn.city.manager.fragment.BaseFragment;
 import cn.city.manager.fragment.t_netbaseinfoGrid;
 import cn.city.manager.fragment.t_netbaseinfo;
 import cn.city.manager.fragment.event.BaseEvent;
+import cn.city.manager.location.Location;
+import cn.city.manager.location.LocationListener;
 import cn.city.manager.view.DateTimeChanger;
 import cn.city.manager.view.DateTimePickerDialog;
 import cn.city.manager.view.ViewSingletonFactory;
+import cn.hpc.common.BaiduMapHelper;
 import cn.hpc.common.HttpUploadHelper;
 
 public class DetailActivity extends Activity {
@@ -67,10 +73,10 @@ public class DetailActivity extends Activity {
 	protected BaseEvent baseContent;
 	protected BaseFragment fragment;
 	protected View mainView;
-	// protected TextView tvMainTitle, tvSubTitle;
+	protected TextView tvTitle;//tvMainTitle, tvSubTitle;
 	protected LinearLayout detailMainContainer;
 	protected TextView tvVideoFile;
-	protected Context context;
+	protected Activity context;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -79,7 +85,7 @@ public class DetailActivity extends Activity {
 		Log.i("", "" + System.currentTimeMillis());
 		mainView = View.inflate(this, R.layout.detail_main, null);
 		setContentView(mainView);// (R.layout.detail_main);
-
+		tvTitle = (TextView) mainView.findViewById(R.id.id_titlebar_title);
 		// tvMainTitle = (TextView) mainView.findViewById(R.id.id_main_title);
 		// tvSubTitle = (TextView) mainView.findViewById(R.id.id_sub_title);
 		detailMainContainer = (LinearLayout) mainView
@@ -159,6 +165,7 @@ public class DetailActivity extends Activity {
 		try {
 			Class<?> userClz = Class.forName(pkg + "." + category);
 			fragment = (BaseFragment) userClz.newInstance();
+			tvTitle.setText(fragment.getTitle(context));
 			// structureView = fragment.getView(context, parent);
 			// fragment = (BaseFragment) ViewSingletonFactory.getInstance()
 			// .getFragment(category).newInstance();
@@ -194,7 +201,7 @@ public class DetailActivity extends Activity {
 				e.printStackTrace();
 			}
 		}
-		this.setTitle(fragment.getTitle());
+		this.setTitle(fragment.getTitle(context));
 
 		baseContent = fragment.getBaseContent();
 //		if (null == baseContent)
@@ -235,7 +242,12 @@ public class DetailActivity extends Activity {
 		tvVideoFile  = (TextView) findViewById(R.id.tv_video_file);
 		int []ids = {R.id.btn_commit, R.id.btn_cancel,
 				R.id.btn_add_picture, R.id.btn_add_video, 
-				R.id.btn_select_picture, R.id.btn_select_video };
+				R.id.btn_select_picture, R.id.btn_select_video,
+				R.id.tv_video_file, 
+				R.id.id_browse_mode};
+		Button btn = (Button) this.findViewById(R.id.id_browse_mode);
+		btn.setVisibility(View.VISIBLE);
+		btn.setText("地图导航");
 		for (int id : ids){
 			findViewById(id).setOnClickListener(onClickListener);
 		}
@@ -487,14 +499,71 @@ public class DetailActivity extends Activity {
 				startActivityForResult(intent, VIDEO_CAPTURE);
 			}
 				break;
-
+			case R.id.tv_video_file:
+				showVideo();
+				break;
+				
+			case R.id.id_browse_mode:
+				startNavi();
+				break;
 			default:
 			}
 
 		}
 	};
 	
+	private boolean isZero(double d){
+		if (d > -0.01 && d < 0.01) return true;
+		return false;
+	}
+	private void startNavi(){
+		
+		if (isZero(baseContent.getD_latitude()) || isZero(baseContent.getD_longitude())){
+			ViewSingletonFactory.getInstance().showProcessDialog(context, null, "位置信息无效,为法为您导航");
+			
+		}
+		
+		ViewSingletonFactory.getInstance().showProcessDialog(context, null, "准备导航数据 ...");
+		Location location = new Location(context);
+		location.asyncLoc(new LocationListener(){
+
+			@Override
+			public void onLocation(double latitude, double longitude,
+					String address) {
+				ViewSingletonFactory.getInstance().hideProcessDialog();
+				if (address.contains("error")) return;
+
+				GeoPoint from = BaiduMapHelper.createGeoPoint(latitude, longitude);
+				GeoPoint to = BaiduMapHelper.createGeoPoint(baseContent.getD_latitude(), baseContent.getD_longitude());
+				BaiduMapHelper.startNavi(context, from, to);
+			}
+			
+		});		
+	}
 	
+	private void showVideo(){
+		
+		String video = tvVideoFile.getText().toString();
+		if (null != video && video.length() > 1){
+			Uri uri = null;
+			if (video.startsWith("/")){
+				uri = Uri.parse("file://" + video);
+			} else {
+				uri = Uri.parse(video);
+			}
+			if (null != uri){
+				try {
+					Intent i = new Intent(Intent.ACTION_VIEW);
+					i.setData(uri);
+					i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					context.startActivity(i);
+				} catch (Exception e){
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
 	AlertDialog alertDialog;
 	
 

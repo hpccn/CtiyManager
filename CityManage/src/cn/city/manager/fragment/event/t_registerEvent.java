@@ -46,7 +46,7 @@ public class t_registerEvent extends BaseEvent {
 	}
 
 	@Override
-	public String getCell() {
+	public String getNetGridId() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -216,6 +216,30 @@ public class t_registerEvent extends BaseEvent {
 	public String getSortValue() {
 		// TODO Auto-generated method stub
 		return s_netid;
+	}
+
+	@Override
+	public String getVillageId() {
+		// TODO Auto-generated method stub
+		return s_villageid;
+	}
+
+	@Override
+	public String getYearMonth() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public double getD_latitude() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double getD_longitude() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

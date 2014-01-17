@@ -10,7 +10,6 @@
     <EditText
         android:id="@+id/et_remark"
         style="@style/generalEditText"
-        android:minLines="2"
         android:hint="@string/remark" />
 
 </LinearLayout>

@@ -2,23 +2,59 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/main_backguard_repeat"
     android:orientation="vertical" >
-<!-- android:background="@drawable/main_backguard_repeat" 
+
+    <!--
+     android:background="@drawable/main_backguard_repeat" 
 
     <TextView
         android:id="@+id/main_title"
         style="@style/mainTitle"
         android:text="更多功能,"
         android:textColor="@color/title_text" />
--->
+    -->
 
     <Button
-        android:id="@+id/btn_upgrade"
+        android:layout_margin="10dp"
+        android:id="@+id/btn_cancel_auto_login"
+        style="@style/generalButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/btn_default_holo_light"
+        android:gravity="center"
+        android:text="@string/cancel_auto_login" />
+
+    <Button
+        android:layout_margin="10dp"
+        android:id="@+id/btn_upgrade"
+        style="@style/generalButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:gravity="center"
         android:text="@string/check_upgrade" />
+    
+    <Button
+        android:visibility="gone"
+        android:layout_margin="10dp"
+        android:id="@+id/btn_map_navigation"
+        style="@style/generalButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/map_navigation" />
+    
+    <Button
+         android:visibility="gone"
+        android:layout_margin="10dp"
+        android:id="@+id/btn_baidu_navigation"
+        style="@style/generalButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/baidu_navigation" />
+    
+    
 </LinearLayout>

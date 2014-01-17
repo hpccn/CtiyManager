@@ -19,15 +19,41 @@
     <EditText
         android:id="@+id/et_titlebar_search"
         style="@style/generalEditText"
-        android:minWidth="100sp"
-        android:singleLine="true"
         android:layout_width="100sp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:hint="@string/search"
+        android:minWidth="100sp"
+        android:singleLine="true"
         android:textColor="@color/titlebar_text"
         android:textSize="@dimen/main_title_text_size2"
         android:visibility="invisible" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true" >
+        <Button
+            android:id="@+id/id_reload"
+            android:visibility="gone"
+            style="@style/generalButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           
+            android:layout_centerVertical="true"
+            android:text="@string/reload" />
+        
+        <Button
+            android:visibility="gone"
+            android:id="@+id/id_browse_mode"
+            style="@style/generalButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           
+            android:layout_centerVertical="true"
+            android:text="@string/browse_map_mode" />
+    </LinearLayout>
 
 </RelativeLayout>

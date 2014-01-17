@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.json.JSONException;
@@ -17,6 +18,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
@@ -25,8 +27,10 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import cn.city.manager.Configuration;
 import cn.city.manager.Constants;
 import cn.city.manager.R;
+import cn.city.manager.fragment.GeneralInformationFragment;
 import cn.city.manager.fragment.t_netbaseinfo;
 import cn.city.manager.fragment.t_netbaseinfoGrid;
 import cn.city.manager.fragment.event.BaseEvent;
@@ -49,11 +53,15 @@ public abstract class BaseBrowseActivity extends Activity {
 	protected int selectBrowseCategory, selectBrowseOrder;
 	protected Button btnCategory, btnOrder;
 	protected FrameLayout mainFrameLayout;
-	protected Page statistics, more, townMap;
+	protected Page more;
+	protected Statistics statistics, townMap;
 
-	protected View rootView;
+	protected View rootView, viewBrowseMode, viewReload;
 	protected ListView listView;
 	protected BaseAdapter adapter;
+	
+	protected GeneralInformationFragment general;// = new GeneralInformationFragment(context);
+	protected String currentUrl;
 	@Override
 	protected void onDestroy() {
 		overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
@@ -73,11 +81,13 @@ public abstract class BaseBrowseActivity extends Activity {
 
 		title = this.getIntent().getStringExtra("title");
 		context = this;
+		general = new GeneralInformationFragment(context);
 		try {
 //			init(this);
 			rootView  = obtainView();
 			setContentView(rootView);
-			events = loadEvents();
+//			events = loadEvents();
+			loadEvents();
 		} catch (Exception e) {
 			e.printStackTrace();
 			this.finishActivity(1000);
@@ -90,6 +100,7 @@ public abstract class BaseBrowseActivity extends Activity {
 
 //		if (null == events) return;
 		updateView();
+//		EventSingletonFactory.getInstance().cachePhoto(context, events);
 //		initToolBar();
 //		updateClickListent();
 
@@ -100,7 +111,7 @@ public abstract class BaseBrowseActivity extends Activity {
 	protected abstract void updateClickListent();
 
 	protected abstract void onSelectDateView(int select);
-	
+	protected abstract void invalidateEvent();
 	protected abstract List <BaseEvent> loadEvents() throws Exception;
 	
 	protected List <BaseEvent> events;
@@ -170,6 +181,7 @@ public abstract class BaseBrowseActivity extends Activity {
 				i.putExtra("jsonValue", js);
 				i.putExtra("category", category);//events.get(position).getCategory());//
 				startActivity(i);
+				overridePendingTransition(R.anim.zoom_in, R.anim.zoom_in); 
 			}
 			
 		});
@@ -193,6 +205,7 @@ public abstract class BaseBrowseActivity extends Activity {
 				i.putExtra("jsonValue", js);
 				i.putExtra("category", category);//events.get(position).getCategory());//
 				startActivity(i);
+				overridePendingTransition(R.anim.zoom_in, R.anim.zoom_in); 
 			}
 			
 		});
@@ -216,7 +229,8 @@ public abstract class BaseBrowseActivity extends Activity {
 //		for (int id : ids) {
 //			this.findViewById(id).setOnClickListener(onClickListener);
 //		}
-		
+		viewReload = this.findViewById(R.id.id_reload);
+		viewBrowseMode = this.findViewById(R.id.id_browse_mode);
 		btnCategory = (Button) this.findViewById(R.id.id_select_browse_category);
 		btnOrder = (Button) this.findViewById(R.id.id_select_browse_order);
 		//分类浏览
@@ -231,9 +245,9 @@ public abstract class BaseBrowseActivity extends Activity {
 		};
 		selectBrowseCategoryItems = items;
 		String OrderItems[]  = {
-				context.getResources().getString(R.string.select_browse_order_time_forward),
-				context.getResources().getString(R.string.select_browse_order_time_reversed)
-
+//				context.getResources().getString(R.string.select_browse_order_time_forward),
+//				context.getResources().getString(R.string.select_browse_order_time_reversed)
+				"按时间", "按村庄"
 		};
 		selectBrowseOrderItems = OrderItems;
 		selectBrowseCategory = 2;
@@ -242,14 +256,24 @@ public abstract class BaseBrowseActivity extends Activity {
 			btnCategory.setText(selectBrowseCategoryItems[selectBrowseCategory]);
 		// 初始化统计类别
 		if (category.equals(t_netbaseinfoGrid.class.getSimpleName())){
-			statistics = new Statistics(this, Constants.wangge_tongji);
-			townMap = new Statistics(this, Constants.wangge_zhenyutu);
+			statistics = new Statistics(this, Constants.obtainNetbaseinfoTongjiUrl(Configuration.getInstance().getUsername(), ""));
+			statistics.setSelect(Constants.netbaseinfo_zhenyutu, Constants.wangge_tongji);
+			
+			townMap = new Statistics(this, Constants.obtainNetbaseinfoZhenyuUrl(Configuration.getInstance().getUsername(), ""));
+			townMap.setSelect(Constants.netbaseinfo_zhenyutu, Constants.wangge_zhenyutu);
 		} else if (category.equals(t_netbaseinfo.class.getSimpleName())){
-			statistics = new Statistics(this, Constants.wangge_tongji);
-			townMap = new Statistics(this, Constants.wangge_zhenyutu);
+			statistics = new Statistics(this, Constants.obtainNetbaseinfoTongjiUrl(Configuration.getInstance().getUsername(), ""));
+			statistics.setSelect(Constants.netbaseinfo_zhenyutu, Constants.wangge_tongji);
+			
+			townMap = new Statistics(this, Constants.obtainNetbaseinfoZhenyuUrl(Configuration.getInstance().getUsername(), ""));
+			townMap.setSelect(Constants.netbaseinfo_zhenyutu, Constants.wangge_zhenyutu);
 		}else {
-			statistics = new Statistics(this, Constants.weijian_tongji);
-			townMap = new Statistics(this, Constants.weijian_zhenyutu);
+			statistics = new Statistics(this, Constants.obtainWeijianTongjiUrl(Configuration.getInstance().getUsername()));
+			String[] tj = {"本月各村情况统计图"};
+			statistics.setSelect(tj , null);
+			townMap = new Statistics(this, Constants.obtainWeijianZhenyutuUrl(Configuration.getInstance().getUsername()));
+			String[] zy = {"本月各村情况镇域图"};
+			townMap.setSelect(zy , null);
 		}
 //		statistics = new Statistics(this);
 		more = new More(this);
@@ -269,25 +293,36 @@ public abstract class BaseBrowseActivity extends Activity {
 				break;
 			case R.id.btn_statistics:
 				mainFrameLayout.removeAllViews();
-				viewChild = statistics.getView();//View.inflate(context, R.layout.statistics_main_frame, null);
+//				WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+//
+//				int width = wm.getDefaultDisplay().getWidth();//屏幕宽度
+				
+				viewChild = statistics.getView(mainFrameLayout.getWidth() * 100 / Constants.tongjitu_width);//View.inflate(context, R.layout.statistics_main_frame, null);
 				mainFrameLayout.addView(viewChild);
+				
+				viewBrowseMode.setVisibility(View.GONE);
+				viewReload.setVisibility(View.GONE);
 				break;
 			case R.id.btn_area:
 				mainFrameLayout.removeAllViews();
-				viewChild = townMap.getView();//View.inflate(context, R.layout.more_main_frame, null);
+				viewChild = townMap.getView(mainFrameLayout.getWidth() * 100 / Constants.zhenyutu_width);//View.inflate(context, R.layout.more_main_frame, null);
 				mainFrameLayout.addView(viewChild);
+				viewBrowseMode.setVisibility(View.GONE);
+				viewReload.setVisibility(View.GONE);
 				break;
 			case R.id.btn_more:
 				mainFrameLayout.removeAllViews();
-				viewChild = more.getView();//View.inflate(context, R.layout.more_main_frame, null);
+				viewChild = more.getView(100);//View.inflate(context, R.layout.more_main_frame, null);
 				mainFrameLayout.addView(viewChild);
+				viewBrowseMode.setVisibility(View.GONE);
+				viewReload.setVisibility(View.GONE);
 				break;
 
 			case R.id.id_add_event:
 				Intent i = new Intent(context, DetailActivity.class);
 				i.putExtra("category", category);//events.get(position).getCategory());//
 				startActivity(i);
-				
+				overridePendingTransition(R.anim.zoom_in, R.anim.zoom_in); 
 				break;
 				
 			case R.id.id_select_browse_category:
@@ -297,7 +332,15 @@ public abstract class BaseBrowseActivity extends Activity {
 			case R.id.id_select_browse_order:
 				showSelectOrder();
 				break;
+			case R.id.id_browse_mode:{
+				Intent intent = new Intent();
+				intent.setClass(context, EventMapOverlay.class);
+				context.startActivity(intent);
+			}
+			case R.id.id_reload:
+				invalidateEvent();
 
+				break;
 			default:
 			}
 			
@@ -334,32 +377,102 @@ public abstract class BaseBrowseActivity extends Activity {
 	    AlertDialog ad = builder.create();  
 		ad.show();
 	}
-	private void showSelectOrder(){
-	    AlertDialog.Builder builder = new AlertDialog.Builder(context);
-	    builder.setIcon(R.drawable.ic_logo);
-	    builder.setTitle("时间排顺");
-	    builder.setCancelable(true);
-	    
-	    builder.setSingleChoiceItems(selectBrowseOrderItems, selectBrowseOrder, new DialogInterface.OnClickListener(){
+	
+	final private Comparator<BaseEvent> comparatorDate_NetGridId = new Comparator<BaseEvent>(){
 
+		@Override
+		public int compare(BaseEvent lhs, BaseEvent rhs) {
+			// TODO Auto-generated method stub
+			if (null == lhs || null == rhs) return 0;
+			int compare = 0;
+			if (null != lhs.getYearMonth())
+				compare = lhs.getYearMonth().compareTo(lhs.getYearMonth());
+			
+			if (0 != compare){
+				return compare;
+			}
+			
+			compare = 0;
+			if (null != lhs.getNetGridId())
+				compare = lhs.getNetGridId().compareTo(lhs.getNetGridId());
+
+			return compare;
+
+		}
+
+		
+	};
+	
+	final private Comparator<BaseEvent> comparatorNetGridId_Date = new Comparator<BaseEvent>(){
+
+
+		@Override
+		public int compare(BaseEvent lhs, BaseEvent rhs) {
+			if (null == lhs || null == rhs) return 0;
+			int compare = 0;
+			if (null != lhs.getNetGridId())
+				compare = lhs.getNetGridId().compareTo(lhs.getNetGridId());
+
+			if (0 != compare){
+				return compare;
+			}
+			
+			compare = 0;
+			if (null != lhs.getYearMonth())
+				compare = lhs.getYearMonth().compareTo(lhs.getYearMonth());
+			
+
+			return compare;
+		}
+		
+	};
+	private void showSelectOrder(){
+		
+		general.setSingleChoiceItems(R.id.id_select_browse_order, selectBrowseOrderItems, selectBrowseOrder, new GeneralInformationFragment.OnChangedListener() {
 			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
-				Toast.makeText(context, "选择 : " + selectBrowseOrderItems[which], Toast.LENGTH_SHORT).show();
+			public void onChanged(int id, int which, String whichValue) {
 				selectBrowseOrder = which;
-				btnOrder.setText(selectBrowseOrderItems[which]);
-				dialog.dismiss();
-				Collections.sort(events);
-				if (1 == which) {
-					Collections.reverse(events);
+				btnOrder.setText(whichValue);
+				Comparator<BaseEvent> comparator= comparatorDate_NetGridId;
+				if (1 == which){
+					comparator= comparatorNetGridId_Date;
 				}
+				Collections.sort(events, comparator);
+//				Collections.sort(events);
+//				if (1 == which) {
+//					Collections.reverse(events);
+//				}
 				if (null != listView) {
 					adapter.notifyDataSetChanged();
 				}
-	    }});
-	    
-	    AlertDialog ad = builder.create();  
-		ad.show();
+			}
+		});
+		
+//	    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//	    builder.setIcon(R.drawable.ic_logo);
+//	    builder.setTitle("时间排顺");
+//	    builder.setCancelable(true);
+//	    
+//	    builder.setSingleChoiceItems(selectBrowseOrderItems, selectBrowseOrder, new DialogInterface.OnClickListener(){
+//
+//			@Override
+//			public void onClick(DialogInterface dialog, int which) {
+//				// TODO Auto-generated method stub
+//				Toast.makeText(context, "选择 : " + selectBrowseOrderItems[which], Toast.LENGTH_SHORT).show();
+//				selectBrowseOrder = which;
+//				btnOrder.setText(selectBrowseOrderItems[which]);
+//				dialog.dismiss();
+//				Collections.sort(events);
+//				if (1 == which) {
+//					Collections.reverse(events);
+//				}
+//				if (null != listView) {
+//					adapter.notifyDataSetChanged();
+//				}
+//	    }});
+//	    
+//	    AlertDialog ad = builder.create();  
+//		ad.show();
 
 	}
 	

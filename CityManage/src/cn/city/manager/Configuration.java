@@ -1,8 +1,10 @@
 package cn.city.manager;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,7 +32,10 @@ public class Configuration {
 
 	private String userJson;
 	
-	private t_registerEvent register;
+//	private t_registerEvent register;
+	
+	private String []villageNames;
+	private String []netNames;
 	
 	public Configuration(){
 		
@@ -63,18 +68,44 @@ public class Configuration {
 	
 	private void paserUser(String string){
 		if (null == string) return;
-		register = null;
+//		register = null;
 		JSONObject jObj;
 		try {
 			jObj = new JSONObject(string);
-			List<BaseEvent> events = EventSingletonFactory.getInstance().create(jObj);
-			if (null != events && !events.isEmpty()) {
-				register = (t_registerEvent)events.get(0);
-				
-			}
+//			List<BaseEvent> events = EventSingletonFactory.getInstance().create(jObj);
+//			if (null != events && !events.isEmpty()) {
+//				register = (t_registerEvent)events.get(0);
+//			}
+			
+			villageNames = parse(jObj, "villagename");
+			netNames = parse(jObj, "netname");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	
+	private String[] parse(JSONObject jObj, String key) throws JSONException{
+		if (null == jObj || !jObj.has("event"))
+			return null;
+
+		JSONObject event = null;
+		event = jObj.getJSONObject("event");
+
+		if (null ==  event || ! event.has(key))
+			return null;
+		JSONArray ja = event.getJSONArray(key);
+		
+		if (null == ja) return null;
+		
+		List<String> list = new ArrayList<String>();
+		
+		for (int i = 0, length = ja.length(); i < length; ++i){
+			list.add(ja.getJSONObject(i).getString("s_" + key));
+		}
+		String[] array = new String[list.size()];  
+		list.toArray(array);
+		return array;
 	}
 	
 	public String getUsername() {
@@ -118,8 +149,24 @@ public class Configuration {
 		paserUser(userJson);
 	}
 
-	public t_registerEvent getRegister() {
-		return register;
+//	public t_registerEvent getRegister() {
+//		return register;
+//	}
+
+	public String[] getVillageNames() {
+		return villageNames;
+	}
+
+	public void setVillageNames(String[] villageNames) {
+		this.villageNames = villageNames;
+	}
+
+	public String[] getNetNames() {
+		return netNames;
+	}
+
+	public void setNetNames(String[] netNames) {
+		this.netNames = netNames;
 	}
 
 

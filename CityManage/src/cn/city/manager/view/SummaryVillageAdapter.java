@@ -63,7 +63,7 @@ public class SummaryVillageAdapter extends BaseAdapter {
 		tv.setText(list.get(position).getVillage());
 		
 		tv = (TextView) convertView.findViewById(R.id.id_summary_item_cell);
-		tv.setText(list.get(position).getCell());
+		tv.setText(list.get(position).getNetGridId());
 		return convertView;
 	}
 

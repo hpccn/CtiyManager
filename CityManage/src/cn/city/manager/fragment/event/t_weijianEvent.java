@@ -12,7 +12,7 @@ public class t_weijianEvent extends BaseEvent {
 //	public final static String category = IllegalStructure.class.getSimpleName();//"IllegalStructure";
 
 //	private long time;
-	
+	private int id;
 	private String s_netid;// ": 1,
 	private String s_villagename;// ":"村名",
 	private String s_netname;// ":"网格名称",
@@ -27,14 +27,14 @@ public class t_weijianEvent extends BaseEvent {
 	private String s_unsolvedreason;// ": "未解决原因",
 	
 	private String s_photo;//"现场照片",
-	private String t_photouploaddate;//380962998588,
-	private String s_photoposition;//"照片地理信息",
-	private String s_photouploadperson;//"照片上传人",
-	private String s_photouploadlevel;//"照片上传人级别",
+//	private String t_photouploaddate;//380962998588,
+//	private String s_photoposition;//"照片地理信息",
+//	private String s_photouploadperson;//"照片上传人",
+//	private String s_photouploadlevel;//"照片上传人级别",
 	private String s_video;//"现场视频",
-	private String t_videouploaddate;//1380962998588,
-	private String s_videouploadperson;//"视频上传人"
-	private String s_videouploadlevel;//"视频上传人级别"
+//	private String t_videouploaddate;//1380962998588,
+//	private String s_videouploadperson;//"视频上传人"
+//	private String s_videouploadlevel;//"视频上传人级别"
 	
 	private String s_leaderinstruction;// ":"领导批示",
 	private String s_voiceinstruction;// ":"语音批示",
@@ -527,7 +527,7 @@ public class t_weijianEvent extends BaseEvent {
 	}
 
 	@Override
-	public String getCell() {
+	public String getNetGridId() {
 		// TODO Auto-generated method stub
 		return s_netname;
 	}
@@ -548,37 +548,37 @@ public class t_weijianEvent extends BaseEvent {
 		this.s_photo = photo;
 	}
 
-	public String getT_photouploaddate() {
-		return t_photouploaddate;
-	}
-
-	public void setT_photouploaddate(String photouploaddate) {
-		this.t_photouploaddate = photouploaddate;
-	}
-
-	public String getS_photoposition() {
-		return s_photoposition;
-	}
-
-	public void setS_photoposition(String photoposition) {
-		this.s_photoposition = photoposition;
-	}
-
-	public String getS_photouploadperson() {
-		return s_photouploadperson;
-	}
-
-	public void setS_photouploadperson(String photouploadperson) {
-		this.s_photouploadperson = photouploadperson;
-	}
-
-	public String getS_photouploadlevel() {
-		return s_photouploadlevel;
-	}
-
-	public void setS_photouploadlevel(String photouploadlevel) {
-		this.s_photouploadlevel = photouploadlevel;
-	}
+//	public String getT_photouploaddate() {
+//		return t_photouploaddate;
+//	}
+//
+//	public void setT_photouploaddate(String photouploaddate) {
+//		this.t_photouploaddate = photouploaddate;
+//	}
+//
+//	public String getS_photoposition() {
+//		return s_photoposition;
+//	}
+//
+//	public void setS_photoposition(String photoposition) {
+//		this.s_photoposition = photoposition;
+//	}
+//
+//	public String getS_photouploadperson() {
+//		return s_photouploadperson;
+//	}
+//
+//	public void setS_photouploadperson(String photouploadperson) {
+//		this.s_photouploadperson = photouploadperson;
+//	}
+//
+//	public String getS_photouploadlevel() {
+//		return s_photouploadlevel;
+//	}
+//
+//	public void setS_photouploadlevel(String photouploadlevel) {
+//		this.s_photouploadlevel = photouploadlevel;
+//	}
 
 	public String getS_video() {
 		return s_video;
@@ -588,32 +588,52 @@ public class t_weijianEvent extends BaseEvent {
 		this.s_video = video;
 	}
 
-	public String getT_videouploaddate() {
-		return t_videouploaddate;
-	}
-
-	public void setT_videouploaddate(String videouploaddate) {
-		this.t_videouploaddate = videouploaddate;
-	}
-
-	public String getS_videouploadperson() {
-		return s_videouploadperson;
-	}
-
-	public void setS_videouploadperson(String videouploadperson) {
-		this.s_videouploadperson = videouploadperson;
-	}
-
-	public String getS_videouploadlevel() {
-		return s_videouploadlevel;
-	}
-
-	public void setS_videouploadlevel(String videouploadlevel) {
-		this.s_videouploadlevel = videouploadlevel;
-	}
+//	public String getT_videouploaddate() {
+//		return t_videouploaddate;
+//	}
+//
+//	public void setT_videouploaddate(String videouploaddate) {
+//		this.t_videouploaddate = videouploaddate;
+//	}
+//
+//	public String getS_videouploadperson() {
+//		return s_videouploadperson;
+//	}
+//
+//	public void setS_videouploadperson(String videouploadperson) {
+//		this.s_videouploadperson = videouploadperson;
+//	}
+//
+//	public String getS_videouploadlevel() {
+//		return s_videouploadlevel;
+//	}
+//
+//	public void setS_videouploadlevel(String videouploadlevel) {
+//		this.s_videouploadlevel = videouploadlevel;
+//	}
 
 	@Override
 	public String getSortValue() {
+		// TODO Auto-generated method stub
+		return t_tijiao;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	@Override
+	public String getVillageId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getYearMonth() {
 		// TODO Auto-generated method stub
 		return t_tijiao;
 	}

@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
+import cn.city.manager.Configuration;
 import cn.city.manager.Constants;
 import cn.city.manager.R;
 import cn.city.manager.fragment.event.BaseEvent;
@@ -25,10 +26,15 @@ import cn.hpc.common.JSONHelper;
 
 public class SummaryActivity extends BaseBrowseActivity {
 
+	
 	@Override
 	protected View obtainView() {
 		View view = View.inflate(this, R.layout.summary_main, null);
-
+		view.findViewById(R.id.id_reload).setVisibility(View.VISIBLE);
+		view.findViewById(R.id.id_browse_mode).setVisibility(View.VISIBLE);
+		
+		tvTitle = (TextView)view.findViewById(R.id.id_titlebar_title);
+		tvTitle.setText("违章建筑");
 		// 使用Web方式浏览
 //		view.findViewById(R.id.id_summary_top_toolbar).setVisibility(View.GONE);
 //		Statistics wange = new Statistics(this, Constants.weijian_list);
@@ -59,12 +65,15 @@ public class SummaryActivity extends BaseBrowseActivity {
 		
 //		String url = "https://code.csdn.net/hpccn/citymanager/blob/master/CityManage/assets/t_weijian.json";//"http://192.168.6.55:8000/t_weijian.json";
 //		String url = "http://192.168.6.55:8000/t_weijian.json";
-		String url = Constants.weijian_list;//"http://longhorn.free3v.net/t_weijian.html";
+		currentUrl = Constants.obtainWeijianListUrl(Configuration.getInstance().getUsername(), "month");//weijian_list;//"http://longhorn.free3v.net/t_weijian.html";
 //		StringCacheFactory scf = StringCacheFactory.getInstance(this);
 //		scf.scheduleLoadString(10, Uri.parse(url));
-		ViewSingletonFactory.getInstance().showProcessDialog(context, null, "正在下载数据,请稍候...");
-		HttpStreamThread hst = new EventHttpStreamThread(this, url, onStringLoadListener);
-		hst.start();
+		
+		
+		EventSingletonFactory.getInstance().loadEvents(context, currentUrl, onLoadListener);
+//		ViewSingletonFactory.getInstance().showProcessDialog(context, null, "正在下载数据,请稍候...");
+//		HttpStreamThread hst = new EventHttpStreamThread(this, url, onStringLoadListener);
+//		hst.start();
 		return null;
 		
 //		tvTitle.setText(category);
@@ -100,39 +109,60 @@ public class SummaryActivity extends BaseBrowseActivity {
 //		return events;
 	}
 
-	EventHttpStreamThread.OnStringLoadListener onStringLoadListener = new EventHttpStreamThread.OnStringLoadListener(){
+
+	EventSingletonFactory.OnLoadListener onLoadListener = new EventSingletonFactory.OnLoadListener(){
 
 		@Override
-		public void onStringLoaded(String uri, String string) {
-			
-
-			JSONObject jObj;
-			try {
-				jObj = new JSONObject(string);
-				events = EventSingletonFactory.getInstance().create(jObj);
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		public void onLoaded(String url, List<BaseEvent> evs) {
+			// TODO Auto-generated method stub
+			events = evs;
+//			updateMedia(events);
 			handler.sendEmptyMessage(100);
+		}
+
+		@Override
+		public void onError(String url) {
+			// TODO Auto-generated method stub
 			
-		}
-
-		@Override
-		public void onMoved(String url) {
-			// TODO Auto-generated method stub
-			HttpStreamThread hst = new EventHttpStreamThread(SummaryActivity.this, url, onStringLoadListener);
-			hst.start();
-
-		}
-
-		@Override
-		public void onResponse(int code) {
-			// TODO Auto-generated method stub
-			ViewSingletonFactory.getInstance().hideProcessDialog();
 		}
 		
 	};
+//	EventHttpStreamThread.OnStringLoadListener onStringLoadListener = new EventHttpStreamThread.OnStringLoadListener(){
+//
+//		@Override
+//		public void onStringLoaded(String uri, String string) {
+//			
+//
+//			JSONObject jObj;
+//			try {
+//				jObj = new JSONObject(string);
+//				events = EventSingletonFactory.getInstance().create(jObj);
+//				updateMedia(events);
+//			} catch (JSONException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			handler.sendEmptyMessage(100);
+//			
+//		}
+//
+//		@Override
+//		public void onMoved(String url) {
+//			// TODO Auto-generated method stub
+//			HttpStreamThread hst = new EventHttpStreamThread(SummaryActivity.this, url, onStringLoadListener);
+//			hst.start();
+//
+//		}
+//
+//		@Override
+//		public void onResponse(int code) {
+//			// TODO Auto-generated method stub
+//			ViewSingletonFactory.getInstance().hideProcessDialog();
+//		}
+//		
+//	};
+	
+	
 	
 	Handler handler = new Handler(){
 		public void handleMessage(Message msg) {
@@ -164,6 +194,7 @@ public class SummaryActivity extends BaseBrowseActivity {
 				i.putExtra("jsonValue", js);
 				i.putExtra("category", category);//events.get(position).getCategory());//
 				startActivity(i);
+				overridePendingTransition(R.anim.zoom_in, R.anim.zoom_in); 
 			}
 			
 		});
@@ -173,10 +204,11 @@ public class SummaryActivity extends BaseBrowseActivity {
 	@Override
 	protected void updateClickListent() {
 		int [] ids = {R.id.id_add_event, R.id.btn_home, R.id.btn_statistics, R.id.btn_area, R.id.btn_more,
-				R.id.id_select_browse_category, R.id.id_select_browse_order};
+				R.id.id_select_browse_category, R.id.id_select_browse_order, R.id.id_browse_mode, R.id.id_reload};
 		
 		for (int id : ids) {
-			this.findViewById(id).setOnClickListener(onClickListener);
+			View v = findViewById(id);
+			if (null != v) v.setOnClickListener(onClickListener);
 		}		
 	}
 
@@ -184,10 +216,18 @@ public class SummaryActivity extends BaseBrowseActivity {
 	@Override
 	protected void onSelectDateView(int select) {
 		// TODO Auto-generated method stub
-		String url = String.format(Constants.weijian_list_option, date[select]);
-		
-		HttpStreamThread hst = new EventHttpStreamThread(this, url, onStringLoadListener);
-		hst.start();
+//		String url = String.format(Constants.weijian_list_option, date[select]);
+		currentUrl = Constants.obtainWeijianListUrl(Configuration.getInstance().getUsername(), date[select]);
+//		HttpStreamThread hst = new EventHttpStreamThread(this, url, onStringLoadListener);
+//		hst.start();
+		EventSingletonFactory.getInstance().loadEvents(context, currentUrl, onLoadListener);
+	}
+
+	@Override
+	protected void invalidateEvent() {
+		if (null != currentUrl) {
+			EventSingletonFactory.getInstance().reloadEvents(context, currentUrl, onLoadListener);
+		}
 	}
 	
 }

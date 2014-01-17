@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+import cn.city.manager.Constants;
 import cn.city.manager.R;
 import cn.city.manager.fragment.t_netbaseinfo;
 import cn.city.manager.fragment.t_netbaseinfoGrid;
@@ -158,13 +159,13 @@ public class EntryActivity extends Activity {
 			case R.id.btn_statistics:
 				showBottomToolbarFull();
 				mainFrameLayout.removeAllViews();
-				viewChild = statistics.getView();//View.inflate(context, R.layout.statistics_main_frame, null);
+				viewChild = statistics.getView(mainFrameLayout.getWidth() * 100 / Constants.tongjitu_width);//View.inflate(context, R.layout.statistics_main_frame, null);
 				mainFrameLayout.addView(viewChild);
 				break;
 			case R.id.btn_area:
 				showBottomToolbarFull();
 				mainFrameLayout.removeAllViews();
-				viewChild = View.inflate(context, R.layout.township_map_main_frame, null);
+				viewChild = townMap.getView(mainFrameLayout.getWidth() * 100 / Constants.zhenyutu_width);//View.inflate(context, R.layout.more_main_frame, null);
 				mainFrameLayout.addView(viewChild);
 				
 				break;
@@ -172,7 +173,7 @@ public class EntryActivity extends Activity {
 			case R.id.btn_more2:
 				showBottomToolbarFull();
 				mainFrameLayout.removeAllViews();
-				viewChild = more.getView();//View.inflate(context, R.layout.more_main_frame, null);
+				viewChild = more.getView(100);//View.inflate(context, R.layout.more_main_frame, null);
 				mainFrameLayout.addView(viewChild);
 				toolbarFull.check(R.id.btn_more);
 				break;

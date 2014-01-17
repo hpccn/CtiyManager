@@ -29,8 +29,11 @@ public  abstract class BaseEvent implements Comparable<BaseEvent>{
 	public abstract BaseEvent fromJSONObject(JSONObject jObj)throws Exception;
 	public abstract String getContent();
 	public abstract String getVillage();
-	public abstract String getCell();
-
+	
+	public abstract String getVillageId();
+	public abstract String getNetGridId();
+	public abstract String getYearMonth();
+	
 	public abstract String getSortValue();
 	
 	public abstract Drawable getIcon(); 
@@ -44,6 +47,9 @@ public  abstract class BaseEvent implements Comparable<BaseEvent>{
 	public abstract void setS_photo(String photo);
 	public abstract String getS_video();
 	public abstract void setS_video(String video);
+	
+	public abstract double getD_latitude();
+	public abstract double getD_longitude();
 	
 	public BaseEvent(){
 //		init();

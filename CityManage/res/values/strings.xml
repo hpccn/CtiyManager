@@ -3,7 +3,8 @@
     
     <string name="search">搜索</string>
     
-
+    <string name="navi_tip">本功能为调起百度地图Android客户端（V5.0及以上版本）的导航功能，用户必须已安装百度地图客户端，如果没有安装则提示用户下载安装百度地图客户端。</string>
+    
     
     <string name="app_name">高丽营镇综合服务平台</string>
     <string name="action_settings">Settings</string>
@@ -147,6 +148,10 @@
     <!-- 统计 -->
     <string name="statistics_category">统计类别</string>
     <string name="check_upgrade">检查升级</string>
+    <string name="cancel_auto_login">取消自动登录</string>
+    <string name="map_navigation">违章建筑地图信息</string>
+    <string name="baidu_navigation">导航</string>
+    
     <!-- 公用 -->
     <string name="netid">网格ID</string>
     <string name="netname">格名称</string>
@@ -226,7 +231,7 @@
     <string name="villageleadertel">村治保主任电话</string>    
     <string name="remark">备注</string>    
     
-    <string name="more_option">查看更多选项►</string>    
+    <string name="more_option">查看更多选项</string>    
      <string name="village_baseinfo">各村基本信息表</string>    
      <string name="netgrid_baseinfo">各网格基本信息表</string>    
     <!--
@@ -241,5 +246,8 @@
     <string name=""></string>    
     -->    
     <string name="netgrid_id">网格ID</string>
-
+    <string name="browse_map_mode">地图模式</string>
+    <string name="browse_list_mode">列表模式</string>
+    <string name="reload">刷新</string>
+    
 </resources>
