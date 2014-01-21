@@ -10,12 +10,12 @@
         <!-- 出租房屋总户数 -->
 
         <TextView
-            style="@style/thirdTitle"
+            style="@style/baseinfothirdTitle"
             android:text="@string/chuzuhuzong" />
 
         <EditText
             android:id="@+id/et_chuzuhuzong"
-            style="@style/generalEditText"
+            style="@style/baseinfothirdEditText"
             android:hint="@string/chuzuhuzong" />
     </LinearLayout>
 
@@ -24,12 +24,12 @@
         <!-- 出租房屋总间数 -->
 
         <TextView
-            style="@style/thirdTitle"
+            style="@style/baseinfothirdTitle"
             android:text="@string/chuzujianzong" />
 
         <EditText
             android:id="@+id/et_chuzujianzong"
-            style="@style/generalEditText"
+            style="@style/baseinfothirdEditText"
             android:hint="@string/chuzujianzong" />
     </LinearLayout>
 
@@ -38,12 +38,12 @@
         <!-- 出租大院户数 -->
 
         <TextView
-            style="@style/thirdTitle"
+            style="@style/baseinfothirdTitle"
             android:text="@string/chuzuyuanzong" />
 
         <EditText
             android:id="@+id/et_chuzuyuanzong"
-            style="@style/generalEditText"
+            style="@style/baseinfothirdEditText"
             android:hint="@string/chuzuyuanzong" />
     </LinearLayout>
 
@@ -52,12 +52,12 @@
         <!-- 租住人员数 -->
 
         <TextView
-            style="@style/thirdTitle"
+            style="@style/baseinfothirdTitle"
             android:text="@string/zuzhurenshu" />
 
         <EditText
             android:id="@+id/et_zuzhurenshu"
-            style="@style/generalEditText"
+            style="@style/baseinfothirdEditText"
             android:hint="@string/zuzhurenshu" />
     </LinearLayout>
 
@@ -66,12 +66,12 @@
         <!-- 利用出租房屋存放易燃易爆危险化学品 -->
 
         <TextView
-            style="@style/thirdTitle"
+            style="@style/baseinfothirdTitle"
             android:text="@string/chuzuyiranyibao" />
 
         <EditText
             android:id="@+id/et_chuzuyiranyibao"
-            style="@style/generalEditText"
+            style="@style/baseinfothirdEditText"
             android:hint="@string/chuzuyiranyibao" />
     </LinearLayout>
 
@@ -80,12 +80,12 @@
         <!-- 利用出租房屋无照经营 -->
 
         <TextView
-            style="@style/thirdTitle"
+            style="@style/baseinfothirdTitle"
             android:text="@string/chuzuwuzhao" />
 
         <EditText
             android:id="@+id/et_chuzuwuzhao"
-            style="@style/generalEditText"
+            style="@style/baseinfothirdEditText"
             android:hint="@string/chuzuwuzhao" />
     </LinearLayout>
 
@@ -94,12 +94,12 @@
         <!-- 利用出租房屋非法办学 -->
 
         <TextView
-            style="@style/thirdTitle"
+            style="@style/baseinfothirdTitle"
             android:text="@string/chuzufeifabanxue" />
 
         <EditText
             android:id="@+id/et_chuzufeifabanxue"
-            style="@style/generalEditText"
+            style="@style/baseinfothirdEditText"
             android:hint="@string/chuzufeifabanxue" />
     </LinearLayout>
 
@@ -108,12 +108,12 @@
         <!-- 利用出租房屋收购废品 -->
 
         <TextView
-            style="@style/thirdTitle"
+            style="@style/baseinfothirdTitle"
             android:text="@string/chuzufeipinshougou" />
 
         <EditText
             android:id="@+id/et_chuzufeipinshougou"
-            style="@style/generalEditText"
+            style="@style/baseinfothirdEditText"
             android:hint="@string/chuzufeipinshougou" />
     </LinearLayout>
 
@@ -122,12 +122,12 @@
         <!-- 利用出租房屋群租 -->
 
         <TextView
-            style="@style/thirdTitle"
+            style="@style/baseinfothirdTitle"
             android:text="@string/chuzuqunzu" />
 
         <EditText
             android:id="@+id/et_chuzuqunzu"
-            style="@style/generalEditText"
+            style="@style/baseinfothirdEditText"
             android:hint="@string/chuzuqunzu" />
     </LinearLayout>
 

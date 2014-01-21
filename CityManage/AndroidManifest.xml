@@ -154,7 +154,16 @@
             android:name=".activity.BaiduNavigation"
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".activity.ImageViewActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activity.InternetVideoPlayerActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:screenOrientation="portrait">
+        </activity>
         
+                
         
     </application>
 

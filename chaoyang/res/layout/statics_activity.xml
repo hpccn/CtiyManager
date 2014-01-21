@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/main" android:background="@drawable/tiaowen" android:layout_width="fill_parent" android:layout_height="fill_parent" android:isScrollContainer="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include layout="@layout/common_back_title_bar" />
+    <ScrollView android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+        <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:gravity="center_horizontal" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="10.0dip">
+                <Button android:textSize="15.0sp" android:textColor="@color/black_start" android:id="@id/shopclass1" android:background="@drawable/color_transparent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/main_activity_button_fourt" android:text="新增建筑" android:drawableTop="@drawable/main_newbuilding" android:drawablePadding="0.0sp" android:layout_weight="33.0" />
+                <Button android:textSize="15.0sp" android:textColor="@color/black_start" android:id="@id/shopclass2" android:background="@drawable/color_transparent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/main_activity_button_fivet" android:text="土方工地" android:drawableTop="@drawable/main_tufanggongdi" android:drawablePadding="0.0sp" android:layout_weight="33.0" />
+                <Button android:textSize="15.0sp" android:textColor="@color/black_start" android:id="@id/shopclass3" android:background="@drawable/color_transparent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/main_activity_button_sixt" android:text="消防安全" android:drawableTop="@drawable/main_production_safety" android:drawablePadding="0.0sp" android:layout_weight="33.0" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center_horizontal" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="10.0dip">
+                <Button android:textSize="13.0sp" android:textColor="@color/black_start" android:id="@id/shopclass4" android:background="@drawable/color_transparent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/main_activity_button_sixt" android:text="公众举报投诉" android:drawableTop="@drawable/main_public_report1" android:drawablePadding="0.0sp" android:layout_weight="33.0" />
+                <Button android:textSize="13.0sp" android:textColor="@color/black_start" android:id="@id/shopclass31" android:background="@drawable/color_transparent" android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/main_activity_button_fourt" android:text="访问量统计" android:drawableTop="@drawable/main_newbuilding" android:drawablePadding="0.0sp" android:layout_weight="33.0" />
+                <Button android:textSize="15.0sp" android:textColor="@color/black_start" android:id="@id/shopclass18" android:background="@drawable/color_transparent" android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/main_activity_button_sixt" android:text="" android:drawableTop="@drawable/wangluojianshe" android:drawablePadding="0.0sp" android:layout_weight="33.0" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

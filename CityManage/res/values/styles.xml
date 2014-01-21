@@ -36,15 +36,43 @@
     </style>
 
     <style name="thirdTitle">
-        <item name="android:layout_width">120sp</item>
+        <item name="android:layout_width">60sp</item>
+        <item name="android:textSize">12dip</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:gravity">left</item>
+        <item name="android:layout_marginLeft">2dp</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginRight">2dp</item>
+    </style>
+    
+    <style name="baseinfothirdTitle">
+        <item name="android:layout_width">160sp</item>
         <item name="android:textSize">14dip</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:gravity">left</item>
-        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginLeft">2dp</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginRight">2dp</item>
+    </style>    
+    <style name="baseinfothirdEditText">
+        <item name="android:ems">10</item>
+        <item name="android:background">@drawable/edit_text_holo_dark</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">left</item>
+        <item name="android:gravity">left</item>
+        <item name="android:layout_marginLeft">2dp</item>
         <item name="android:layout_marginTop">0dp</item>
         <item name="android:layout_marginRight">0dp</item>
     </style>
+    
+    <style name="baseinfothirdEditTextReadonly" parent="baseinfothirdEditText">
+        <item name="android:editable">false</item>
+    </style>
+    
     
     <style name="midTitle">
         <item name="android:layout_width">wrap_content</item>
@@ -59,11 +87,11 @@
         <item name="android:ems">10</item>
         <item name="android:background">@drawable/edit_text_holo_dark</item>
         <item name="android:layout_width">fill_parent</item>
-        <item name="android:textSize">14dp</item>
+        <item name="android:textSize">12dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">left</item>
         <item name="android:gravity">left</item>
-        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginLeft">2dp</item>
         <item name="android:layout_marginTop">0dp</item>
         <item name="android:layout_marginRight">0dp</item>
     </style>
@@ -161,7 +189,7 @@
         <item name="android:textColor">@color/grey_end</item>
     </style>
     <style name="TextViewStyleCheckinListItemLineMessage">
-        <item name="android:textSize">13.0dip</item>
+        <item name="android:textSize">12.0dip</item>
         <item name="android:textColor">@color/black_end</item>
     </style>
 

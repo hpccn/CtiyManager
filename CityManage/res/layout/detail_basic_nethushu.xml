@@ -8,24 +8,24 @@
         <LinearLayout style="@style/horizontalCenter" >
 
             <TextView
-                style="@style/thirdTitle"
+                style="@style/baseinfothirdTitle"
                 android:text="@string/nethushu" />
 
             <EditText
                 android:id="@+id/et_nethushu"
-                style="@style/generalEditText"
+                style="@style/baseinfothirdEditText"
                 android:hint="@string/nethushu" />
         </LinearLayout>
 
         <LinearLayout style="@style/horizontalCenter" >
 
             <TextView
-                style="@style/thirdTitle"
+                style="@style/baseinfothirdTitle"
                 android:text="@string/netrenkou" />
 
             <EditText
                 android:id="@+id/et_netrenkou"
-                style="@style/generalEditText"
+                style="@style/baseinfothirdEditText"
                 android:hint="@string/netrenkou" />
         </LinearLayout>
         

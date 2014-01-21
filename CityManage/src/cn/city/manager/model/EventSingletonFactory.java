@@ -242,7 +242,7 @@ public class EventSingletonFactory {
 			String photo = ev.getS_photo();
 			if (photo!= null && photo.length() > 2 && !photo.startsWith("http")){
 				ev.setS_photo(Constants.obtainImageUrl(photo));
-				
+				ev.setIcon(Constants.obtainIconImageUrl(photo));
 			}
 			
 			String video = ev.getS_video();

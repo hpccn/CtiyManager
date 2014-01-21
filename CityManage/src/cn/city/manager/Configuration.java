@@ -24,7 +24,11 @@ public class Configuration {
 	public static Configuration getInstance() {
 		return SingletonInstance.instance;
 	}
-	
+
+	private String kind;
+	private String id;
+	private String time;
+	private int start, step;
 
 	private String username;
 	private String password;
@@ -48,8 +52,10 @@ public class Configuration {
 		password = pereference.getString("password", null);
 		autoLogin = pereference.getBoolean("autoLogin", false);
 		saveLogin = pereference.getBoolean("saveLogin", false);
-		
+		step = pereference.getInt("step", 30);
 		userJson = pereference.getString("user", null);
+		
+		id = username;
 		paserUser(userJson);
 	}
 	
@@ -63,6 +69,7 @@ public class Configuration {
 		editor.putString("password", password);
 		editor.putBoolean("saveLogin", saveLogin);
 		editor.putString("user", userJson);
+		editor.putInt("step", step);
 		editor.commit();
 	}
 	
@@ -114,6 +121,7 @@ public class Configuration {
 
 	public void setUsername(String username) {
 		this.username = username;
+		setId(username);
 	}
 
 	public String getPassword() {
@@ -167,6 +175,46 @@ public class Configuration {
 
 	public void setNetNames(String[] netNames) {
 		this.netNames = netNames;
+	}
+
+	public String getKind() {
+		return kind;
+	}
+
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	public int getStart() {
+		return start;
+	}
+
+	public void setStart(int start) {
+		this.start = start;
+	}
+
+	public int getStep() {
+		return step;
+	}
+
+	public void setStep(int step) {
+		this.step = step;
 	}
 
 

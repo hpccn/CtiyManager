@@ -6,20 +6,24 @@
     android:orientation="vertical" >
 
     <TextView
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:singleLine="true"
         android:id="@+id/tv_video_file"
         style="@style/thirdTitle"
-        android:layout_weight="1"
-        android:drawableLeft="@drawable/ic_graphic_video"
-        android:hint="@string/video_file" />
-
-    <LinearLayout
-        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_weight="1"
+        
+        android:background="@drawable/ic_video"
+        android:singleLine="true" />
+    <!--
+    android:text="@string/video_file"
+     android:drawableLeft="@drawable/ic_graphic_video" -->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal" >
 
         <Button

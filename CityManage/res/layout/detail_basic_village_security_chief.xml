@@ -1,0 +1,15 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="村治保主任姓名" >
+
+    <TextView
+        style="@style/baseinfothirdTitle"
+        android:text="@string/villageleadername" />
+
+    <EditText
+        android:id="@+id/et_villageleadername"
+        style="@style/baseinfothirdEditTextReadonly"
+        android:hint="@string/villageleadername" />
+
+</LinearLayout>

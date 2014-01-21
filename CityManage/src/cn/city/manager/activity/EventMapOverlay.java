@@ -160,7 +160,7 @@ public class EventMapOverlay extends Activity {
 	protected List <BaseEvent> events;
 	
 	protected List<BaseEvent> loadEvents() throws Exception {
-		String url = Constants.obtainWeijianListUrl(Configuration.getInstance().getUsername(), "month");//weijian_list;//"http://longhorn.free3v.net/t_weijian.html";
+		String url = Constants.obtainLastWeijianListUrl();//Constants.obtainWeijianListUrl(Configuration.getInstance().getUsername(), "month");//weijian_list;//"http://longhorn.free3v.net/t_weijian.html";
 		EventSingletonFactory.getInstance().loadEvents(context, url, onLoadListener);
 		return null;
 	}
@@ -205,6 +205,7 @@ public class EventMapOverlay extends Activity {
 			String photo = ev.getS_photo();
 			if (photo!= null && photo.length() > 2 && !photo.startsWith("http")){
 				ev.setS_photo(Constants.obtainImageUrl(photo));
+				ev.setIcon(Constants.obtainIconImageUrl(photo));
 			}
 			
 			String video = ev.getS_video();
@@ -227,10 +228,13 @@ public class EventMapOverlay extends Activity {
 	}
 
     public void initOverlay(){
+    	
+    	Drawable d = getResources().getDrawable(R.drawable.nav_turn_via_1);//icon_marka);//
     	/**
     	 * 创建自定义overlay
     	 */
-         mOverlay = new MyOverlay(getResources().getDrawable(R.drawable.nav_turn_via_1),mMapView);	//icon_marka
+//         mOverlay = new MyOverlay(getResources().getDrawable(R.drawable.nav_turn_via_1),mMapView);	//icon_marka
+         mOverlay = new MyOverlay(d, mMapView);	//icon_marka
          /**
           * 准备overlay 数据
           */
@@ -242,8 +246,9 @@ public class EventMapOverlay extends Activity {
              /**
               * 设置overlay图标，如不设置，则使用创建ItemizedOverlay时的默认图标.
               */
-             item.setMarker(getResources().getDrawable(R.drawable.nav_turn_via_1));//icon_marka
-
+        	 
+//             item.setMarker(getResources().getDrawable(R.drawable.nav_turn_via_1));//icon_marka
+             item.setMarker(d);//icon_marka
         	 overlayItems.add(item);
          }
          
@@ -422,7 +427,7 @@ public class EventMapOverlay extends Activity {
 //			   popupText.setText(getItem(index).getTitle());
 			
 	         try {
-				popupEventPhoto.setImageDrawable(imc.getImage(Uri.parse(events.get(index).getS_photo()), 72, 72));
+				popupEventPhoto.setImageDrawable(imc.getImage(Uri.parse(events.get(index).getIcon())));//()), 72, 72));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

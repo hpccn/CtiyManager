@@ -1,18 +1,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/horizontalCenter"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
     tools:context="违建位置" >
 
     <TextView
         style="@style/thirdTitle"
-        android:text="@string/yinhuanaddress" />
+        android:id="@+id/id_threeadress"
+        android:gravity="fill_vertical"
+        android:layout_height="32dp"
+        android:layout_width="fill_parent"
+        android:drawableLeft="@drawable/ic_threeadress"
+        android:drawablePadding="10dp"
+        android:text="@string/threeadress" />
 
-    <include layout="@layout/must_input_mark" />
+    <LinearLayout
+        style="@style/horizontalCenter"
+        tools:context="违建位置" >
 
-    <EditText
-        android:id="@+id/et_yinhuanaddress"
-        style="@style/generalEditText"
-        android:hint="@string/yinhuanaddress"
-         />
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/yinhuanaddress" />
+
+        <include layout="@layout/must_input_mark" />
+
+        <EditText
+            android:id="@+id/et_yinhuanaddress"
+            style="@style/generalEditText"
+            android:hint="@string/yinhuanaddress" />
+    </LinearLayout>
 
 </LinearLayout>

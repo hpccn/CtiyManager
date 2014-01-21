@@ -204,7 +204,7 @@ public class t_weijian extends BaseFragment implements ImageCacheFactory.OnImage
 			if (null != uri && uri.getHost() != null)
 				
 				try {
-					Drawable drawable = imc.loadImage(R.id.picture, uri, -1, -1);
+					Drawable drawable = imc.loadImage(R.id.picture, uri, 320, 240);
 					if (null == drawable) {
 						imc.registerOnImageLoadListener(this);
 					}
@@ -215,8 +215,11 @@ public class t_weijian extends BaseFragment implements ImageCacheFactory.OnImage
 				} 
 		}
 		
-		((TextView)rootView.findViewById(R.id.tv_video_file)).setText(content.getS_video());
-		
+//		((TextView)rootView.findViewById(R.id.tv_video_file)).setText(content.getS_video());
+		String video = content.getS_video();
+		if (null != video && video.length() > 4){
+			rootView.findViewById(R.id.tv_video_file).setBackgroundResource(R.drawable.ic_media_play);
+		}
 		((EditText)rootView.findViewById(R.id.et_yinhuanxiangqing)).setText(content.getS_yinhuanxiangqing());
 		
 		if (null == jsonData) {
@@ -313,7 +316,7 @@ public class t_weijian extends BaseFragment implements ImageCacheFactory.OnImage
 		content.setS_yinhuanaddress(((EditText) rootView.findViewById(R.id.et_yinhuanaddress)).getText().toString());
 		
 		
-		content.setS_video(((TextView)rootView.findViewById(R.id.tv_video_file)).getText().toString());
+//		content.setS_video(((TextView)rootView.findViewById(R.id.tv_video_file)).getText().toString());
 		
 		//
 		content.setS_villagename(((EditText)rootView.findViewById(R.id.et_villagename)).getText().toString());

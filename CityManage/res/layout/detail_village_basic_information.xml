@@ -50,31 +50,31 @@
 
         <include
             android:id="@+id/id_recently_updated"
-            layout="@layout/detail_item_recently_updated" />
+            layout="@layout/detail_basic_recently_updated" />
 
         <include
             android:id="@+id/id_recently_update_time"
-            layout="@layout/detail_item_recently_update_time" />
+            layout="@layout/detail_basic_recently_update_time" />
 
         <include
             android:id="@+id/id_grid_leader"
-            layout="@layout/detail_item_grid_leader" />
+            layout="@layout/detail_basic_grid_leader" />
 
         <include
             android:id="@+id/id_grid_leader_tel"
-            layout="@layout/detail_item_grid_leader_tel" />
+            layout="@layout/detail_basic_leader_tel" />
 
         <include
             android:id="@+id/id_village_security_chief"
-            layout="@layout/detail_item_village_security_chief" />
+            layout="@layout/detail_basic_village_security_chief" />
 
         <include
             android:id="@+id/id_village_security_chief_tel"
-            layout="@layout/detail_item_village_security_chief_tel" />
+            layout="@layout/detail_basic_village_security_chief_tel" />
 
         <include
             android:id="@+id/id_remark"
-            layout="@layout/detail_general_remark" />
+            layout="@layout/detail_basic_remark" />
     </LinearLayout>
 
 </ScrollView>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+     android:shape="rectangle" >
+    <solid android:color="#80efefef" /> <!-- 背景的填充颜色 -->
+    <stroke
+        android:width="2dp"
+        android:color="#7F016fb1"/> <!-- 描边，width是边得宽度，color是颜色 -->
+    <corners android:radius="2dp" /> <!-- 边角圆弧的半径 -->
+    <padding
+        android:bottom="3dp"
+        android:left="3dp"
+        android:right="3dp"
+        android:top="3dp" /> <!-- 四周留出来的空白 -->
+
+</shape>

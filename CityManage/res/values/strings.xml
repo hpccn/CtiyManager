@@ -105,7 +105,7 @@
     
     <string name="select_picture">选择照片</string>
     <string name="select_video">选择视频</string>
-    <string name="video_file">视频文件名</string>
+    <string name="video_file">无视频</string>
     
     <!-- 违章建筑 -->
     <string name="illegal_structure_examination">违章建筑</string>
@@ -151,6 +151,7 @@
     <string name="cancel_auto_login">取消自动登录</string>
     <string name="map_navigation">违章建筑地图信息</string>
     <string name="baidu_navigation">导航</string>
+    <string name="show_event_step">每页显示案件数</string>
     
     <!-- 公用 -->
     <string name="netid">网格ID</string>
@@ -249,5 +250,7 @@
     <string name="browse_map_mode">地图模式</string>
     <string name="browse_list_mode">列表模式</string>
     <string name="reload">刷新</string>
+ 
+    <string name="threeadress">事发地点</string>
     
 </resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:isScrollContainer="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include layout="@layout/common_back_title_bar" />
+    <ScrollView android:background="@drawable/listview_background" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:layout_width="fill_parent" android:layout_height="5.0dip" />
+            <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <LinearLayout android:gravity="left|center" android:orientation="horizontal" android:background="@drawable/mine_item_selector" android:paddingLeft="12.0dip" android:paddingTop="4.0dip" android:paddingRight="12.0dip" android:paddingBottom="4.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="12.0dip" android:layout_marginRight="12.0dip">
+                    <EditText android:textAppearance="@*android:style/TextAppearance.Large" android:textColor="@color/black" android:id="@id/oldpasswordEditText" android:background="@null" android:paddingLeft="20.0dip" android:paddingTop="4.0dip" android:paddingRight="20.0dip" android:paddingBottom="4.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/oldpassword_hint" android:inputType="textPassword" android:imeOptions="actionDone" android:textCursorDrawable="@drawable/color_cursor" />
+                </LinearLayout>
+                <LinearLayout android:gravity="left|center" android:orientation="horizontal" android:background="@drawable/mine_item_selector" android:paddingLeft="12.0dip" android:paddingTop="4.0dip" android:paddingRight="12.0dip" android:paddingBottom="4.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="12.0dip" android:layout_marginRight="12.0dip">
+                    <EditText android:textAppearance="@*android:style/TextAppearance.Large" android:textColor="@color/black" android:id="@id/passwordEditText" android:background="@null" android:paddingLeft="20.0dip" android:paddingTop="4.0dip" android:paddingRight="20.0dip" android:paddingBottom="4.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/newpassword_hint" android:inputType="textPassword" android:imeOptions="actionDone" android:textCursorDrawable="@drawable/color_cursor" />
+                </LinearLayout>
+                <LinearLayout android:gravity="left|center" android:orientation="horizontal" android:background="@drawable/mine_item_selector" android:paddingLeft="12.0dip" android:paddingTop="4.0dip" android:paddingRight="12.0dip" android:paddingBottom="4.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="12.0dip" android:layout_marginRight="12.0dip">
+                    <EditText android:textAppearance="@*android:style/TextAppearance.Large" android:textColor="@color/black" android:id="@id/repasswordEditText" android:background="@null" android:paddingLeft="20.0dip" android:paddingTop="4.0dip" android:paddingRight="20.0dip" android:paddingBottom="4.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/repassword_hint" android:inputType="textPassword" android:imeOptions="actionDone" android:textCursorDrawable="@drawable/color_cursor" />
+                </LinearLayout>
+                <LinearLayout android:layout_width="fill_parent" android:layout_height="25.0dip" />
+                <Button android:enabled="false" android:textAppearance="@*android:style/TextAppearance.Large" android:gravity="center" android:id="@id/changebutton" android:background="@drawable/mine_item_selector" android:paddingLeft="12.0dip" android:paddingTop="4.0dip" android:paddingRight="12.0dip" android:paddingBottom="4.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="12.0dip" android:layout_marginRight="12.0dip" android:text="@string/btn_changepasswd" style="@style/submitbuttonStyle" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

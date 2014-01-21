@@ -7,11 +7,12 @@
 
     <ImageView
         android:id="@+id/img_event_photo"
-        android:layout_width="128dp"
-        android:layout_height="128dp" android:contentDescription="TODO"/>
+        android:layout_width="72dp"
+        android:layout_height="72dp" android:contentDescription="TODO"/>
 
     <LinearLayout
         android:id="@+id/popinfo"
+        android:paddingLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
@@ -22,7 +23,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="@color/red"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textStyle="bold" />
 
         <TextView
@@ -30,7 +31,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
-            android:textSize="12sp" />
+            android:textSize="10sp" />
     </LinearLayout>
 
 </LinearLayout>

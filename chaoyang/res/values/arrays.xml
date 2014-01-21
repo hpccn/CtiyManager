@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="startup_tabs">
+        <item>Friends</item>
+        <item>Places</item>
+    </string-array>
+    <string-array name="startup_tabs_values">
+        <item>Friends</item>
+        <item>Places</item>
+    </string-array>
+    <string-array name="dialogshopsordercheckbox">
+        <item>By distance</item>
+        <item>By visited times</item>
+        <item>By score</item>
+    </string-array>
+    <string-array name="Themenames">
+        <item>Blue</item>
+        <item>Green</item>
+        <item>Yellow</item>
+    </string-array>
+    <string-array name="user_gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string-array name="modify_select">
+        <item>From Camera</item>
+        <item>From Gellery</item>
+    </string-array>
+    <string-array name="notification_way">
+        <item>All</item>
+        <item>Sound</item>
+        <item>Vibrate</item>
+        <item>Light</item>
+    </string-array>
+    <string-array name="ListNumChoice">
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>50</item>
+        <item>All</item>
+    </string-array>
+    <string-array name="casesearchclass">
+        <item>新增建筑</item>
+        <item>疑似新增建筑</item>
+        <item>公众举报违建</item>
+        <item>土方工地</item>
+        <item>消防安全</item>
+        <item>公众举报投诉</item>
+    </string-array>
+</resources>

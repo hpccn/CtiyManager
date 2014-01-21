@@ -30,12 +30,19 @@ public class Constants {
 //	final public static String weijian_list = host + "/wangge/?q=node/10";
 //	final public static String weijian_list = host + "/wangge/sites/all/themes/wangge/android/to-android-event.php";
 //	final public static String weijian_list = host + "/wangge/sites/all/themes/wangge/android/to-android-event.php?kind=t_weijian&id=010101&time=month";
-	final private static String weijian_list_option = host + "/wangge/sites/all/themes/wangge/android/to-android-event.php?kind=t_weijian&id=%s&time=%s";
-	final static public String obtainWeijianListUrl (String userid, String time){
-		return String.format(weijian_list_option, userid, time);
-
+	final private static String weijian_list_option = host + "/wangge/sites/all/themes/wangge/android/to-android-event.php?kind=t_weijian&id=%s&time=%s&start=%d&step=%d";
+	final static public String obtainWeijianListUrl (String userid, String time, int start, int step){
+		return String.format(weijian_list_option, userid, time, start, step);
 	}
-
+	
+	final static public String obtainLastWeijianListUrl(){
+		return String.format(weijian_list_option
+				, Configuration.getInstance().getUsername()
+				, Configuration.getInstance().getTime()
+				, Configuration.getInstance().getStart()
+				, Configuration.getInstance().getStep());
+	}
+	
 //	这个是违建统计：镇域图
 //	final public static String weijian_zhenyutu = host + "/wangge/?q=node/13&s_yearmonth_selected=&s_statistics_type=&s_chart=no";
 	final private static String weijian_zhenyutu = host + "/wangge/sites/all/themes/wangge/android/to-android-event-statistics.php?kind=t_weijian&id=%s&s_statistics_type=违建数量&s_chart=no";
@@ -96,6 +103,13 @@ public class Constants {
 	final static public String obtainImageUrl (String image){
 		return imageUrl + image;
 	}
+	
+	//	图片地址
+	private final static String iconImageUrl = "http://www.iisale.com/wangge/sites/all/themes/wangge/android/icon/";
+	final static public String obtainIconImageUrl (String image){
+		return iconImageUrl + image;
+	}
+
 	
 //	视频地址
 	private final static String videoUrl = "http://www.iisale.com/wangge/sites/all/themes/wangge/android/video/";

@@ -45,7 +45,7 @@ public class t_weijianEvent extends BaseEvent {
 	private String s_netleadertel;// ":"格长电话",
 	private String s_updatename;// ":"最近更新人",
 	private String s_updatelevel;// ":"更新人级别",
-	private String t_updatetime;// ":1380962998588,
+	private String t_updatetime;// ":1380962998588,// 更新时间
 //	private String updateid;// ":"更新人id",
 	private String s_remark;// ":"备注",
 	private String s_yinhuanaddress;// ":"违法建设具体位置",
@@ -192,11 +192,6 @@ public class t_weijianEvent extends BaseEvent {
 		return s_yinhuanxiangqing;
 	}
 
-	@Override
-	public Drawable getIcon() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 
@@ -636,6 +631,12 @@ public class t_weijianEvent extends BaseEvent {
 	public String getYearMonth() {
 		// TODO Auto-generated method stub
 		return t_tijiao;
+	}
+
+	@Override
+	public String getAddress() {
+		// TODO Auto-generated method stub
+		return s_yinhuanaddress;
 	}
 
 

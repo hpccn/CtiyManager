@@ -110,7 +110,7 @@ public class HttpUploadHelper {
 //					baseEvent.toJSONObject().toString(),
 //					Charset.forName("utf-8")));
 
-			if (null != baseEvent.getS_photo() && !baseEvent.getS_video().startsWith("http://")) {
+			if (null != baseEvent.getS_photo() && !baseEvent.getS_photo().startsWith("http://")) {
 				File picFile = new File(baseEvent.getS_photo());
 				if (null != picFile && picFile.isFile() && picFile.canRead()) {
 					MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();

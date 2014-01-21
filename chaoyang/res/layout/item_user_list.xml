@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:paddingTop="3.0dip" android:paddingRight="7.0dip" android:paddingBottom="10.0dip" android:focusable="false" android:clickable="false" android:descendantFocusability="blocksDescendants" android:layout_width="fill_parent" android:layout_height="wrap_content" style="@style/listItemStyle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:id="@id/firstlayout" android:focusable="false" android:clickable="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:layout_alignParentTop="true">
+        <TextView android:textAppearance="@style/TextViewStyleUserDetailsActivityTitle" android:id="@id/firstLine" android:focusable="false" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/item_list_view_textview_t" android:maxLines="1" android:layout_weight="35.0" android:layout_alignParentTop="true" />
+        <TextView android:textAppearance="@style/TextViewStyleCheckinListItemLineAddress" android:ellipsize="none" android:id="@id/secondLine2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/item_shop_list_textview_twot" android:layout_marginRight="@dimen/item_shop_list_textview_twol" />
+    </LinearLayout>
+    <LinearLayout android:id="@id/thirdlayout" android:focusable="false" android:clickable="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:layout_below="@id/firstlayout" android:layout_alignParentRight="true">
+        <TextView android:textAppearance="@style/TextViewStyleCheckinListItemLineAddress" android:id="@id/secondLine31" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/item_shop_list_textview_fourt" android:maxLines="1" android:scrollHorizontally="false" android:layout_weight="35.0" />
+        <TextView android:textAppearance="@style/TextViewStyleCheckinListItemLineAddress" android:ellipsize="none" android:id="@id/secondLine32" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/item_shop_list_textview_fourt" android:layout_marginRight="@dimen/item_shop_list_textview_twol" />
+    </LinearLayout>
+</RelativeLayout>

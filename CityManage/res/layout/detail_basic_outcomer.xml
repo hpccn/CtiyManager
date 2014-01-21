@@ -10,12 +10,12 @@
         <!-- 流动人口总数 -->
 
         <TextView
-            style="@style/thirdTitle"
+            style="@style/baseinfothirdTitle"
             android:text="@string/liudongzong" />
 
         <EditText
             android:id="@+id/et_liudongzong"
-            style="@style/generalEditText"
+            style="@style/baseinfothirdEditText"
             android:hint="@string/liudongzong" />
     </LinearLayout>
 
@@ -24,12 +24,12 @@
         <!-- 流动人口数（已办暂住证） -->
 
         <TextView
-            style="@style/thirdTitle"
+            style="@style/baseinfothirdTitle"
             android:text="@string/youzanzhu" />
 
         <EditText
             android:id="@+id/et_youzanzhu"
-            style="@style/generalEditText"
+            style="@style/baseinfothirdEditText"
             android:hint="@string/youzanzhu" />
     </LinearLayout>
     
@@ -38,12 +38,12 @@
         <!--流动人口数（未办暂住证总数） -->
 
         <TextView
-            style="@style/thirdTitle"
+            style="@style/baseinfothirdTitle"
             android:text="@string/wuzanzhuzong" />
 
         <EditText
             android:id="@+id/et_wuzanzhuzong"
-            style="@style/generalEditText"
+            style="@style/baseinfothirdEditText"
             android:hint="@string/wuzanzhuzong" />
     </LinearLayout>
     
@@ -52,12 +52,12 @@
         <!-- 流动人口数（未办暂住证，16周岁以上） -->
 
         <TextView
-            style="@style/thirdTitle"
+            style="@style/baseinfothirdTitle"
             android:text="@string/wuzanzhu16shang" />
 
         <EditText
             android:id="@+id/et_wuzanzhu16shang"
-            style="@style/generalEditText"
+            style="@style/baseinfothirdEditText"
             android:hint="@string/wuzanzhu16shang" />
     </LinearLayout>
     
@@ -67,12 +67,12 @@
         <!-- 流动人口数（未办暂住证，16周岁以下） -->
 
         <TextView
-            style="@style/thirdTitle"
+            style="@style/baseinfothirdTitle"
             android:text="@string/wuzanzhu16xia" />
 
         <EditText
             android:id="@+id/et_wuzanzhu16xia"
-            style="@style/generalEditText"
+            style="@style/baseinfothirdEditText"
             android:hint="@string/wuzanzhu16xia" />
     </LinearLayout>
     
@@ -81,12 +81,12 @@
         <!-- 流动人口个体经商户数 -->
 
         <TextView
-            style="@style/thirdTitle"
+            style="@style/baseinfothirdTitle"
             android:text="@string/liudongbusiness" />
 
         <EditText
             android:id="@+id/et_liudongbusiness"
-            style="@style/generalEditText"
+            style="@style/baseinfothirdEditText"
             android:hint="@string/liudongbusiness" />
     </LinearLayout>
     
@@ -95,12 +95,12 @@
         <!-- 流动人口从业人员数 -->
 
         <TextView
-            style="@style/thirdTitle"
+            style="@style/baseinfothirdTitle"
             android:text="@string/liudongwork" />
 
         <EditText
             android:id="@+id/et_liudongwork"
-            style="@style/generalEditText"
+            style="@style/baseinfothirdEditText"
             android:hint="@string/liudongwork" />
     </LinearLayout>            
     <LinearLayout style="@style/horizontalCenter" >
@@ -108,12 +108,12 @@
         <!-- 招用流动人口数 -->
 
         <TextView
-            style="@style/thirdTitle"
+            style="@style/baseinfothirdTitle"
             android:text="@string/liudongemployee" />
 
         <EditText
             android:id="@+id/et_liudongemployee"
-            style="@style/generalEditText"
+            style="@style/baseinfothirdEditText"
             android:hint="@string/liudongemployee" />
     </LinearLayout>
 </LinearLayout>

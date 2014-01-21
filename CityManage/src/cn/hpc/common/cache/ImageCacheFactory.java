@@ -392,6 +392,33 @@ public class ImageCacheFactory extends DiskCache<String, Bitmap> {
 		return d;
 	}
 	
+	public Drawable getLocalImage(Uri uri)
+			throws Exception {
+		final String origKey = getKey(uri);
+
+		Drawable d = getDrawable(origKey);
+		if (d != null){
+			return d;
+		}
+
+		Bitmap bmp = get(origKey);
+
+		if(bmp == null){
+			if ("file".equals(uri.getScheme())) {
+				bmp = localImage(new File(uri.getPath()));
+			} 
+		}
+		if (bmp == null) {
+//			Log.w(TAG, "got null bitmap from request to scale");
+//			throw new Exception("got null bitmap from request to scale");
+			return null;
+
+		}
+		d = new BitmapDrawable(mRes, bmp);
+
+		return d;
+	}
+	
 	public Drawable getImage(Uri uri)
 			throws Exception {
 		final String origKey = getKey(uri);
@@ -418,11 +445,11 @@ public class ImageCacheFactory extends DiskCache<String, Bitmap> {
 				}
 			}
 		}
-		if (bmp == null) {
-//			Log.w(TAG, "got null bitmap from request to scale");
-			throw new Exception("got null bitmap from request to scale");
-
-		}
+//		if (bmp == null) {
+////			Log.w(TAG, "got null bitmap from request to scale");
+//			throw new Exception("got null bitmap from request to scale");
+//
+//		}
 		d = new BitmapDrawable(mRes, bmp);
 
 		return d;
@@ -573,7 +600,7 @@ public class ImageCacheFactory extends DiskCache<String, Bitmap> {
 	 * @throws IOException
 	 */
 	private static Bitmap scaleLocalImage(File localFile, int width, int height)
-			throws ClientProtocolException, IOException {
+			throws Exception {
 		if (-1 == width || -1 == height) {
 			return localImage(localFile);
 		}
@@ -624,25 +651,29 @@ public class ImageCacheFactory extends DiskCache<String, Bitmap> {
 	}
 	
 	private static Bitmap localImage(File localFile)
-			throws ClientProtocolException, IOException {
+			throws Exception {
 
 		if (DEBUG){
 			Log.d(TAG, "scaleLocalImage(" + localFile +  ")");
 		}
 
-		if (!localFile.exists()) {
-			throw new IOException("local file does not exist: " + localFile);
-		}
-		if (!localFile.canRead()) {
-			throw new IOException("cannot read from local file: " + localFile);
-		}
+//		if (!localFile.exists()) {
+//			throw new IOException("local file does not exist: " + localFile);
+//		}
+//		if (!localFile.canRead()) {
+//			throw new IOException("cannot read from local file: " + localFile);
+//		}
 
 		// the below borrowed from:
 		// https://github.com/thest1/LazyList/blob/master/src/com/fedorvlasov/lazylist/ImageLoader.java
 
 	
-		final Bitmap bmp = BitmapFactory.decodeStream(new FileInputStream(localFile), null, null);
-
+		Bitmap bmp = null;
+		try {
+			bmp = BitmapFactory.decodeStream(new FileInputStream(localFile), null, null);
+		} catch (OutOfMemoryError o){
+			o.printStackTrace();
+		}
 		if (bmp == null) {
 			Log.e(TAG, localFile + " could not be decoded");
 		}
@@ -674,8 +705,9 @@ public class ImageCacheFactory extends DiskCache<String, Bitmap> {
 			final HttpResponse hr = hc.execute(get);
 			final StatusLine hs = hr.getStatusLine();
 			if (hs.getStatusCode() != 200) {
-				throw new HttpResponseException(hs.getStatusCode(),
-						hs.getReasonPhrase());
+//				throw new HttpResponseException(hs.getStatusCode(),
+//						hs.getReasonPhrase());
+				return;
 			}
 
 			final HttpEntity ent = hr.getEntity();

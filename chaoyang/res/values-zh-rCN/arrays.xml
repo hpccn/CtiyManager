@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="startup_tabs">
+        <item>Friends</item>
+        <item>Places</item>
+    </string-array>
+    <string-array name="startup_tabs_values">
+        <item>Friends</item>
+        <item>Places</item>
+    </string-array>
+    <string-array name="dialogshopsordercheckbox">
+        <item>距离位置</item>
+        <item>人气排序</item>
+        <item>按总体评价排序</item>
+    </string-array>
+    <string-array name="Themenames">
+        <item>蓝</item>
+        <item>绿</item>
+        <item>黄</item>
+    </string-array>
+    <string-array name="user_gender">
+        <item>男</item>
+        <item>女</item>
+    </string-array>
+    <string-array name="modify_select">
+        <item>相机拍照</item>
+        <item>手机相册</item>
+    </string-array>
+    <string-array name="notification_way">
+        <item>全部</item>
+        <item>声音</item>
+        <item>振动</item>
+        <item>免打扰</item>
+    </string-array>
+    <string-array name="ListNumChoice">
+        <item>10条</item>
+        <item>20条</item>
+        <item>30条</item>
+        <item>50条</item>
+        <item>全部</item>
+    </string-array>
+    <string-array name="Report_title">
+        <item>新增建筑排名柱状图</item>
+        <item>新增建筑拆除率柱状图</item>
+        <item>新增建筑手续办理率柱状图</item>
+        <item>新增建筑案件回复率展示柱状图</item>
+    </string-array>
+    <string-array name="Report_construstionFied_title2">
+        <item>土方工地发案数排名柱状图</item>
+        <item>各土方工地发案数排名柱状图</item>
+        <item>土方工地平均发案数统计排名柱状图</item>
+    </string-array>
+    <string-array name="Report_visitorvolume_title">
+        <item>掌上朝阳访问/安装量统计图</item>
+        <item>掌上朝阳访问量统计图</item>
+        <item>掌上朝阳安装量统计图</item>
+    </string-array>
+    <string-array name="Report_fire">
+        <item>消防安全发案数排名柱状图</item>
+        <item>消防安全隐患消除率排名柱状图</item>
+    </string-array>
+    <string-array name="Report_public">
+        <item>公众举报投诉发案数排名柱状图</item>
+        <item>公众举报投诉结案率排名柱状图</item>
+    </string-array>
+    <string-array name="Report_street">
+        <item>城区</item>
+        <item>农村地区</item>
+    </string-array>
+</resources>

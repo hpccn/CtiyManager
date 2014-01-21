@@ -1,0 +1,15 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="格长电话号码" >
+
+    <TextView
+        style="@style/baseinfothirdTitle"
+        android:text="@string/netleadertel" />
+
+    <EditText
+        android:id="@+id/et_netleadertel"
+        style="@style/baseinfothirdEditTextReadonly"
+        android:hint="@string/netleadertel" />
+
+</LinearLayout>

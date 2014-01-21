@@ -51,11 +51,7 @@ public class t_registerEvent extends BaseEvent {
 		return null;
 	}
 
-	@Override
-	public Drawable getIcon() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 
 
@@ -240,6 +236,24 @@ public class t_registerEvent extends BaseEvent {
 	public double getD_longitude() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public String getS_solvestatus() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getT_updatetime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAddress() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

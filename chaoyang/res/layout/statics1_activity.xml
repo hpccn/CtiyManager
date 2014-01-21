@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/main" android:background="@drawable/tiaowen" android:layout_width="fill_parent" android:layout_height="fill_parent" android:isScrollContainer="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include layout="@layout/common_back_title_bar" />
+    <ScrollView android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+        <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:gravity="center_horizontal" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="10.0dip">
+                <Button android:textSize="15.0sp" android:textColor="@color/black_start" android:id="@id/shopclass1" android:background="@drawable/color_transparent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/main_activity_button_fourt" android:text="重点单位" android:drawableTop="@drawable/main_key_units" android:drawablePadding="0.0sp" android:layout_weight="33.0" />
+                <Button android:textSize="15.0sp" android:textColor="@color/black_start" android:id="@id/shopclass2" android:background="@drawable/color_transparent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/main_activity_button_fivet" android:text="一般单位" android:drawableTop="@drawable/main_general_unit" android:drawablePadding="0.0sp" android:layout_weight="33.0" />
+                <Button android:textSize="15.0sp" android:textColor="@color/black_start" android:id="@id/shopclass3" android:background="@drawable/color_transparent" android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/main_activity_button_sixt" android:text="消防安全" android:drawableTop="@drawable/main_production_safety" android:drawablePadding="0.0sp" android:layout_weight="33.0" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

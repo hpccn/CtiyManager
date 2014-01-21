@@ -10,12 +10,12 @@
         <!-- 无业人员数 -->
 
         <TextView
-            style="@style/thirdTitle"
+            style="@style/baseinfothirdTitle"
             android:text="@string/wuye" />
 
         <EditText
             android:id="@+id/et_wuye"
-            style="@style/generalEditText"
+            style="@style/baseinfothirdEditText"
             android:hint="@string/wuye" />
     </LinearLayout>
 
@@ -24,12 +24,12 @@
         <!-- 育龄妇女数 -->
 
         <TextView
-            style="@style/thirdTitle"
+            style="@style/baseinfothirdTitle"
             android:text="@string/yuling" />
 
         <EditText
             android:id="@+id/et_yuling"
-            style="@style/generalEditText"
+            style="@style/baseinfothirdEditText"
             android:hint="@string/yuling" />
     </LinearLayout>
 
@@ -38,12 +38,12 @@
         <!--企业数  -->
 
         <TextView
-            style="@style/thirdTitle"
+            style="@style/baseinfothirdTitle"
             android:text="@string/qiyeshu" />
 
         <EditText
             android:id="@+id/et_qiyeshu"
-            style="@style/generalEditText"
+            style="@style/baseinfothirdEditText"
             android:hint="@string/qiyeshu" />
     </LinearLayout>
 
@@ -52,12 +52,12 @@
         <!-- 门店数 -->
 
         <TextView
-            style="@style/thirdTitle"
+            style="@style/baseinfothirdTitle"
             android:text="@string/mendianshu" />
 
         <EditText
             android:id="@+id/et_mendianshu"
-            style="@style/generalEditText"
+            style="@style/baseinfothirdEditText"
             android:hint="@string/mendianshu" />
     </LinearLayout>
 
@@ -66,12 +66,12 @@
         <!-- 废品收购站数 -->
 
         <TextView
-            style="@style/thirdTitle"
+            style="@style/baseinfothirdTitle"
             android:text="@string/feipinzhan" />
 
         <EditText
             android:id="@+id/et_feipinzhan"
-            style="@style/generalEditText"
+            style="@style/baseinfothirdEditText"
             android:hint="@string/feipinzhan" />
     </LinearLayout>
 
@@ -80,12 +80,12 @@
         <!-- 幼儿园或培训机构数 -->
 
         <TextView
-            style="@style/thirdTitle"
+            style="@style/baseinfothirdTitle"
             android:text="@string/youyuanpeixun" />
 
         <EditText
             android:id="@+id/et_youyuanpeixun"
-            style="@style/generalEditText"
+            style="@style/baseinfothirdEditText"
             android:hint="@string/youyuanpeixun" />
     </LinearLayout>
 
@@ -94,12 +94,12 @@
         <!-- 种养殖地数 -->
 
         <TextView
-            style="@style/thirdTitle"
+            style="@style/baseinfothirdTitle"
             android:text="@string/zhongyangzhidi" />
 
         <EditText
             android:id="@+id/et_zhongyangzhidi"
-            style="@style/generalEditText"
+            style="@style/baseinfothirdEditText"
             android:hint="@string/zhongyangzhidi" />
     </LinearLayout>
     
@@ -108,12 +108,12 @@
         <!-- 炉具取暖户数 -->
 
         <TextView
-            style="@style/thirdTitle"
+            style="@style/baseinfothirdTitle"
             android:text="@string/lujuqunuan" />
 
         <EditText
             android:id="@+id/et_lujuqunuan"
-            style="@style/generalEditText"
+            style="@style/baseinfothirdEditText"
             android:hint="@string/lujuqunuan" />
     </LinearLayout>
 </LinearLayout>

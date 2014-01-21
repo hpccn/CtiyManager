@@ -75,7 +75,7 @@ public class ViewSingletonFactory {
 		public void onChanged(int id, String value);
 	}	
 	
-	public void showSingleChoiceItems(Context context, final int id, final String []items, final OnChangedListener listener) {
+	public void showSingleChoiceItems(Context context, final String []items, final OnChangedListener listener) {
 	    AlertDialog.Builder builder = new AlertDialog.Builder(context);
 	    builder.setIcon(R.drawable.ic_logo);
 	    builder.setCancelable(true);
@@ -85,7 +85,7 @@ public class ViewSingletonFactory {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 
-				listener.onChanged(id, items[which]);
+				listener.onChanged(which, items[which]);
 				dialog.dismiss();
 	    }});
 	    

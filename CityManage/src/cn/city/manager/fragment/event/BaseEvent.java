@@ -36,9 +36,12 @@ public  abstract class BaseEvent implements Comparable<BaseEvent>{
 	
 	public abstract String getSortValue();
 	
-	public abstract Drawable getIcon(); 
 	
-
+	public abstract String getS_solvestatus();// 解决状态
+	public abstract String getT_updatetime(); //更新时间 
+	
+	
+	public abstract String getAddress();
 	public abstract void setAddress(String address);
 	public abstract void setL_latitude(double latitude);
 	public abstract void setD_longitude(double longitude);
@@ -50,6 +53,8 @@ public  abstract class BaseEvent implements Comparable<BaseEvent>{
 	
 	public abstract double getD_latitude();
 	public abstract double getD_longitude();
+	
+	private String icon;
 	
 	public BaseEvent(){
 //		init();
@@ -89,4 +94,10 @@ public  abstract class BaseEvent implements Comparable<BaseEvent>{
 		return getSortValue().compareTo(ev.getSortValue());
 	}
 
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+	public String getIcon() {
+		return this.icon;
+	}
 }

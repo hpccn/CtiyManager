@@ -8,12 +8,15 @@
 
     <ImageView
         android:id="@+id/picture"
-        android:layout_width="300dp"
-        android:layout_height="280dp"
+        android:layout_width="160dp"
+        android:layout_height="120dp"
         android:layout_gravity="center"
         android:background="@drawable/img_photo_background2"
         android:gravity="center"
-        android:padding="10dp" />
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp" 
+        android:paddingBottom="14dp"/>
     <!--
     <Gallery
         android:id="@+id/gallery"

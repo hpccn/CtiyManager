@@ -4,12 +4,12 @@
     tools:context="村庄信息" >
 
     <TextView
-        style="@style/thirdTitle"
+        style="@style/baseinfothirdTitle"
         android:text="@string/villagename" />
 
     <EditText
         android:id="@+id/et_villagename"
-        style="@style/generalEditTextReadonly"
+        style="@style/baseinfothirdEditText"
         android:hint="@string/villagename" />
 
 </LinearLayout>

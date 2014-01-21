@@ -87,12 +87,6 @@ public class t_netbaseinfoEvent extends BaseEvent {
 		return s_netid;
 	}
 
-	@Override
-	public Drawable getIcon() {
-
-		return null;
-	}
-
 
 
 	@Override
@@ -485,6 +479,24 @@ public class t_netbaseinfoEvent extends BaseEvent {
 	public double getD_longitude() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public String getS_solvestatus() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getT_updatetime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAddress() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

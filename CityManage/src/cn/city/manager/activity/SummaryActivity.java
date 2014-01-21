@@ -58,14 +58,22 @@ public class SummaryActivity extends BaseBrowseActivity {
 		selectEventSummary(summaryView);
 
 	}
-
+	@Override
+	protected List<BaseEvent> reloadEvents() throws Exception {
+		EventSingletonFactory.getInstance().reloadEvents(context, currentUrl, onLoadListener);
+		return null;
+	}
 	@Override
 	protected List<BaseEvent> loadEvents() throws Exception {
 		tvTitle = (TextView)this.findViewById(R.id.id_titlebar_title);
-		
+		Configuration.getInstance().setKind("t_weijian");
+		Configuration.getInstance().setId(Configuration.getInstance().getUsername());
+		Configuration.getInstance().setTime("month");
+		Configuration.getInstance().setStart(0);
+		//Configuration.getInstance().setStep(step)
 //		String url = "https://code.csdn.net/hpccn/citymanager/blob/master/CityManage/assets/t_weijian.json";//"http://192.168.6.55:8000/t_weijian.json";
 //		String url = "http://192.168.6.55:8000/t_weijian.json";
-		currentUrl = Constants.obtainWeijianListUrl(Configuration.getInstance().getUsername(), "month");//weijian_list;//"http://longhorn.free3v.net/t_weijian.html";
+		currentUrl = Constants.obtainLastWeijianListUrl();//Constants.obtainWeijianListUrl(Configuration.getInstance().getUsername(), "month");//weijian_list;//"http://longhorn.free3v.net/t_weijian.html";
 //		StringCacheFactory scf = StringCacheFactory.getInstance(this);
 //		scf.scheduleLoadString(10, Uri.parse(url));
 		
@@ -217,7 +225,8 @@ public class SummaryActivity extends BaseBrowseActivity {
 	protected void onSelectDateView(int select) {
 		// TODO Auto-generated method stub
 //		String url = String.format(Constants.weijian_list_option, date[select]);
-		currentUrl = Constants.obtainWeijianListUrl(Configuration.getInstance().getUsername(), date[select]);
+		Configuration.getInstance().setTime(date[select]);
+		currentUrl = Constants.obtainLastWeijianListUrl();//Constants.obtainWeijianListUrl(Configuration.getInstance().getUsername(), date[select]);
 //		HttpStreamThread hst = new EventHttpStreamThread(this, url, onStringLoadListener);
 //		hst.start();
 		EventSingletonFactory.getInstance().loadEvents(context, currentUrl, onLoadListener);

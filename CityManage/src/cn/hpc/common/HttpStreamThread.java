@@ -24,6 +24,7 @@ public abstract class HttpStreamThread extends Thread {
 		public void onStringLoaded(String url, String string);
 		public void onMoved(String url);
 		public void onResponse(int code);
+		
 	}
 	
 	public static final String TAG = "HttpStreamThread";

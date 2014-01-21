@@ -4,9 +4,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,9 +22,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
@@ -41,9 +51,11 @@ import cn.city.manager.view.NetBaseInfoNetGridAdapter;
 import cn.city.manager.view.Statistics;
 import cn.city.manager.view.SummaryEventAdapter;
 import cn.hpc.common.JSONHelper;
+import cn.hpc.common.cache.ImageCacheFactory;
 
-public abstract class BaseBrowseActivity extends Activity {
+public abstract class BaseBrowseActivity extends Activity implements ImageCacheFactory.OnImageLoadListener{
 
+	public static final int REQUEST_CODE = 0x100;
 	protected String category, title;
 	protected TextView tvTitle;
 	protected Context context;
@@ -62,11 +74,17 @@ public abstract class BaseBrowseActivity extends Activity {
 	
 	protected GeneralInformationFragment general;// = new GeneralInformationFragment(context);
 	protected String currentUrl;
+	
+	private ImageCacheFactory imc;
+	final protected ExecutorService executorService = Executors.newFixedThreadPool(10);    //固定五个线程来执行任务
+//.newCachedThreadPool();//
 	@Override
 	protected void onDestroy() {
 		overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
+		executorService.shutdown();
 		super.onDestroy();
 	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -81,6 +99,7 @@ public abstract class BaseBrowseActivity extends Activity {
 
 		title = this.getIntent().getStringExtra("title");
 		context = this;
+		imc = ImageCacheFactory.getInstance(context);
 		general = new GeneralInformationFragment(context);
 		try {
 //			init(this);
@@ -96,14 +115,185 @@ public abstract class BaseBrowseActivity extends Activity {
 		updateClickListent();
 	}
 	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		Log.e("", "onActivityResult : " + requestCode + ", resultCode " + resultCode);
+//		if (resultCode == 0 ||  (resultCode != RESULT_OK) ) {
+//			super.onActivityResult(requestCode, resultCode, data);
+//			return;
+//		}
+		if (REQUEST_CODE == requestCode) {
+			handler.sendEmptyMessageDelayed(0x1002, 500);
+		}
+	}
+	
+	class TaskWithResult implements Callable<String> {
+        private Uri uri;
+
+        public TaskWithResult(Uri uri) {
+                this.uri = uri;
+        }
+
+        /**
+         * 任务的具体过程，一旦任务传给ExecutorService的submit方法，则该方法自动在一个线程上执行。
+         *
+         * @return
+         * @throws Exception
+         */
+        public String call() throws Exception {
+			System.out.println("call()方法被自动调用,干活！！！             "
+					+ Thread.currentThread().getName());
+			try {
+				imc.getImage(uri);// , 72, 72);
+				if (null != adapter)
+					adapter.notifyDataSetInvalidated();
+				Log.d("", "finish download img : " + uri.toString());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			// for (int i = 999999; i > 0; i--) ;
+			return "call()方法被自动调用，任务的结果是：" + uri + "    "
+					+ Thread.currentThread().getName();
+        } 
+	}
+	private void asyncDownloadImage(){
+		
+//		List<Future<String>> resultList = new ArrayList<Future<String>>(); 
+//		
+//		for (BaseEvent content : events){
+//			if (null != content && null != content.getIcon() && content.getIcon().length() > 4){
+//				final Uri uri = Uri.parse(content.getIcon());
+//				if (null != uri && uri.getHost() != null){
+////					executorService.execute(new Runnable() {
+////						public void run() {
+////							Log.d("", "start download img : " + uri.toString());
+////							try {
+////								imc.getImage(uri);//, 72, 72);
+////								if (null != adapter)
+////									adapter.notifyDataSetInvalidated();
+////								Log.d("", "finish download img : " + uri.toString());
+////							} catch (Exception e) {
+////								// TODO Auto-generated catch block
+////								e.printStackTrace();
+////							}
+////						}
+////					});
+//
+//				    //使用ExecutorService执行Callable类型的任务，并将结果保存在future变量中
+//                    Future<String> future = executorService.submit(new TaskWithResult(uri));
+//                    //将任务执行结果存储到List中
+//                    resultList.add(future); 
+//				}
+//			}
+//		}
+//        //遍历任务的结果
+//        for (Future<String> fs : resultList) {
+//                try {
+//                        System.out.println(fs.get());     //打印各个线程（任务）执行的结果
+//                } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                } catch (ExecutionException e) {
+//                        e.printStackTrace();
+//                } finally {
+//                        //启动一次顺序关闭，执行以前提交的任务，但不接受新任务。如果已经关闭，则调用没有其他作用。
+//                        executorService.shutdown();
+//                }
+//        } 
+
+		
+		
+		Thread th = new Thread(){
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				super.run();
+				
+				if (null != events) {
+					for (BaseEvent content : events){
+						if (null != content && null != content.getIcon() && content.getIcon().length() > 4){
+							final Uri uri = Uri.parse(content.getIcon());
+							if (null != uri && uri.getHost() != null)
+								try {
+									executorService.submit(new Runnable() {
+										public void run() {
+											Log.d("", "download img : " + uri.toString());
+											try {
+												imc.getImage(uri);//, 72, 72);
+												handler.sendEmptyMessage(0x1001);
+											} catch (Exception e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											}
+										}
+									});
+								} catch (Exception e1){
+									
+								}
+
+//								try {
+////									Drawable drawable = imc.loadImage(R.id.picture, uri, 320, 240);
+//									
+//									if (null == drawable) {
+//										imc.registerOnImageLoadListener(this);
+//									}
+////									imageView.setImageDrawable(drawable);
+//								} catch (Exception e) {
+//									// TODO Auto-generated catch block
+//									e.printStackTrace();
+//								} 
+						}
+					}
+				}
+				
+			}
+			
+		};
+		th.setPriority(Thread.MIN_PRIORITY);
+		th.start();
+	}
+	
 	protected void onEventLoad(){
 
+		asyncDownloadImage();
 //		if (null == events) return;
 		updateView();
 //		EventSingletonFactory.getInstance().cachePhoto(context, events);
 //		initToolBar();
 //		updateClickListent();
 
+	}
+	
+	final protected Handler handler = new Handler(){
+
+		@Override
+		public void dispatchMessage(Message msg) {
+			switch (msg.what) {
+			case 0x1001:
+				if (null != adapter)
+					adapter.notifyDataSetInvalidated();
+
+				break;
+			case 0x1002:
+				try {
+					reloadEvents();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+			default:
+			super.dispatchMessage(msg);
+			}
+		}
+		
+	};
+	@Override
+	public void onImageLoaded(int id, Uri imageUri, Drawable image) {
+//		((ImageView) rootView.findViewById(id)).setImageDrawable(image);
+		adapter.notifyDataSetInvalidated();
+		imc.unregisterOnImageLoadListener(this);
 	}
 	
 	protected abstract View obtainView();
@@ -113,6 +303,7 @@ public abstract class BaseBrowseActivity extends Activity {
 	protected abstract void onSelectDateView(int select);
 	protected abstract void invalidateEvent();
 	protected abstract List <BaseEvent> loadEvents() throws Exception;
+	protected abstract List <BaseEvent> reloadEvents() throws Exception;
 	
 	protected List <BaseEvent> events;
 	private void init(final Context context) throws JSONException, IOException{
@@ -180,12 +371,12 @@ public abstract class BaseBrowseActivity extends Activity {
 				Intent i = new Intent(context, DetailActivity.class);
 				i.putExtra("jsonValue", js);
 				i.putExtra("category", category);//events.get(position).getCategory());//
-				startActivity(i);
+				startActivityForResult(i, REQUEST_CODE);
 				overridePendingTransition(R.anim.zoom_in, R.anim.zoom_in); 
 			}
 			
 		});
-
+		
 	}
 	
 	private void selectEventSummary(ListView summaryView){
@@ -204,7 +395,7 @@ public abstract class BaseBrowseActivity extends Activity {
 				Intent i = new Intent(context, DetailActivity.class);
 				i.putExtra("jsonValue", js);
 				i.putExtra("category", category);//events.get(position).getCategory());//
-				startActivity(i);
+				startActivityForResult(i, REQUEST_CODE);
 				overridePendingTransition(R.anim.zoom_in, R.anim.zoom_in); 
 			}
 			
@@ -321,7 +512,7 @@ public abstract class BaseBrowseActivity extends Activity {
 			case R.id.id_add_event:
 				Intent i = new Intent(context, DetailActivity.class);
 				i.putExtra("category", category);//events.get(position).getCategory());//
-				startActivity(i);
+				startActivityForResult(i, REQUEST_CODE);
 				overridePendingTransition(R.anim.zoom_in, R.anim.zoom_in); 
 				break;
 				
@@ -474,6 +665,22 @@ public abstract class BaseBrowseActivity extends Activity {
 //	    AlertDialog ad = builder.create();  
 //		ad.show();
 
+	}
+
+	@Override
+	protected void onRestart() {
+		// TODO Auto-generated method stub
+		super.onRestart();
+		Log.e("", "onRestart");
+		handler.sendEmptyMessageDelayed(0x1002, 500);
+
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		Log.e("", "onResume");
 	}
 	
 }

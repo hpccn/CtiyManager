@@ -120,6 +120,11 @@ public class NetBaseInfoActivity extends BaseBrowseActivity {
 	}
 
 	@Override
+	protected List<BaseEvent> reloadEvents() throws Exception {
+		return loadEvents();
+	}
+	
+	@Override
 	protected List<BaseEvent> loadEvents() throws Exception {
 //		if (t_netbaseinfoGrid.class.getSimpleName().equals(category)) {
 //			return null;
@@ -276,7 +281,7 @@ public class NetBaseInfoActivity extends BaseBrowseActivity {
 			
 			@Override
 			public void onClick(View v) {
-				ViewSingletonFactory.getInstance().showSingleChoiceItems(context, 0, optionTitle, new ViewSingletonFactory.OnChangedListener(){
+				ViewSingletonFactory.getInstance().showSingleChoiceItems(context, optionTitle, new ViewSingletonFactory.OnChangedListener(){
 
 					@Override
 					public void onChanged(int id, String value) {

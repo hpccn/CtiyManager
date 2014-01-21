@@ -7,6 +7,7 @@ import cn.city.manager.fragment.event.BaseEvent;
 import cn.hpc.common.cache.ImageCacheFactory;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,18 +51,25 @@ public class SummaryEventAdapter extends BaseAdapter {
 			convertView = View.inflate(context, R.layout.summary_listitem, null);
 		}
 		
-		String image = list.get(position).getS_photo();
+		String image = list.get(position).getIcon();
 		ImageView imageView =  (ImageView) convertView.findViewById(R.id.id_summary_item_cover);
-		
+		Drawable icon = null;
 		if (null != image) {
+			
 			try {
-				imageView.setImageDrawable(imc.getImage(Uri.parse(image), 72, 72));
+				icon = imc.getLocalImage(Uri.parse(image));
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				
 			}
+		}
+		
+		if (null != icon){
+			imageView.setImageDrawable(icon);
 		} else {
-			imageView.setImageResource(R.drawable.ic_item_gray);
+			imageView.setImageResource(R.drawable.ic_default_event);
 		}
 		
 		TextView tv = null;
@@ -86,6 +94,17 @@ public class SummaryEventAdapter extends BaseAdapter {
 		
 		tv = (TextView) convertView.findViewById(R.id.id_summary_item_cell);
 		tv.setText(list.get(position).getNetGridId());
+		
+		tv = (TextView) convertView.findViewById(R.id.id_update_time);
+		tv.setText(list.get(position).getT_updatetime());
+		
+		tv = (TextView) convertView.findViewById(R.id.id_status);
+		tv.setText(list.get(position).getS_solvestatus());
+		
+		tv = (TextView) convertView.findViewById(R.id.id_address);
+		tv.setText(list.get(position).getAddress());
+		
+		
 		return convertView;
 	}
 

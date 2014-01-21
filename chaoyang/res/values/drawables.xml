@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="drawable" name="color_background">#ffe7e7e7</item>
+    <item type="drawable" name="color_stdbg">#fff1f1f1</item>
+    <item type="drawable" name="color_stdbg2">#fff3f3f3</item>
+    <item type="drawable" name="splash_bg">#fffff359</item>
+    <item type="drawable" name="dlg_text">#ff333333</item>
+    <item type="drawable" name="dlg_bg">#ffffffff</item>
+    <item type="drawable" name="black">#ff000000</item>
+    <item type="drawable" name="white">#ffffffff</item>
+    <item type="drawable" name="color_border">#ffcccccc</item>
+    <item type="drawable" name="color_border2">#ffcfcfcf</item>
+    <item type="drawable" name="red">#ffcc3333</item>
+    <item type="drawable" name="button_text">#ff363636</item>
+    <item type="drawable" name="tabbar_normal">#ff464646</item>
+    <item type="drawable" name="tabbar_highlight">#ff29aaf7</item>
+    <item type="drawable" name="gray">#ffc7c7c7</item>
+    <item type="drawable" name="color_text">#ff262626</item>
+    <item type="drawable" name="alpha_black">#99000000</item>
+    <item type="drawable" name="color_transparent">#00000000</item>
+    <item type="drawable" name="color_title_bar_text">#ffb5b5b5</item>
+    <item type="drawable" name="color_price">#ffa9e9f7</item>
+    <item type="drawable" name="color_item_normal">#ffe7e7e7</item>
+    <item type="drawable" name="color_item_selected">#fff9f9f9</item>
+    <item type="drawable" name="color_item_text_normal">#ff565656</item>
+    <item type="drawable" name="color_item_text_normal2">#ff919191</item>
+    <item type="drawable" name="color_item_text_selected">#ff4a97c9</item>
+</resources>

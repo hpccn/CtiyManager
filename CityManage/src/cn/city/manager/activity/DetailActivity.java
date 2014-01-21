@@ -48,6 +48,7 @@ import cn.city.manager.view.DateTimeChanger;
 import cn.city.manager.view.DateTimePickerDialog;
 import cn.city.manager.view.ViewSingletonFactory;
 import cn.hpc.common.BaiduMapHelper;
+import cn.hpc.common.DrawableUtils;
 import cn.hpc.common.HttpUploadHelper;
 
 public class DetailActivity extends Activity {
@@ -61,10 +62,11 @@ public class DetailActivity extends Activity {
 
 	public static final String IMAGE_UNSPECIFIED = "image/*";
 
-	public static final int VIDEO_CAPTURE = 4;// 拍照
-	public static final int IMAGE_SELECT = 5;// 拍照
-	public static final int VIDEO_SELECT = 6;// 拍照
-
+	public static final int VIDEO_CAPTURE = 4;// 
+	public static final int IMAGE_SELECT = 5;// 
+	public static final int VIDEO_SELECT = 6;// 
+	
+	public static final int IMAGE_CROP = 7;// 剪图
 
 	protected String jsonValue;
 //	protected Gallery gallery;
@@ -145,9 +147,10 @@ public class DetailActivity extends Activity {
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
-		// if (keyCode == KeyEvent.KEYCODE_BACK) {
-		// return true;
-		// }
+		 if (keyCode == KeyEvent.KEYCODE_BACK) {
+			 DetailActivity.this.finish();
+			 return true;
+		 }
 		return super.onKeyDown(keyCode, event);
 		// return true;
 	}
@@ -155,7 +158,7 @@ public class DetailActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
-
+		
 		super.onDestroy();
 	}
 	
@@ -243,18 +246,22 @@ public class DetailActivity extends Activity {
 		int []ids = {R.id.btn_commit, R.id.btn_cancel,
 				R.id.btn_add_picture, R.id.btn_add_video, 
 				R.id.btn_select_picture, R.id.btn_select_video,
-				R.id.tv_video_file, 
-				R.id.id_browse_mode};
+				R.id.tv_video_file, R.id.picture,
+				R.id.id_browse_mode,
+				R.id.id_threeadress};
 		Button btn = (Button) this.findViewById(R.id.id_browse_mode);
 		btn.setVisibility(View.VISIBLE);
-		btn.setText("地图导航");
+		
+		btn.setBackgroundResource(R.drawable.title_btn_map);
+		btn.setText(null);//"事发地点");
 		for (int id : ids){
 			findViewById(id).setOnClickListener(onClickListener);
 		}
 		
 		imageView = (ImageView) findViewById(R.id.picture);
-		findViewById(R.id.btn_add_picture).setOnClickListener(onClickListener);
-		findViewById(R.id.btn_add_video).setOnClickListener(onClickListener);
+		
+//		findViewById(R.id.btn_add_picture).setOnClickListener(onClickListener);
+//		findViewById(R.id.btn_add_video).setOnClickListener(onClickListener);
 //		gallery = (Gallery) findViewById(R.id.gallery);
 //		imageAdapter = new ImageAdapter(this);
 //		gallery.setAdapter(imageAdapter);
@@ -289,33 +296,48 @@ public class DetailActivity extends Activity {
 			
 
 		switch (requestCode) {
-		case IMAGE_SELECT: {
-			Uri uri = data.getData();
-			Cursor cursor = getContentResolver().query(uri, null, null, null,
-					null);
-			cursor.moveToFirst();
-//			// String imgNo = cursor.getString(0); // 图片编号
-			String imgPath = cursor.getString(1); // 图片文件路径
-//			String imgSize = cursor.getString(2); // 图片大小
-//			String imgName = cursor.getString(3); // 图片文件名
-//			String fileName = imgName;
-//			String fileSize = imgSize;
-			// Log.e("uri", uri.toString());
+		case IMAGE_CROP:{
 			baseContent.setS_photo(imgPath);
-			ContentResolver cr = this.getContentResolver();
-			try {
-				Bitmap bitmap = BitmapFactory.decodeStream(cr
-						.openInputStream(uri));
-//				ImageView imageView = (ImageView) findViewById(R.id.imview);
-//				// 将Bitmap设定到ImageView 
-				Bitmap bmp = small(bitmap);
-				imageView.setImageBitmap(bmp);
-//				imageAdapter.addBitmap(bitmap);// (pictureFile);
-//				imageAdapter.notifyDataSetChanged();
-			} catch (FileNotFoundException e) {
-				// Log.e("Exception", e.getMessage(),e);
-			}
-			cursor.close();
+			Bitmap bmp = DrawableUtils.decodeBitmapWithSize(imgPath, 100, 100);
+			imageView.setImageBitmap(bmp);
+
+		}
+		break;
+		case IMAGE_SELECT: {
+			
+			startPhotoZoom(data.getData());
+//			Uri uri = data.getData();
+//			Cursor cursor = getContentResolver().query(uri, null, null, null,
+//					null);
+//			cursor.moveToFirst();
+////			// String imgNo = cursor.getString(0); // 图片编号
+//			String imgPath = cursor.getString(1); // 图片文件路径
+////			String imgSize = cursor.getString(2); // 图片大小
+////			String imgName = cursor.getString(3); // 图片文件名
+////			String fileName = imgName;
+////			String fileSize = imgSize;
+//			// Log.e("uri", uri.toString());
+//			
+			//增加切图:	
+			
+//			baseContent.setS_photo(imgPath);
+//			ContentResolver cr = this.getContentResolver();
+//			try {
+////				Bitmap bitmap = BitmapFactory.decodeStream(cr
+////						.openInputStream(uri));
+////				ImageView imageView = (ImageView) findViewById(R.id.imview);
+////				// 将Bitmap设定到ImageView 
+////				Bitmap bmp = small(bitmap);
+////				imageView.setImageBitmap(bmp);
+////				imageView.setImageURI(uri);
+//				Bitmap bmp = DrawableUtils.decodeBitmapWithSize(imgPath, 100, 100);
+//				imageView.setImageBitmap(bmp);
+////				imageAdapter.addBitmap(bitmap);// (pictureFile);
+////				imageAdapter.notifyDataSetChanged();
+//			} catch (Exception e) {
+//				// Log.e("Exception", e.getMessage(),e);
+//			}
+//			cursor.close();
 		}
 		break;
 		
@@ -325,7 +347,8 @@ public class DetailActivity extends Activity {
 			cursor.moveToFirst();
 			String mediaFilePath = cursor.getString(1);
 			cursor.close();
-			tvVideoFile.setText(mediaFilePath);
+			tvVideoFile.setText(null);//mediaFilePath);
+			tvVideoFile.setBackgroundResource(R.drawable.ic_media_play);
 			baseContent.setS_video(mediaFilePath);
 			// File mMediaFile = new File(mediaFilePath);
 			Log.d("", "VIDEO_CAPTURE : " + mediaFilePath);
@@ -334,7 +357,7 @@ public class DetailActivity extends Activity {
 		break;
 		case IMAGE_CAPTURE: {// 拍照//if (requestCode == PHOTOHRAPH)
 			// 设置文件保存路径这里放在跟目录下
-
+			startPhotoZoom(Uri.parse("file://"+imgPath));
 //			Bundle extras = data.getExtras();
 //			Bitmap b = (Bitmap) extras.get("data");
 //			Bitmap bmp = small(b);
@@ -350,20 +373,23 @@ public class DetailActivity extends Activity {
 ////			String imgPath = cursor.getString(1); // 图片文件路径
 //			
 //			
-			baseContent.setS_photo(imgPath);
-			try {
-//				File pictureFile = new File(imgPath);
-
-				Bitmap bitmap = BitmapFactory.decodeFile(imgPath);
-//				ImageView imageView = (ImageView) findViewById(R.id.imview);
-//				// 将Bitmap设定到ImageView 
-				Bitmap bmp = small(bitmap);
-				imageView.setImageBitmap(bmp);
-//				imageAdapter.addBitmap(bitmap);// (pictureFile);
-//				imageAdapter.notifyDataSetChanged();
-			} catch (Exception e) {
-				// Log.e("Exception", e.getMessage(),e);
-			}
+	//增加切图:		
+//			baseContent.setS_photo(imgPath);
+//			try {
+////				File pictureFile = new File(imgPath);
+//
+////				Bitmap bitmap = BitmapFactory.decodeFile(imgPath);
+////				ImageView imageView = (ImageView) findViewById(R.id.imview);
+////				// 将Bitmap设定到ImageView 
+////				Bitmap bmp = small(bitmap);
+//				Bitmap bmp = DrawableUtils.decodeBitmapWithSize(imgPath, 100, 100);
+//
+//				imageView.setImageBitmap(bmp);
+////				imageAdapter.addBitmap(bitmap);// (pictureFile);
+////				imageAdapter.notifyDataSetChanged();
+//			} catch (Exception e) {
+//				// Log.e("Exception", e.getMessage(),e);
+//			}
 		}
 			break;
 		case VIDEO_CAPTURE: {
@@ -373,7 +399,8 @@ public class DetailActivity extends Activity {
 			String mediaFilePath = cursor.getString(1);
 			cursor.close();
 			baseContent.setS_video(mediaFilePath);
-			tvVideoFile.setText(mediaFilePath);
+			tvVideoFile.setBackgroundResource(R.drawable.ic_media_play);
+			tvVideoFile.setText(null);//mediaFilePath);
 			// File mMediaFile = new File(mediaFilePath);
 			Log.d("", "VIDEO_CAPTURE : " + mediaFilePath);
 			// File pictureFile = new File(
@@ -459,11 +486,30 @@ public class DetailActivity extends Activity {
 			case R.id.btn_select_picture: {
 				Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 				// 开启Pictures画面Type设定为image
-				intent.setType("image/*");
+//				intent.setType("image/*");
 				 //intent.setType("video/*;image/*");//同时选择视频和图片
 				// 使用Intent.ACTION_GET_CONTENT这个Action
 //				intent.setAction(Intent.ACTION_GET_CONTENT);
 				//取得相片后返回本画面
+				
+				intent.setType("image/*");
+//				intent.putExtra("crop", "true");
+
+//				//裁剪框比例
+//				intent.putExtra("aspectX", 2);
+//				intent.putExtra("aspectY", 1);
+
+				//图片输出大小
+//				intent.putExtra("outputX", 1024);
+//				intent.putExtra("outputY", 768);
+//				intent.putExtra("scale", true);
+//				intent.putExtra("return-data", false);
+//				intent.putExtra(MediaStore.EXTRA_OUTPUT, imgPath);
+//				intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+
+				//不启用人脸识别
+				intent.putExtra("noFaceDetection", false); 
+				//
 				startActivityForResult(intent, IMAGE_SELECT);
 			}
 				break;
@@ -490,6 +536,14 @@ public class DetailActivity extends Activity {
 				break;
 			case R.id.btn_add_video: {
 				Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+				//设置视频大小
+				intent.putExtra(android.provider.MediaStore.EXTRA_SIZE_LIMIT, 2*1024*1024);
+				//
+				intent.putExtra(android.provider.MediaStore.EXTRA_VIDEO_QUALITY , 0);
+
+				//设置视频时间  毫秒单位
+				intent.putExtra(android.provider.MediaStore.EXTRA_DURATION_LIMIT, 60000);
+//				startActivityForResult(intent, VIDEO);
 
 				// intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri
 				// .fromFile(new File(Environment
@@ -499,10 +553,13 @@ public class DetailActivity extends Activity {
 				startActivityForResult(intent, VIDEO_CAPTURE);
 			}
 				break;
+			case R.id.picture:
+				showPicture();
+				break;
 			case R.id.tv_video_file:
 				showVideo();
 				break;
-				
+			case R.id.id_threeadress:
 			case R.id.id_browse_mode:
 				startNavi();
 				break;
@@ -518,32 +575,112 @@ public class DetailActivity extends Activity {
 	}
 	private void startNavi(){
 		
-		if (isZero(baseContent.getD_latitude()) || isZero(baseContent.getD_longitude())){
-			ViewSingletonFactory.getInstance().showProcessDialog(context, null, "位置信息无效,为法为您导航");
-			
-		}
-		
-		ViewSingletonFactory.getInstance().showProcessDialog(context, null, "准备导航数据 ...");
-		Location location = new Location(context);
-		location.asyncLoc(new LocationListener(){
+//		String strIntent = "intent://map/direction?origin=latlng:39.981042,116.779937|name:我的位置&destination=latlng:39.805961,116.194632|name:西单&mode=driving&region=北京&referer=Autohome|GasStation#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end";
+		//移动APP调起Android百度地图方式举例
+//		String strIntent = "intent://map/marker?location=39.805961,116.194632&title=事发地点&content=百度奎科大厦&src=yourCompanyName|yourAppName#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end";  
+		String strIntent = String.format("intent://map/marker?location=%s,%s&title=%s&content=事发地点&src=hpccn|seatosky#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end"
+			, String.valueOf(baseContent.getD_latitude()), String.valueOf(baseContent.getD_longitude())
+			, baseContent.getAddress());
 
-			@Override
-			public void onLocation(double latitude, double longitude,
-					String address) {
-				ViewSingletonFactory.getInstance().hideProcessDialog();
-				if (address.contains("error")) return;
-
-				GeoPoint from = BaiduMapHelper.createGeoPoint(latitude, longitude);
-				GeoPoint to = BaiduMapHelper.createGeoPoint(baseContent.getD_latitude(), baseContent.getD_longitude());
-				BaiduMapHelper.startNavi(context, from, to);
+//		String strIntent = String.format("intent://map/direction?origin=latlng:%s,%s|name:我的位置&destination=latlng:%s,%s|name:%s&mode=driving&region=北京&referer=Autohome|GasStation#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end"
+//				, String.valueOf(baseContent.getD_latitude()), String.valueOf(baseContent.getD_longitude())
+//				, String.valueOf(baseContent.getD_latitude()), String.valueOf(baseContent.getD_longitude())
+//				, baseContent.getAddress());
+		Intent intent;
+//		//调起百度地图客户端
+        try {
+                intent = Intent.getIntent(strIntent);
+                if(isInstallByread("com.baidu.BaiduMap")){
+                        startActivity(intent); //启动调用
+                         Log.e("GasStation", "百度地图客户端已经安装") ;
+                }else{
+                         Log.e("GasStation", "没有安装百度地图客户端") ;
+                }
+        } catch (Exception e) {
+                e.printStackTrace();
+        }
+        
+        
+//		if (isZero(baseContent.getD_latitude()) || isZero(baseContent.getD_longitude())){
+//			ViewSingletonFactory.getInstance().showProcessDialog(context, null, "位置信息无效,为法为您导航");
+//			
+//		}
+//		
+//		ViewSingletonFactory.getInstance().showProcessDialog(context, null, "准备导航数据 ...");
+//		Location location = new Location(context);
+//		location.asyncLoc(new LocationListener(){
+//
+//			@Override
+//			public void onLocation(double latitude, double longitude,
+//					String address) {
+//				ViewSingletonFactory.getInstance().hideProcessDialog();
+//				if (address.contains("error")) return;
+//
+//				GeoPoint from = BaiduMapHelper.createGeoPoint(latitude, longitude);
+//				GeoPoint to = BaiduMapHelper.createGeoPoint(baseContent.getD_latitude(), baseContent.getD_longitude());
+////				BaiduMapHelper.startNavi(context, from, to);
+//				Intent intent;
+////				String strIntent = "intent://map/marker?location=39.916979519873,116.41004950566&title=我的位置&content=百度奎科大厦"
+//					//调起百度PC或web地图，且在（lat:39.916979519873，lng:116.41004950566）坐标点上显示名称“我的位置”，内容“百度奎科大厦”的信息窗口。
+//				//"intent://map/direction?origin=latlng:34.264642646862,108.95108518068|name:我家&destination=大雁塔&mode=driving®ion=西安&referer=Autohome|GasStation#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end"
+//				
+//				// 直接导航 
+//				String strIntent = String.format("intent://map/direction?origin=latlng:%s,%s|name:我的位置&destination=latlng:%s,%s|name:%s&mode=driving&region=北京&referer=Autohome|GasStation#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end"
+//					, String.valueOf(latitude), String.valueOf(longitude)
+//					, String.valueOf(baseContent.getD_latitude()), String.valueOf(baseContent.getD_longitude())
+//					, baseContent.getAddress());
+//				
+//
+//				//调起百度地图客户端
+//                try {
+//                        intent = Intent.getIntent(strIntent);
+//                        startActivity(intent); //启动调用
+////                        if(isInstallByread("com.baidu.BaiduMap")){
+////                                startActivity(intent); //启动调用
+////                                 Log.e("GasStation", "百度地图客户端已经安装") ;
+////                        }else{
+////                                 Log.e("GasStation", "没有安装百度地图客户端") ;
+////                        }
+//                } catch (Exception e) {
+//                        e.printStackTrace();
+//                }
+//			}
+//			
+//		});		
+	}
+	
+	private boolean isInstallByread(String packageName) {   
+        return new File("/data/data/" + packageName).exists();   
+    } 
+	
+	private void showPicture(){
+		String pic = baseContent.getS_photo();//tvVideoFile.getText().toString();
+		if (null != pic && pic.length() > 1){
+			Uri uri = null;
+			if (pic.startsWith("/")){
+				uri = Uri.parse("file://" + pic);
+			} else {
+				uri = Uri.parse(pic);
 			}
-			
-		});		
+			if (null != uri){
+				try {
+					Intent i = new Intent();//(Intent.ACTION_VIEW);
+					i.setClass(context, ImageViewActivity.class);
+					String type = "image/* ";
+//					i.setData(uri);
+					i.setDataAndType(uri, type);
+//					i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					context.startActivity(i);
+				} catch (Exception e){
+					e.printStackTrace();
+				}
+			}
+		}	
 	}
 	
 	private void showVideo(){
 		
-		String video = tvVideoFile.getText().toString();
+		String video = baseContent.getS_video();//tvVideoFile.getText().toString();
 		if (null != video && video.length() > 1){
 			Uri uri = null;
 			if (video.startsWith("/")){
@@ -554,7 +691,10 @@ public class DetailActivity extends Activity {
 			if (null != uri){
 				try {
 					Intent i = new Intent(Intent.ACTION_VIEW);
-					i.setData(uri);
+//					i.setClass(context, InternetVideoPlayerActivity.class);
+					String type = "video/* ";
+//					i.setData(uri);
+					i.setDataAndType(uri, type);
 					i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					context.startActivity(i);
 				} catch (Exception e){
@@ -609,4 +749,50 @@ public class DetailActivity extends Activity {
 		}
 		super.onStop();
 	}
+
+	@Override
+	public void finish() {
+		Intent intent = new Intent();
+		intent.putExtra("finish", "");
+		setResult(Activity.RESULT_OK, intent);
+		this.setResult(100);
+		super.finish();
+	}
+	
+	
+	/**
+	 * 裁剪图片方法实现
+	 * 
+	 * @param uri
+	 */
+	public void startPhotoZoom(Uri uri) {
+
+//		Intent intent = new Intent("com.android.camera.action.CROP");
+//		intent.setDataAndType(uri, "image/*");
+//		// 设置裁剪
+//		intent.putExtra("crop", "true");
+//		// aspectX aspectY 是宽高的比例
+//		intent.putExtra("aspectX", 1);
+//		intent.putExtra("aspectY", 1);
+//		// outputX outputY 是裁剪图片宽高
+//		intent.putExtra("outputX", 320);
+//		intent.putExtra("outputY", 320);
+//		intent.putExtra("return-data", true);
+//		startActivityForResult(intent, 2);
+		
+		 Intent intent = new Intent("com.android.camera.action.CROP");
+		 intent.setDataAndType(uri, "image/*");
+		 intent.putExtra("crop", "true");
+//		 intent.putExtra("aspectX", 1);
+//		 intent.putExtra("aspectY", 1);
+		 intent.putExtra("outputX", 1024);
+		 intent.putExtra("outputY", 768);
+		 intent.putExtra("scale", true);
+		 intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.parse("file://"+imgPath));
+		 intent.putExtra("return-data", false);
+		 intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+		 intent.putExtra("noFaceDetection", true); // no face detection
+		 startActivityForResult(intent, IMAGE_CROP);
+	}
+
 }

@@ -4,19 +4,13 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/title_backguard_repeat"
         android:orientation="horizontal" >
-        
-        <Button
-            android:id="@+id/id_return"
-            style="@style/generalButtonStyle"
-            android:layout_gravity="center"
-            android:text="@string/browse_list_mode" />
-<!--
 
+        <!--
         <TextView 
             android:text="@string/illegal_structure_examination"
             android:id="@+id/id_kind_title"
@@ -42,13 +36,13 @@
             android:layout_margin="2dip"
             android:layout_weight="1"
             android:onClick="resetOverlay"
-            android:text="重置(reset)" />
- -->
+            android:text="重置(reset)" />        -->
+
         <RadioGroup
             android:id="@+id/RadioGroup"
-            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:orientation="horizontal" >
 
             <RadioButton
@@ -62,8 +56,8 @@
                 android:text="普通图" />
 
             <RadioButton
-                style="@style/generalCheckButtonStyle"
                 android:id="@+id/statellite"
+                style="@style/generalCheckButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -72,15 +66,22 @@
         </RadioGroup>
 
         <CheckBox
-            android:visibility="gone"
             android:id="@+id/traffice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:checked="false"
             android:onClick="setTraffic"
-            android:text="交通图" />
-    </LinearLayout>
+            android:text="交通图"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/id_return"
+            style="@style/generalButtonStyle"
+            android:layout_gravity="right"
+            android:layout_alignParentRight="true"
+            android:text="@string/browse_list_mode" />
+    </RelativeLayout>
 
     <com.baidu.mapapi.map.MapView
         android:id="@+id/bmapView"
