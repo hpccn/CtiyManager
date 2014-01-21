@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TabHost android:id="@*android:id/tabhost" android:layout_width="fill_parent" android:layout_height="fill_parent"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <RelativeLayout android:id="@id/tabBackground" android:padding="0.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent">
-        <FrameLayout android:id="@*android:id/tabcontent" android:paddingTop="0.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" />
-        <TabWidget android:id="@*android:id/tabs" android:background="@drawable/backgroundgry" android:layout_width="fill_parent" android:layout_height="60.0dip" android:layout_alignParentBottom="true" />
-        <ImageView android:id="@id/tab_top_select" android:layout_width="wrap_content" android:layout_height="60.0dip" android:layout_marginLeft="0.0dip" android:layout_alignParentBottom="true" />
-    </RelativeLayout>
-</TabHost>

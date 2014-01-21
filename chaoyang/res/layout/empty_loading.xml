@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:gravity="center" android:background="@drawable/listview_item_manual" android:layout_width="fill_parent" android:layout_height="fill_parent" android:fillViewport="true"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout android:gravity="center" android:layout_width="fill_parent" android:layout_height="fill_parent" android:fillViewport="true">
-        <ProgressBar android:id="@id/emptyProgress" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="6.0dip" />
-        <TextView android:gravity="center" android:id="@id/emptyText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/textview_loading" />
-    </LinearLayout>
-</LinearLayout>
