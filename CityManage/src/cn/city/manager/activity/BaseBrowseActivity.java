@@ -82,6 +82,7 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 	protected void onDestroy() {
 		overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
 		executorService.shutdown();
+		imc.clear();
 		super.onDestroy();
 	}
 	
@@ -529,6 +530,7 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 				context.startActivity(intent);
 			}
 			case R.id.id_reload:
+				imc.clear();
 				invalidateEvent();
 
 				break;
@@ -672,7 +674,7 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 		// TODO Auto-generated method stub
 		super.onRestart();
 		Log.e("", "onRestart");
-		handler.sendEmptyMessageDelayed(0x1002, 500);
+//		handler.sendEmptyMessageDelayed(0x1002, 500);
 
 	}
 

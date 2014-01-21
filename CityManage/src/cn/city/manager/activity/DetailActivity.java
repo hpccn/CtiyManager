@@ -122,6 +122,10 @@ public class DetailActivity extends Activity {
 				break;
 			case 0x1002:
 				ViewSingletonFactory.getInstance().hideProcessDialog();
+//				Intent intent = new Intent();
+//				intent.putExtra("finish", "");
+//				setResult(Activity.RESULT_OK, intent);
+				setResult(100);
 				DetailActivity.this.finish();
 				break;
 			case HttpStatus.SC_OK:
@@ -752,10 +756,10 @@ public class DetailActivity extends Activity {
 
 	@Override
 	public void finish() {
-		Intent intent = new Intent();
-		intent.putExtra("finish", "");
-		setResult(Activity.RESULT_OK, intent);
-		this.setResult(100);
+//		Intent intent = new Intent();
+//		intent.putExtra("finish", "");
+//		setResult(Activity.RESULT_OK, intent);
+//		this.setResult(100);
 		super.finish();
 	}
 	
@@ -785,8 +789,8 @@ public class DetailActivity extends Activity {
 		 intent.putExtra("crop", "true");
 //		 intent.putExtra("aspectX", 1);
 //		 intent.putExtra("aspectY", 1);
-		 intent.putExtra("outputX", 1024);
-		 intent.putExtra("outputY", 768);
+//		 intent.putExtra("outputX", 1024);
+//		 intent.putExtra("outputY", 768);
 		 intent.putExtra("scale", true);
 		 intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.parse("file://"+imgPath));
 		 intent.putExtra("return-data", false);

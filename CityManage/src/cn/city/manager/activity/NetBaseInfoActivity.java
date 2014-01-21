@@ -258,7 +258,8 @@ public class NetBaseInfoActivity extends BaseBrowseActivity {
 				Intent i = new Intent(context, DetailActivity.class);
 				i.putExtra("jsonValue", js);
 				i.putExtra("category", category);//events.get(position).getCategory());//
-				startActivity(i);
+//				startActivity(i);
+				startActivityForResult(i, REQUEST_CODE);
 				overridePendingTransition(R.anim.zoom_in, R.anim.zoom_in); 
 			}			
 		});
