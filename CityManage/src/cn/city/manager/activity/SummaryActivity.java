@@ -23,10 +23,11 @@ import cn.city.manager.view.SummaryEventAdapter;
 import cn.city.manager.view.ViewSingletonFactory;
 import cn.hpc.common.HttpStreamThread;
 import cn.hpc.common.JSONHelper;
+import cn.hpc.common.view.XListView;
 
 public class SummaryActivity extends BaseBrowseActivity {
 
-	
+	String title = "违章建筑 [%d]";
 	@Override
 	protected View obtainView() {
 		View view = View.inflate(this, R.layout.summary_main, null);
@@ -53,8 +54,9 @@ public class SummaryActivity extends BaseBrowseActivity {
 			
 		}
 		tvTitle = (TextView)this.findViewById(R.id.id_titlebar_title);
-		ListView summaryView = (ListView) this.findViewById(R.id.summary_list); 
-		this.listView = summaryView;
+		XListView summaryView = (XListView) this.findViewById(R.id.summary_xListView); 
+		setXListView(summaryView);
+		setXListView(summaryView);
 		selectEventSummary(summaryView);
 
 	}
@@ -64,12 +66,12 @@ public class SummaryActivity extends BaseBrowseActivity {
 		return null;
 	}
 	@Override
-	protected List<BaseEvent> loadEvents() throws Exception {
+	protected List<BaseEvent> loadEvents(int start) throws Exception {
 		tvTitle = (TextView)this.findViewById(R.id.id_titlebar_title);
 		Configuration.getInstance().setKind("t_weijian");
 		Configuration.getInstance().setId(Configuration.getInstance().getUsername());
 		Configuration.getInstance().setTime("month");
-		Configuration.getInstance().setStart(0);
+		Configuration.getInstance().setStart(start);
 		//Configuration.getInstance().setStep(step)
 //		String url = "https://code.csdn.net/hpccn/citymanager/blob/master/CityManage/assets/t_weijian.json";//"http://192.168.6.55:8000/t_weijian.json";
 //		String url = "http://192.168.6.55:8000/t_weijian.json";
@@ -176,6 +178,9 @@ public class SummaryActivity extends BaseBrowseActivity {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case 100:
+				if (null != events && ! events.isEmpty()) {
+					tvTitle.setText(String.format(title, events.size()));
+				}
 				onEventLoad();
 				break;
 			default:	
@@ -186,16 +191,21 @@ public class SummaryActivity extends BaseBrowseActivity {
 	private void selectEventSummary(ListView summaryView){
 		if (null == summaryView || null == events) return;
 		SummaryEventAdapter adapter = new SummaryEventAdapter(context, events); 
-		this.adapter = adapter;
+//		this.adapter = adapter;
+		setAdapter(adapter);
 		summaryView.setAdapter(adapter);
 		summaryView.setOnItemClickListener(new OnItemClickListener(){
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				
+				if (position > events.size()) {
+					
+					
+					return;
+				}
 
-				String js = JSONHelper.toJSON(events.get(position));
+				String js = JSONHelper.toJSON(events.get(position - 1));
 //				Log.i("", "events.get(position) :" + js);
 				
 				Intent i = new Intent(context, DetailActivity.class);
@@ -239,6 +249,12 @@ public class SummaryActivity extends BaseBrowseActivity {
 		if (null != currentUrl) {
 			EventSingletonFactory.getInstance().reloadEvents(context, currentUrl, onLoadListener);
 		}
+	}
+
+	@Override
+	protected List<BaseEvent> loadMoreEvents(int start) throws Exception {
+		return loadEvents(start);
+		
 	}
 	
 }

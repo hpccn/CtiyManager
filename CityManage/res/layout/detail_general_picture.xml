@@ -41,13 +41,14 @@
             android:id="@+id/btn_select_picture"
             style="@style/generalButtonStyle"
             android:layout_gravity="center"
+            android:layout_marginRight="20dp"
             android:text="@string/select_picture" />
 
         <Button
             android:id="@+id/btn_add_picture"
             style="@style/generalButtonStyle"
             android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
+            
             android:text="@string/snapshot" />
     </LinearLayout>
 

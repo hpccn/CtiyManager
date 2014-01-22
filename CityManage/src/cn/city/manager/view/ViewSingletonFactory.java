@@ -75,12 +75,12 @@ public class ViewSingletonFactory {
 		public void onChanged(int id, String value);
 	}	
 	
-	public void showSingleChoiceItems(Context context, final String []items, final OnChangedListener listener) {
+	public void showSingleChoiceItems(Context context, final String []items, final int checkedItem, final OnChangedListener listener) {
 	    AlertDialog.Builder builder = new AlertDialog.Builder(context);
 	    builder.setIcon(R.drawable.ic_logo);
 	    builder.setCancelable(true);
 	    
-	    builder.setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener(){
+	    builder.setSingleChoiceItems(items, checkedItem, new DialogInterface.OnClickListener(){
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

@@ -125,7 +125,7 @@ public class DetailActivity extends Activity {
 //				Intent intent = new Intent();
 //				intent.putExtra("finish", "");
 //				setResult(Activity.RESULT_OK, intent);
-				setResult(100);
+				setResult(BaseBrowseActivity.REQUEST_UPDATE_CODE);
 				DetailActivity.this.finish();
 				break;
 			case HttpStatus.SC_OK:
@@ -255,6 +255,9 @@ public class DetailActivity extends Activity {
 				R.id.id_threeadress};
 		Button btn = (Button) this.findViewById(R.id.id_browse_mode);
 		btn.setVisibility(View.VISIBLE);
+		
+		this.findViewById(R.id.btn_select_picture).setVisibility(View.GONE);
+		this.findViewById(R.id.btn_select_video).setVisibility(View.GONE);
 		
 		btn.setBackgroundResource(R.drawable.title_btn_map);
 		btn.setText(null);//"事发地点");
@@ -579,11 +582,23 @@ public class DetailActivity extends Activity {
 	}
 	private void startNavi(){
 		
+		String lat =null;
+		String lon = null;
+		GeoPoint gp = BaiduMapHelper.createGeoPoint(baseContent.getD_latitude(), baseContent.getD_longitude());
+		Double gpsLat = 0.0d, gpsLon = 0.0d;
+		gpsLat = gp.getLatitudeE6() * 1.0d / 1E6;
+		gpsLon = gp.getLongitudeE6() * 1.0d / 1E6;
+
+		lat = String.valueOf(gpsLat);
+		lon = String.valueOf(gpsLon);
 //		String strIntent = "intent://map/direction?origin=latlng:39.981042,116.779937|name:我的位置&destination=latlng:39.805961,116.194632|name:西单&mode=driving&region=北京&referer=Autohome|GasStation#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end";
 		//移动APP调起Android百度地图方式举例
 //		String strIntent = "intent://map/marker?location=39.805961,116.194632&title=事发地点&content=百度奎科大厦&src=yourCompanyName|yourAppName#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end";  
 		String strIntent = String.format("intent://map/marker?location=%s,%s&title=%s&content=事发地点&src=hpccn|seatosky#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end"
-			, String.valueOf(baseContent.getD_latitude()), String.valueOf(baseContent.getD_longitude())
+//			, String.valueOf(baseContent.getD_latitude())
+//			, String.valueOf(baseContent.getD_longitude())
+			, lat
+			, lon
 			, baseContent.getAddress());
 
 //		String strIntent = String.format("intent://map/direction?origin=latlng:%s,%s|name:我的位置&destination=latlng:%s,%s|name:%s&mode=driving&region=北京&referer=Autohome|GasStation#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end"

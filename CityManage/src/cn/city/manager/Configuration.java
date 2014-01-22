@@ -28,7 +28,7 @@ public class Configuration {
 	private String kind;
 	private String id;
 	private String time;
-	private int start, step;
+	private int start, step, end, count = 1;
 
 	private String username;
 	private String password;
@@ -215,6 +215,22 @@ public class Configuration {
 
 	public void setStep(int step) {
 		this.step = step;
+	}
+
+	public int getEnd() {
+		return end;
+	}
+
+	public void setEnd(int end) {
+		this.end = end;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 

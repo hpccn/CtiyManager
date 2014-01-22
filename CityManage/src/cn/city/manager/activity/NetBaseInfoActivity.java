@@ -29,6 +29,7 @@ import cn.city.manager.view.NetBaseInfoGeneralAdapter;
 import cn.city.manager.view.ViewSingletonFactory;
 import cn.hpc.common.HttpStreamThread;
 import cn.hpc.common.JSONHelper;
+import cn.hpc.common.view.XListView;
 
 public class NetBaseInfoActivity extends BaseBrowseActivity {
 
@@ -102,9 +103,11 @@ public class NetBaseInfoActivity extends BaseBrowseActivity {
 //		}
 
 		
-		
 		tvTitle = (TextView)this.findViewById(R.id.id_titlebar_title);
-		ListView summaryView = (ListView) this.findViewById(R.id.summary_list); 
+		XListView summaryView = (XListView) this.findViewById(R.id.summary_xListView); 
+		setXListView(summaryView);
+		summaryView.setPullLoadEnable(false);
+
 		BaseAdapter adapter = obtainAdapter();
 		initListView(summaryView, adapter);
 //		if (t_netbaseinfo.class.getSimpleName().equals(category)){
@@ -121,11 +124,11 @@ public class NetBaseInfoActivity extends BaseBrowseActivity {
 
 	@Override
 	protected List<BaseEvent> reloadEvents() throws Exception {
-		return loadEvents();
+		return loadEvents(0);
 	}
 	
 	@Override
-	protected List<BaseEvent> loadEvents() throws Exception {
+	protected List<BaseEvent> loadEvents(int start) throws Exception {
 //		if (t_netbaseinfoGrid.class.getSimpleName().equals(category)) {
 //			return null;
 //		}
@@ -177,6 +180,7 @@ public class NetBaseInfoActivity extends BaseBrowseActivity {
 
 
 		adapter = new NetBaseInfoGeneralAdapter(context, events, fields); 
+		setAdapter(adapter);
 		return adapter;
 	}
 	
@@ -252,7 +256,7 @@ public class NetBaseInfoActivity extends BaseBrowseActivity {
 					int position, long id) {
 				
 
-				String js = JSONHelper.toJSON(events.get(position));
+				String js = JSONHelper.toJSON(events.get(position - 1));
 //				Log.i("", "events.get(position) :" + js);
 				
 				Intent i = new Intent(context, DetailActivity.class);
@@ -282,7 +286,7 @@ public class NetBaseInfoActivity extends BaseBrowseActivity {
 			
 			@Override
 			public void onClick(View v) {
-				ViewSingletonFactory.getInstance().showSingleChoiceItems(context, optionTitle, new ViewSingletonFactory.OnChangedListener(){
+				ViewSingletonFactory.getInstance().showSingleChoiceItems(context, optionTitle, 0, new ViewSingletonFactory.OnChangedListener(){
 
 					@Override
 					public void onChanged(int id, String value) {
@@ -357,5 +361,11 @@ public class NetBaseInfoActivity extends BaseBrowseActivity {
 	protected void invalidateEvent() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	protected List<BaseEvent> loadMoreEvents(int start) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

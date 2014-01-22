@@ -40,9 +40,15 @@ public class Constants {
 				, Configuration.getInstance().getUsername()
 				, Configuration.getInstance().getTime()
 				, Configuration.getInstance().getStart()
-				, Configuration.getInstance().getStep());
+				, Configuration.getInstance().getStep() * Configuration.getInstance().getCount());
 	}
-	
+	final static public String obtainLastWeijianListUrl(int start, int step){
+		return String.format(weijian_list_option
+				, Configuration.getInstance().getUsername()
+				, Configuration.getInstance().getTime()
+				, start
+				, step);
+	}
 //	这个是违建统计：镇域图
 //	final public static String weijian_zhenyutu = host + "/wangge/?q=node/13&s_yearmonth_selected=&s_statistics_type=&s_chart=no";
 	final private static String weijian_zhenyutu = host + "/wangge/sites/all/themes/wangge/android/to-android-event-statistics.php?kind=t_weijian&id=%s&s_statistics_type=违建数量&s_chart=no";

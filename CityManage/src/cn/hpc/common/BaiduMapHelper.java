@@ -11,13 +11,36 @@ import cn.city.manager.location.LocationListener;
 import com.baidu.mapapi.navi.BaiduMapAppNotSupportNaviException;
 import com.baidu.mapapi.navi.BaiduMapNavigation;
 import com.baidu.mapapi.navi.NaviPara;
+import com.baidu.mapapi.utils.CoordinateConvert;
 import com.baidu.platform.comapi.basestruct.GeoPoint;
 
 public class BaiduMapHelper {
 	public static final GeoPoint createGeoPoint(double lat, double lon) {
-		return new GeoPoint((int) (lat * 1E6), (int) (lon * 1E6));
+		GeoPoint p = new GeoPoint((int) (lat * 1E6), (int) (lon * 1E6));//createGeoPoint(gpsLat, gpsLon);
+//		GeoPoint p1 = CoordinateConvert.fromWgs84ToBaidu(p);
+		GeoPoint p1 = CoordinateConvert.fromGcjToBaidu(p);
+		return p1;//new GeoPoint((int) (lat * 1E6), (int) (lon * 1E6));
+	}
+	
+	public static final boolean geoPoint2Gps(GeoPoint gp, Double gpsLat, Double gpsLon) {
+		gpsLat = gp.getLatitudeE6() * 1.0d / 1E6;
+		gpsLon = gp.getLongitudeE6() * 1.0d / 1E6;
+		return true;//new GeoPoint((int) (lat * 1E6), (int) (lon * 1E6));
 	}
 
+	
+//	
+//	public static GeoPoint conver(double gpsLat, double gpsLon){
+////		Android中把GPS坐标转换为百度地图坐标
+//		
+//		GeoPoint p = createGeoPoint(gpsLat, gpsLon);
+//		GeoPoint p1 = CoordinateConvert.fromWgs84ToBaidu(p);
+//		return p1;
+////		p为GPS坐标点，p1为百度坐标点
+////		CoordinateConvert.bundleDecode(CoordinateConvert.fromWgs84ToBaidu(
+////				new GeoPoint((int)(gpsLat*1E6), (int)(gpsLon*1E6))));
+//	}
+	
 	/**
 	 * 开始导航
 	 * 

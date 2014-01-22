@@ -422,6 +422,10 @@ public class t_weijian extends BaseFragment implements ImageCacheFactory.OnImage
 			((EditText)rootView.findViewById(R.id.et_netname)).setText(status[0]);
 		}
 		((EditText)rootView.findViewById(R.id.et_solvemethod)).setText("新发现");
+		
+		
+		rootView.findViewById(R.id.id_threeadress).setVisibility(View.GONE);
+		rootView.findViewById(R.id.id_browse_mode).setVisibility(View.GONE);
 	}
 	
 	

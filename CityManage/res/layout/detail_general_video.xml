@@ -29,13 +29,14 @@
         <Button
             android:id="@+id/btn_select_video"
             style="@style/generalButtonStyle"
+            android:layout_marginRight="20dp"
             android:layout_weight="0"
             android:text="@string/select_video" />
 
         <Button
             android:id="@+id/btn_add_video"
             style="@style/generalButtonStyle"
-            android:layout_marginLeft="20dp"
+            
             android:layout_weight="0"
             android:text="@string/videotape" />
     </LinearLayout>

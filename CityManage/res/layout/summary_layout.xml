@@ -21,6 +21,12 @@
         android:layout_alignWithParentIfMissing="true"
         android:layout_below="@+id/id_summary_top_toolbar" >
 
+        <cn.hpc.common.view.XListView
+            android:id="@+id/summary_xListView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:cacheColorHint="#00000000" />
+        <!--
         <ListView
             android:id="@+id/summary_list"
             android:layout_width="fill_parent"
@@ -28,11 +34,11 @@
             android:fadeScrollbars="true"
             android:fadingEdge="vertical"
             android:fadingEdgeLength="20dp" />
+        -->
     </FrameLayout>
 
     <Button
         android:id="@+id/id_add_event"
-        
         style="@style/generalButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

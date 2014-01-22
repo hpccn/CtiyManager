@@ -4,9 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.Collator;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -31,6 +34,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -52,10 +56,14 @@ import cn.city.manager.view.Statistics;
 import cn.city.manager.view.SummaryEventAdapter;
 import cn.hpc.common.JSONHelper;
 import cn.hpc.common.cache.ImageCacheFactory;
+import cn.hpc.common.view.XListView;
+import cn.hpc.common.view.XListView.IXListViewListener;
 
 public abstract class BaseBrowseActivity extends Activity implements ImageCacheFactory.OnImageLoadListener{
 
 	public static final int REQUEST_CODE = 0x100;
+	
+	public static final int REQUEST_UPDATE_CODE = 0x1000;
 	protected String category, title;
 	protected TextView tvTitle;
 	protected Context context;
@@ -69,8 +77,7 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 	protected Statistics statistics, townMap;
 
 	protected View rootView, viewBrowseMode, viewReload;
-	protected ListView listView;
-	protected BaseAdapter adapter;
+	private BaseAdapter adapter;
 	
 	protected GeneralInformationFragment general;// = new GeneralInformationFragment(context);
 	protected String currentUrl;
@@ -78,11 +85,14 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 	private ImageCacheFactory imc;
 	final protected ExecutorService executorService = Executors.newFixedThreadPool(10);    //固定五个线程来执行任务
 //.newCachedThreadPool();//
+	
+	private XListView xListView;
+	
 	@Override
 	protected void onDestroy() {
 		overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
 		executorService.shutdown();
-		imc.clear();
+//		imc.clear();
 		super.onDestroy();
 	}
 	
@@ -107,7 +117,7 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 			rootView  = obtainView();
 			setContentView(rootView);
 //			events = loadEvents();
-			loadEvents();
+			loadEvents(0);
 		} catch (Exception e) {
 			e.printStackTrace();
 			this.finishActivity(1000);
@@ -123,7 +133,7 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 //			super.onActivityResult(requestCode, resultCode, data);
 //			return;
 //		}
-		if (REQUEST_CODE == requestCode) {
+		if (REQUEST_CODE == requestCode && resultCode == REQUEST_UPDATE_CODE) {
 			handler.sendEmptyMessageDelayed(0x1002, 500);
 		}
 	}
@@ -256,40 +266,21 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 	}
 	
 	protected void onEventLoad(){
-
+		int end = 0;
+		if (null != events){
+			end = events.size();
+		}
+		Configuration.getInstance().setEnd(Configuration.getInstance().getStart() + end);
 		asyncDownloadImage();
 //		if (null == events) return;
 		updateView();
 //		EventSingletonFactory.getInstance().cachePhoto(context, events);
 //		initToolBar();
 //		updateClickListent();
-
+		onLoad();
 	}
 	
-	final protected Handler handler = new Handler(){
 
-		@Override
-		public void dispatchMessage(Message msg) {
-			switch (msg.what) {
-			case 0x1001:
-				if (null != adapter)
-					adapter.notifyDataSetInvalidated();
-
-				break;
-			case 0x1002:
-				try {
-					reloadEvents();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				break;
-			default:
-			super.dispatchMessage(msg);
-			}
-		}
-		
-	};
 	@Override
 	public void onImageLoaded(int id, Uri imageUri, Drawable image) {
 //		((ImageView) rootView.findViewById(id)).setImageDrawable(image);
@@ -303,9 +294,9 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 
 	protected abstract void onSelectDateView(int select);
 	protected abstract void invalidateEvent();
-	protected abstract List <BaseEvent> loadEvents() throws Exception;
+	protected abstract List <BaseEvent> loadEvents(int start) throws Exception;
 	protected abstract List <BaseEvent> reloadEvents() throws Exception;
-	
+	protected abstract List <BaseEvent> loadMoreEvents(int start) throws Exception;
 	protected List <BaseEvent> events;
 	private void init(final Context context) throws JSONException, IOException{
 		
@@ -331,7 +322,8 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 
 //		System.out.println(sb.toString());
 		
-		ListView summaryView = (ListView) this.findViewById(R.id.summary_list); 
+		XListView summaryView = (XListView) this.findViewById(R.id.summary_xListView); 
+		 setXListView(summaryView);
 		
 		String jsonString = sb.toString();
 
@@ -364,9 +356,9 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				
+				if (position < 1 || position > events.size()) return;
 
-				String js = JSONHelper.toJSON(events.get(position));
+				String js = JSONHelper.toJSON(events.get(position - 1));
 //				Log.i("", "events.get(position) :" + js);
 				
 				Intent i = new Intent(context, DetailActivity.class);
@@ -389,8 +381,8 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				
-
-				String js = JSONHelper.toJSON(events.get(position));
+				if (position < 1 || position > events.size()) return;
+				String js = JSONHelper.toJSON(events.get(position -1));
 //				Log.i("", "events.get(position) :" + js);
 				
 				Intent i = new Intent(context, DetailActivity.class);
@@ -572,14 +564,23 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 	}
 	
 	final private Comparator<BaseEvent> comparatorDate_NetGridId = new Comparator<BaseEvent>(){
-
+		private final Collator sCollator = Collator.getInstance();
 		@Override
 		public int compare(BaseEvent lhs, BaseEvent rhs) {
 			// TODO Auto-generated method stub
 			if (null == lhs || null == rhs) return 0;
 			int compare = 0;
+			
+			if (null != lhs.getS_solvestatus()) 
+				compare = sCollator.compare(lhs.getS_solvestatus(), rhs.getS_solvestatus());//lhs.getS_solvestatus().compareTo(rhs.getS_solvestatus());
+			
+			if (0 != compare){
+				return compare;
+			}
+			
+			compare = 0;
 			if (null != lhs.getYearMonth())
-				compare = lhs.getYearMonth().compareTo(lhs.getYearMonth());
+				compare = sCollator.compare(rhs.getYearMonth(), lhs.getYearMonth());//lhs.getYearMonth().compareTo(rhs.getYearMonth());
 			
 			if (0 != compare){
 				return compare;
@@ -587,7 +588,13 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 			
 			compare = 0;
 			if (null != lhs.getNetGridId())
-				compare = lhs.getNetGridId().compareTo(lhs.getNetGridId());
+				compare = sCollator.compare(rhs.getNetGridId(), lhs.getNetGridId());//lhs.getNetGridId().compareTo(rhs.getNetGridId());
+
+			if (0 != compare){
+				return compare;
+			}
+			
+
 
 			return compare;
 
@@ -597,14 +604,22 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 	};
 	
 	final private Comparator<BaseEvent> comparatorNetGridId_Date = new Comparator<BaseEvent>(){
-
+		
+		 private final Collator sCollator = Collator.getInstance();
 
 		@Override
 		public int compare(BaseEvent lhs, BaseEvent rhs) {
 			if (null == lhs || null == rhs) return 0;
 			int compare = 0;
+			
+			if (null != lhs.getS_solvestatus()) 
+				compare = sCollator.compare(lhs.getS_solvestatus(), rhs.getS_solvestatus());//lhs.getS_solvestatus().compareTo(rhs.getS_solvestatus());
+			if (0 != compare){
+				return compare;
+			}
+						
 			if (null != lhs.getNetGridId())
-				compare = lhs.getNetGridId().compareTo(lhs.getNetGridId());
+				compare = sCollator.compare(rhs.getNetGridId(), lhs.getNetGridId());//lhs.getNetGridId().compareTo(rhs.getNetGridId());
 
 			if (0 != compare){
 				return compare;
@@ -612,7 +627,7 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 			
 			compare = 0;
 			if (null != lhs.getYearMonth())
-				compare = lhs.getYearMonth().compareTo(lhs.getYearMonth());
+				compare = sCollator.compare(rhs.getYearMonth(), lhs.getYearMonth());//lhs.getYearMonth().compareTo(rhs.getYearMonth());
 			
 
 			return compare;
@@ -635,7 +650,7 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 //				if (1 == which) {
 //					Collections.reverse(events);
 //				}
-				if (null != listView) {
+				if (null != xListView) {
 					adapter.notifyDataSetChanged();
 				}
 			}
@@ -685,4 +700,114 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 		Log.e("", "onResume");
 	}
 	
+	final protected Handler handler = new Handler(){
+
+		@Override
+		public void dispatchMessage(Message msg) {
+			switch (msg.what) {
+			case 0x1001:
+				if (null != adapter)
+					adapter.notifyDataSetInvalidated();
+
+				break;
+			case 0x1002:
+				try {
+					reloadEvents();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+			default:
+			super.dispatchMessage(msg);
+			}
+		}
+		
+	};
+	
+	/**
+	 * 
+	 */
+	protected void geneItems(){
+		
+	}
+	
+	private void onLoad() {
+		xListView.stopRefresh();
+		xListView.stopLoadMore();
+//		summaryView.setRefreshTime("刚刚");
+		Date date = new Date(System.currentTimeMillis());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String dateTime = sdf.format(date);
+		xListView.setRefreshTime(dateTime);
+//		xListView.removeHeaderView(xListView.getHeaderView());
+//		xListView.removeFooterView(xListView.getFooterView());
+
+	}
+	IXListViewListener xListViewListener = new IXListViewListener(){
+		@Override
+		public void onRefresh() {
+			handler.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+//					start = ++refreshCnt;
+//					items.clear();
+//					geneItems();
+					try {
+						reloadEvents();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					adapter.notifyDataSetInvalidated();
+//					adapter = new ArrayAdapter<String>(context, R.layout.list_item, items);
+//					summaryView.setAdapter(adapter);
+//					onLoad();
+				}
+			}, 10);
+		}
+
+		@Override
+		public void onLoadMore() {
+			handler.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+//					geneItems();
+					try {
+						
+						Configuration.getInstance().setCount(++count);
+						loadMoreEvents(Configuration.getInstance().getStart());
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					adapter.notifyDataSetChanged();
+//					onLoad();
+//					getXListView().removeFooterView(getXListView().getFooterView());
+//					getXListView().getFooterView().hide();
+				}
+			}, 10);
+		}
+	};
+
+	int count = 1;
+	public XListView getXListView() {
+		return xListView;
+	}
+
+	public void setXListView(XListView summaryView) {
+		this.xListView = summaryView;
+		if (null != summaryView) {
+			summaryView.setXListViewListener(xListViewListener);
+			summaryView.setPullLoadEnable(true);
+		}
+	}
+
+	public BaseAdapter getAdapter() {
+		return adapter;
+	}
+
+	public void setAdapter(BaseAdapter adapter) {
+		this.adapter = adapter;
+	}
 }

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.view.View;
 import android.widget.Button;
 import cn.city.manager.Configuration;
@@ -28,7 +30,7 @@ public class More implements Page{
 		if (null == view)
 			view = View.inflate(context, R.layout.more_main_frame, null);
 		
-//		btnUpgrade = (Button) view.findViewById(R.id.btn_upgrade);
+		btnUpgrade = (Button) view.findViewById(R.id.btn_upgrade);
 //		btnUpgrade.setOnClickListener(onClickListener);
 	
 		int ids[] = {R.id.btn_cancel_auto_login, R.id.btn_upgrade, R.id.btn_show_event_step, R.id.btn_map_navigation, R.id.btn_baidu_navigation};
@@ -37,12 +39,28 @@ public class More implements Page{
 			
 		}
 		
+		// 获取packagemanager的实例
+		PackageManager packageManager = context.getPackageManager();
+		// getPackageName()是你当前类的包名，0代表是获取版本信息
+		PackageInfo packInfo;
+		String versionName = "";
+		try {
+			packInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
+			versionName = packInfo.versionName;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		btnUpgrade.setText("检查升级   [当前版本:" + versionName+"]");
 		
 		return view;
 	}
 	
-	final private String[] stepTitles ={"10条", "20条", "30条", "50条", "全部"}; 
-	final private int[] steps = {10, 20, 30, 50, 100}; 
+	final private String[] stepTitles ={"10条", "20条", "30条", "50条", "全部"};
+	
+	final private int[] steps = {10, 20, 30, 50, 200};
+//	final private int[] steps = {2, 4, 5, 50, 200}; 
 	final private View.OnClickListener onClickListener = new View.OnClickListener() {
 		
 		@Override
@@ -55,7 +73,16 @@ public class More implements Page{
 				cancelAutoLogin();
 				break;
 			case R.id.btn_show_event_step:
-				ViewSingletonFactory.getInstance().showSingleChoiceItems(context, stepTitles, new ViewSingletonFactory.OnChangedListener(){
+				
+				int checkItem = 0;
+				int step = Configuration.getInstance().getStep();
+				for (int i = 0, count = steps.length; i < count; ++i) {
+					checkItem = i;
+					if (steps[i] == step){
+						break;
+					}
+				}
+				ViewSingletonFactory.getInstance().showSingleChoiceItems(context, stepTitles, checkItem, new ViewSingletonFactory.OnChangedListener(){
 
 					@Override
 					public void onChanged(int id, String value) {
