@@ -1,0 +1,15 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="垃圾种类" >
+
+    <TextView
+        style="@style/thirdTitle"
+        android:text="@string/garbagetype" />
+
+    <EditText
+        android:id="@+id/et_garbagetype"
+        style="@style/generalEditText"
+        android:hint="@string/garbagetype" />
+
+</LinearLayout>

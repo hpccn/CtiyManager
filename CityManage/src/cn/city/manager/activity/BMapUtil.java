@@ -1,16 +1,7 @@
 package cn.city.manager.activity;
 
-import java.io.IOException;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.graphics.Bitmap;
-import android.util.Base64;
 import android.view.View;
-
-import com.baidu.mapapi.utils.CoordinateConvert;
-import com.baidu.platform.comapi.basestruct.GeoPoint;
 
 public class BMapUtil {
     	

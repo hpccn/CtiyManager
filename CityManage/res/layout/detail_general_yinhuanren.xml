@@ -5,6 +5,7 @@
 
     <TextView
         style="@style/thirdTitle"
+        android:id="@+id/yinhuanren_title"
         android:text="@string/yinhuanren" />
 
     <include layout="@layout/must_input_mark" />

@@ -87,4 +87,9 @@
     
     <color name="edit_gridview_item_mask">#40FFFFFF</color>
     
+    
+    
+    <color name="accent_1">#ff29549f</color>
+    <color name="hyperlink">#ffff549f</color>
+    
 </resources>

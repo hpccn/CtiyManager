@@ -1,25 +1,14 @@
 package cn.city.manager.activity;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.apache.http.HttpStatus;
 
-import com.baidu.platform.comapi.basestruct.GeoPoint;
-
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.ContentResolver;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -39,17 +28,17 @@ import android.widget.Toast;
 import cn.city.manager.Constants;
 import cn.city.manager.R;
 import cn.city.manager.fragment.BaseFragment;
-import cn.city.manager.fragment.t_netbaseinfoGrid;
+import cn.city.manager.fragment.GeneralInformationFragment;
 import cn.city.manager.fragment.t_netbaseinfo;
+import cn.city.manager.fragment.t_netbaseinfoGrid;
 import cn.city.manager.fragment.event.BaseEvent;
-import cn.city.manager.location.Location;
-import cn.city.manager.location.LocationListener;
-import cn.city.manager.view.DateTimeChanger;
-import cn.city.manager.view.DateTimePickerDialog;
 import cn.city.manager.view.ViewSingletonFactory;
 import cn.hpc.common.BaiduMapHelper;
 import cn.hpc.common.DrawableUtils;
 import cn.hpc.common.HttpUploadHelper;
+
+import com.baidu.platform.comapi.basestruct.GeoPoint;
+import com.umeng.analytics.MobclickAgent;
 
 public class DetailActivity extends Activity {
 	public static final int NONE = 0;
@@ -65,6 +54,7 @@ public class DetailActivity extends Activity {
 	public static final int VIDEO_CAPTURE = 4;// 
 	public static final int IMAGE_SELECT = 5;// 
 	public static final int VIDEO_SELECT = 6;// 
+	public static final int VIDEO_CAPTURE2 = 8;// 
 	
 	public static final int IMAGE_CROP = 7;// 剪图
 
@@ -79,11 +69,18 @@ public class DetailActivity extends Activity {
 	protected LinearLayout detailMainContainer;
 	protected TextView tvVideoFile;
 	protected Activity context;
+	private GeneralInformationFragment general;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		com.umeng.common.Log.LOG = true;
+//		MobclickAgent.setDebugMode(true);
+		MobclickAgent.onError(this);
+		
 		context = this;
+		general = new GeneralInformationFragment(context);
 		Log.i("", "" + System.currentTimeMillis());
 		mainView = View.inflate(this, R.layout.detail_main, null);
 		setContentView(mainView);// (R.layout.detail_main);
@@ -106,6 +103,17 @@ public class DetailActivity extends Activity {
 		// onNavigationItemSelected(0, 0);
 		// }
 
+	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 
 	final protected Handler handler = new Handler() {
@@ -421,35 +429,45 @@ public class DetailActivity extends Activity {
 			// startPhotoZoom(Uri.fromFile(picture));
 
 		}
+		
+		case VIDEO_CAPTURE2:{
+			String mediaFilePath = data.getData().getPath();
+			baseContent.setS_video(mediaFilePath);
+			tvVideoFile.setBackgroundResource(R.drawable.ic_media_play);
+			tvVideoFile.setText(null);//mediaFilePath);
+			// File mMediaFile = new File(mediaFilePath);
+			Log.d("", "VIDEO_CAPTURE : " + mediaFilePath);
+
+		}
 			break;
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
-	protected static Bitmap small(Bitmap bitmap) {
-		// int w = b.getWidth();
-		// int h = b.getHeight();
-		// int wScale = 1;
-		// int hScale = 1;
-		// if ( w > h) {
-		// wScale = 800;
-		// hScale = h * 800 / w;
-		// } else {
-		// hScale = 800;
-		// wScale = w * 800 / h;
-		// }
-		// Bitmap bmp = Bitmap.createScaledBitmap(b, wScale, hScale, true);
-		Matrix matrix = new Matrix();
-		int max = bitmap.getHeight();
-		if (max < bitmap.getWidth()) {
-			max = bitmap.getWidth();
-		}
-		float scale = 400.0f / max;
-		matrix.postScale(scale, scale); // 长和宽放大缩小的比例
-		Bitmap resizeBmp = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
-				bitmap.getHeight(), matrix, true);
-		return resizeBmp;
-	}
+//	protected static Bitmap small(Bitmap bitmap) {
+//		// int w = b.getWidth();
+//		// int h = b.getHeight();
+//		// int wScale = 1;
+//		// int hScale = 1;
+//		// if ( w > h) {
+//		// wScale = 800;
+//		// hScale = h * 800 / w;
+//		// } else {
+//		// hScale = 800;
+//		// wScale = w * 800 / h;
+//		// }
+//		// Bitmap bmp = Bitmap.createScaledBitmap(b, wScale, hScale, true);
+//		Matrix matrix = new Matrix();
+//		int max = bitmap.getHeight();
+//		if (max < bitmap.getWidth()) {
+//			max = bitmap.getWidth();
+//		}
+//		float scale = 400.0f / max;
+//		matrix.postScale(scale, scale); // 长和宽放大缩小的比例
+//		Bitmap resizeBmp = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+//				bitmap.getHeight(), matrix, true);
+//		return resizeBmp;
+//	}
 
 //	protected EditText etTime;
 //
@@ -480,9 +498,9 @@ public class DetailActivity extends Activity {
 					HttpUploadHelper uploader = new HttpUploadHelper(handler);
 					String uploadUrl = null;
 					if (null != jsonValue) {
-						uploadUrl = Constants.weijian_commit_update;
+						uploadUrl = Constants.URL_commit_update;
 					} else {
-						uploadUrl = Constants.weijian_commit_new;
+						uploadUrl = Constants.URL_commit_new;
 					}
 					uploader.httpPostEvent(uploadUrl, baseContent);
 				}
@@ -531,6 +549,7 @@ public class DetailActivity extends Activity {
 			}
 				break;
 			case R.id.btn_add_picture: {
+				general.updateLocation(context, (EditText) findViewById(R.id.et_yinhuanaddress), baseContent);
 				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 				intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(imgPath)));
 				// intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri
@@ -542,14 +561,16 @@ public class DetailActivity extends Activity {
 			}
 				break;
 			case R.id.btn_add_video: {
-				Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+				general.updateLocation(context, (EditText) findViewById(R.id.et_yinhuanaddress), baseContent);
+				Intent intent = new Intent();//(MediaStore.ACTION_VIDEO_CAPTURE);
+				intent.setClass(context, BasicVideoCapture.class);
 				//设置视频大小
 				intent.putExtra(android.provider.MediaStore.EXTRA_SIZE_LIMIT, 2*1024*1024);
 				//
 				intent.putExtra(android.provider.MediaStore.EXTRA_VIDEO_QUALITY , 0);
 
-				//设置视频时间  毫秒单位
-				intent.putExtra(android.provider.MediaStore.EXTRA_DURATION_LIMIT, 60000);
+				//设置视频时间  秒单位
+				intent.putExtra(android.provider.MediaStore.EXTRA_DURATION_LIMIT, 60);
 //				startActivityForResult(intent, VIDEO);
 
 				// intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri
@@ -557,7 +578,7 @@ public class DetailActivity extends Activity {
 				// .getExternalStorageDirectory(),
 				// "temp.jpg")));
 
-				startActivityForResult(intent, VIDEO_CAPTURE);
+				startActivityForResult(intent, VIDEO_CAPTURE2);
 			}
 				break;
 			case R.id.picture:
@@ -582,6 +603,11 @@ public class DetailActivity extends Activity {
 	}
 	private void startNavi(){
 		
+		if (isZero(baseContent.getD_latitude()) || isZero(baseContent.getD_longitude())){
+			Toast.makeText(context, "地理位置无效, 无法进入地图模式", Toast.LENGTH_LONG).show();
+			return;
+		}
+		
 		String lat =null;
 		String lon = null;
 		GeoPoint gp = BaiduMapHelper.createGeoPoint(baseContent.getD_latitude(), baseContent.getD_longitude());
@@ -594,7 +620,7 @@ public class DetailActivity extends Activity {
 //		String strIntent = "intent://map/direction?origin=latlng:39.981042,116.779937|name:我的位置&destination=latlng:39.805961,116.194632|name:西单&mode=driving&region=北京&referer=Autohome|GasStation#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end";
 		//移动APP调起Android百度地图方式举例
 //		String strIntent = "intent://map/marker?location=39.805961,116.194632&title=事发地点&content=百度奎科大厦&src=yourCompanyName|yourAppName#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end";  
-		String strIntent = String.format("intent://map/marker?location=%s,%s&title=%s&content=事发地点&src=hpccn|seatosky#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end"
+		String strIntent = String.format("intent://map/marker?location=%s,%s&title=%s&content=事发地点&src=hpccn|QQ285993990#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end"
 //			, String.valueOf(baseContent.getD_latitude())
 //			, String.valueOf(baseContent.getD_longitude())
 			, lat
@@ -707,10 +733,11 @@ public class DetailActivity extends Activity {
 			} else {
 				uri = Uri.parse(video);
 			}
+			MobclickAgent.onEvent(context, "play_video", uri.toString());
 			if (null != uri){
 				try {
 					Intent i = new Intent(Intent.ACTION_VIEW);
-//					i.setClass(context, InternetVideoPlayerActivity.class);
+					i.setClass(context, InternetVideoPlayerActivity.class);
 					String type = "video/* ";
 //					i.setData(uri);
 					i.setDataAndType(uri, type);
@@ -718,10 +745,24 @@ public class DetailActivity extends Activity {
 					context.startActivity(i);
 				} catch (Exception e){
 					e.printStackTrace();
+					obatinException(e);
+					MobclickAgent.onEvent(context, "play_video", sb.toString());
 				}
 			}
 		}
 
+	}
+	
+	private StringBuilder sb = new StringBuilder();
+	
+	private void obatinException(Exception e){
+		sb.append(e.getMessage());
+		sb.append("\n");
+		StackTraceElement[] stes = e.getStackTrace();
+		for (StackTraceElement ste : stes) {
+			sb.append(ste.toString());
+			sb.append("\n");
+		}
 	}
 	AlertDialog alertDialog;
 	
@@ -798,20 +839,30 @@ public class DetailActivity extends Activity {
 //		intent.putExtra("outputY", 320);
 //		intent.putExtra("return-data", true);
 //		startActivityForResult(intent, 2);
+	
+		// 裁剪图片
+//		 Intent intent = new Intent("com.android.camera.action.CROP");
+//		 intent.setDataAndType(uri, "image/*");
+//		 intent.putExtra("crop", "true");
+////		 intent.putExtra("aspectX", 1);
+////		 intent.putExtra("aspectY", 1);
+////		 intent.putExtra("outputX", 1024);
+////		 intent.putExtra("outputY", 768);
+//		 intent.putExtra("scale", true);
+//		 intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.parse("file://"+imgPath));
+//		 intent.putExtra("return-data", false);
+//		 intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+//		 intent.putExtra("noFaceDetection", true); // no face detection
+//		 startActivityForResult(intent, IMAGE_CROP);
 		
-		 Intent intent = new Intent("com.android.camera.action.CROP");
-		 intent.setDataAndType(uri, "image/*");
-		 intent.putExtra("crop", "true");
-//		 intent.putExtra("aspectX", 1);
-//		 intent.putExtra("aspectY", 1);
-//		 intent.putExtra("outputX", 1024);
-//		 intent.putExtra("outputY", 768);
-		 intent.putExtra("scale", true);
-		 intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.parse("file://"+imgPath));
-		 intent.putExtra("return-data", false);
-		 intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
-		 intent.putExtra("noFaceDetection", true); // no face detection
-		 startActivityForResult(intent, IMAGE_CROP);
+		Bitmap bmp = DrawableUtils.decodeBitmapWithSize(uri.getPath(), 1024, 768);
+		
+		DrawableUtils.bitmapToFile(bmp, imgPath);
+		
+		baseContent.setS_photo(imgPath);
+		bmp = DrawableUtils.decodeBitmapWithSize(imgPath, 100, 100);
+		imageView.setImageBitmap(bmp);
+
 	}
 
 }

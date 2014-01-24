@@ -2,6 +2,9 @@ package cn.city.manager.activity;
 
 import java.util.List;
 
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.update.UmengUpdateAgent;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -41,6 +44,12 @@ public class EntryActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+//		UmengUpdateAgent.setDefault();
+//		UmengUpdateAgent.update(this);
+		com.umeng.common.Log.LOG = true;
+//		MobclickAgent.setDebugMode(true);
+		MobclickAgent.onError(this);
+		
 		context = this;
 		init();
 		setContentView(R.layout.layout_main);
@@ -65,6 +74,18 @@ public class EntryActivity extends Activity {
 		browse(this, eventCategory.getCategorys());
 		initOnClickListener();
 	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
 	private BaseCategory eventCategory, gradeCategory;
 
 	private void init(){

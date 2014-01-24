@@ -2,9 +2,6 @@ package cn.city.manager.activity;
 
 import java.util.List;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -17,17 +14,18 @@ import cn.city.manager.Configuration;
 import cn.city.manager.Constants;
 import cn.city.manager.R;
 import cn.city.manager.fragment.event.BaseEvent;
-import cn.city.manager.model.EventHttpStreamThread;
 import cn.city.manager.model.EventSingletonFactory;
+import cn.city.manager.view.EventCategory;
 import cn.city.manager.view.SummaryEventAdapter;
 import cn.city.manager.view.ViewSingletonFactory;
-import cn.hpc.common.HttpStreamThread;
 import cn.hpc.common.JSONHelper;
 import cn.hpc.common.view.XListView;
 
 public class SummaryActivity extends BaseBrowseActivity {
 
-	String title = "违章建筑 [%d]";
+	protected EventCategory eventCategory = new EventCategory();
+
+//	String title = "违章建筑 [%d]";
 	@Override
 	protected View obtainView() {
 		View view = View.inflate(this, R.layout.summary_main, null);
@@ -35,7 +33,7 @@ public class SummaryActivity extends BaseBrowseActivity {
 		view.findViewById(R.id.id_browse_mode).setVisibility(View.VISIBLE);
 		
 		tvTitle = (TextView)view.findViewById(R.id.id_titlebar_title);
-		tvTitle.setText("违章建筑");
+		tvTitle.setText(eventCategory.getCategoryTitle(category));
 		// 使用Web方式浏览
 //		view.findViewById(R.id.id_summary_top_toolbar).setVisibility(View.GONE);
 //		Statistics wange = new Statistics(this, Constants.weijian_list);
@@ -68,14 +66,25 @@ public class SummaryActivity extends BaseBrowseActivity {
 	@Override
 	protected List<BaseEvent> loadEvents(int start) throws Exception {
 		tvTitle = (TextView)this.findViewById(R.id.id_titlebar_title);
-		Configuration.getInstance().setKind("t_weijian");
+		String username = Configuration.getInstance().getUsername();
+		if (null == username || username.length() < 1) {
+			Configuration.getInstance().load(context);
+		}
+		username = Configuration.getInstance().getUsername();
+		if (null == username || username.length() < 1) {
+			this.finish();
+			startActivity(new Intent(this, LoginActivity.class));
+
+			return null;
+		}
+		Configuration.getInstance().setKind(category);//"t_weijian");
 		Configuration.getInstance().setId(Configuration.getInstance().getUsername());
 		Configuration.getInstance().setTime("month");
 		Configuration.getInstance().setStart(start);
 		//Configuration.getInstance().setStep(step)
 //		String url = "https://code.csdn.net/hpccn/citymanager/blob/master/CityManage/assets/t_weijian.json";//"http://192.168.6.55:8000/t_weijian.json";
 //		String url = "http://192.168.6.55:8000/t_weijian.json";
-		currentUrl = Constants.obtainLastWeijianListUrl();//Constants.obtainWeijianListUrl(Configuration.getInstance().getUsername(), "month");//weijian_list;//"http://longhorn.free3v.net/t_weijian.html";
+		currentUrl = Constants.obtainLastEventsListUrl();//Constants.obtainWeijianListUrl(Configuration.getInstance().getUsername(), "month");//weijian_list;//"http://longhorn.free3v.net/t_weijian.html";
 //		StringCacheFactory scf = StringCacheFactory.getInstance(this);
 //		scf.scheduleLoadString(10, Uri.parse(url));
 		
@@ -179,7 +188,7 @@ public class SummaryActivity extends BaseBrowseActivity {
 			switch (msg.what) {
 			case 100:
 				if (null != events && ! events.isEmpty()) {
-					tvTitle.setText(String.format(title, events.size()));
+					tvTitle.setText(eventCategory.getCategoryTitle(category) + "  [" + events.size() + "]");
 				}
 				onEventLoad();
 				break;
@@ -238,7 +247,7 @@ public class SummaryActivity extends BaseBrowseActivity {
 		// TODO Auto-generated method stub
 //		String url = String.format(Constants.weijian_list_option, date[select]);
 		Configuration.getInstance().setTime(date[select]);
-		currentUrl = Constants.obtainLastWeijianListUrl();//Constants.obtainWeijianListUrl(Configuration.getInstance().getUsername(), date[select]);
+		currentUrl = Constants.obtainLastEventsListUrl();//Constants.obtainWeijianListUrl(Configuration.getInstance().getUsername(), date[select]);
 //		HttpStreamThread hst = new EventHttpStreamThread(this, url, onStringLoadListener);
 //		hst.start();
 		EventSingletonFactory.getInstance().loadEvents(context, currentUrl, onLoadListener);

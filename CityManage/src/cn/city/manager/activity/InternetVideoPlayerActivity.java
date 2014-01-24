@@ -2,6 +2,8 @@ package cn.city.manager.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.graphics.PixelFormat;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -10,6 +12,8 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import cn.city.manager.R;
 
 public class InternetVideoPlayerActivity extends Activity {
@@ -23,6 +27,14 @@ public class InternetVideoPlayerActivity extends Activity {
 	private Context context;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		requestWindowFeature(Window.FEATURE_NO_TITLE);// 去掉标题栏
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);// 设置全屏
+		// 设置横屏显示
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+		// 选择支持半透明模式,在有surfaceview的activity中使用。
+		getWindow().setFormat(PixelFormat.TRANSLUCENT);
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_video_player_main);
 
@@ -62,7 +74,7 @@ public class InternetVideoPlayerActivity extends Activity {
 		 * 是创建一个push的'surface'，主要的特点就是不进行缓冲
 		 */
 		surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-		play();
+//		play();
 		this.findViewById(R.id.button_play).setOnClickListener(onClickListener);
 		this.findViewById(R.id.button_stop).setOnClickListener(onClickListener);
 	}
@@ -103,10 +115,13 @@ public class InternetVideoPlayerActivity extends Activity {
 	 * 播放
 	 */
 	private void play() {
-
+		if (null != mediaPlayer){
+			mediaPlayer.reset();
+			mediaPlayer = null;
+		}
 		mediaPlayer = new MediaPlayer();
 		// 设置多媒体流类型
-		mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+//		mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
 		// 设置用于展示mediaPlayer的容器
 		mediaPlayer.setDisplay(surfaceHolder);
@@ -114,9 +129,21 @@ public class InternetVideoPlayerActivity extends Activity {
 			// mediaPlayer.setDataSource("/sdcard/001.mp4");
 			mediaPlayer.setDataSource(context, uri);
 //					.setDataSource("http://192.168.1.114:8080/webdav/china.3gp");
-			mediaPlayer.prepareAsync();
+//			mediaPlayer.prepareAsync();
+			mediaPlayer.prepare();
 			mediaPlayer.start();
 			isPause = false;
+			mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+
+                @Override
+
+                public void onCompletion(MediaPlayer mp) {
+                	
+                	mp.release();
+                	mediaPlayer = null;
+                }
+
+             });
 		} catch (Exception e) {
 			// Log.i("通知", "播放过程中出现了错误哦");
 			e.printStackTrace();
@@ -152,9 +179,19 @@ public class InternetVideoPlayerActivity extends Activity {
 	 */
 	private void stop() {
 		Log.i("通知", "点击了stop按钮");
-		mediaPlayer.stop();
-		mediaPlayer.release();
+		if (null != mediaPlayer){
+			mediaPlayer.stop();
+			mediaPlayer.release();
+		}
+		this.finish();
+	}
 
+	@Override
+	protected void onDestroy() {
+		if (null != mediaPlayer){
+			mediaPlayer.release();
+		}
+		super.onDestroy();
 	}
 
 }

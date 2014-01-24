@@ -6,7 +6,6 @@ import org.json.JSONObject;
 
 import com.google.gson.Gson;
 
-import android.graphics.drawable.Drawable;
 
 public class t_weijianEvent extends BaseEvent {
 //	public final static String category = IllegalStructure.class.getSimpleName();//"IllegalStructure";

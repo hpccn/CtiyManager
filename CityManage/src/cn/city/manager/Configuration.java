@@ -29,7 +29,7 @@ public class Configuration {
 	private String id;
 	private String time;
 	private int start, step, end, count = 1;
-
+	
 	private String username;
 	private String password;
 	private boolean autoLogin, saveLogin;
@@ -52,7 +52,7 @@ public class Configuration {
 		password = pereference.getString("password", null);
 		autoLogin = pereference.getBoolean("autoLogin", false);
 		saveLogin = pereference.getBoolean("saveLogin", false);
-		step = pereference.getInt("step", 30);
+		step = pereference.getInt("step", 10);
 		userJson = pereference.getString("user", null);
 		
 		id = username;
@@ -186,6 +186,9 @@ public class Configuration {
 	}
 
 	public String getId() {
+		if (null == id || id.length() < 2) {
+			return getUsername();
+		}
 		return id;
 	}
 
@@ -226,6 +229,7 @@ public class Configuration {
 	}
 
 	public int getCount() {
+		if (1 > count) count = 1;
 		return count;
 	}
 

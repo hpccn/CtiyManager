@@ -21,6 +21,7 @@
             layout="@layout/detail_basic_village" />
 
         <include
+            android:visibility="gone"
             android:id="@+id/id_net"
             layout="@layout/detail_general_net" />
 
@@ -57,10 +58,12 @@
             layout="@layout/detail_basic_recently_update_time" />
 
         <include
+            android:visibility="gone"
             android:id="@+id/id_grid_leader"
             layout="@layout/detail_basic_grid_leader" />
 
         <include
+            android:visibility="gone"
             android:id="@+id/id_grid_leader_tel"
             layout="@layout/detail_basic_leader_tel" />
 

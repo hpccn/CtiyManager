@@ -53,9 +53,9 @@ public class t_weijian extends BaseFragment implements ImageCacheFactory.OnImage
 //		fl.addView(illegalStructure);
 		View v = null;
 		if (null == jsonData){
-			v = View.inflate(context, R.layout.detail_illegal_structure_main_new, null);
+			v = View.inflate(context, R.layout.detail_main_weijian_new, null);
 		} else {
-			v = View.inflate(context, R.layout.detail_illegal_structure_main, null);
+			v = View.inflate(context, R.layout.detail_main_weijian, null);
 		}
 		return v;
 	}
@@ -117,7 +117,7 @@ public class t_weijian extends BaseFragment implements ImageCacheFactory.OnImage
 		//新建 
 		if (null == jsonData) {
 			// 位置
-			general.updateLocation(context, (EditText) rootView.findViewById(R.id.et_yinhuanaddress), content);
+//			general.updateLocation(context, (EditText) rootView.findViewById(R.id.et_yinhuanaddress), content);
 			
 			initSelectChanger();
 			initNewEvent();
@@ -197,7 +197,7 @@ public class t_weijian extends BaseFragment implements ImageCacheFactory.OnImage
 		
 		imageView = (ImageView) rootView.findViewById(R.id.picture);
 		
-		imc = ImageCacheFactory.getInstance(context);
+		imc = ImageCacheFactory.getInstance();
 		
 		if (null != content && null != content.getS_photo() && content.getS_photo().length() > 4){
 			Uri uri = Uri.parse(content.getS_photo());
@@ -490,7 +490,7 @@ public class t_weijian extends BaseFragment implements ImageCacheFactory.OnImage
 							setViewText(R.id.et_updatetime, millisecond);
 						}
 
-					}, content.getT_buildtime());
+					}, content.getT_updatetime());
 
 			break;
 		case R.id.et_solvestatus:

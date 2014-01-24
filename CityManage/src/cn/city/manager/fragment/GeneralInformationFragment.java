@@ -77,7 +77,12 @@ public class GeneralInformationFragment {
 				baseContent.setL_latitude(latitude);
 				baseContent.setD_longitude(longitude);
 				baseContent.setAddress(address);
-				etAddress.setText(address);
+				if (null != etAddress){
+					String tmp = etAddress.getText().toString();
+					if (null == tmp || tmp.length() < 2)
+						etAddress.setText(address);
+				}
+					
 //				JSONObject jObj = new JSONObject();
 //				try {
 //					jObj.put("latitude", latitude);

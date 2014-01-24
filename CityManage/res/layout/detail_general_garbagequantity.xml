@@ -1,0 +1,19 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="垃圾数量（吨）" >
+
+    <TextView
+        style="@style/thirdTitle"
+        android:text="@string/garbagequantity" />
+
+
+    <EditText
+        android:id="@+id/et_garbagequantity"
+        style="@style/generalEditText"
+        android:ems="10"
+        android:text="0"
+        android:hint="@string/garbagequantity"
+        android:inputType="numberDecimal" />
+
+</LinearLayout>

@@ -21,29 +21,34 @@ public class Constants {
 //		return "http://192.168.1.4:8000/400.php";
 		
 	}
-	final public static String weijian_commit_new = host + "/wangge/sites/all/themes/wangge/android/from-android-event-insert.php";
 	
-	final public static String weijian_commit_update = host + "/wangge/sites/all/themes/wangge/android/from-android-event-update.php";
+	final public static String URL_commit_new = host + "/wangge/sites/all/themes/wangge/android/from-android-event-insert.php";// 新事件上传
+	
+	final public static String URL_commit_update = host + "/wangge/sites/all/themes/wangge/android/from-android-event-update.php";// 事件更新
 
 //	这个是接收服务器端发给移动端登录人和移动端所选月份的违建事件。转化这个json为列表之后，就可以点取其中一行进行编辑，
 //	编辑后点击“修改”，上传到上边的from-android-event-update.php这个路径，我接收去更新数据库。
 //	final public static String weijian_list = host + "/wangge/?q=node/10";
 //	final public static String weijian_list = host + "/wangge/sites/all/themes/wangge/android/to-android-event.php";
 //	final public static String weijian_list = host + "/wangge/sites/all/themes/wangge/android/to-android-event.php?kind=t_weijian&id=010101&time=month";
-	final private static String weijian_list_option = host + "/wangge/sites/all/themes/wangge/android/to-android-event.php?kind=t_weijian&id=%s&time=%s&start=%d&step=%d";
-	final static public String obtainWeijianListUrl (String userid, String time, int start, int step){
-		return String.format(weijian_list_option, userid, time, start, step);
+	final private static String events_list_option = host + "/wangge/sites/all/themes/wangge/android/to-android-event.php?kind=%s&id=%s&time=%s&start=%d&step=%d";
+	final static public String obtainEventsListUrl(String kind, String userid, String time, int start, int step){
+		if (10 > step) step = 10; 
+		return String.format(events_list_option, kind, userid, time, start, step);
 	}
 	
-	final static public String obtainLastWeijianListUrl(){
-		return String.format(weijian_list_option
+	final static public String obtainLastEventsListUrl(){
+		int step = Configuration.getInstance().getStep() * Configuration.getInstance().getCount();
+		if (10 > step) step = 10; 
+		return String.format(events_list_option
+				, Configuration.getInstance().getKind()
 				, Configuration.getInstance().getUsername()
 				, Configuration.getInstance().getTime()
 				, Configuration.getInstance().getStart()
-				, Configuration.getInstance().getStep() * Configuration.getInstance().getCount());
+				, step);
 	}
 	final static public String obtainLastWeijianListUrl(int start, int step){
-		return String.format(weijian_list_option
+		return String.format(events_list_option
 				, Configuration.getInstance().getUsername()
 				, Configuration.getInstance().getTime()
 				, start
@@ -51,15 +56,15 @@ public class Constants {
 	}
 //	这个是违建统计：镇域图
 //	final public static String weijian_zhenyutu = host + "/wangge/?q=node/13&s_yearmonth_selected=&s_statistics_type=&s_chart=no";
-	final private static String weijian_zhenyutu = host + "/wangge/sites/all/themes/wangge/android/to-android-event-statistics.php?kind=t_weijian&id=%s&s_statistics_type=违建数量&s_chart=no";
-	final static public String obtainWeijianZhenyutuUrl (String userId){
-		return String.format(weijian_zhenyutu, userId);
+	final private static String event_zhenyutu = host + "/wangge/sites/all/themes/wangge/android/to-android-event-statistics.php?kind=%s&id=%s&s_statistics_type=违建数量&s_chart=no";
+	final static public String obtainEventZhenyutuUrl(String kind, String userId){
+		return String.format(event_zhenyutu, kind, userId);
 	}
 //	这个是违建统计：柱状图
 //	final public static String weijian_tongji = host + "/wangge/?q=node/13&s_yearmonth_selected=&s_statistics_type=&s_chart=yes";
-	final private static String weijian_tongji = host + "/wangge/sites/all/themes/wangge/android/to-android-event-statistics.php?kind=t_weijian&id=%s&s_statistics_type=违建数量&s_chart=yes";
-	final static public String obtainWeijianTongjiUrl (String userId){
-		return String.format(weijian_tongji, userId);
+	final private static String event_tongji = host + "/wangge/sites/all/themes/wangge/android/to-android-event-statistics.php?kind=%s&id=%s&s_statistics_type=违建数量&s_chart=yes";
+	final static public String obtainEventTongjiUrl (String kind, String userId){
+		return String.format(event_tongji, kind, userId);
 	}
 //	final public static String wangge_village_netbaseinfo_list = host + "/wangge/sites/all/themes/wangge/android/to-android-netinfo.php?kind=s_villageid&id=010101";
 	final private static String wangge_netbaseinfo_list = host + "/wangge/sites/all/themes/wangge/android/to-android-netinfo.php?kind=%s&id=%s";

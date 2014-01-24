@@ -2,6 +2,10 @@
 <resources>
     
     
+    
+	<string name="umeng_example_fb_home_btn_simple">Simple Demo</string>
+    
+    
     <string name="xlistview_header_hint_normal">下拉刷新</string>
     <string name="xlistview_header_hint_ready">松开刷新数据</string>
     <string name="xlistview_header_hint_loading">正在加载...</string>
@@ -161,7 +165,27 @@
     <string name="map_navigation">违章建筑地图信息</string>
     <string name="baidu_navigation">导航</string>
     <string name="show_event_step">每页显示案件数</string>
+    <string name="feedback">用户反馈</string>
     
+    <!-- 安全生产 -->
+     <string name="shengchang_title">生产安全</string>
+     <string name="shengchang_sub_title">生产安全相关</string>
+    <!---消防安全 -->
+     <string name="xiaofang_title">消防安全</string>
+     <string name="xiaofang_sub_title">消防安全相关</string>
+    <!---事件管理-03-煤气中毒 -->
+     <string name="meiqizhongdu_title">煤气中毒</string>
+     <string name="meiqizhongdu_sub_title">煤气中毒相关</string>
+    <!-- 事件管理-04-环境安全 -->
+     <string name="huanjing_title">环境安全</string>
+     <string name="huanjing_sub_title">环境安全相关</string>
+    <!-- 事件管理-05-食品安全 -->
+     <string name="shipin_title">食品安全</string>
+     <string name="shipin_sub_title">食品安全相关</string>
+    <!-- 事件管理-06-药品安全 -->
+     <string name="yaopin_title">药品安全</string>
+     <string name="yaopin_sub_title">药品安全相关</string>
+     
     <!-- 公用 -->
     <string name="netid">网格ID</string>
     <string name="netname">格名称</string>
@@ -178,10 +202,17 @@
     <string name="belong_village">所属村</string>
     <string name="belong_netgrid">所属格</string>
 
-    <string name="yinhuanaddress">违建位置</string>    
+    <string name="weijinaddress">违建位置</string>    
     <string name="weijianxiangduiren">违建相对人</string>    
-    <string name="yinhuanxiangqing">违章描述</string>    
-
+    <string name="weizhangmiaoshu">违章描述</string>    
+    
+    <string name="yinhuanxiangqing">隐患描述</string>    
+    <string name="yinhuanaddress">隐患地点</string>   
+    <string name="yinhuandanwei">隐患所在单位</string>    
+    <string name="yinhuandanweiren">隐患单位负责人</string>    
+    <string name="yinhuandanweitel">隐患单位电话</string>    
+    <string name="yinhuandanweitype">隐患单位类型</string>    
+    
     
     <string name="yinhuanren">涉及人姓名</string>
     <string name="yinhuanlianluo">涉及人电话</string>
@@ -244,9 +275,17 @@
     <string name="more_option">查看更多选项</string>    
      <string name="village_baseinfo">各村基本信息表</string>    
      <string name="netgrid_baseinfo">各网格基本信息表</string>    
+     
+     
+    <string name="garbagequantity">垃圾数量（吨）</string>    
+    <string name="garbagetype">垃圾种类</string>    
+      
+    <string name="license">是否有营业执照</string>    
+    <string name="weishengxuke">是否有卫生许可证</string>    
+      
     <!--
-    <string name=""></string>    
-    <string name=""></string>    
+   
+    
     <string name=""></string>    
     <string name=""></string>    
     <string name=""></string>    

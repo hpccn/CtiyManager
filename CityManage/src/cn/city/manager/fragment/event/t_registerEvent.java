@@ -4,7 +4,6 @@ import org.json.JSONObject;
 
 import com.google.gson.Gson;
 
-import android.graphics.drawable.Drawable;
 
 public class t_registerEvent extends BaseEvent {
 	

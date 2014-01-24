@@ -4,8 +4,6 @@ import org.json.JSONObject;
 
 import com.google.gson.Gson;
 
-import android.graphics.drawable.Drawable;
-
 public class t_netbaseinfoEvent extends BaseEvent {
 	public final static String category = t_netbaseinfoEvent.class.getSimpleName();
 	private String s_netid;// 网格ID",

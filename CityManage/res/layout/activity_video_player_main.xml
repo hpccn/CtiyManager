@@ -3,31 +3,45 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/button_play"
-            style="@style/generalButtonStyle"
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <SurfaceView
+            android:id="@+id/id_surfaceview1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="play" />
-        <Button
-            android:id="@+id/button_stop"
-            style="@style/generalButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="stop" />
+            android:layout_gravity="center_horizontal|bottom"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/button_play"
+                style="@style/generalButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/icn_media_play"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                 />
+<!-- android:text="播放" -->
+            <Button
+                android:id="@+id/button_stop"
+                style="@style/generalButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/icn_media_pause"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                 />
+            <!-- android:text="完成" -->
         </LinearLayout>
-
-    <SurfaceView
-        android:id="@+id/id_surfaceview1"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
-    
+    </FrameLayout>
 
 </LinearLayout>

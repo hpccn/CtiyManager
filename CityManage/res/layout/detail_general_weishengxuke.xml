@@ -1,0 +1,17 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="是否有卫生许可证" >
+
+    <TextView
+        style="@style/thirdTitle"
+        android:id="@+id/weishengxuke_title"
+        android:text="@string/weishengxuke" />
+
+    <EditText
+        android:id="@+id/et_weishengxuke"
+        style="@style/generalEditText"
+        android:text="是"
+        android:hint="@string/weishengxuke" />
+
+</LinearLayout>

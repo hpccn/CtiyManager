@@ -2,8 +2,6 @@ package cn.city.manager.fragment.event;
 
 import org.json.JSONObject;
 
-import android.graphics.drawable.Drawable;
-
 import com.google.gson.Gson;
 
 public  abstract class BaseEvent implements Comparable<BaseEvent>{

@@ -104,7 +104,7 @@ public class ImageCacheFactory extends DiskCache<String, Bitmap> {
 	private final CompressFormat mCompressFormat;
 	private final int mQuality;
 
-	private final Resources mRes;
+//	private final Resources mRes;
 
 	// TODO make it so this is customizable on the instance level.
 	/**
@@ -113,23 +113,29 @@ public class ImageCacheFactory extends DiskCache<String, Bitmap> {
 	 * @param context
 	 * @return an instance of the cache
 	 */
-	public static ImageCacheFactory getInstance(Context context) {
+//	public static ImageCacheFactory getInstance(Context context) {
+//		if (mInstance == null) {
+//			mInstance = new ImageCacheFactory(context, CompressFormat.JPEG, 85);
+//		}
+//		return mInstance;
+//	}
+	public static ImageCacheFactory getInstance() {
 		if (mInstance == null) {
-			mInstance = new ImageCacheFactory(context, CompressFormat.JPEG, 85);
+			mInstance = new ImageCacheFactory(CompressFormat.JPEG, 85);
 		}
 		return mInstance;
 	}
 	final private static String cacheDir = android.os.Environment.getExternalStorageDirectory().getPath() + File.separator + ".img";
 	final private static File cacheFile = new File(cacheDir);
-	private ImageCacheFactory(Context context, CompressFormat format, int quality) {
+	private ImageCacheFactory(CompressFormat format, int quality) {//Context context, 
 //		super(context.getCacheDir(), null, getExtension(format));
 		
 		super(cacheFile, null, getExtension(format));
 		cacheFile.mkdirs();
-		Log.d(TAG, "cache: " +context.getCacheDir());
+//		Log.d(TAG, "cache: " +context.getCacheDir());
 		hc = getHttpClient();
 
-		mRes = context.getResources();
+//		mRes = context.getResources();
 
 		mCompressFormat = format;
 		mQuality = quality;
@@ -386,7 +392,8 @@ public class ImageCacheFactory extends DiskCache<String, Bitmap> {
 			throw new Exception("got null bitmap from request to scale");
 
 		}
-		d = new BitmapDrawable(mRes, bmp);
+//		d = new BitmapDrawable(mRes, bmp);
+		d = new BitmapDrawable(bmp);
 		putDrawable(scaledKey, d);
 
 		return d;
@@ -410,11 +417,12 @@ public class ImageCacheFactory extends DiskCache<String, Bitmap> {
 		}
 		if (bmp == null) {
 //			Log.w(TAG, "got null bitmap from request to scale");
-//			throw new Exception("got null bitmap from request to scale");
-			return null;
+			throw new Exception("got null bitmap from request to scale");
+
 
 		}
-		d = new BitmapDrawable(mRes, bmp);
+//		d = new BitmapDrawable(mRes, bmp);
+		d = new BitmapDrawable(bmp);
 
 		return d;
 	}
@@ -445,12 +453,13 @@ public class ImageCacheFactory extends DiskCache<String, Bitmap> {
 				}
 			}
 		}
-//		if (bmp == null) {
-////			Log.w(TAG, "got null bitmap from request to scale");
-//			throw new Exception("got null bitmap from request to scale");
-//
-//		}
-		d = new BitmapDrawable(mRes, bmp);
+		if (bmp == null) {
+//			Log.w(TAG, "got null bitmap from request to scale");
+			throw new Exception("got null bitmap from request to scale");
+
+		}
+//		d = new BitmapDrawable(mRes, bmp);
+		d = new BitmapDrawable(bmp);
 
 		return d;
 	}
@@ -657,12 +666,12 @@ public class ImageCacheFactory extends DiskCache<String, Bitmap> {
 			Log.d(TAG, "scaleLocalImage(" + localFile +  ")");
 		}
 
-//		if (!localFile.exists()) {
-//			throw new IOException("local file does not exist: " + localFile);
-//		}
-//		if (!localFile.canRead()) {
-//			throw new IOException("cannot read from local file: " + localFile);
-//		}
+		if (!localFile.exists()) {
+			throw new IOException("local file does not exist: " + localFile);
+		}
+		if (!localFile.canRead()) {
+			throw new IOException("cannot read from local file: " + localFile);
+		}
 
 		// the below borrowed from:
 		// https://github.com/thest1/LazyList/blob/master/src/com/fedorvlasov/lazylist/ImageLoader.java
@@ -705,9 +714,9 @@ public class ImageCacheFactory extends DiskCache<String, Bitmap> {
 			final HttpResponse hr = hc.execute(get);
 			final StatusLine hs = hr.getStatusLine();
 			if (hs.getStatusCode() != 200) {
-//				throw new HttpResponseException(hs.getStatusCode(),
-//						hs.getReasonPhrase());
-				return;
+				throw new HttpResponseException(hs.getStatusCode(),
+						hs.getReasonPhrase());
+				
 			}
 
 			final HttpEntity ent = hr.getEntity();

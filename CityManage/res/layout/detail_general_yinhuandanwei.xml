@@ -1,0 +1,17 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="隐患单位" >
+
+    <TextView
+        style="@style/thirdTitle"
+        android:id="@+id/yinhuandanwei_title"
+        android:text="@string/yinhuandanwei" />
+
+
+    <EditText
+        android:id="@+id/et_yinhuandanwei"
+        style="@style/generalEditText"
+        android:hint="@string/yinhuandanwei" />
+
+</LinearLayout>

@@ -6,16 +6,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.Collator;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,7 +31,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -59,6 +55,8 @@ import cn.hpc.common.cache.ImageCacheFactory;
 import cn.hpc.common.view.XListView;
 import cn.hpc.common.view.XListView.IXListViewListener;
 
+import com.umeng.analytics.MobclickAgent;
+
 public abstract class BaseBrowseActivity extends Activity implements ImageCacheFactory.OnImageLoadListener{
 
 	public static final int REQUEST_CODE = 0x100;
@@ -82,9 +80,10 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 	protected GeneralInformationFragment general;// = new GeneralInformationFragment(context);
 	protected String currentUrl;
 	
-	private ImageCacheFactory imc;
-	final protected ExecutorService executorService = Executors.newFixedThreadPool(10);    //固定五个线程来执行任务
+	final protected ImageCacheFactory imc = ImageCacheFactory.getInstance();
+	protected ExecutorService executorService = Executors.newFixedThreadPool(10);    //固定五个线程来执行任务
 //.newCachedThreadPool();//
+	
 	
 	private XListView xListView;
 	
@@ -100,6 +99,9 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		com.umeng.common.Log.LOG = true;
+//		MobclickAgent.setDebugMode(true);
+		MobclickAgent.onError(this);
 //		setContentView(R.layout.summary_main);
 		category = this.getIntent().getStringExtra("category");
 
@@ -110,7 +112,7 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 
 		title = this.getIntent().getStringExtra("title");
 		context = this;
-		imc = ImageCacheFactory.getInstance(context);
+//		imc = ImageCacheFactory.getInstance();
 		general = new GeneralInformationFragment(context);
 		try {
 //			init(this);
@@ -222,6 +224,8 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 				super.run();
 				
 				if (null != events) {
+					executorService.shutdownNow();
+					executorService = Executors.newFixedThreadPool(10); 
 					for (BaseEvent content : events){
 						if (null != content && null != content.getIcon() && content.getIcon().length() > 4){
 							final Uri uri = Uri.parse(content.getIcon());
@@ -298,7 +302,7 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 	protected abstract List <BaseEvent> reloadEvents() throws Exception;
 	protected abstract List <BaseEvent> loadMoreEvents(int start) throws Exception;
 	protected List <BaseEvent> events;
-	private void init(final Context context) throws JSONException, IOException{
+	protected void init(final Context context) throws JSONException, IOException{
 		
 		tvTitle = (TextView)this.findViewById(R.id.id_titlebar_title);
 //		tvTitle.setText(category);
@@ -452,10 +456,10 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 			townMap = new Statistics(this, Constants.obtainNetbaseinfoZhenyuUrl(Configuration.getInstance().getUsername(), ""));
 			townMap.setSelect(Constants.netbaseinfo_zhenyutu, Constants.wangge_zhenyutu);
 		}else {
-			statistics = new Statistics(this, Constants.obtainWeijianTongjiUrl(Configuration.getInstance().getUsername()));
+			statistics = new Statistics(this, Constants.obtainEventTongjiUrl(category, Configuration.getInstance().getUsername()));
 			String[] tj = {"本月各村情况统计图"};
 			statistics.setSelect(tj , null);
-			townMap = new Statistics(this, Constants.obtainWeijianZhenyutuUrl(Configuration.getInstance().getUsername()));
+			townMap = new Statistics(this, Constants.obtainEventZhenyutuUrl(category, Configuration.getInstance().getUsername()));
 			String[] zy = {"本月各村情况镇域图"};
 			townMap.setSelect(zy , null);
 		}
@@ -521,6 +525,7 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 				intent.setClass(context, EventMapOverlay.class);
 				context.startActivity(intent);
 			}
+			break;
 			case R.id.id_reload:
 				imc.clear();
 				invalidateEvent();
@@ -692,13 +697,20 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 //		handler.sendEmptyMessageDelayed(0x1002, 500);
 
 	}
-
+	
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
-		Log.e("", "onResume");
+		MobclickAgent.onResume(this);
 	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
+
 	
 	final protected Handler handler = new Handler(){
 

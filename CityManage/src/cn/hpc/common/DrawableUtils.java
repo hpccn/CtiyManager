@@ -1,6 +1,10 @@
 package cn.hpc.common;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -251,34 +255,38 @@ public class DrawableUtils {
 				matrix, true);
 		return new BitmapDrawable(newbmp);
 	}
-	
-	
+
 	/**
 	 * 获取指定大小的图片.
+	 * 
 	 * @param file
 	 * @param width
 	 * @param height
 	 * @return
 	 */
-	final public static Bitmap decodeBitmapWithSize(String file, int width, int height) {
+	final public static Bitmap decodeBitmapWithSize(String file, int width,
+			int height) {
 		if (null == file)
 			return null;
 		BitmapFactory.Options options = new BitmapFactory.Options();
 		options.inJustDecodeBounds = true;
 		// 通过这个bitmap获取图片的宽和高
 		Bitmap bitmap = BitmapFactory.decodeFile(file, options);
-//		if (bitmap == null) {
-//			System.out.println("bitmap为空");
-//			// return null;
-//		}
+		// if (bitmap == null) {
+		// System.out.println("bitmap为空");
+		// // return null;
+		// }
 		float realWidth = options.outWidth;
 		float realHeight = options.outHeight;
 		System.out.println("真实图片高度：" + realHeight + "宽度:" + realWidth);
 		// 计算缩放比
 		// int scale = (int) ((realHeight > realWidth ? realHeight : realWidth)
 		// / 100);
-		int scale = (int) ((realHeight > realWidth ? realHeight / height
-				: realWidth / width));
+		float realMax = realHeight > realWidth ? realHeight : realWidth;
+		int needMax = width > height ? width : height;
+		int scale = (int) (realMax / needMax + 0.9f);
+//		int scale = (int) ((realHeight > realWidth ? realHeight / height
+//				: realWidth / width));
 		if (scale <= 0) {
 			scale = 1;
 		}
@@ -290,5 +298,32 @@ public class DrawableUtils {
 		int h = bitmap.getHeight();
 		System.out.println("缩略图高度：" + h + "宽度:" + w);
 		return bitmap;
+	}
+
+	final public static void bitmapToFile(Bitmap bitmap, String fileName) {
+		File f = new File(fileName);
+		try {
+			f.createNewFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			// DebugMessage.put("在保存图片时出错："+e.toString());
+		}
+		FileOutputStream fOut = null;
+		try {
+			fOut = new FileOutputStream(f);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		bitmap.compress(Bitmap.CompressFormat.JPEG, 80, fOut);
+		try {
+			fOut.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			fOut.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

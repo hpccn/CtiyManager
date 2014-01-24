@@ -1,13 +1,8 @@
 package cn.city.manager.activity;
 
-import java.util.List;
-
 import org.apache.http.HttpStatus;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,12 +15,11 @@ import android.widget.EditText;
 import cn.city.manager.Configuration;
 import cn.city.manager.Constants;
 import cn.city.manager.R;
-import cn.city.manager.fragment.event.BaseEvent;
-import cn.city.manager.fragment.event.t_registerEvent;
 import cn.city.manager.model.EventHttpStreamThread;
-import cn.city.manager.model.EventSingletonFactory;
 import cn.city.manager.view.ViewSingletonFactory;
 import cn.hpc.common.HttpStreamThread;
+
+import com.umeng.analytics.MobclickAgent;
 
 public class LoginActivity extends Activity {
 
@@ -39,7 +33,9 @@ public class LoginActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login_main);
-
+		com.umeng.common.Log.LOG = true;
+//		MobclickAgent.setDebugMode(true);
+		MobclickAgent.onError(this);
 		configuration = Configuration.getInstance();
 
 		shake = AnimationUtils.loadAnimation(this, R.anim.shake);
@@ -48,7 +44,17 @@ public class LoginActivity extends Activity {
 		findViewById(R.id.login_reset).setOnClickListener(onClickListener);
 		init();
 	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
 
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
 	private void init() {
 		password = (EditText) findViewById(R.id.et_password);
 		userName = (EditText) findViewById(R.id.et_user_name);

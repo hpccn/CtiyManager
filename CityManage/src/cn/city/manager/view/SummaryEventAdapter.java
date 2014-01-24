@@ -18,13 +18,13 @@ import android.widget.TextView;
 public class SummaryEventAdapter extends BaseAdapter {
 
 	
-	private ImageCacheFactory imc;
+	private ImageCacheFactory imc = ImageCacheFactory.getInstance();
 	final private Context context;
 	final private List <BaseEvent> list;
 	public SummaryEventAdapter(Context context, List <BaseEvent> list){
 		this.context = context;
 		this.list = list;
-		imc  = ImageCacheFactory.getInstance(context);
+//		imc  = ImageCacheFactory.getInstance();
 	}
 	@Override
 	public int getCount() {

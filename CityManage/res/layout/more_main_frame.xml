@@ -71,5 +71,16 @@
         android:gravity="center"
         android:text="@string/baidu_navigation" />
     
+    <Button
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="4dp"
+        android:id="@+id/btn_feedback"
+        style="@style/generalButtonStyle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="left"
+        android:text="@string/feedback" />
     
 </LinearLayout>

@@ -1,0 +1,16 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="是否有营业执照" >
+
+    <TextView
+        style="@style/thirdTitle"
+        android:text="@string/license" />
+
+    <EditText
+        android:id="@+id/et_license"
+        style="@style/generalEditText"
+        android:text="是"
+        android:hint="@string/license" />
+
+</LinearLayout>

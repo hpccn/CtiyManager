@@ -210,10 +210,10 @@ public class EventSingletonFactory {
 		reloadEvents(context, url, listener);
 
 	}
-	private ImageCacheFactory imc;
+	final private ImageCacheFactory imc = ImageCacheFactory.getInstance();
 	public void cachePhoto(final Context context, List<BaseEvent> events){
-		if (null  == imc)
-			imc  = ImageCacheFactory.getInstance(context);
+//		if (null  == imc)
+//			imc  = ImageCacheFactory.getInstance(context);
 		
 		
 		for (BaseEvent ev : events){

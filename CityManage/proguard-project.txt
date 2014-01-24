@@ -45,3 +45,15 @@
   *;
   native <methods>;
 }
+
+
+-dontwarn com.markupartist.**
+
+-keep public class com.umeng.example.R$*{
+    public static final int *;
+}
+
+
+
+-keep public class com.umeng.fb.ui.ThreadView {
+}

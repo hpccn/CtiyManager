@@ -1,5 +1,11 @@
 package cn.city.manager.view;
 
+import com.umeng.fb.FeedbackAgent;
+import com.umeng.update.UmengUpdateAgent;
+import com.umeng.update.UmengUpdateListener;
+import com.umeng.update.UpdateResponse;
+import com.umeng.update.UpdateStatus;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,6 +15,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 import cn.city.manager.Configuration;
 import cn.city.manager.R;
 import cn.city.manager.activity.BaiduNavigation;
@@ -33,7 +40,7 @@ public class More implements Page{
 		btnUpgrade = (Button) view.findViewById(R.id.btn_upgrade);
 //		btnUpgrade.setOnClickListener(onClickListener);
 	
-		int ids[] = {R.id.btn_cancel_auto_login, R.id.btn_upgrade, R.id.btn_show_event_step, R.id.btn_map_navigation, R.id.btn_baidu_navigation};
+		int ids[] = {R.id.btn_cancel_auto_login, R.id.btn_upgrade, R.id.btn_show_event_step, R.id.btn_feedback, R.id.btn_map_navigation, R.id.btn_baidu_navigation};
 		for (int id : ids){
 			view.findViewById(id).setOnClickListener(onClickListener);
 			
@@ -110,7 +117,11 @@ public class More implements Page{
 				context.startActivity(intent);
 			}
 				break;
-
+			case R.id.btn_feedback:
+				FeedbackAgent agent = new FeedbackAgent(context);
+				agent.sync();
+				agent.startFeedbackActivity();
+				break;
 			default:
 			}
 			
@@ -169,13 +180,18 @@ public class More implements Page{
 	}
 	
 	private void showUpgrade(){
+		UmengUpdateAgent.setUpdateAutoPopup(true);
+		UmengUpdateAgent.update(context);
+		UmengUpdateAgent.setUpdateListener(listener);
 
-		
+	}
+	
+	private void showDiaglog(String title, String message){
 	    AlertDialog.Builder builder = new AlertDialog.Builder(context);
 	    builder.setIcon(R.drawable.ic_logo);
-	    builder.setTitle("检查新版本");
+	    builder.setTitle(title);//"检查新版本");
 	    builder.setCancelable(true);
-	    builder.setMessage("当前是最新版本");
+	    builder.setMessage(message);//"当前是最新版本");
 	    builder.setCancelable(true);
 	    
 
@@ -184,4 +200,31 @@ public class More implements Page{
 	    
 		ad.show();
 	}
+	
+	final UmengUpdateListener listener = new UmengUpdateListener() {
+
+		@Override
+		public void onUpdateReturned(int updateStatus,
+				UpdateResponse updateInfo) {
+			switch (updateStatus) {
+			case UpdateStatus.Yes:
+//				Toast.makeText(context, "发现更新", Toast.LENGTH_SHORT).show();
+				showDiaglog("检查新版本", "发现更新");
+				break;
+			case UpdateStatus.No:
+//				Toast.makeText(context, "没有更新", Toast.LENGTH_SHORT).show();
+				showDiaglog("检查新版本", "无需更新, 当前是最新版本");
+				break;
+			case UpdateStatus.NoneWifi:
+//				Toast.makeText(context, "没有wifi", Toast.LENGTH_SHORT).show();
+				showDiaglog("检查新版本", "请连接Wifi网络,检查更新");
+				break;
+			case UpdateStatus.Timeout:
+//				Toast.makeText(context, "超时", Toast.LENGTH_SHORT).show();		
+				showDiaglog("检查新版本", "超时, 网络超时");
+				break;
+			}
+		}
+
+	};
 }

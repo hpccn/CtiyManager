@@ -2,6 +2,8 @@ package cn.city.manager.activity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,6 +16,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -43,6 +46,7 @@ import com.baidu.mapapi.map.OverlayItem;
 import com.baidu.mapapi.map.PopupClickListener;
 import com.baidu.mapapi.map.PopupOverlay;
 import com.baidu.platform.comapi.basestruct.GeoPoint;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * 覆盖物的用法
@@ -85,8 +89,13 @@ public class EventMapOverlay extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+		com.umeng.common.Log.LOG = true;
+//		MobclickAgent.setDebugMode(true);
+		MobclickAgent.onError(this);
+		
         context = this;
-        imc  = ImageCacheFactory.getInstance(context);
+        imc  = ImageCacheFactory.getInstance();
         /**
          * 使用地图sdk前需先初始化BMapManager.
          * BMapManager是全局的，可为多个MapView共用，它需要地图模块创建前创建，
@@ -129,12 +138,23 @@ public class EventMapOverlay extends Activity {
          */
         GeoPoint p = new GeoPoint((int)(39.933859 * 1E6), (int)(116.400191* 1E6));
         mMapController.setCenter(p);
-        try {
-			loadEvents();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        
+        new Thread(){
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				super.run();
+		        try {
+					loadEvents();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+        	
+        }.start();
+
         
         
         init();
@@ -160,7 +180,7 @@ public class EventMapOverlay extends Activity {
 	protected List <BaseEvent> events;
 	
 	protected List<BaseEvent> loadEvents() throws Exception {
-		String url = Constants.obtainLastWeijianListUrl();//Constants.obtainWeijianListUrl(Configuration.getInstance().getUsername(), "month");//weijian_list;//"http://longhorn.free3v.net/t_weijian.html";
+		String url = Constants.obtainLastEventsListUrl();//Constants.obtainWeijianListUrl(Configuration.getInstance().getUsername(), "month");//weijian_list;//"http://longhorn.free3v.net/t_weijian.html";
 		EventSingletonFactory.getInstance().loadEvents(context, url, onLoadListener);
 		return null;
 	}
@@ -225,8 +245,54 @@ public class EventMapOverlay extends Activity {
 			}
 		}
 		initOverlay();
+		asyncDownloadImage();
 	}
+	protected ExecutorService executorService = Executors.newFixedThreadPool(10);    //固定五个线程来执行任务
 
+	private void asyncDownloadImage(){
+		Thread th = new Thread(){
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				super.run();
+				
+				if (null != events) {
+					executorService.shutdownNow();
+					executorService = Executors.newFixedThreadPool(10); 
+
+					for (BaseEvent content : events){
+						if (null != content && null != content.getIcon() && content.getIcon().length() > 4){
+							final Uri uri = Uri.parse(content.getIcon());
+							if (null != uri && uri.getHost() != null)
+								try {
+									executorService.submit(new Runnable() {
+										public void run() {
+											Log.d("", "download img : " + uri.toString());
+											try {
+												imc.getImage(uri);//, 72, 72);
+												handler.sendEmptyMessage(0x1001);
+											} catch (Exception e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											}
+										}
+									});
+								} catch (Exception e1){
+									
+								}
+
+						}
+					}
+				}
+				
+			}
+			
+		};
+		th.setPriority(Thread.MIN_PRIORITY);
+		th.start();
+	}
+	
     public void initOverlay(){
     	
     	Drawable d = getResources().getDrawable(R.drawable.nav_turn_via_1);//icon_marka);//
@@ -362,7 +428,9 @@ public class EventMapOverlay extends Activity {
     	 *  MapView的生命周期与Activity同步，当activity挂起时需调用MapView.onPause()
     	 */
         mMapView.onPause();
+        
         super.onPause();
+        MobclickAgent.onPause(this);
     }
     
     @Override
@@ -372,6 +440,7 @@ public class EventMapOverlay extends Activity {
     	 */
         mMapView.onResume();
         super.onResume();
+        MobclickAgent.onResume(this);
     }
     
     @Override
@@ -380,6 +449,7 @@ public class EventMapOverlay extends Activity {
     	 *  MapView的生命周期与Activity同步，当activity销毁时需调用MapView.destroy()
     	 */
         mMapView.destroy();
+        executorService.shutdown();
         super.onDestroy();
     }
     
@@ -406,6 +476,7 @@ public class EventMapOverlay extends Activity {
 		@Override
 		public boolean onTap(int index){
 			OverlayItem item = getItem(index);
+			if (null == item) return false;
 			mCurItem = item ;
 //			if (index == 3){
 //				button.setText("这是一个系统控件");
@@ -427,10 +498,11 @@ public class EventMapOverlay extends Activity {
 //			   popupText.setText(getItem(index).getTitle());
 			
 	         try {
-				popupEventPhoto.setImageDrawable(imc.getImage(Uri.parse(events.get(index).getIcon())));//()), 72, 72));
+				popupEventPhoto.setImageDrawable(imc.getLocalImage(Uri.parse(events.get(index).getIcon())));//()), 72, 72));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				popupEventPhoto.setImageResource(R.drawable.ic_default_event);
 			}
 	         popupInfoTitle.setText("网格:" + events.get(index).getNetGridId());
 	         popupInfoContent.setText(events.get(index).getContent());

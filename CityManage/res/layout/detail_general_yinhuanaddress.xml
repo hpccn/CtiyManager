@@ -21,7 +21,8 @@
 
         <TextView
             style="@style/thirdTitle"
-            android:text="@string/yinhuanaddress" />
+             android:id="@+id/yinhuanaddress_title"
+            android:text="@string/weijinaddress" />
 
         <include layout="@layout/must_input_mark" />
 
