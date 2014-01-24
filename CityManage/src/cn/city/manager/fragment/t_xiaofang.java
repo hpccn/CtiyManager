@@ -221,7 +221,7 @@ public class t_xiaofang extends BaseFragment implements ImageCacheFactory.OnImag
 		if (null == jsonData) {
 //		String strAddress = content.getS_yinhuanaddress();
 //		if (null == strAddress || strAddress.length() < 2)
-			general.updateLocation(context, (EditText) rootView.findViewById(R.id.et_yinhuanaddress), content);
+//			general.updateLocation(context, (EditText) rootView.findViewById(R.id.et_yinhuanaddress), content);
 		}
 		general.updateTitle(context, rootView, this);
 		

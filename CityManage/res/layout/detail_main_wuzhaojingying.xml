@@ -28,13 +28,27 @@
         <include layout="@layout/divider_horizontal" />
 
         <include
-            android:id="@+id/id_yinhuanxiangqing"
-            layout="@layout/detail_general_yinhuanxiangqing" />
-
+            android:id="@+id/id_houseowner"
+            layout="@layout/detail_general_houseowner" />
+        
+        <include
+            android:id="@+id/id_businessitems"
+            layout="@layout/detail_general_businessitems" />
+        
+        
+        
         <include
             android:id="@+id/id_yinhuanaddress"
             layout="@layout/detail_general_yinhuanaddress" />
+        
+        <include
+            android:id="@+id/id_yinhuanren"
+            layout="@layout/detail_general_yinhuanren" />
 
+        <include
+            android:id="@+id/id_yinhuanlianluo"
+            layout="@layout/detail_general_yinhuanlianluo" />
+        
         <include
             android:id="@+id/id_belong_village"
             layout="@layout/detail_general_belong_village" />
@@ -44,40 +58,8 @@
             layout="@layout/detail_general_belong_netgrid" />
 
         <include
-            android:id="@+id/id_weijianxiangduiren"
-            layout="@layout/detail_general_weijianxiangduiren" />
-
-        <include
-            android:id="@+id/id_landstatus"
-            layout="@layout/detail_general_landstatus" />
-
-        <include
-            android:id="@+id/id_landarea"
-            layout="@layout/detail_general_landarea" />
-
-        <include
-            android:id="@+id/id_construction"
-            layout="@layout/detail_general_construction" />
-
-        <include
-            android:id="@+id/id_jianzhumianji"
-            layout="@layout/detail_general_jianzhumianji" />
-
-        <include
-            android:id="@+id/id_buildtime"
-            layout="@layout/detail_general_buildtime" />
-
-        <include
-            android:id="@+id/id_solvemethod"
-            layout="@layout/detail_general_solvemethod" />
-
-        <include
-            android:id="@+id/id_yinhuanren"
-            layout="@layout/detail_general_yinhuanren" />
-
-        <include
-            android:id="@+id/id_yinhuanlianluo"
-            layout="@layout/detail_general_yinhuanlianluo" />
+            android:id="@+id/id_eventid"
+            layout="@layout/detail_general_eventid" />
 
         <include
             android:id="@+id/id_solvestatus"
@@ -95,7 +77,28 @@
             android:id="@+id/id_unsolvedreason"
             layout="@layout/detail_general_unsolvedreason" />
 
- 
+        <include
+            android:id="@+id/id_discoverer"
+            layout="@layout/detail_general_discoverer" />
+
+        <include
+            android:id="@+id/id_updater"
+            layout="@layout/detail_general_updater" />
+
+        <include
+            android:id="@+id/id_netleader"
+            layout="@layout/detail_general_netleader" />
+
+        <!-- 到此 -->
+
+        <!-- 非公有属性 -->
+
+        <FrameLayout
+            android:id="@+id/detail_container"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <!-- 公有属性 -->
+
         <include
             android:id="@+id/id_remark"
             layout="@layout/detail_general_remark" />

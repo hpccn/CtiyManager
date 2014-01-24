@@ -185,6 +185,12 @@
     <!-- 事件管理-06-药品安全 -->
      <string name="yaopin_title">药品安全</string>
      <string name="yaopin_sub_title">药品安全相关</string>
+    <!-- 事件管理-09-无照经营 -->
+     <string name="wuzhaojingying_title">无照经营</string>
+     <string name="wuzhaojingying_sub_title">无照经营</string>
+     <!-- 事件管理-12-交通安全 -->
+     <string name="jiaotong_title">交通安全</string>
+     <string name="jiaotong_sub_title">交通安全相关</string>
      
     <!-- 公用 -->
     <string name="netid">网格ID</string>
@@ -282,11 +288,12 @@
       
     <string name="license">是否有营业执照</string>    
     <string name="weishengxuke">是否有卫生许可证</string>    
-      
+    <string name="businessitems">经营项目</string>    
+    <string name="houseowner">房东姓名</string>      
     <!--
    
     
-    <string name=""></string>    
+    
     <string name=""></string>    
     <string name=""></string>    
     <string name=""></string>    

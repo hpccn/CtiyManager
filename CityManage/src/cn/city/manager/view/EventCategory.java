@@ -7,10 +7,12 @@ import java.util.Map;
 
 import cn.city.manager.R;
 import cn.city.manager.fragment.t_huanjing;
+import cn.city.manager.fragment.t_jiaotong;
 import cn.city.manager.fragment.t_meiqizhongdu;
 import cn.city.manager.fragment.t_shengchan;
 import cn.city.manager.fragment.t_shipin;
 import cn.city.manager.fragment.t_weijian;
+import cn.city.manager.fragment.t_wuzhaojingying;
 import cn.city.manager.fragment.t_xiaofang;
 import cn.city.manager.fragment.t_yaopin;
 import cn.city.manager.model.CategoryMeta;
@@ -39,10 +41,10 @@ public class EventCategory  implements BaseCategory{
 			, t_shipin.class.getSimpleName()
 			, t_yaopin.class.getSimpleName()
 			, null//
+			, t_wuzhaojingying.class.getSimpleName()
 			, null
 			, null
-			, null
-			, null
+			, t_jiaotong.class.getSimpleName()
 	};
 	
 	final private int[] eventIconId = {R.drawable.ic_structure, 

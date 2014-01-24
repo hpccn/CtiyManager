@@ -18,21 +18,21 @@ import android.widget.TextView;
 import cn.city.manager.Configuration;
 import cn.city.manager.R;
 import cn.city.manager.fragment.event.BaseEvent;
-import cn.city.manager.fragment.event.t_shengchanEvent;
+import cn.city.manager.fragment.event.t_wuzhaojingyingEvent;
 import cn.city.manager.view.DateTimePickerDialog;
 import cn.hpc.common.cache.ImageCacheFactory;
 
 /**
- * 生产安全
+ *  事件管理-09-无照经营
  * @author hpc
  *
  */
-public class CommonFragment extends BaseFragment implements ImageCacheFactory.OnImageLoadListener{
+public class t_wuzhaojingying extends BaseFragment implements ImageCacheFactory.OnImageLoadListener{
 	public static final String ARG_SECTION_NUMBER = "section_number";
 	
 	protected ViewGroup parent;
 	protected Context context;
-	protected t_shengchanEvent content;
+	protected t_wuzhaojingyingEvent content;
 
 	protected GeneralInformationFragment general;// = new GeneralInformationFragment();
 	protected View rootView;
@@ -50,23 +50,25 @@ public class CommonFragment extends BaseFragment implements ImageCacheFactory.On
 //		} else {
 //			v = View.inflate(context, R.layout.detail_shengchan_main, null);
 //		}
-		v = View.inflate(context, R.layout.detail_main_shengchan, null);
+		v = View.inflate(context, R.layout.detail_main_wuzhaojingying, null);
 		
 		initViewTitles(v);
 		return v;
 	}
 
 	private void initViewTitles(View v){
-		((TextView) v.findViewById(R.id.yinhuanxiangqing_title)).setText(R.string.yinhuanxiangqing);
-		((TextView) v.findViewById(R.id.yinhuanaddress_title)).setText(R.string.yinhuanaddress);
-		((TextView) v.findViewById(R.id.yinhuandanwei_title)).setText(R.string.yinhuandanwei);
-		((TextView) v.findViewById(R.id.yinhuanren_title)).setText(R.string.yinhuandanweiren);
-		((TextView) v.findViewById(R.id.yinhuanlianluo_title)).setText(R.string.yinhuandanweitel);
+//		((TextView) v.findViewById(R.id.yinhuanxiangqing_title)).setText("详情描述");
+		((TextView) v.findViewById(R.id.yinhuanaddress_title)).setText("具体地址");
+		((TextView) v.findViewById(R.id.yinhuanren_title)).setText("经营者姓名");
+//		((TextView) v.findViewById(R.id.yinhuanren_title)).setText(R.string.yinhuandanweiren);
+		((TextView) v.findViewById(R.id.yinhuanlianluo_title)).setText("经营者电话");
+		
+//		v.findViewById(R.id.id_yinhuandanwei).setVisibility(View.GONE);
 	}
 
 	@Override
 	public String getTitle(final Context context) {
-		return context.getResources().getString(R.string.shengchang_title);
+		return context.getResources().getString(R.string.wuzhaojingying_title);
 	}
 
 
@@ -74,7 +76,7 @@ public class CommonFragment extends BaseFragment implements ImageCacheFactory.On
 	public void setJsonData(String jsonData) {
 		this.jsonData = jsonData;
 		if (null == jsonData) {
-			content = new t_shengchanEvent();
+			content = new t_wuzhaojingyingEvent();
 			return;
 		}
 		JSONObject js = null;
@@ -84,9 +86,9 @@ public class CommonFragment extends BaseFragment implements ImageCacheFactory.On
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		t_shengchanEvent event = new t_shengchanEvent();//(js);
+		t_wuzhaojingyingEvent event = new t_wuzhaojingyingEvent();//(js);
 		try {
-			content = (t_shengchanEvent) event.fromJSONObject(js);
+			content = (t_wuzhaojingyingEvent) event.fromJSONObject(js);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -105,7 +107,7 @@ public class CommonFragment extends BaseFragment implements ImageCacheFactory.On
 
 	@Override
 	public String getSubTitle(final Context context) {
-		return context.getResources().getString(R.string.shengchang_sub_title);
+		return context.getResources().getString(R.string.wuzhaojingying_sub_title);
 		
 	}
 
@@ -214,7 +216,7 @@ public class CommonFragment extends BaseFragment implements ImageCacheFactory.On
 		if (null != video && video.length() > 4){
 			rootView.findViewById(R.id.tv_video_file).setBackgroundResource(R.drawable.ic_media_play);
 		}
-		((EditText)rootView.findViewById(R.id.et_yinhuanxiangqing)).setText(content.getS_yinhuanxiangqing());
+//		((EditText)rootView.findViewById(R.id.et_yinhuanxiangqing)).setText(content.getS_yinhuanxiangqing());
 		
 		if (null == jsonData) {
 //		String strAddress = content.getS_yinhuanaddress();
@@ -231,9 +233,11 @@ public class CommonFragment extends BaseFragment implements ImageCacheFactory.On
 		
 		//yinhuan
 		((EditText)rootView.findViewById(R.id.et_yinhuanaddress)).setText(content.getS_yinhuanaddress());
-		((EditText)rootView.findViewById(R.id.et_yinhuandanwei)).setText(content.getS_yinhuandanwei());
+//		((EditText)rootView.findViewById(R.id.et_yinhuandanwei)).setText(content.getS_yinhuandanwei());
 		((EditText)rootView.findViewById(R.id.et_yinhuanren)).setText(content.getS_yinhuanren());
 		((EditText)rootView.findViewById(R.id.et_yinhuanlianluo)).setText(content.getS_yinhuanlianluo());
+		((EditText)rootView.findViewById(R.id.et_houseowner)).setText(content.getS_houseowner());
+		((EditText)rootView.findViewById(R.id.et_businessitems)).setText(content.getS_businessitems());
 		
 		//solve
 		
@@ -295,11 +299,13 @@ public class CommonFragment extends BaseFragment implements ImageCacheFactory.On
 		
 		
 		//yinhuan
-		content.setS_yinhuanxiangqing(((EditText)rootView.findViewById(R.id.et_yinhuanxiangqing)).getText().toString());
+//		content.setS_yinhuanxiangqing(((EditText)rootView.findViewById(R.id.et_yinhuanxiangqing)).getText().toString());
 		content.setS_yinhuanaddress(((EditText)rootView.findViewById(R.id.et_yinhuanaddress)).getText().toString());
-		content.setS_yinhuandanwei(((EditText)rootView.findViewById(R.id.et_yinhuandanwei)).getText().toString());
+//		content.setS_yinhuandanwei(((EditText)rootView.findViewById(R.id.et_yinhuandanwei)).getText().toString());
 		content.setS_yinhuanren(((EditText)rootView.findViewById(R.id.et_yinhuanren)).getText().toString());
 		content.setS_yinhuanlianluo(((EditText)rootView.findViewById(R.id.et_yinhuanlianluo)).getText().toString());
+		content.setS_houseowner(((EditText)rootView.findViewById(R.id.et_houseowner)).getText().toString());
+		content.setS_businessitems(((EditText)rootView.findViewById(R.id.et_businessitems)).getText().toString());
 		
 	
 		//solve

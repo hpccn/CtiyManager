@@ -1,0 +1,17 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="房东姓名" >
+
+    <TextView
+        style="@style/thirdTitle"
+        android:id="@+id/houseowner_title"
+        android:text="@string/houseowner" />
+
+ 
+    <EditText
+        android:id="@+id/et_houseowner"
+        style="@style/generalEditText"
+        android:hint="@string/houseowner" />
+
+</LinearLayout>

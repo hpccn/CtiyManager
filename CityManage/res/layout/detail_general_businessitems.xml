@@ -1,0 +1,16 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="经营项目" >
+
+    <TextView
+        style="@style/thirdTitle"
+        android:id="@+id/businessitems_title"
+        android:text="@string/businessitems" />
+
+    <EditText
+        android:id="@+id/et_businessitems"
+        style="@style/generalEditText"
+        android:hint="@string/businessitems" />
+
+</LinearLayout>
