@@ -1,6 +1,7 @@
 package cn.city.manager.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.graphics.PixelFormat;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import cn.city.manager.R;
+import cn.city.manager.view.ViewSingletonFactory;
 
 public class InternetVideoPlayerActivity extends Activity {
 	public static final String TAG = "InternetVideoPlayerActivity";
@@ -52,20 +54,20 @@ public class InternetVideoPlayerActivity extends Activity {
 
 			@Override
 			public void surfaceDestroyed(SurfaceHolder holder) {
-				Log.i("通知", "surfaceHolder被销毁了");
+//				Log.i("通知", "surfaceHolder被销毁了");
 				if (mediaPlayer != null)
 					mediaPlayer.release();
 			}
 
 			@Override
 			public void surfaceCreated(SurfaceHolder holder) {
-				Log.i("通知", "surfaceHolder被create了");
+//				Log.i("通知", "surfaceHolder被create了");
 			}
 
 			@Override
 			public void surfaceChanged(SurfaceHolder holder, int format,
 					int width, int height) {
-				Log.i("通知", "surfaceHolder被改变了");
+//				Log.i("通知", "surfaceHolder被改变了");
 			}
 		});
 
@@ -111,27 +113,55 @@ public class InternetVideoPlayerActivity extends Activity {
 
 	}
 
+
 	/**
 	 * 播放
 	 */
 	private void play() {
+
+		ViewSingletonFactory.getInstance().showProcessDialog(context, null, "正在加载视频,请稍候...\n 较长时间无反应,请按返回键退出");
+
 		if (null != mediaPlayer){
 			mediaPlayer.reset();
-			mediaPlayer = null;
+//			mediaPlayer = null;
+		} else {
+			mediaPlayer = new MediaPlayer();
 		}
-		mediaPlayer = new MediaPlayer();
 		// 设置多媒体流类型
 //		mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
 		// 设置用于展示mediaPlayer的容器
 		mediaPlayer.setDisplay(surfaceHolder);
-		try {
 			// mediaPlayer.setDataSource("/sdcard/001.mp4");
-			mediaPlayer.setDataSource(context, uri);
 //					.setDataSource("http://192.168.1.114:8080/webdav/china.3gp");
 //			mediaPlayer.prepareAsync();
-			mediaPlayer.prepare();
-			mediaPlayer.start();
+			new Thread(){
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					super.run();
+					try {
+						mediaPlayer.setDataSource(context, uri);
+
+						mediaPlayer.prepare();
+						mediaPlayer.start();
+					} catch (Exception e) {
+						// Log.i("通知", "播放过程中出现了错误哦");
+						e.printStackTrace();
+					}
+
+				}
+				
+			}.start();
+			mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+				
+				@Override
+				public void onPrepared(MediaPlayer mp) {
+					
+					ViewSingletonFactory.getInstance().hideProcessDialog();
+				}
+			});
 			isPause = false;
 			mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
 
@@ -144,17 +174,14 @@ public class InternetVideoPlayerActivity extends Activity {
                 }
 
              });
-		} catch (Exception e) {
-			// Log.i("通知", "播放过程中出现了错误哦");
-			e.printStackTrace();
-		}
+
 	}
 
 	/**
 	 * 暂停
 	 */
 	private void pause() {
-		Log.i("通知", "点击了暂停按钮");
+//		Log.i("通知", "点击了暂停按钮");
 		if (isPause == false) {
 			mediaPlayer.pause();
 			isPause = true;
@@ -168,7 +195,7 @@ public class InternetVideoPlayerActivity extends Activity {
 	 * 重置
 	 */
 	private void reset() {
-		Log.i("通知", "点击了reset按钮");
+//		Log.i("通知", "点击了reset按钮");
 		// 跳转到视频的最开始
 		mediaPlayer.seekTo(0);
 		mediaPlayer.start();
@@ -178,10 +205,11 @@ public class InternetVideoPlayerActivity extends Activity {
 	 * 停止
 	 */
 	private void stop() {
-		Log.i("通知", "点击了stop按钮");
+//		Log.i("通知", "点击了stop按钮");
 		if (null != mediaPlayer){
 			mediaPlayer.stop();
 			mediaPlayer.release();
+			mediaPlayer = null;
 		}
 		this.finish();
 	}

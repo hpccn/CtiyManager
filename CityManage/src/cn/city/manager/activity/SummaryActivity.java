@@ -30,10 +30,16 @@ public class SummaryActivity extends BaseBrowseActivity {
 	protected View obtainView() {
 		View view = View.inflate(this, R.layout.summary_main, null);
 		view.findViewById(R.id.id_reload).setVisibility(View.VISIBLE);
-		view.findViewById(R.id.id_browse_mode).setVisibility(View.VISIBLE);
+		if ("t_xingshianjian".equals(category)){
+			view.findViewById(R.id.id_browse_mode).setVisibility(View.GONE);
+		} else {
+			view.findViewById(R.id.id_browse_mode).setVisibility(View.VISIBLE);
+		}
 		
 		tvTitle = (TextView)view.findViewById(R.id.id_titlebar_title);
 		tvTitle.setText(eventCategory.getCategoryTitle(category));
+		
+
 		// 使用Web方式浏览
 //		view.findViewById(R.id.id_summary_top_toolbar).setVisibility(View.GONE);
 //		Statistics wange = new Statistics(this, Constants.weijian_list);

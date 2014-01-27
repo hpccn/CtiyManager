@@ -11,6 +11,6 @@
     <EditText
         android:id="@+id/et_yinhuanxiangqing"
         style="@style/generalEditText"
-        android:hint="@string/yinhuanxiangqing" />
-
+         />
+<!-- android:hint="@string/yinhuanxiangqing" -->
 </LinearLayout>

@@ -31,7 +31,7 @@ public class ImageViewActivity extends Activity {
 //		MobclickAgent.setDebugMode(true);
 		MobclickAgent.onError(this);
 		imageView = (ImageView) this.findViewById(R.id.id_imgageview);
-		ViewSingletonFactory.getInstance().showProcessDialog(this, null, "正在下载图片,请稍候...\n 常时间无反应,请按返回键退出");
+		ViewSingletonFactory.getInstance().showProcessDialog(this, null, "正在下载图片,请稍候...\n 较长时间无反应,请按返回键退出");
 		uri = this.getIntent().getData();
 		Log.d("", "photo : " + uri);
 		imc  = ImageCacheFactory.getInstance();

@@ -1,13 +1,11 @@
 package cn.city.manager.fragment;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 import org.json.JSONObject;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.MotionEvent;
@@ -15,13 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
+import cn.city.manager.Configuration;
 import cn.city.manager.R;
 import cn.city.manager.fragment.event.BaseEvent;
 import cn.city.manager.fragment.event.t_weijianEvent;
 import cn.city.manager.view.DateTimePickerDialog;
 import cn.hpc.common.cache.ImageCacheFactory;
-import cn.city.manager.Configuration;
 
 /**
  * 违章建筑
@@ -35,7 +32,6 @@ public class t_weijian extends BaseFragment implements ImageCacheFactory.OnImage
 	private Context context;
 	private t_weijianEvent content;
 
-	private GeneralInformationFragment general;// = new GeneralInformationFragment();
 	private View rootView;
 	private ImageView imageView;
 	private ImageCacheFactory imc;
@@ -111,9 +107,7 @@ public class t_weijian extends BaseFragment implements ImageCacheFactory.OnImage
 	public void updateView(View rootView){
 		if (null == rootView) return;
 		this.rootView = rootView;
-		if (null == general){
-			general = new GeneralInformationFragment(context);
-		}
+
 		//新建 
 		if (null == jsonData) {
 			// 位置
@@ -486,7 +480,7 @@ public class t_weijian extends BaseFragment implements ImageCacheFactory.OnImage
 						@Override
 						public void onDateTimeChanged(long millisecond) {
 							// TODO Auto-generated method stub
-							content.setT_solvetime(getDateText(millisecond));
+							content.setT_updatetime(getDateText(millisecond));
 							setViewText(R.id.et_updatetime, millisecond);
 						}
 
@@ -497,7 +491,7 @@ public class t_weijian extends BaseFragment implements ImageCacheFactory.OnImage
 		{
 			// 解决状态
 			String []status = {"未解决","已解决"};
-			general.setSingleChoiceItems( R.id.et_solvestatus, status, 0, new GeneralInformationFragment.OnChangedListener() {
+			general.setSingleChoiceItems(context, R.id.et_solvestatus, status, 0, new GeneralInformationFragment.OnChangedListener() {
 				@Override
 				public void onChanged(int id, int which, String value) {
 					// TODO Auto-generated method stub
@@ -517,7 +511,7 @@ public class t_weijian extends BaseFragment implements ImageCacheFactory.OnImage
 				((EditText)rootView.findViewById(R.id.et_villagename)).setText(status[0]);
 			} else {
 //				{Configuration.getInstance().getRegister().getS_villagename() , "other"};
-				general.setSingleChoiceItems( R.id.et_villagename, status, 0, new GeneralInformationFragment.OnChangedListener() {
+				general.setSingleChoiceItems(context, R.id.et_villagename, status, 0, new GeneralInformationFragment.OnChangedListener() {
 					@Override
 					public void onChanged(int id, int which, String value) {
 						// TODO Auto-generated method stub
@@ -539,7 +533,7 @@ public class t_weijian extends BaseFragment implements ImageCacheFactory.OnImage
 			} else if (status.length == 1){
 				((EditText)rootView.findViewById(R.id.et_netname)).setText(status[0]);
 			} else {
-				general.setSingleChoiceItems( R.id.et_netname, status, 0, new GeneralInformationFragment.OnChangedListener() {
+				general.setSingleChoiceItems(context, R.id.et_netname, status, 0, new GeneralInformationFragment.OnChangedListener() {
 					@Override
 					public void onChanged(int id, int which, String value) {
 						// TODO Auto-generated method stub
@@ -554,7 +548,7 @@ public class t_weijian extends BaseFragment implements ImageCacheFactory.OnImage
 		{
 			// 当日新发现和拆除情况
 			String []status = {"新发现","已经拆除"};
-			general.setSingleChoiceItems( R.id.et_solvemethod, status, 0, new GeneralInformationFragment.OnChangedListener() {
+			general.setSingleChoiceItems(context, R.id.et_solvemethod, status, 0, new GeneralInformationFragment.OnChangedListener() {
 				@Override
 				public void onChanged(int id, int which, String value) {
 					// TODO Auto-generated method stub
@@ -624,25 +618,11 @@ public class t_weijian extends BaseFragment implements ImageCacheFactory.OnImage
 		((EditText)rootView.findViewById(id)).setText(dateTime);
 	}
 
-	private final SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-	private String getDateText(long millisecond) {
-		Date date = new Date(millisecond);
-		String dateTime = sdf2.format(date);
-		return dateTime;
-	}
-
-
 	@Override
 	public void onImageLoaded(int id, Uri imageUri, Drawable image) {
 		((ImageView) rootView.findViewById(id)).setImageDrawable(image);
 		imc.unregisterOnImageLoadListener(this);
 	}
 
-	private double string2Double(String str){
-		try{
-			return Double.parseDouble(str);
-		} catch (Exception e ){
-			return 0;
-		}
-	}
+
 }

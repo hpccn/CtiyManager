@@ -5,8 +5,8 @@ import java.io.File;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.graphics.PixelFormat;
+import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +17,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import cn.city.manager.R;
 
 /**
@@ -28,15 +29,16 @@ import cn.city.manager.R;
  * @author 
  */
 public class BasicVideoCapture extends Activity implements SurfaceHolder.Callback {
-//	private Button start;// 开始录制按钮
-//	private Button stop;// 停止录制按钮
-//	private Button ok, cancel;
+	private Button start;// 开始录制按钮
+	private Button stop;// 停止录制按钮
+	private Button ok, cancel;
 	private MediaRecorder mediarecorder;// 录制视频的类
 	private SurfaceView surfaceview;// 显示视频的控件
 	// 用来显示视频的一个接口，我靠不用还不行，也就是说用mediarecorder录制视频还得给个界面看
 	// 想偷偷录视频的同学可以考虑别的办法。。嗯需要实现这个接口的Callback接口
 	private SurfaceHolder surfaceHolder;
 
+	private boolean isRecording;
 	private String recoderFile = Environment.getExternalStorageDirectory() + "/tmpRecoder.3gp";
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,19 +52,20 @@ public class BasicVideoCapture extends Activity implements SurfaceHolder.Callbac
 		setContentView(R.layout.activity_video_capture_main);
 		mediarecorder = new MediaRecorder();// 创建mediarecorder对象
 		init();
+		isRecording = false;
 	}
 
 	private void init() {
 		File mediaFile = new File(recoderFile);
 		mediaFile.delete();
-		int ids[] = {R.id.start, R.id.stop, R.id.cancel, R.id.ok};
+		int ids[] = {R.id.start, R.id.cancel, R.id.ok};//, R.id.stop
 		for (int id: ids ){
 			this.findViewById(id).setOnClickListener(onClickListener);
 		}
-//		start = (Button) this.findViewById(R.id.start);
+		start = (Button) this.findViewById(R.id.start);
 //		stop = (Button) this.findViewById(R.id.stop);
-//		ok = (Button) this.findViewById(R.id.ok);
-//		cancel = (Button) this.findViewById(R.id.cancel);
+		ok = (Button) this.findViewById(R.id.ok);
+		cancel = (Button) this.findViewById(R.id.cancel);
 		
 //		start.setOnClickListener(onClickListener);
 //		stop.setOnClickListener(onClickListener);
@@ -102,7 +105,7 @@ public class BasicVideoCapture extends Activity implements SurfaceHolder.Callbac
 	};
 	
 	private void startRecorder(){
-
+		isRecording = true;
 		if (mediarecorder == null) {
 			mediarecorder = new MediaRecorder();// 创建mediarecorder对象
 		}
@@ -117,20 +120,29 @@ public class BasicVideoCapture extends Activity implements SurfaceHolder.Callbac
 		// 设置录制完成后视频的封装格式THREE_GPP为3gp.MPEG_4为mp4
 		mediarecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
 		// 设置录制的视频编码h263 h264
-//		mediarecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
+		//mediarecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
 		 // 这两项需要放在setOutputFormat之后  
-		mediarecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);  
-		mediarecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);  
+//		mediarecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);  
+//		mediarecorder.setVideoEncoder(MediaRecorder.VideoEncoder.MPEG_4_SP);  
+		
+		//replacement
+//		CamcorderProfile cpLow = CamcorderProfile.get(CamcorderProfile.QUALITY_480P);
+//		mediarecorder.setProfile(cpLow);
+//		mediarecorder.setVideoSize(cpLow.videoFrameWidth, cpLow.videoFrameHeight);
+//		mediarecorder.setVideoFrameRate(4);//设置视频帧率
+		mediarecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);//设置音频编码
+		mediarecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);//设置视频编码
+		
 		mediarecorder.setPreviewDisplay(surfaceview.getHolder().getSurface());
 		// 设置视频录制的分辨率。必须放在设置编码和格式的后面，否则报错
-		mediarecorder.setVideoSize(640, 480);
+//		mediarecorder.setVideoSize(640, 480);
 		// 设置录制的视频帧率。必须放在设置编码和格式的后面，否则报错
 //		mediarecorder.setVideoFrameRate(15);
 		mediarecorder.setPreviewDisplay(surfaceHolder.getSurface());
 		// 设置视频文件输出的路径
 		mediarecorder.setOutputFile(recoderFile);// //("/sdcard/love.3gp");
 		mediarecorder.setMaxDuration(60000);
-		mediarecorder.setMaxFileSize(2 * 1024 * 1024);
+		mediarecorder.setMaxFileSize(4 * 1024 * 1024);
 		
 		try {
 			// 准备录制
@@ -141,23 +153,31 @@ public class BasicVideoCapture extends Activity implements SurfaceHolder.Callbac
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		start.setBackgroundResource(R.drawable.btn_shutter_video_recording);
 //		stop.setVisibility(View.VISIBLE);
-//		ok.setVisibility(View.INVISIBLE);
-//		cancel.setVisibility(View.INVISIBLE);
+		ok.setVisibility(View.INVISIBLE);
+		cancel.setVisibility(View.INVISIBLE);
 //		start.setVisibility(View.INVISIBLE);
 	}
 	private void stopRecorder(){
+		if (!isRecording) return;
 		if (mediarecorder != null) {
 			// 停止录制
-			mediarecorder.stop();
+			try {
+				mediarecorder.stop();
+			} catch (Exception e){
+				e.printStackTrace();
+			}
 			// 释放资源
 			mediarecorder.reset();
 //			mediarecorder.release();
 //			mediarecorder = null;
 		}
-//		ok.setVisibility(View.VISIBLE);
-//		cancel.setVisibility(View.VISIBLE);
+		isRecording = false;
+
+		start.setBackgroundResource(R.drawable.btn_new_shutter_video);
+		ok.setVisibility(View.VISIBLE);
+		cancel.setVisibility(View.VISIBLE);
 //		start.setVisibility(View.VISIBLE);
 	}
 	private void cancel(){
@@ -177,15 +197,25 @@ public class BasicVideoCapture extends Activity implements SurfaceHolder.Callbac
 		public void onClick(View v) {
 			switch(v.getId()){
 			case R.id.start:
-				startRecorder();
+				if (isRecording){
+					stopRecorder();
+				}else {
+					startRecorder();
+				}
 				break;
-			case R.id.stop:
-				stopRecorder();
-				break;
+//			case R.id.stop:
+//				stopRecorder();
+//				break;
 			case R.id.ok:
+				if (isRecording){
+					stopRecorder();
+				}
 				ok();
 				break;
 			case R.id.cancel:
+				if (isRecording){
+					stopRecorder();
+				}
 				cancel();
 				break;
 				default:

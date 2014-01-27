@@ -1,6 +1,5 @@
 package cn.city.manager.fragment;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -34,7 +33,6 @@ public class t_wuzhaojingying extends BaseFragment implements ImageCacheFactory.
 	protected Context context;
 	protected t_wuzhaojingyingEvent content;
 
-	protected GeneralInformationFragment general;// = new GeneralInformationFragment();
 	protected View rootView;
 	protected ImageView imageView;
 	protected ImageCacheFactory imc;
@@ -116,9 +114,7 @@ public class t_wuzhaojingying extends BaseFragment implements ImageCacheFactory.
 	public void updateView(View rootView){
 		if (null == rootView) return;
 		this.rootView = rootView;
-		if (null == general){
-			general = new GeneralInformationFragment(context);
-		}
+
 		//新建 
 		if (null == jsonData) {
 			// 位置
@@ -427,7 +423,7 @@ public class t_wuzhaojingying extends BaseFragment implements ImageCacheFactory.
 						@Override
 						public void onDateTimeChanged(long millisecond) {
 							// TODO Auto-generated method stub
-							content.setT_solvetime(getDateText(millisecond));
+							content.setT_updatetime(getDateText(millisecond));
 							setViewText(R.id.et_updatetime, millisecond);
 						}
 
@@ -438,7 +434,7 @@ public class t_wuzhaojingying extends BaseFragment implements ImageCacheFactory.
 		{
 			// 解决状态
 			String []status = {"未解决","已解决"};
-			general.setSingleChoiceItems( R.id.et_solvestatus, status, 0, new GeneralInformationFragment.OnChangedListener() {
+			general.setSingleChoiceItems(context, R.id.et_solvestatus, status, 0, new GeneralInformationFragment.OnChangedListener() {
 				@Override
 				public void onChanged(int id, int which, String value) {
 					// TODO Auto-generated method stub
@@ -458,7 +454,7 @@ public class t_wuzhaojingying extends BaseFragment implements ImageCacheFactory.
 				((EditText)rootView.findViewById(R.id.et_villagename)).setText(status[0]);
 			} else {
 //				{Configuration.getInstance().getRegister().getS_villagename() , "other"};
-				general.setSingleChoiceItems( R.id.et_villagename, status, 0, new GeneralInformationFragment.OnChangedListener() {
+				general.setSingleChoiceItems(context, R.id.et_villagename, status, 0, new GeneralInformationFragment.OnChangedListener() {
 					@Override
 					public void onChanged(int id, int which, String value) {
 						// TODO Auto-generated method stub
@@ -480,7 +476,7 @@ public class t_wuzhaojingying extends BaseFragment implements ImageCacheFactory.
 			} else if (status.length == 1){
 				((EditText)rootView.findViewById(R.id.et_netname)).setText(status[0]);
 			} else {
-				general.setSingleChoiceItems( R.id.et_netname, status, 0, new GeneralInformationFragment.OnChangedListener() {
+				general.setSingleChoiceItems(context, R.id.et_netname, status, 0, new GeneralInformationFragment.OnChangedListener() {
 					@Override
 					public void onChanged(int id, int which, String value) {
 						// TODO Auto-generated method stub
@@ -551,13 +547,6 @@ public class t_wuzhaojingying extends BaseFragment implements ImageCacheFactory.
 		((EditText)rootView.findViewById(id)).setText(dateTime);
 	}
 
-	private final SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-	private String getDateText(long millisecond) {
-		Date date = new Date(millisecond);
-		String dateTime = sdf2.format(date);
-		return dateTime;
-	}
-
 
 	@Override
 	public void onImageLoaded(int id, Uri imageUri, Drawable image) {
@@ -565,11 +554,5 @@ public class t_wuzhaojingying extends BaseFragment implements ImageCacheFactory.
 		imc.unregisterOnImageLoadListener(this);
 	}
 
-	private double string2Double(String str){
-		try{
-			return Double.parseDouble(str);
-		} catch (Exception e ){
-			return 0;
-		}
-	}
+
 }

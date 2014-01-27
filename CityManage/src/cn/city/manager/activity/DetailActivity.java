@@ -80,7 +80,7 @@ public class DetailActivity extends Activity {
 		MobclickAgent.onError(this);
 		
 		context = this;
-		general = new GeneralInformationFragment(context);
+		general = new GeneralInformationFragment();
 		Log.i("", "" + System.currentTimeMillis());
 		mainView = View.inflate(this, R.layout.detail_main, null);
 		setContentView(mainView);// (R.layout.detail_main);
@@ -200,6 +200,10 @@ public class DetailActivity extends Activity {
 		detailMainContainer.addView(fragment
 				.getView(this, (ViewGroup) mainView));
 
+		// 新建事件,需要隐藏一些字段
+		if (null == jsonValue)
+			general.initNewEvent(mainView);
+		
 		// FrameLayout fl = (FrameLayout)
 		// this.findViewById(R.id.detail_container);
 		// fl.removeAllViews();
@@ -254,24 +258,27 @@ public class DetailActivity extends Activity {
 //			return;
 //		}
 		
-		tvVideoFile  = (TextView) findViewById(R.id.tv_video_file);
 		int []ids = {R.id.btn_commit, R.id.btn_cancel,
+				R.id.id_browse_mode,
+				R.id.id_threeadress,
 				R.id.btn_add_picture, R.id.btn_add_video, 
 				R.id.btn_select_picture, R.id.btn_select_video,
-				R.id.tv_video_file, R.id.picture,
-				R.id.id_browse_mode,
-				R.id.id_threeadress};
+				R.id.tv_video_file, R.id.picture};
 		Button btn = (Button) this.findViewById(R.id.id_browse_mode);
 		btn.setVisibility(View.VISIBLE);
 		
-		this.findViewById(R.id.btn_select_picture).setVisibility(View.GONE);
-		this.findViewById(R.id.btn_select_video).setVisibility(View.GONE);
 		
 		btn.setBackgroundResource(R.drawable.title_btn_map);
 		btn.setText(null);//"事发地点");
 		for (int id : ids){
 			findViewById(id).setOnClickListener(onClickListener);
 		}
+		
+		
+		tvVideoFile  = (TextView) findViewById(R.id.tv_video_file);
+		
+		this.findViewById(R.id.btn_select_picture).setVisibility(View.GONE);
+		this.findViewById(R.id.btn_select_video).setVisibility(View.GONE);
 		
 		imageView = (ImageView) findViewById(R.id.picture);
 		

@@ -113,7 +113,7 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 		title = this.getIntent().getStringExtra("title");
 		context = this;
 //		imc = ImageCacheFactory.getInstance();
-		general = new GeneralInformationFragment(context);
+		general = new GeneralInformationFragment();
 		try {
 //			init(this);
 			rootView  = obtainView();
@@ -641,7 +641,7 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 	};
 	private void showSelectOrder(){
 		
-		general.setSingleChoiceItems(R.id.id_select_browse_order, selectBrowseOrderItems, selectBrowseOrder, new GeneralInformationFragment.OnChangedListener() {
+		general.setSingleChoiceItems(context, R.id.id_select_browse_order, selectBrowseOrderItems, selectBrowseOrder, new GeneralInformationFragment.OnChangedListener() {
 			@Override
 			public void onChanged(int id, int which, String whichValue) {
 				selectBrowseOrder = which;

@@ -8,12 +8,15 @@ import java.util.Map;
 import cn.city.manager.R;
 import cn.city.manager.fragment.t_huanjing;
 import cn.city.manager.fragment.t_jiaotong;
+import cn.city.manager.fragment.t_maodunpaicha;
 import cn.city.manager.fragment.t_meiqizhongdu;
 import cn.city.manager.fragment.t_shengchan;
 import cn.city.manager.fragment.t_shipin;
 import cn.city.manager.fragment.t_weijian;
+import cn.city.manager.fragment.t_weishengsuo;
 import cn.city.manager.fragment.t_wuzhaojingying;
 import cn.city.manager.fragment.t_xiaofang;
+import cn.city.manager.fragment.t_xingshianjian;
 import cn.city.manager.fragment.t_yaopin;
 import cn.city.manager.model.CategoryMeta;
 
@@ -40,10 +43,10 @@ public class EventCategory  implements BaseCategory{
 			, t_huanjing.class.getSimpleName()
 			, t_shipin.class.getSimpleName()
 			, t_yaopin.class.getSimpleName()
-			, null//
+			, t_weishengsuo.class.getSimpleName()//
 			, t_wuzhaojingying.class.getSimpleName()
-			, null
-			, null
+			, t_maodunpaicha.class.getSimpleName()
+			, t_xingshianjian.class.getSimpleName()
 			, t_jiaotong.class.getSimpleName()
 	};
 	

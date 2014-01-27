@@ -19,7 +19,7 @@ public class t_huanjingEvent extends CommonEvent {
 	@Override
 	public String getContent() {
 		// TODO Auto-generated method stub
-		return s_yinhuanxiangqing;
+		return s_garbagetype + " , " + s_yinhuanxiangqing;
 	}
 
 	@Override

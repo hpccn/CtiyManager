@@ -29,7 +29,8 @@
         <EditText
             android:id="@+id/et_yinhuanaddress"
             style="@style/generalEditText"
-            android:hint="@string/yinhuanaddress" />
+             />
+        <!-- android:hint="@string/yinhuanaddress" -->
     </LinearLayout>
 
 </LinearLayout>

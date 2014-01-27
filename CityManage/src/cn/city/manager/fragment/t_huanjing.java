@@ -1,7 +1,5 @@
 package cn.city.manager.fragment;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import org.json.JSONObject;
@@ -34,7 +32,7 @@ public class t_huanjing extends BaseFragment implements ImageCacheFactory.OnImag
 	protected Context context;
 	protected t_huanjingEvent content;
 
-	protected GeneralInformationFragment general;// = new GeneralInformationFragment();
+
 	protected View rootView;
 	protected ImageView imageView;
 	protected ImageCacheFactory imc;
@@ -114,9 +112,7 @@ public class t_huanjing extends BaseFragment implements ImageCacheFactory.OnImag
 	public void updateView(View rootView){
 		if (null == rootView) return;
 		this.rootView = rootView;
-		if (null == general){
-			general = new GeneralInformationFragment(context);
-		}
+
 		//新建 
 		if (null == jsonData) {
 			// 位置
@@ -373,6 +369,7 @@ public class t_huanjing extends BaseFragment implements ImageCacheFactory.OnImag
 		}
 //		((EditText)rootView.findViewById(R.id.et_solvemethod)).setText("新发现");
 		
+		((EditText)rootView.findViewById(R.id.et_garbagetype)).setText("生活垃圾");
 		
 		rootView.findViewById(R.id.id_threeadress).setVisibility(View.GONE);
 		rootView.findViewById(R.id.id_browse_mode).setVisibility(View.GONE);
@@ -380,6 +377,7 @@ public class t_huanjing extends BaseFragment implements ImageCacheFactory.OnImag
 	
 	
 	private void onAction(int id){
+//		onSelectListener(context, rootView, id);
 		switch (id) {
 		
 		case R.id.btn_cancel:
@@ -389,7 +387,7 @@ public class t_huanjing extends BaseFragment implements ImageCacheFactory.OnImag
 			
 
 		case R.id.et_solvetime:
-			setDateTime(
+			setDateTime(context, 
 					new DateTimePickerDialog.OnDateTimeChangedListener() {
 
 						@Override
@@ -402,7 +400,7 @@ public class t_huanjing extends BaseFragment implements ImageCacheFactory.OnImag
 					}, content.getT_solvetime());
 			break;
 		case R.id.et_tijiao:
-			setDateTime(
+			setDateTime(context,
 					new DateTimePickerDialog.OnDateTimeChangedListener() {
 
 						@Override
@@ -416,13 +414,13 @@ public class t_huanjing extends BaseFragment implements ImageCacheFactory.OnImag
 
 			break;
 		case R.id.et_updatetime:
-			setDateTime(
+			setDateTime(context,
 					new DateTimePickerDialog.OnDateTimeChangedListener() {
 
 						@Override
 						public void onDateTimeChanged(long millisecond) {
 							// TODO Auto-generated method stub
-							content.setT_solvetime(getDateText(millisecond));
+							content.setT_updatetime(getDateText(millisecond));
 							setViewText(R.id.et_updatetime, millisecond);
 						}
 
@@ -433,7 +431,8 @@ public class t_huanjing extends BaseFragment implements ImageCacheFactory.OnImag
 		{
 			// 解决状态
 			String []status = {"未解决","已解决"};
-			general.setSingleChoiceItems( R.id.et_solvestatus, status, 0, new GeneralInformationFragment.OnChangedListener() {
+			
+			general.setSingleChoiceItems(context,  R.id.et_solvestatus, status, 0, new GeneralInformationFragment.OnChangedListener() {
 				@Override
 				public void onChanged(int id, int which, String value) {
 					// TODO Auto-generated method stub
@@ -453,7 +452,8 @@ public class t_huanjing extends BaseFragment implements ImageCacheFactory.OnImag
 				((EditText)rootView.findViewById(R.id.et_villagename)).setText(status[0]);
 			} else {
 //				{Configuration.getInstance().getRegister().getS_villagename() , "other"};
-				general.setSingleChoiceItems( R.id.et_villagename, status, 0, new GeneralInformationFragment.OnChangedListener() {
+				
+				general.setSingleChoiceItems(context,  R.id.et_villagename, status, 0, new GeneralInformationFragment.OnChangedListener() {
 					@Override
 					public void onChanged(int id, int which, String value) {
 						// TODO Auto-generated method stub
@@ -475,7 +475,8 @@ public class t_huanjing extends BaseFragment implements ImageCacheFactory.OnImag
 			} else if (status.length == 1){
 				((EditText)rootView.findViewById(R.id.et_netname)).setText(status[0]);
 			} else {
-				general.setSingleChoiceItems( R.id.et_netname, status, 0, new GeneralInformationFragment.OnChangedListener() {
+				
+				general.setSingleChoiceItems(context,  R.id.et_netname, status, 0, new GeneralInformationFragment.OnChangedListener() {
 					@Override
 					public void onChanged(int id, int which, String value) {
 						// TODO Auto-generated method stub
@@ -489,8 +490,8 @@ public class t_huanjing extends BaseFragment implements ImageCacheFactory.OnImag
 		case R.id.et_garbagetype:
 		{
 			String []status = {"生活垃圾", "建筑垃圾"};
-
-				general.setSingleChoiceItems( R.id.et_garbagetype, status, 0, new GeneralInformationFragment.OnChangedListener() {
+			
+				general.setSingleChoiceItems(context,  R.id.et_garbagetype, status, 0, new GeneralInformationFragment.OnChangedListener() {
 					@Override
 					public void onChanged(int id, int which, String value) {
 						// TODO Auto-generated method stub
@@ -534,36 +535,13 @@ public class t_huanjing extends BaseFragment implements ImageCacheFactory.OnImag
 	};
 	
 	
-	
-	private void setDateTime(DateTimePickerDialog.OnDateTimeChangedListener listener, String strDate) {
-		
-		DateTimePickerDialog dateTimePicKDialog = new DateTimePickerDialog(context);
-		Calendar calendar = Calendar.getInstance();
-		if (null != strDate) {
-			String[] data = strDate.split("-");
-			if (data.length > 2);
-				calendar.set(Integer.parseInt(data[0]), Integer.parseInt(data[1]) - 1, Integer.parseInt(data[2]));
-		}
-//		Date date = new Date();
-//		date.setYear(Integer.parseInt(data[0]));
-//		date.setMonth(Integer.parseInt(data[1]) - 1);
-//		date.setDate(Integer.parseInt(data[2]));
-		dateTimePicKDialog.dateTimePicKDialog(listener, calendar.getTimeInMillis());//date.getTime());//baseContent.getTime());
-		
-	}
+
 	
 //	private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private void setViewText(int id, long millisecond) {
 		Date date = new Date(millisecond);
 		String dateTime = sdf2.format(date);
 		((EditText)rootView.findViewById(id)).setText(dateTime);
-	}
-
-	private final SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-	private String getDateText(long millisecond) {
-		Date date = new Date(millisecond);
-		String dateTime = sdf2.format(date);
-		return dateTime;
 	}
 
 
@@ -573,11 +551,5 @@ public class t_huanjing extends BaseFragment implements ImageCacheFactory.OnImag
 		imc.unregisterOnImageLoadListener(this);
 	}
 
-	private double string2Double(String str){
-		try{
-			return Double.parseDouble(str);
-		} catch (Exception e ){
-			return 0;
-		}
-	}
+
 }

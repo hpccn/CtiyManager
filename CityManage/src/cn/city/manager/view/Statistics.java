@@ -75,9 +75,9 @@ public class Statistics implements Page{
 					
 					@Override
 					public void onClick(View v) {
-						GeneralInformationFragment general = new GeneralInformationFragment(context);
+						GeneralInformationFragment general = new GeneralInformationFragment();
 	//					String []status = {"未解决","已解决"};
-						general.setSingleChoiceItems( R.id.et_solvestatus, selectItems, 0, new GeneralInformationFragment.OnChangedListener() {
+						general.setSingleChoiceItems(context, R.id.et_solvestatus, selectItems, 0, new GeneralInformationFragment.OnChangedListener() {
 							@Override
 							public void onChanged(int id, int which, String value) {
 								// TODO Auto-generated method stub

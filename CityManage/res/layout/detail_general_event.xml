@@ -17,7 +17,8 @@
             android:hint="@string/eventtype" />
     </LinearLayout>
 
-    <LinearLayout style="@style/horizontalCenter" >
+    <LinearLayout style="@style/horizontalCenter" 
+         android:id="@+id/id_eventid">
 
         <TextView
             style="@style/thirdTitle"
@@ -25,7 +26,7 @@
 
         <EditText
             android:id="@+id/et_eventid"
-            style="@style/generalEditText"
+            style="@style/generalEditTextReadonly"
             android:hint="@string/eventid" />
     </LinearLayout>
 

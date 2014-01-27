@@ -13,49 +13,43 @@
             android:layout_height="fill_parent"
             android:layout_gravity="center" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|bottom"
             android:orientation="horizontal" >
-            <Button
-                android:id="@+id/start"
-                style="@style/generalButtonStyle"
-                android:layout_weight="1"
-                android:background="@drawable/btn_new_shutter_video"
-                android:padding="10dp"
-                android:layout_margin="10dp"
-                 />
-<!-- android:text="开始摄像" -->
-            <Button
-                android:id="@+id/stop"
-                style="@style/generalButtonStyle"
-                android:layout_weight="1"
-                android:background="@drawable/btn_shutter_video_recording"
-                android:padding="10dp"
-                android:layout_margin="10dp"
-                
-                 />
-<!-- android:text="停止摄像" -->
+
             <Button
                 android:id="@+id/cancel"
-                style="@style/generalButtonStyle"
-                android:layout_weight="1"
-                android:background="@drawable/ic_menu_cancel_holo_light"
-                android:padding="10dp"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                 />
-<!-- android:text="放弃" -->
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/ic_menu_cancel_holo_light"
+                android:padding="10dp" />
+            <!-- android:text="放弃" -->
+
+            <Button
+                android:id="@+id/start"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/btn_new_shutter_video"
+                android:padding="10dp" />
+            <!-- android:text="开始摄像" -->
+
+
             <Button
                 android:id="@+id/ok"
-                android:background="@drawable/ic_menu_done_holo_light"
-                style="@style/generalButtonStyle"
-                android:layout_weight="1"
-                android:padding="10dp"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                 />
+                android:layout_alignParentRight="true"
+                android:background="@drawable/ic_menu_done_holo_light"
+                android:padding="10dp" />
             <!-- android:text="完成" -->
-        </LinearLayout>
+        </RelativeLayout>
     </FrameLayout>
 
 </LinearLayout>

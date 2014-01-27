@@ -1,20 +1,15 @@
 package cn.city.manager.fragment;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 import cn.city.manager.R;
 import cn.city.manager.fragment.event.BaseEvent;
 import cn.city.manager.location.Location;
 import cn.city.manager.location.LocationListener;
-import cn.city.manager.view.DateTimePickerDialog;
 
 public class GeneralInformationFragment {
 	
@@ -35,9 +30,7 @@ public class GeneralInformationFragment {
 
 	public static final int VIDEO_CAPTURE = 4;// 拍照
 
-	final private Context context;
-	public GeneralInformationFragment(final Context context){
-		this.context = context;
+	public GeneralInformationFragment(){
 	}
 	
 	public void updateMedia(final Context context, final View rootView, final BaseFragment fragment){
@@ -101,52 +94,52 @@ public class GeneralInformationFragment {
 	
 	
 	
-	final protected View.OnClickListener onClickListener = new View.OnClickListener() {
-		
-		@Override
-		public void onClick(View v) {
-			switch (v.getId()){
-			case R.id.btn_cancel:
-//				DetailActivity.this.finish();
-				break;
-			case R.id.btn_commit:
-				break;
-			case R.id.examination_date_time:
-//				setDateTime();
-				break;
-				
-			case R.id.btn_add_picture:{
-				Intent intent = new Intent(
-						MediaStore.ACTION_IMAGE_CAPTURE);
+//	final protected View.OnClickListener onClickListener = new View.OnClickListener() {
+//		
+//		@Override
+//		public void onClick(View v) {
+//			switch (v.getId()){
+//			case R.id.btn_cancel:
+////				DetailActivity.this.finish();
+//				break;
+//			case R.id.btn_commit:
+//				break;
+//			case R.id.examination_date_time:
+////				setDateTime();
+//				break;
+//				
+//			case R.id.btn_add_picture:{
+//				Intent intent = new Intent(
+//						MediaStore.ACTION_IMAGE_CAPTURE);
+//
+//				// intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri
+//				// .fromFile(new File(Environment
+//				// .getExternalStorageDirectory(),
+//				// "temp.jpg")));
+//
+//				((Activity) context).startActivityForResult(intent, IMAGE_CAPTURE);
+//			}
+//				break;
+//			case R.id.btn_add_video:{
+//				Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+//				
+//				// intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri
+//				// .fromFile(new File(Environment
+//				// .getExternalStorageDirectory(),
+//				// "temp.jpg")));
+//
+//				((Activity) context).startActivityForResult(intent, VIDEO_CAPTURE);
+//			}
+//				break;
+//				
+//			
+//			default:
+//			}
+//			
+//		}
+//	};
 
-				// intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri
-				// .fromFile(new File(Environment
-				// .getExternalStorageDirectory(),
-				// "temp.jpg")));
-
-				((Activity) context).startActivityForResult(intent, IMAGE_CAPTURE);
-			}
-				break;
-			case R.id.btn_add_video:{
-				Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-				
-				// intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri
-				// .fromFile(new File(Environment
-				// .getExternalStorageDirectory(),
-				// "temp.jpg")));
-
-				((Activity) context).startActivityForResult(intent, VIDEO_CAPTURE);
-			}
-				break;
-				
-			
-			default:
-			}
-			
-		}
-	};
-
-	public void setSingleChoiceItems(final int id, final String []items, int checkedItem, final OnChangedListener listener) {
+	public void setSingleChoiceItems(final Context context, final int viewId, final String []items, int checkedItem, final OnChangedListener listener) {
 	    AlertDialog.Builder builder = new AlertDialog.Builder(context);
 	    builder.setIcon(R.drawable.ic_logo);
 	    builder.setCancelable(true);
@@ -156,11 +149,25 @@ public class GeneralInformationFragment {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 
-				listener.onChanged(id, which, items[which]);
+				listener.onChanged(viewId, which, items[which]);
 				dialog.dismiss();
 	    }});
 	    
 	    AlertDialog ad = builder.create();  
 		ad.show();
+	}
+	
+	public void initNewEvent(final View rootView){
+		int ids[] = {R.id.id_eventid, R.id.id_discoverer, R.id.id_updater, R.id.id_netleader, R.id.id_threeadress, R.id.id_browse_mode, R.id.id_eventid};//, R.id., R.id., R.id., R.id., R.id., R.id., R.id., R.id., R.id., R.id., R.id.};
+		for (int id : ids) {
+			View view = rootView.findViewById(id);
+			if (null != view){
+				view.setVisibility(View.GONE);
+			}
+		}
+		
+//		rootView.findViewById(R.id.id_threeadress).setVisibility(View.GONE);
+//		rootView.findViewById(R.id.id_browse_mode).setVisibility(View.GONE);
+
 	}
 }

@@ -53,7 +53,11 @@
     <!-- 餐饮检查 -->
     <string name="restaurant_examination">餐饮检查</string>
     <string name="restaurant_examination_sub_title">餐饮企业卫生许可证、从业人员健康证等信息的提交</string>
-
+    <string name="jianchadate">检查日期</string>
+    <string name="healthcertificate">从业人员是否有健康证</string>
+    <string name="outofbusiness">是否超范围经营冷荤凉菜</string>
+    <string name="handlingroomclean">操作间环境是否干净整洁</string>
+     
     <!-- 环境、垃圾隐患 -->
     <string name="sanitation_examination">环境、垃圾隐患</string>
     <string name="sanitation_examination_sub_title">生活垃圾或建筑垃圾堆放位置等信息的提交</string>
@@ -185,9 +189,18 @@
     <!-- 事件管理-06-药品安全 -->
      <string name="yaopin_title">药品安全</string>
      <string name="yaopin_sub_title">药品安全相关</string>
-    <!-- 事件管理-09-无照经营 -->
+    <!-- 事件管理-07-卫生所检查 -->
+     <string name="weishengsuo_title">卫生所检查</string>
+     <string name="weishengsuo_sub_title">卫生所检查</string>
+     <!-- 事件管理-09-无照经营 -->
      <string name="wuzhaojingying_title">无照经营</string>
      <string name="wuzhaojingying_sub_title">无照经营</string>
+    <!-- 事件管理-10-矛盾排查 -->
+     <string name="maodunpaicha_title">矛盾排查</string>
+     <string name="maodunpaicha_sub_title">矛盾排查</string>
+    <!-- 事件管理-11-刑事案件 -->
+     <string name="xingshianjian_title">刑事案件</string>
+     <string name="xingshianjian_sub_title">刑事案件</string>
      <!-- 事件管理-12-交通安全 -->
      <string name="jiaotong_title">交通安全</string>
      <string name="jiaotong_sub_title">交通安全相关</string>
@@ -289,12 +302,17 @@
     <string name="license">是否有营业执照</string>    
     <string name="weishengxuke">是否有卫生许可证</string>    
     <string name="businessitems">经营项目</string>    
-    <string name="houseowner">房东姓名</string>      
-    <!--
+    <string name="houseowner">房东姓名</string>     
+    
+    
+    <string name="paichadate">排查时间</string>    
+    <string name="jiufentype">纠纷类型</string>    
+    <string name="jiufenren">纠纷方名称</string>    
+     <!--
    
     
     
-    <string name=""></string>    
+   
     <string name=""></string>    
     <string name=""></string>    
     <string name=""></string>    
