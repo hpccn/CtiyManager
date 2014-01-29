@@ -1,0 +1,15 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="纠纷类型" >
+
+    <TextView
+        style="@style/thirdTitle"
+        android:text="@string/jiufentype" />
+
+    <EditText
+        android:id="@+id/et_jiufentype"
+        style="@style/generalEditText"
+        android:hint="@string/jiufentype" />
+
+</LinearLayout>

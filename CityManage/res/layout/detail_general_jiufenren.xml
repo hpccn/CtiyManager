@@ -1,0 +1,15 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="纠纷方名称" >
+
+    <TextView
+        style="@style/thirdTitle"
+        android:text="@string/jiufenren" />
+
+    <EditText
+        android:id="@+id/et_jiufenren"
+        style="@style/generalEditText"
+        android:hint="@string/jiufenren" />
+
+</LinearLayout>

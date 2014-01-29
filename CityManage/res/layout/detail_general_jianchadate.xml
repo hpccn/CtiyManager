@@ -1,0 +1,15 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="检查日期" >
+
+    <TextView
+        style="@style/thirdTitle"
+        android:text="@string/jianchadate" />
+
+    <EditText
+        android:id="@+id/et_jianchadate"
+        style="@style/generalEditText"
+        android:hint="@string/jianchadate" />
+
+</LinearLayout>

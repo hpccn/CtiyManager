@@ -1,0 +1,15 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="操作间环境是否干净整洁" >
+
+    <TextView
+        style="@style/thirdTitle"
+        android:text="@string/handlingroomclean" />
+
+    <EditText
+        android:id="@+id/et_handlingroomclean"
+        style="@style/generalEditText"
+        android:hint="@string/handlingroomclean" />
+
+</LinearLayout>

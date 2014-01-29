@@ -1,0 +1,15 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/horizontalCenter"
+    tools:context="排查时间" >
+
+    <TextView
+        style="@style/thirdTitle"
+        android:text="@string/paichadate" />
+
+    <EditText
+        android:id="@+id/et_paichadate"
+        style="@style/generalEditText"
+        android:hint="@string/paichadate" />
+
+</LinearLayout>
