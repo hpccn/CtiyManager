@@ -2,6 +2,8 @@ package cn.city.manager.fragment.event;
 
 import org.json.JSONObject;
 
+import cn.hpc.common.JSONHelper;
+
 import com.google.gson.Gson;
 
 public  abstract class BaseEvent implements Comparable<BaseEvent>{
@@ -20,8 +22,10 @@ public  abstract class BaseEvent implements Comparable<BaseEvent>{
 	
 	
 	public String toJSONObject() {
-		Gson gson = new Gson(); 
-		String json = gson.toJson(this);  
+//		Gson gson = new Gson(); 
+//		String json = gson.toJson(this);  
+		
+		String json = JSONHelper.toJSON(this);
 		return json;
 	}
 	public abstract BaseEvent fromJSONObject(JSONObject jObj)throws Exception;
@@ -52,7 +56,7 @@ public  abstract class BaseEvent implements Comparable<BaseEvent>{
 	public abstract double getD_latitude();
 	public abstract double getD_longitude();
 	
-	private String icon;
+	protected String icon;
 	
 	public BaseEvent(){
 //		init();

@@ -197,10 +197,11 @@ public class t_jiaotong extends BaseFragment implements ImageCacheFactory.OnImag
 				
 				try {
 					Drawable drawable = imc.loadImage(R.id.picture, uri, 320, 240);
+					imageView.setImageDrawable(drawable);
 					if (null == drawable) {
 						imc.registerOnImageLoadListener(this);
 					}
-					imageView.setImageDrawable(drawable);
+					
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

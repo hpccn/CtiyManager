@@ -195,10 +195,11 @@ public class t_shengchan extends BaseFragment implements ImageCacheFactory.OnIma
 				
 				try {
 					Drawable drawable = imc.loadImage(R.id.picture, uri, 320, 240);
+					imageView.setImageDrawable(drawable);
 					if (null == drawable) {
 						imc.registerOnImageLoadListener(this);
 					}
-					imageView.setImageDrawable(drawable);
+					
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

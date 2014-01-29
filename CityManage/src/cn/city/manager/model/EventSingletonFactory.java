@@ -79,17 +79,28 @@ public class EventSingletonFactory {
 		return list;
 	}
 
-	public List<BaseEvent> parse(JSONObject jObj) throws Exception {
+	public List<BaseEvent> parse(JSONObject jObj) {
 		if (null == jObj || !jObj.has("event"))
 			return null;
 
 		JSONObject jTransport = null;
-		jTransport = jObj.getJSONObject("event");
+		try {
+			jTransport = jObj.getJSONObject("event");
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		if (null == jTransport || !jTransport.has("kind"))
 			return null;
 
-		String kind = jTransport.getString("kind");
+		String kind = null;
+		try {
+			kind = jTransport.getString("kind");
+		} catch (JSONException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 //		if ("s_netid".equals(kind) || "s_villageid".equals(kind)) {
 //			kind = "t_netbaseinfo";
 //		} 
@@ -116,7 +127,13 @@ public class EventSingletonFactory {
 		if (null == jTransport || !jTransport.has("content"))
 			return null;
 		
-		JSONArray jContent = jTransport.getJSONArray("content");
+		JSONArray jContent= null;
+		try {
+			jContent = jTransport.getJSONArray("content");
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		if (null == jContent)
 			return null;
@@ -127,14 +144,13 @@ public class EventSingletonFactory {
 			event = null;
 			try {
 				event = (BaseEvent) clz.newInstance();
-			} catch (InstantiationException e) {
+				BaseEvent ev = event.fromJSONObject(jContent.getJSONObject(i));
+				if (null != ev) {
+					events.add(ev);
+				}
+
+			} catch (Exception e) {
 				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			}
-			BaseEvent ev = event.fromJSONObject(jContent.getJSONObject(i));
-			if (null != ev) {
-				events.add(ev);
 			}
 		}
 		return events;

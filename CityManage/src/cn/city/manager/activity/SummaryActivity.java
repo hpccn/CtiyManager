@@ -94,7 +94,7 @@ public class SummaryActivity extends BaseBrowseActivity {
 //		StringCacheFactory scf = StringCacheFactory.getInstance(this);
 //		scf.scheduleLoadString(10, Uri.parse(url));
 		
-		
+		events = null;
 		EventSingletonFactory.getInstance().loadEvents(context, currentUrl, onLoadListener);
 //		ViewSingletonFactory.getInstance().showProcessDialog(context, null, "正在下载数据,请稍候...");
 //		HttpStreamThread hst = new EventHttpStreamThread(this, url, onStringLoadListener);

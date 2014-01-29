@@ -8,12 +8,12 @@ package cn.city.manager.fragment.event;
 public class t_shipinEvent extends CommonEvent {
 
 	
-	private String s_yinhuandanwei;//	食品单位名称	no
-	private String s_yinhuanaddress;//	营业地点	no
-	private String s_license;//	是否有营业执照	no					下拉列表，单选：是，否
-	private String s_weishengxuke;//	是否有卫生许可证	no		下拉列表，单选：是，否
-	private String s_yinhuanren;//	隐患单位负责人	yes
-	private String s_yinhuanlianluo;//	隐患单位电话	yes
+	protected String s_yinhuandanwei;//	食品单位名称	no
+	protected String s_yinhuanaddress;//	营业地点	no
+	protected String s_license;//	是否有营业执照	no					下拉列表，单选：是，否
+	protected String s_weishengxuke;//	是否有卫生许可证	no		下拉列表，单选：是，否
+	protected String s_yinhuanren;//	隐患单位负责人	yes
+	protected String s_yinhuanlianluo;//	隐患单位电话	yes
 
 	@Override
 	public String getContent() {

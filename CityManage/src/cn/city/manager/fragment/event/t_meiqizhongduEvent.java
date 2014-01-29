@@ -6,10 +6,10 @@ package cn.city.manager.fragment.event;
  */
 public class t_meiqizhongduEvent extends CommonEvent {
 
-	private String s_yinhuanren;//	涉案人
-	private String s_yinhuanaddress;//	事件地点
-	private String s_yinhuanxiangqing;//	详情描述
-	private String s_yinhuanlianluo;//	涉案人联系方式
+	protected String s_yinhuanren;//	涉案人
+	protected String s_yinhuanaddress;//	事件地点
+	protected String s_yinhuanxiangqing;//	详情描述
+	protected String s_yinhuanlianluo;//	涉案人联系方式
 
 
 	@Override

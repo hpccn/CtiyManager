@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.city.manager"
     android:versionCode="1"
-    android:versionName="1.1.20140127" >
+    android:versionName="1.1.20140129" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -196,7 +196,7 @@
         </activity>
         <activity
             android:name=".activity.InternetVideoPlayerActivity"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:screenOrientation="portrait">
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -206,7 +206,7 @@
         </activity>
         <activity
             android:name=".activity.BasicVideoCapture"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:screenOrientation="portrait">
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:screenOrientation="landscape">
         </activity>
         
                 

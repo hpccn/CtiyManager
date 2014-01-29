@@ -10,10 +10,10 @@ public class t_huanjingEvent extends CommonEvent {
 	
 
 
-	private String s_yinhuanaddress;//	nvarchar(50)	垃圾所在地点	no	事件专属字段。
-	private String s_yinhuanxiangqing;//	nvarchar(50)	详情描述	no	事件专属字段。
-	private String s_garbagetype;//	nvarchar(50)	垃圾种类	no	事件专属字段。下拉列表，单选：生活垃圾，建筑垃圾
-	private double d_garbagequantity;//		decimal	垃圾数量（吨）	no	事件专属字段。
+	protected String s_yinhuanaddress;//	nvarchar(50)	垃圾所在地点	no	事件专属字段。
+	protected String s_yinhuanxiangqing;//	nvarchar(50)	详情描述	no	事件专属字段。
+	protected String s_garbagetype;//	nvarchar(50)	垃圾种类	no	事件专属字段。下拉列表，单选：生活垃圾，建筑垃圾
+	protected double d_garbagequantity;//		decimal	垃圾数量（吨）	no	事件专属字段。
 	
 	
 	@Override

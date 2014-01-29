@@ -10,63 +10,63 @@ import com.google.gson.Gson;
 public class t_weijianEvent extends BaseEvent {
 //	public final static String category = IllegalStructure.class.getSimpleName();//"IllegalStructure";
 
-//	private long time;
-	private int id;
-	private String s_netid;// ": 1,
-	private String s_villagename;// ":"村名",
-	private String s_netname;// ":"网格名称",
-	private String s_eventtype;// ":"事件类型",
-	private String s_eventid;// ":"事件ID",
-	private String t_tijiao;// ":1380962998588,// 提交日期
-	private String s_discoverername;// ":"发现人",
-	private String s_discovererlevel;// ":"发现人级别",
-	private String s_solvestatus;// ": "解决状态",
-	private String s_result;//解决结果
-	private String t_solvetime;// ": 1380962998588,
-	private String s_unsolvedreason;// ": "未解决原因",
+//	protected long time;
+	protected int id;
+	protected String s_netid;// ": 1,
+	protected String s_villagename;// ":"村名",
+	protected String s_netname;// ":"网格名称",
+	protected String s_eventtype;// ":"事件类型",
+	protected String s_eventid;// ":"事件ID",
+	protected String t_tijiao;// ":1380962998588,// 提交日期
+	protected String s_discoverername;// ":"发现人",
+	protected String s_discovererlevel;// ":"发现人级别",
+	protected String s_solvestatus;// ": "解决状态",
+	protected String s_result;//解决结果
+	protected String t_solvetime;// ": 1380962998588,
+	protected String s_unsolvedreason;// ": "未解决原因",
 	
-	private String s_photo;//"现场照片",
-//	private String t_photouploaddate;//380962998588,
-//	private String s_photoposition;//"照片地理信息",
-//	private String s_photouploadperson;//"照片上传人",
-//	private String s_photouploadlevel;//"照片上传人级别",
-	private String s_video;//"现场视频",
-//	private String t_videouploaddate;//1380962998588,
-//	private String s_videouploadperson;//"视频上传人"
-//	private String s_videouploadlevel;//"视频上传人级别"
+	protected String s_photo;//"现场照片",
+//	protected String t_photouploaddate;//380962998588,
+//	protected String s_photoposition;//"照片地理信息",
+//	protected String s_photouploadperson;//"照片上传人",
+//	protected String s_photouploadlevel;//"照片上传人级别",
+	protected String s_video;//"现场视频",
+//	protected String t_videouploaddate;//1380962998588,
+//	protected String s_videouploadperson;//"视频上传人"
+//	protected String s_videouploadlevel;//"视频上传人级别"
 	
-	private String s_leaderinstruction;// ":"领导批示",
-	private String s_voiceinstruction;// ":"语音批示",
-	private String t_instructiondate;// ":"批示日期",
-	private String s_leaderid;// ":"批示人id",
-	private String s_leadername;// ":"批示人姓名",
-	private String s_netleadername;// ":"格长姓名",
-	private String s_netleadertel;// ":"格长电话",
-	private String s_updatename;// ":"最近更新人",
-	private String s_updatelevel;// ":"更新人级别",
-	private String t_updatetime;// ":1380962998588,// 更新时间
-//	private String updateid;// ":"更新人id",
-	private String s_remark;// ":"备注",
-	private String s_yinhuanaddress;// ":"违法建设具体位置",
-	private String s_weijianxiangduiren;// ":"违法建设相对人",
-	private String s_yinhuanxiangqing;// ":"隐患描述",
-	private String s_landstatus;// ":"土地性质",
-	private double d_landarea;// ":"占地面积（亩）",
-	private String s_construction;// ":"建筑结构",
-	private double d_jianzhumianji;// ":100,
-	private String t_buildtime;// ":1380962998588,
-	private String s_solvemethod;// ":"当日新发现和拆除情况",
-	private String s_yinhuanren;// ":"涉及人姓名",
-	private String s_yinhuanlianluo;// ":"涉及人联系方式",
-	private String t_jianshedate;// ":1380962998588,
-	private double d_latitude;// ": "38.112",
-	private double d_longitude;// ": "116.002"
-//	private List<MediaContent> photos = new ArrayList<MediaContent>();
-//	private List<MediaContent> videos = new ArrayList<MediaContent>();
+	protected String s_leaderinstruction;// ":"领导批示",
+	protected String s_voiceinstruction;// ":"语音批示",
+	protected String t_instructiondate;// ":"批示日期",
+	protected String s_leaderid;// ":"批示人id",
+	protected String s_leadername;// ":"批示人姓名",
+	protected String s_netleadername;// ":"格长姓名",
+	protected String s_netleadertel;// ":"格长电话",
+	protected String s_updatename;// ":"最近更新人",
+	protected String s_updatelevel;// ":"更新人级别",
+	protected String t_updatetime;// ":1380962998588,// 更新时间
+//	protected String updateid;// ":"更新人id",
+	protected String s_remark;// ":"备注",
+	protected String s_yinhuanaddress;// ":"违法建设具体位置",
+	protected String s_weijianxiangduiren;// ":"违法建设相对人",
+	protected String s_yinhuanxiangqing;// ":"隐患描述",
+	protected String s_landstatus;// ":"土地性质",
+	protected double d_landarea;// ":"占地面积（亩）",
+	protected String s_construction;// ":"建筑结构",
+	protected double d_jianzhumianji;// ":100,
+	protected String t_buildtime;// ":1380962998588,
+	protected String s_solvemethod;// ":"当日新发现和拆除情况",
+	protected String s_yinhuanren;// ":"涉及人姓名",
+	protected String s_yinhuanlianluo;// ":"涉及人联系方式",
+	protected String t_jianshedate;// ":1380962998588,
+	protected double d_latitude;// ": "38.112",
+	protected double d_longitude;// ": "116.002"
+//	protected List<MediaContent> photos = new ArrayList<MediaContent>();
+//	protected List<MediaContent> videos = new ArrayList<MediaContent>();
 	
-//	private String[] medias = {"photo", "video"};
+//	protected String[] medias = {"photo", "video"};
 	
-//	private String[] jsStrings = {
+//	protected String[] jsStrings = {
 //			//double
 //			"jianzhumianji", "landarea"
 //			, "latitude", "longitude"

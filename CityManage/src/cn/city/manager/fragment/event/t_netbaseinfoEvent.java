@@ -6,52 +6,52 @@ import com.google.gson.Gson;
 
 public class t_netbaseinfoEvent extends BaseEvent {
 	public final static String category = t_netbaseinfoEvent.class.getSimpleName();
-	private String s_netid;// 网格ID",
-	private String s_villageid;// 村ID",
-	private String s_villagename;// 村名称",
-	private String s_netname;// 网格名称",
-	private int i_nethushu;// 100, 常驻户数
-	private int i_netrenkou;// 500, 常驻人口数
-	private int i_liudongzong;// 600, 流动人口总数
-	private int i_youzanzhu;// 400, 流动人口数（已办暂住证）
-	private int i_wuzanzhuzong;// 200, 流动人口数（未办暂住证总数）
-	private int i_wuzanzhu16shang;// 100, 流动人口数（未办暂住证，16周岁以上）
-	private int i_wuzanzhu16xia;// 50, 流动人口数（未办暂住证，16周岁以下）
-	private int i_liudongbusiness;// 700, 流动人口个体经商户数
-	private int i_liudongwork;// 1000 流动人口从业人员数
-	private int i_liudongemployee;// 2000, 招用流动人口数
-	private int i_newcomer;// 80, 新来京人员数量
-	private int i_liudongleave;// 90, 已离开流动人口数量
-	private int i_chuzuhuzong;// 899, 出租房屋总户数
-	private int i_chuzujianzong;// 888, 出租房屋总间数
-	private int i_chuzuyuanzong;// 323, 出租大院户数
-	private int i_zuzhurenshu;// 1000,租住人员数
-	private int i_chuzuyiranyibao;// 88, 利用出租房屋存放易燃易爆危险化学品
-	private int i_chuzuwuzhao;// 666, 利用出租房屋无照经营
-	private int i_chuzufeifabanxue;// 2, 利用出租房屋非法办学
-	private int i_chuzufeipinshougou;// 345, 利用出租房屋收购废品
-	private int i_chuzuqunzu;// 234, 利用出租房屋群租
-	private int i_wuye;// 789, 无业人员数
-	private int i_yuling;// 988, 育龄妇女数
-	private int i_qiyeshu;// 20, 企业数
-	private int i_mendianshu;// 22, 门店数
-	private int i_feipinzhan;// 20, 废品收购站数
-	private int i_youyuanpeixun;// 8, 幼儿园或培训机构数
-	private int i_zhongyangzhidi;// 9, 种养殖地数
-	private int i_lujuqunuan;// 876, 炉具取暖户数
-	private String s_infouploadname;// 最近更新人",
-	private String t_inforuploaddate;// 1380962998588, 更新日期
-	private String s_netleadername;// 格长姓名"
-	private String s_netleadertel;// 格长电话"
-	private String s_villageleadername;// 村治保主任姓名"
-	private String s_villageleadertel;// 村治保主任电话"
-	private String s_remark;// 备注"
+	protected String s_netid;// 网格ID",
+	protected String s_villageid;// 村ID",
+	protected String s_villagename;// 村名称",
+	protected String s_netname;// 网格名称",
+	protected int i_nethushu;// 100, 常驻户数
+	protected int i_netrenkou;// 500, 常驻人口数
+	protected int i_liudongzong;// 600, 流动人口总数
+	protected int i_youzanzhu;// 400, 流动人口数（已办暂住证）
+	protected int i_wuzanzhuzong;// 200, 流动人口数（未办暂住证总数）
+	protected int i_wuzanzhu16shang;// 100, 流动人口数（未办暂住证，16周岁以上）
+	protected int i_wuzanzhu16xia;// 50, 流动人口数（未办暂住证，16周岁以下）
+	protected int i_liudongbusiness;// 700, 流动人口个体经商户数
+	protected int i_liudongwork;// 1000 流动人口从业人员数
+	protected int i_liudongemployee;// 2000, 招用流动人口数
+	protected int i_newcomer;// 80, 新来京人员数量
+	protected int i_liudongleave;// 90, 已离开流动人口数量
+	protected int i_chuzuhuzong;// 899, 出租房屋总户数
+	protected int i_chuzujianzong;// 888, 出租房屋总间数
+	protected int i_chuzuyuanzong;// 323, 出租大院户数
+	protected int i_zuzhurenshu;// 1000,租住人员数
+	protected int i_chuzuyiranyibao;// 88, 利用出租房屋存放易燃易爆危险化学品
+	protected int i_chuzuwuzhao;// 666, 利用出租房屋无照经营
+	protected int i_chuzufeifabanxue;// 2, 利用出租房屋非法办学
+	protected int i_chuzufeipinshougou;// 345, 利用出租房屋收购废品
+	protected int i_chuzuqunzu;// 234, 利用出租房屋群租
+	protected int i_wuye;// 789, 无业人员数
+	protected int i_yuling;// 988, 育龄妇女数
+	protected int i_qiyeshu;// 20, 企业数
+	protected int i_mendianshu;// 22, 门店数
+	protected int i_feipinzhan;// 20, 废品收购站数
+	protected int i_youyuanpeixun;// 8, 幼儿园或培训机构数
+	protected int i_zhongyangzhidi;// 9, 种养殖地数
+	protected int i_lujuqunuan;// 876, 炉具取暖户数
+	protected String s_infouploadname;// 最近更新人",
+	protected String t_inforuploaddate;// 1380962998588, 更新日期
+	protected String s_netleadername;// 格长姓名"
+	protected String s_netleadertel;// 格长电话"
+	protected String s_villageleadername;// 村治保主任姓名"
+	protected String s_villageleadertel;// 村治保主任电话"
+	protected String s_remark;// 备注"
 
 
 
 
-//	final private Type listType = new TypeToken<VillageEvent>(){}.getType();
-//	final private Gson gson = new Gson();
+//	final protected Type listType = new TypeToken<VillageEvent>(){}.getType();
+//	final protected Gson gson = new Gson();
 	
 
 	@Override

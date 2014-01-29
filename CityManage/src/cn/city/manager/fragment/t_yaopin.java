@@ -196,10 +196,11 @@ public class t_yaopin extends BaseFragment implements ImageCacheFactory.OnImageL
 				
 				try {
 					Drawable drawable = imc.loadImage(R.id.picture, uri, 320, 240);
+					imageView.setImageDrawable(drawable);
 					if (null == drawable) {
 						imc.registerOnImageLoadListener(this);
 					}
-					imageView.setImageDrawable(drawable);
+					
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

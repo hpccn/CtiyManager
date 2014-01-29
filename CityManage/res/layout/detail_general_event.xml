@@ -13,7 +13,7 @@
 
         <EditText
             android:id="@+id/et_eventtype"
-            style="@style/generalEditText"
+            style="@style/generalEditTextReadonly"
             android:hint="@string/eventtype" />
     </LinearLayout>
 

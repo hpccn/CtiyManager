@@ -125,7 +125,7 @@ public class EventMapOverlay extends Activity {
         /**
          * 设置地图缩放级别
          */
-        mMapController.setZoom(14);
+        mMapController.setZoom(13);
         /**
          * 显示内置缩放控件
          */

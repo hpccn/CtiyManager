@@ -8,18 +8,18 @@ package cn.city.manager.fragment.event;
 public class t_wuzhaojingyingEvent extends CommonEvent {
 
 	
-	private String s_yinhuanren;//	经营者姓名	no	事件专属字段。
-	private String s_yinhuanaddress;//	具体地址	no	事件专属字段。
-	private String s_houseowner;//	房东姓名	no	事件专属字段。
-	private String s_businessitems;//	经营项目	no	事件专属字段。
-	private String s_yinhuanlianluo;//	经营者电话	yes	事件专属字段。
+	protected String s_yinhuanren;//	经营者姓名	no	事件专属字段。
+	protected String s_yinhuanaddress;//	具体地址	no	事件专属字段。
+	protected String s_houseowner;//	房东姓名	no	事件专属字段。
+	protected String s_businessitems;//	经营项目	no	事件专属字段。
+	protected String s_yinhuanlianluo;//	经营者电话	yes	事件专属字段。
 
 	
 	
 	@Override
 	public String getContent() {
 		// TODO Auto-generated method stub
-		return s_yinhuanren + " : " + s_businessitems;
+		return s_yinhuanren + "  " + s_businessitems;
 	}
 
 	@Override

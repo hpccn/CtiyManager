@@ -5,11 +5,11 @@ package cn.city.manager.fragment.event;
  *
  */
 public class t_shengchanEvent extends CommonEvent {
-	private String s_yinhuanaddress;//	隐患地点
-	private String s_yinhuanxiangqing;//	隐患描述
-	private String s_yinhuandanwei;//	隐患所在单位
-	private String s_yinhuanren;//	隐患单位负责人
-	private String s_yinhuanlianluo;//	隐患单位电话
+	protected String s_yinhuanaddress;//	隐患地点
+	protected String s_yinhuanxiangqing;//	隐患描述
+	protected String s_yinhuandanwei;//	隐患所在单位
+	protected String s_yinhuanren;//	隐患单位负责人
+	protected String s_yinhuanlianluo;//	隐患单位电话
 
 
 	@Override

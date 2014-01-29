@@ -9,15 +9,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
+
+import com.google.gson.Gson;
  
 /** JSON序列化辅助类 **/
 public class JSONHelper {
- 
     /** 将对象转换成Json字符串 **/
     public static String toJSON(Object obj) {
         JSONStringer js = new JSONStringer();
         serialize(js, obj);
         return js.toString();
+//    	Gson gson = new Gson();  
+//    	String json = gson.toJson(obj);  
+//    	return json;
     }
  
     /** 序列化为JSON **/
@@ -89,12 +93,36 @@ public class JSONHelper {
                 js.key(f.getName());
                 serialize(js, o);
             }
+            Class <?> parentClz = obj.getClass().getSuperclass();
+            serializeParent(js, obj, parentClz);
+//            if (null != parentClz) {
+//            	final Field [] parentFileds = parentClz.getDeclaredFields();//.getFields();//
+//                for (Field f : parentFileds) {
+//                	f.setAccessible(true);
+//                    Object o = f.get(obj);
+//                    js.key(f.getName());
+//                    serialize(js, o);
+//                }
+//            }
             js.endObject();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
  
+    private static void serializeParent(JSONStringer js, Object obj, Class <?> parentClz) throws Exception{
+    	
+    	if (null == parentClz) return;
+    	final Field [] parentFileds = parentClz.getDeclaredFields();//.getFields();//
+        for (Field f : parentFileds) {
+        	f.setAccessible(true);
+            Object o = f.get(obj);
+            js.key(f.getName());
+            serialize(js, o);
+        }
+    	serializeParent(js, obj, parentClz.getSuperclass());
+
+    }
     /**
      * 反序列化简单对象
      *
