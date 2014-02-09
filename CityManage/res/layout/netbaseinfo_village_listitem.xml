@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    
+    android:layout_margin="4dp"
     android:orientation="horizontal" >
 
     <TextView
-        android:layout_margin="4dp"
+        
         android:singleLine="true"
         android:layout_weight="1"
         android:id="@+id/id_summary_item_1"
@@ -17,7 +17,8 @@
         android:gravity="center"
        
          />
-
+    <!-- android:layout_margin="4dp" -->
+    
     <TextView
         android:layout_weight="1"
         android:singleLine="true"

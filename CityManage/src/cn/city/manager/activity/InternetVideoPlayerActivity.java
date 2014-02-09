@@ -9,6 +9,8 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -33,7 +35,7 @@ public class InternetVideoPlayerActivity extends Activity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);// 设置全屏
 		// 设置横屏显示
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+//		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		// 选择支持半透明模式,在有surfaceview的activity中使用。
 		getWindow().setFormat(PixelFormat.TRANSLUCENT);
 
@@ -79,7 +81,18 @@ public class InternetVideoPlayerActivity extends Activity {
 //		play();
 		this.findViewById(R.id.button_play).setOnClickListener(onClickListener);
 		this.findViewById(R.id.button_stop).setOnClickListener(onClickListener);
+		
+		handler.sendEmptyMessageDelayed(100, 500);
+		
 	}
+	
+	final protected Handler handler = new Handler(){
+		public void handleMessage(Message msg) {
+			if (msg.what == 100){
+				play();
+			}
+		}
+	};
 	
 	final protected View.OnClickListener onClickListener = new View.OnClickListener() {
 		@Override
@@ -217,7 +230,10 @@ public class InternetVideoPlayerActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		if (null != mediaPlayer){
+			if (mediaPlayer.isPlaying())
+				mediaPlayer.stop();
 			mediaPlayer.release();
+			mediaPlayer = null;
 		}
 		super.onDestroy();
 	}

@@ -2,16 +2,20 @@ package cn.city.manager.activity;
 
 
 import java.io.File;
+import java.io.IOException;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PixelFormat;
+import android.hardware.Camera;
+import android.hardware.Camera.CameraInfo;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -28,7 +32,7 @@ import cn.city.manager.R;
  * @version 1.00 
  * @author 
  */
-public class BasicVideoCapture extends Activity implements SurfaceHolder.Callback {
+public class BasicVideoCapture extends Activity  {
 	private Button start;// 开始录制按钮
 	private Button stop;// 停止录制按钮
 	private Button ok, cancel;
@@ -40,6 +44,10 @@ public class BasicVideoCapture extends Activity implements SurfaceHolder.Callbac
 
 	private boolean isRecording;
 	private String recoderFile = Environment.getExternalStorageDirectory() + "/tmpRecoder.3gp";
+	
+	private Camera mCamera;
+	private CameraInfo[] mCameraInfo;
+	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);// 去掉标题栏
@@ -74,45 +82,58 @@ public class BasicVideoCapture extends Activity implements SurfaceHolder.Callbac
 		
 		
 		surfaceview = (SurfaceView) this.findViewById(R.id.surfaceview);
-		SurfaceHolder holder = surfaceview.getHolder();// 取得holder
-		holder.addCallback(this); // holder加入回调接口
+		
+		surfaceHolder = surfaceview.getHolder();// 取得holder
+		
+		surfaceHolder.addCallback(surfaceHolderCallback); // holder加入回调接口
 		// setType必须设置，要不出错.
-		holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+		surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 		
 //		stop.setVisibility(View.INVISIBLE);
 //		ok.setVisibility(View.INVISIBLE);
+		
+//		mediarecorder.setPreviewDisplay(surfaceview.getHolder().getSurface());
 	}
 
-	MediaRecorder.OnInfoListener onInfoListener = new MediaRecorder.OnInfoListener(){
+	
+	final private SurfaceHolder.Callback surfaceHolderCallback = new SurfaceHolder.Callback(){
 
 		@Override
-		public void onInfo(MediaRecorder mr, int what, int extra) {
-			// TODO Auto-generated method stub
-			Log.e("", "onInfo: what: "+ what + ", extra:" + extra);
+		public void surfaceDestroyed(SurfaceHolder holder) {
+			releaseCamera();
+			surfaceview = null;
+			surfaceHolder = null;
 		}
 		
-	};
-	MediaRecorder.OnErrorListener onErrorListener = new MediaRecorder.OnErrorListener(){
-
 		@Override
-		public void onError(MediaRecorder mr, int what, int extra) {
-			// TODO Auto-generated method stub
-			Log.e("", "onError: what: "+ what + ", extra:" + extra);
+		public void surfaceCreated(SurfaceHolder holder) {
+			initpreview();
+			surfaceHolder = holder;
 		}
-
-
 		
+		@Override
+		public void surfaceChanged(SurfaceHolder holder, int format, int width,
+				int height) {
+			surfaceHolder = holder;
+		}
+	
 	};
+
 	
 	private void startRecorder(){
+		mCamera.stopPreview();
+		mCamera.unlock();
+		
 		isRecording = true;
 		if (mediarecorder == null) {
 			mediarecorder = new MediaRecorder();// 创建mediarecorder对象
 		}
 //		mediarecorder = new MediaRecorder();// 创建mediarecorder对象
-		mediarecorder.setOnInfoListener(onInfoListener);
-		mediarecorder.setOnErrorListener(onErrorListener);
+//		mediarecorder.setOnInfoListener(onInfoListener);
+//		mediarecorder.setOnErrorListener(onErrorListener);
+		mediarecorder.reset();
 		
+		mediarecorder.setCamera(mCamera);
 		mediarecorder.setAudioSource(MediaRecorder.AudioSource.MIC);  
 		// 设置录制视频源为Camera(相机)
 		mediarecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
@@ -152,6 +173,7 @@ public class BasicVideoCapture extends Activity implements SurfaceHolder.Callbac
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			mCamera.lock();
 		}
 		start.setBackgroundResource(R.drawable.btn_shutter_video_recording);
 //		stop.setVisibility(View.VISIBLE);
@@ -165,6 +187,8 @@ public class BasicVideoCapture extends Activity implements SurfaceHolder.Callbac
 			// 停止录制
 			try {
 				mediarecorder.stop();
+				mCamera.reconnect();
+				mCamera.startPreview();
 			} catch (Exception e){
 				e.printStackTrace();
 			}
@@ -226,27 +250,71 @@ public class BasicVideoCapture extends Activity implements SurfaceHolder.Callbac
 
 	};
 
-	@Override
-	public void surfaceChanged(SurfaceHolder holder, int format, int width,
-			int height) {
-		// 将holder，这个holder为开始在oncreat里面取得的holder，将它赋给surfaceHolder
-		surfaceHolder = holder;
-	}
+//	@Override
+//	public void surfaceChanged(SurfaceHolder holder, int format, int width,
+//			int height) {
+//		// 将holder，这个holder为开始在oncreat里面取得的holder，将它赋给surfaceHolder
+//		surfaceHolder = holder;
+//	}
+//
+//	@Override
+//	public void surfaceCreated(SurfaceHolder holder) {
+//		// 将holder，这个holder为开始在oncreat里面取得的holder，将它赋给surfaceHolder
+//		surfaceHolder = holder;
+//	}
+//
+//	@Override
+//	public void surfaceDestroyed(SurfaceHolder holder) {
+//		// surfaceDestroyed的时候同时对象设置为null
+//		releaseCamera();
+//		surfaceview = null;
+//		surfaceHolder = null;
+////		mediarecorder = null;
+//	}
+	
+	 public  void setCameraDisplayOrientation(Activity activity,
+	         int cameraId, android.hardware.Camera camera) {
+//	     android.hardware.Camera.CameraInfo info =
+//	             new android.hardware.Camera.CameraInfo();
+//	     android.hardware.Camera.getCameraInfo(cameraId, info);
+	     int rotation = activity.getWindowManager().getDefaultDisplay()
+	             .getRotation();
+	     int degrees = 0;
+	     switch (rotation) {
+	         case Surface.ROTATION_0: degrees = 0; break;
+	         case Surface.ROTATION_90: degrees = 90; break;
+	         case Surface.ROTATION_180: degrees = 180; break;
+	         case Surface.ROTATION_270: degrees = 270; break;
+	     }
 
-	@Override
-	public void surfaceCreated(SurfaceHolder holder) {
-		// 将holder，这个holder为开始在oncreat里面取得的holder，将它赋给surfaceHolder
-		surfaceHolder = holder;
+	     int result = degrees;
+//	     if (info.facing == 1){//Camera.CameraInfo.CAMERA_FACING_FRONT) {
+//	         result = (info.orientation + degrees) % 360;
+//	         result = (360 - result) % 360;  // compensate the mirror
+//	     } else {  // back-facing
+//	         result = (info.orientation - degrees + 360) % 360;
+//	     }
+	     camera.setDisplayOrientation(result);
+	 }
+	
+	protected void initpreview() {
+		mCamera = Camera.open();//(CameraInfo.CAMERA_FACING_BACK);
+		try {
+			mCamera.setPreviewDisplay(surfaceHolder);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		setCameraDisplayOrientation(this,0,mCamera);//CameraInfo.CAMERA_FACING_BACK
+		mCamera.startPreview();
 	}
-
-	@Override
-	public void surfaceDestroyed(SurfaceHolder holder) {
-		// surfaceDestroyed的时候同时对象设置为null
-		surfaceview = null;
-		surfaceHolder = null;
-//		mediarecorder = null;
+	protected void releaseCamera() {
+		if(mCamera!=null){
+			mCamera.stopPreview();
+			mCamera.release();
+			mCamera = null;
+		}
 	}
-
 	@Override
 	protected void onDestroy() {
 		if (mediarecorder != null) {

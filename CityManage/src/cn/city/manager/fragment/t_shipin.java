@@ -376,6 +376,8 @@ public class t_shipin extends BaseFragment implements ImageCacheFactory.OnImageL
 		}
 //		((EditText)rootView.findViewById(R.id.et_solvemethod)).setText("新发现");
 		
+		((EditText) rootView.findViewById(R.id.et_license)).setText("是");
+		((EditText) rootView.findViewById(R.id.et_weishengxuke)).setText("是");
 		
 		rootView.findViewById(R.id.id_threeadress).setVisibility(View.GONE);
 		rootView.findViewById(R.id.id_browse_mode).setVisibility(View.GONE);

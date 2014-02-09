@@ -108,7 +108,7 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 		if (null == category) {
 			this.finishActivity(1000);
 		}
-		
+		Configuration.getInstance().setTime("month");
 
 		title = this.getIntent().getStringExtra("title");
 		context = this;
@@ -480,6 +480,11 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 				finish();
 				break;
 			case R.id.btn_statistics:
+				if (! Configuration.getInstance().isVillageLevel()) {
+					Toast.makeText(context, "无权查看 ", Toast.LENGTH_SHORT).show();
+
+					break;
+				}
 				mainFrameLayout.removeAllViews();
 //				WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
 //
@@ -492,6 +497,10 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 				viewReload.setVisibility(View.GONE);
 				break;
 			case R.id.btn_area:
+				if (! Configuration.getInstance().isVillageLevel()) {
+					Toast.makeText(context, "无权查看 ", Toast.LENGTH_SHORT).show();
+					break;
+				}
 				mainFrameLayout.removeAllViews();
 				viewChild = townMap.getView(mainFrameLayout.getWidth() * 100 / Constants.zhenyutu_width);//View.inflate(context, R.layout.more_main_frame, null);
 				mainFrameLayout.addView(viewChild);
@@ -802,7 +811,7 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 		}
 	};
 
-	int count = 1;
+	protected int count = 1;
 	public XListView getXListView() {
 		return xListView;
 	}

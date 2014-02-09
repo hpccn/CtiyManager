@@ -36,10 +36,11 @@ public class Configuration {
 
 	private String userJson;
 	
-//	private t_registerEvent register;
+	private t_registerEvent register;
 	
 	private String []villageNames;
 	private String []netNames;
+	
 	
 	public Configuration(){
 		
@@ -84,13 +85,39 @@ public class Configuration {
 //				register = (t_registerEvent)events.get(0);
 //			}
 			
+//			JSONObject content = jObj.getJSONObject("content");
+//			if (null != content){
+//				t_registerEvent re = new t_registerEvent();
+//				register = (t_registerEvent) re.fromJSONObject(content);
+//			}
 			villageNames = parse(jObj, "villagename");
 			netNames = parse(jObj, "netname");
+			
+			register = parseRegisterEvent(jObj, "content");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+	private t_registerEvent parseRegisterEvent(JSONObject jObj, String key) throws Exception{
+		
+		if (null == jObj || !jObj.has("event"))
+			return null;
+
+		JSONObject event = null;
+		event = jObj.getJSONObject("event");
+
+		if (null ==  event || ! event.has(key))
+			return null;
+		JSONObject content = event.getJSONObject(key);
+		if (null != content){
+			t_registerEvent re = new t_registerEvent();
+			register = (t_registerEvent) re.fromJSONObject(content);
+		}
+		return register;
+		
+	}
+
 	
 	private String[] parse(JSONObject jObj, String key) throws JSONException{
 		if (null == jObj || !jObj.has("event"))
@@ -236,6 +263,15 @@ public class Configuration {
 	public void setCount(int count) {
 		this.count = count;
 	}
+
+	public boolean isVillageLevel() {
+		if (null == register) return false;
+		
+		if ("全部".equals(register.getS_villagename())) return true;
+		return false;
+	}
+
+
 
 
 }

@@ -71,7 +71,7 @@ public class NetBaseInfoActivity extends BaseBrowseActivity {
 			fields.add("villageid");
 			fields.add("villagename");
 			fields.add("villageleadername");
-			fields.add("nethushu");
+			fields.add("netrenkou");
 
 			((TextView)this.findViewById(R.id.id_summary_item_title_1)).setText(R.string.villageid);
 			((TextView)this.findViewById(R.id.id_summary_item_title_2)).setText(R.string.villagename);
@@ -83,7 +83,7 @@ public class NetBaseInfoActivity extends BaseBrowseActivity {
 			fields.add("netid");
 			fields.add("netname");
 			fields.add("villagename");
-			fields.add("nethushu");
+			fields.add("netrenkou");
 
 //			adapter = new NetBaseInfoAdapter(context, events, fields); 
 			((TextView)this.findViewById(R.id.id_summary_item_title_1)).setText(R.string.netgrid_id);

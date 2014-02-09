@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.content.Context;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -47,6 +48,7 @@ public class NetBaseInfoGeneralAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (null == convertView) {
 			convertView = View.inflate(context, R.layout.netbaseinfo_village_listitem, null);
+			convertView.setPadding(0, 10, 0, 10);
 		}
 		t_netbaseinfoEvent ve = null;
 		if (list.get(position) instanceof t_netbaseinfoEvent) {
@@ -56,8 +58,8 @@ public class NetBaseInfoGeneralAdapter extends BaseAdapter {
 		}
 //		t_netbaseinfoEvent ve = list.get(position);
 		
-		TextView tv = (TextView) convertView.findViewById(R.id.id_summary_item_1);
-		Object obj;
+//		TextView tv = (TextView) convertView.findViewById(R.id.id_summary_item_1);
+//		Object obj;
 //		try {
 //			obj = methodMap.get(fields.get(0)).invoke(ve);
 //			if (null != obj)

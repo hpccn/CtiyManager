@@ -239,10 +239,11 @@ public class EventMapOverlay extends Activity {
 		
 		if (null == events || events.isEmpty()) return;
 		for (BaseEvent e : events){
-			if (e instanceof t_weijianEvent){
-				t_weijianEvent ev = (t_weijianEvent)e;
-				geoPoints.add(BaiduMapHelper.createGeoPoint(ev.getD_latitude(), ev.getD_longitude()));
-			}
+			geoPoints.add(BaiduMapHelper.createGeoPoint(e.getD_latitude(), e.getD_longitude()));
+//			if (e instanceof t_weijianEvent){
+//				t_weijianEvent ev = (t_weijianEvent)e;
+//				geoPoints.add(BaiduMapHelper.createGeoPoint(ev.getD_latitude(), ev.getD_longitude()));
+//			}
 		}
 		initOverlay();
 		asyncDownloadImage();

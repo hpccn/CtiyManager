@@ -378,7 +378,9 @@ public class t_yaopin extends BaseFragment implements ImageCacheFactory.OnImageL
 			((EditText)rootView.findViewById(R.id.et_netname)).setText(status[0]);
 		}
 //		((EditText)rootView.findViewById(R.id.et_solvemethod)).setText("新发现");
-		
+		((EditText) rootView.findViewById(R.id.et_license)).setText("是");
+		((EditText) rootView.findViewById(R.id.et_weishengxuke)).setText("是");
+		((EditText) rootView.findViewById(R.id.et_yinhuandanweitype)).setText("医疗诊所");
 		
 		rootView.findViewById(R.id.id_threeadress).setVisibility(View.GONE);
 		rootView.findViewById(R.id.id_browse_mode).setVisibility(View.GONE);
@@ -494,7 +496,7 @@ public class t_yaopin extends BaseFragment implements ImageCacheFactory.OnImageL
 		break;
 		case R.id.et_license: {
 			String[] status = { "是", "否" };
-
+			
 			general.setSingleChoiceItems(context, R.id.et_license, status, 0,
 					new GeneralInformationFragment.OnChangedListener() {
 						@Override
@@ -525,7 +527,7 @@ public class t_yaopin extends BaseFragment implements ImageCacheFactory.OnImageL
 		 
 		case R.id.et_yinhuandanweitype:{
 			String[] status = { "医疗诊所", "药店" };
-
+			
 			general.setSingleChoiceItems(context, R.id.et_yinhuandanweitype, status, 0,
 					new GeneralInformationFragment.OnChangedListener() {
 						@Override

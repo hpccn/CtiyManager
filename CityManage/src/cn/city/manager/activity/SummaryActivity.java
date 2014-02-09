@@ -85,7 +85,9 @@ public class SummaryActivity extends BaseBrowseActivity {
 		}
 		Configuration.getInstance().setKind(category);//"t_weijian");
 		Configuration.getInstance().setId(Configuration.getInstance().getUsername());
-		Configuration.getInstance().setTime("month");
+		if (null == Configuration.getInstance().getTime()){
+			Configuration.getInstance().setTime("month");
+		}
 		Configuration.getInstance().setStart(start);
 		//Configuration.getInstance().setStep(step)
 //		String url = "https://code.csdn.net/hpccn/citymanager/blob/master/CityManage/assets/t_weijian.json";//"http://192.168.6.55:8000/t_weijian.json";
@@ -252,6 +254,8 @@ public class SummaryActivity extends BaseBrowseActivity {
 	protected void onSelectDateView(int select) {
 		// TODO Auto-generated method stub
 //		String url = String.format(Constants.weijian_list_option, date[select]);
+		count = 1;
+		Configuration.getInstance().setCount(count);
 		Configuration.getInstance().setTime(date[select]);
 		currentUrl = Constants.obtainLastEventsListUrl();//Constants.obtainWeijianListUrl(Configuration.getInstance().getUsername(), date[select]);
 //		HttpStreamThread hst = new EventHttpStreamThread(this, url, onStringLoadListener);
