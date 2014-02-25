@@ -41,6 +41,7 @@ public class Configuration {
 	private String []villageNames;
 	private String []netNames;
 	
+	private String eventTongJiTime;
 	
 	public Configuration(){
 		
@@ -269,6 +270,14 @@ public class Configuration {
 		
 		if ("全部".equals(register.getS_villagename())) return true;
 		return false;
+	}
+
+	public String getEventTongJiTime() {
+		return eventTongJiTime;
+	}
+
+	public void setEventTongJiTime(String eventTongJiTime) {
+		this.eventTongJiTime = eventTongJiTime;
 	}
 
 

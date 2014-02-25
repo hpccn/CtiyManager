@@ -439,29 +439,30 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 		};
 		selectBrowseOrderItems = OrderItems;
 		selectBrowseCategory = 2;
+		Configuration.getInstance().setEventTongJiTime(selectBrowseCategoryItems[selectBrowseCategory]);
 		selectBrowseOrder = 0;
 		if (null != btnCategory)
 			btnCategory.setText(selectBrowseCategoryItems[selectBrowseCategory]);
 		// 初始化统计类别
 		if (category.equals(t_netbaseinfoGrid.class.getSimpleName())){
 			statistics = new Statistics(this, Constants.obtainNetbaseinfoTongjiUrl(Configuration.getInstance().getUsername(), ""));
-			statistics.setSelect(Constants.netbaseinfo_zhenyutu, Constants.wangge_tongji);
+			statistics.setSelect(Constants.netbaseinfo_zhenyutu, Constants.wangge_tongji, "t_netbaseinfo");
 			
 			townMap = new Statistics(this, Constants.obtainNetbaseinfoZhenyuUrl(Configuration.getInstance().getUsername(), ""));
-			townMap.setSelect(Constants.netbaseinfo_zhenyutu, Constants.wangge_zhenyutu);
+			townMap.setSelect(Constants.netbaseinfo_zhenyutu, Constants.wangge_zhenyutu, "t_netbaseinfo");
 		} else if (category.equals(t_netbaseinfo.class.getSimpleName())){
 			statistics = new Statistics(this, Constants.obtainNetbaseinfoTongjiUrl(Configuration.getInstance().getUsername(), ""));
-			statistics.setSelect(Constants.netbaseinfo_zhenyutu, Constants.wangge_tongji);
+			statistics.setSelect(Constants.netbaseinfo_zhenyutu, Constants.wangge_tongji, "t_netbaseinfo");
 			
 			townMap = new Statistics(this, Constants.obtainNetbaseinfoZhenyuUrl(Configuration.getInstance().getUsername(), ""));
-			townMap.setSelect(Constants.netbaseinfo_zhenyutu, Constants.wangge_zhenyutu);
+			townMap.setSelect(Constants.netbaseinfo_zhenyutu, Constants.wangge_zhenyutu, "t_netbaseinfo");
 		}else {
-			statistics = new Statistics(this, Constants.obtainEventTongjiUrl(category, Configuration.getInstance().getUsername()));
-			String[] tj = {"本月各村情况统计图"};
-			statistics.setSelect(tj , null);
-			townMap = new Statistics(this, Constants.obtainEventZhenyutuUrl(category, Configuration.getInstance().getUsername()));
-			String[] zy = {"本月各村情况镇域图"};
-			townMap.setSelect(zy , null);
+			statistics = new Statistics(this, Constants.obtainEventTongjiUrl(category, Configuration.getInstance().getUsername(), Configuration.getInstance().getEventTongJiTime()));
+			String[] tj = Constants.event_tongji_time_title;//{"本月各村情况统计图"};
+			statistics.setSelect(tj , Constants.event_tongji, category);
+			townMap = new Statistics(this, Constants.obtainEventZhenyutuUrl(category, Configuration.getInstance().getUsername(), Configuration.getInstance().getEventTongJiTime()));
+			String[] zy = Constants.event_tongji_time_title;// {"本月各村情况镇域图"};
+			townMap.setSelect(zy, Constants.event_zhenyutu, category);
 		}
 //		statistics = new Statistics(this);
 		more = new More(this);
@@ -568,6 +569,7 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 				// TODO Auto-generated method stub
 				Toast.makeText(context, "选择 : " + selectBrowseCategoryItems[which], Toast.LENGTH_SHORT).show();
 				selectBrowseCategory = which;
+				Configuration.getInstance().setEventTongJiTime(selectBrowseCategoryItems[which]);
 				btnCategory.setText(selectBrowseCategoryItems[which]);
 				onSelectDateView(which);
 				dialog.dismiss();
@@ -754,6 +756,7 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 	}
 	
 	private void onLoad() {
+		if (null == xListView) return;
 		xListView.stopRefresh();
 		xListView.stopLoadMore();
 //		summaryView.setRefreshTime("刚刚");

@@ -2,15 +2,15 @@ package cn.city.manager.activity;
 
 import java.util.List;
 
-import com.umeng.analytics.MobclickAgent;
-import com.umeng.update.UmengUpdateAgent;
-
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -30,6 +30,8 @@ import cn.city.manager.view.DateTimePickerDialog;
 import cn.city.manager.view.EventCategory;
 import cn.city.manager.view.GradeCategory;
 import cn.city.manager.view.More;
+
+import com.umeng.analytics.MobclickAgent;
 
 public class EntryActivity extends Activity {
 
@@ -327,6 +329,31 @@ public class EntryActivity extends Activity {
 		eventFrameLayout.addView(rootView);
 
 		return rootView;
+	}
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+//		super.onBackPressed();
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//				new ContextThemeWrapper(this, android.R.style.Theme_DeviceDefault_Light));
+		builder.setMessage("你确定退出吗？");
+		builder.setCancelable(false);
+		builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				finish();
+			}
+		});
+		builder.setNegativeButton("返回", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				dialog.cancel();
+			}
+		});
+		AlertDialog alert = builder.create();
+		alert.show();
+
+
 	}
 	
 //	private View newEvent(Context context){

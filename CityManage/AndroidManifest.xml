@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.city.manager"
     android:versionCode="1"
-    android:versionName="1.1.20140209" >
+    android:versionName="1.1.20140213" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -192,7 +192,7 @@
         </activity>
         <activity
             android:name=".activity.ImageViewActivity"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:screenOrientation="portrait">
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
         <activity
             android:name=".activity.InternetVideoPlayerActivity"

@@ -106,6 +106,7 @@ public class NetBaseInfoActivity extends BaseBrowseActivity {
 		tvTitle = (TextView)this.findViewById(R.id.id_titlebar_title);
 		XListView summaryView = (XListView) this.findViewById(R.id.summary_xListView); 
 		setXListView(summaryView);
+		if (null == summaryView) return;
 		summaryView.setPullLoadEnable(false);
 
 		BaseAdapter adapter = obtainAdapter();

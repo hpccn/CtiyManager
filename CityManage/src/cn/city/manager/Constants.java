@@ -1,5 +1,8 @@
 package cn.city.manager;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -57,15 +60,19 @@ public class Constants {
 	}
 //	这个是违建统计：镇域图
 //	final public static String weijian_zhenyutu = host + "/wangge/?q=node/13&s_yearmonth_selected=&s_statistics_type=&s_chart=no";
-	final private static String event_zhenyutu = host + "/wangge/sites/all/themes/wangge/android/to-android-event-statistics.php?kind=%s&id=%s&s_statistics_type=违建数量&s_chart=no";
-	final static public String obtainEventZhenyutuUrl(String kind, String userId){
-		return String.format(event_zhenyutu, kind, userId);
+	public final static String event_zhenyutu = host + "/wangge/sites/all/themes/wangge/android/to-android-event-statistics.php?kind=%s&id=%s&s_time=%s&s_statistics_type=违建数量&s_chart=no";
+	final static public String obtainEventZhenyutuUrl(String kind, String userId, String time){
+		time = eventTongjiMap.get(time);
+		if (null == time) time = event_tongji_time[0];
+		return String.format(event_zhenyutu, kind, userId, time);
 	}
 //	这个是违建统计：柱状图
 //	final public static String weijian_tongji = host + "/wangge/?q=node/13&s_yearmonth_selected=&s_statistics_type=&s_chart=yes";
-	final private static String event_tongji = host + "/wangge/sites/all/themes/wangge/android/to-android-event-statistics.php?kind=%s&id=%s&s_statistics_type=违建数量&s_chart=yes";
-	final static public String obtainEventTongjiUrl (String kind, String userId){
-		return String.format(event_tongji, kind, userId);
+	public final static String event_tongji = host + "/wangge/sites/all/themes/wangge/android/to-android-event-statistics.php?kind=%s&id=%s&s_time=%s&s_statistics_type=违建数量&s_chart=yes";
+	final static public String obtainEventTongjiUrl (String kind, String userId, String time){
+		time = eventTongjiMap.get(time);
+		if (null == time) time = event_tongji_time[0];
+		return String.format(event_tongji, kind, userId, time);
 	}
 //	final public static String wangge_village_netbaseinfo_list = host + "/wangge/sites/all/themes/wangge/android/to-android-netinfo.php?kind=s_villageid&id=010101";
 	final private static String wangge_netbaseinfo_list = host + "/wangge/sites/all/themes/wangge/android/to-android-netinfo.php?kind=%s&id=%s";
@@ -80,16 +87,18 @@ public class Constants {
 	
 //这个是网格统计：镇域图
 //	final public static String wangge_zhenyutu = host + "/wangge/?q=node/12&s_yearmonth_selected=&s_statistics_type=%s&s_chart=no";
-	final public static String wangge_zhenyutu = host + "/wangge/sites/all/themes/wangge/android/to-android-netinfo-statistics.php?kind=t_netbaseinfo&id=%s&s_statistics_type=%s&s_chart=no";
+	final public static String wangge_zhenyutu = host + "/wangge/sites/all/themes/wangge/android/to-android-netinfo-statistics.php?kind=%s&id=%s&s_statistics_type=%s&s_chart=no";
+//	final public static String wangge_zhenyutu = host + "/wangge/sites/all/themes/wangge/android/to-android-netinfo-statistics.php?kind=t_netbaseinfo&id=%s&s_statistics_type=%s&s_chart=no";
 
 //这个是网格统计：柱状图
 //	final public static String wangge_tongji = host + "/wangge/?q=node/12&s_yearmonth_selected=&s_statistics_type=%s&s_chart=yes";
-	final public static String wangge_tongji = host + "/wangge/sites/all/themes/wangge/android/to-android-netinfo-statistics.php?kind=t_netbaseinfo&id=%s&s_statistics_type=%s&s_chart=yes";
+	final public static String wangge_tongji = host + "/wangge/sites/all/themes/wangge/android/to-android-netinfo-statistics.php?kind=%s&id=%s&s_statistics_type=%s&s_chart=yes";
+//	final public static String wangge_tongji = host + "/wangge/sites/all/themes/wangge/android/to-android-netinfo-statistics.php?kind=t_netbaseinfo&id=%s&s_statistics_type=%s&s_chart=yes";
 	final static public String obtainNetbaseinfoTongjiUrl (String userId, String type){
-		return String.format(wangge_tongji, userId, type);
+		return String.format(wangge_tongji, "t_netbaseinfo", userId, type);
 	}
 	final static public String obtainNetbaseinfoZhenyuUrl (String userId, String type){
-		return String.format(wangge_zhenyutu, userId, type);
+		return String.format(wangge_zhenyutu, "t_netbaseinfo", userId, type);
 	}
 	
 	
@@ -109,6 +118,37 @@ public class Constants {
 		"企业数",
 		"门店数"
 		};
+
+	final public static Map<String, String> eventTongjiMap = new HashMap<String, String>();
+	final public static String [] event_tongji_time = {
+		"day",
+		"week",
+		"month",
+		"year",
+		"all"
+		};
+	final public static String [] event_tongji_time_title = {
+		"当天",
+		"本周",
+		"本月",
+		"本年",
+		"全部"
+		};
+	static {
+		for (int i = 0; i < event_tongji_time.length; ++i){
+			eventTongjiMap.put(event_tongji_time_title[i], event_tongji_time[i]);
+		}
+	};
+	
+	public static String obtainStatisticsUrl(String kind, String userId, String time){
+		if (null == kind) return "http://www.iisale.com/wangge/sites/all/themes/wangge/android/to-android-event-statistics.php";
+		if (kind.equalsIgnoreCase("")){
+			
+		}else {
+			
+		}
+		return time;
+	}
 
 	//	图片地址
 	private final static String imageUrl = "http://www.iisale.com/wangge/sites/all/themes/wangge/android/photo/";

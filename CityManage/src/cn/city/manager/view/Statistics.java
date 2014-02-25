@@ -41,6 +41,7 @@ public class Statistics implements Page{
 //	private String selectBrowseCategoryItems[] = {"常驻人口", "常驻户数", "流动人口总数", "出租屋总户数"};
 //	private int selectBrowseCategory;
 	protected int scaleInPercent;
+	
 	public Statistics(Context context, String url){
 		this.context = context;
 		this.url = url;
@@ -49,10 +50,11 @@ public class Statistics implements Page{
 	
 	protected String []selectItems;
 	protected String selectUrl;
-	
-	public void setSelect(String []selectItems, String selectUrl){
+	protected String kind;
+	public void setSelect(String []selectItems, String selectUrl, String kind){
 		this.selectItems = selectItems;
 		this.selectUrl = selectUrl;
+		this.kind = kind;
 	}
 	
 	protected Button selectButton;
@@ -83,7 +85,14 @@ public class Statistics implements Page{
 								// TODO Auto-generated method stub
 	//							((EditText)view.findViewById(id)).setText(value);
 	//							 Constants.obtainNetbaseinfoZhenyuUrl(value);
-								url = String.format(selectUrl, Configuration.getInstance().getUsername(), value);
+								if ("t_netbaseinfo".equalsIgnoreCase(kind)){
+									url = String.format(selectUrl, kind, Configuration.getInstance().getUsername(), value);
+								} else {
+									Configuration.getInstance().setEventTongJiTime(value);
+									String time = Constants.eventTongjiMap.get(value);
+									if (null == time) time = Constants.event_tongji_time[0];
+									url = String.format(selectUrl, kind, Configuration.getInstance().getUsername(), time);
+								}
 								loadUrl(url);
 								selectButton.setText(value);
 							}
@@ -99,7 +108,7 @@ public class Statistics implements Page{
 		webView.setInitialScale(scaleInPercent);
         WebSettings webSettings = webView.getSettings();       
         webSettings.setJavaScriptEnabled(true);       
-        webSettings.setDefaultZoom(WebSettings.ZoomDensity.CLOSE);
+        webSettings.setDefaultZoom(WebSettings.ZoomDensity.FAR);
         webSettings.setUseWideViewPort(false);
         webSettings.setBuiltInZoomControls(true);
         webSettings.setSupportZoom(true);  
@@ -135,6 +144,21 @@ public class Statistics implements Page{
 		
 //		btnCategory = (Button) view.findViewById(R.id.statistics_category);
 //		btnCategory.setOnClickListener(onClickListener);
+		
+		
+		if ("t_netbaseinfo".equalsIgnoreCase(kind)){
+			
+			url = String.format(selectUrl, kind, Configuration.getInstance().getUsername(), selectItems[0]);
+		} else {
+			
+			String value = Configuration.getInstance().getEventTongJiTime();
+			if (null == value) value = Constants.event_tongji_time_title[0];
+			String time = Constants.eventTongjiMap.get(value);
+			
+			selectButton.setText(value);
+			if (null == time) time = Constants.event_tongji_time[0];
+			url = String.format(selectUrl, kind, Configuration.getInstance().getUsername(), time);
+		}
 		loadUrl(url);
 		return view;
 	}

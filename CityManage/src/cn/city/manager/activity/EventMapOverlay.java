@@ -239,6 +239,7 @@ public class EventMapOverlay extends Activity {
 		
 		if (null == events || events.isEmpty()) return;
 		for (BaseEvent e : events){
+			if (isZero(e.getD_latitude()) || isZero(e.getD_longitude())) continue;
 			geoPoints.add(BaiduMapHelper.createGeoPoint(e.getD_latitude(), e.getD_longitude()));
 //			if (e instanceof t_weijianEvent){
 //				t_weijianEvent ev = (t_weijianEvent)e;
@@ -248,6 +249,12 @@ public class EventMapOverlay extends Activity {
 		initOverlay();
 		asyncDownloadImage();
 	}
+	
+	private boolean isZero(double d){
+		if (d > -0.01 && d < 0.01) return true;
+		return false;
+	}
+	
 	protected ExecutorService executorService = Executors.newFixedThreadPool(10);    //固定五个线程来执行任务
 
 	private void asyncDownloadImage(){

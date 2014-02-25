@@ -1,19 +1,24 @@
 package cn.city.manager.activity;
 
-import com.umeng.analytics.MobclickAgent;
-
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 import cn.city.manager.R;
 import cn.city.manager.view.ViewSingletonFactory;
+import cn.hpc.common.DrawableUtils;
 import cn.hpc.common.cache.ImageCacheFactory;
+import cn.hpc.common.view.PinchableImageView;
+
+import com.umeng.analytics.MobclickAgent;
 
 public class ImageViewActivity extends Activity {
 	public static final String TAG = "ImageViewActivity";
@@ -22,14 +27,18 @@ public class ImageViewActivity extends Activity {
 	private ImageView imageView;
 	
 	private Drawable drawable;
+	private LinearLayout mainLayout;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_imageview_main);
+		mainLayout = (LinearLayout) View.inflate(this, R.layout.activity_imageview_main, null);
+		setContentView(mainLayout);
+//		setContentView(R.layout.activity_imageview_main);
 		com.umeng.common.Log.LOG = true;
 //		MobclickAgent.setDebugMode(true);
 		MobclickAgent.onError(this);
+		this.
 		imageView = (ImageView) this.findViewById(R.id.id_imgageview);
 		ViewSingletonFactory.getInstance().showProcessDialog(this, null, "正在下载图片,请稍候...\n 较长时间无反应,请按返回键退出");
 		uri = this.getIntent().getData();
@@ -59,6 +68,7 @@ public class ImageViewActivity extends Activity {
 				
 				int w = imageView.getWidth();
 				int h = imageView.getHeight();
+				
 				try {
 					Log.d("", "photo : " + w + ", " + h);
 					drawable = imc.getImage(uri, w, h);
@@ -94,12 +104,13 @@ public class ImageViewActivity extends Activity {
 		}
 	};
 
+	PinchableImageView piv;
 	private ImageCacheFactory imc;
 	private void showImage(){
 		ViewSingletonFactory.getInstance().hideProcessDialog();
 		imageView.setImageDrawable(drawable);
-//		int w = imageView.getWidth();
-//		int h = imageView.getHeight();
+		int w = imageView.getWidth();
+		int h = imageView.getHeight();
 //		try {
 //			imageView.setImageDrawable(imc.getImage(uri, w, h));
 //		} catch (Exception e) {
@@ -109,10 +120,18 @@ public class ImageViewActivity extends Activity {
 //		Bitmap bmp = DrawableUtils.decodeBitmapWithSize(imgPath, 100, 100);
 //		imageView.setImageBitmap(bmp);
 
+		piv = new PinchableImageView(this, w, h); 
+//		piv.setImageDrawable(drawable);
+		Bitmap bmp = DrawableUtils.drawableToBitmap(drawable);
+		piv.setImageBitmap(bmp);
+		mainLayout.removeAllViews();
+		mainLayout.addView(piv);
+		
 	}
 	@Override
 	protected void onDestroy() {
 //		overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
+		if (null != piv) piv.recycle();
 		super.onDestroy();
 	}
 
