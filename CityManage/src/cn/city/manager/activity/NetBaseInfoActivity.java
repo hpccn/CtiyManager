@@ -108,7 +108,8 @@ public class NetBaseInfoActivity extends BaseBrowseActivity {
 		setXListView(summaryView);
 		if (null == summaryView) return;
 		summaryView.setPullLoadEnable(false);
-
+		summaryView.setPullRefreshEnable(false);
+		
 		BaseAdapter adapter = obtainAdapter();
 		initListView(summaryView, adapter);
 //		if (t_netbaseinfo.class.getSimpleName().equals(category)){

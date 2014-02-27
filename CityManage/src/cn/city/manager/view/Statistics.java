@@ -57,6 +57,8 @@ public class Statistics implements Page{
 		this.kind = kind;
 	}
 	
+	private final String btnSuffixTxt = "各村事件合计";
+	
 	protected Button selectButton;
 	
 	public View getView(int scaleInPercent){
@@ -87,14 +89,16 @@ public class Statistics implements Page{
 	//							 Constants.obtainNetbaseinfoZhenyuUrl(value);
 								if ("t_netbaseinfo".equalsIgnoreCase(kind)){
 									url = String.format(selectUrl, kind, Configuration.getInstance().getUsername(), value);
+									selectButton.setText(value);
 								} else {
 									Configuration.getInstance().setEventTongJiTime(value);
 									String time = Constants.eventTongjiMap.get(value);
 									if (null == time) time = Constants.event_tongji_time[0];
 									url = String.format(selectUrl, kind, Configuration.getInstance().getUsername(), time);
+									selectButton.setText(value + btnSuffixTxt);
 								}
 								loadUrl(url);
-								selectButton.setText(value);
+//								selectButton.setText(value);
 							}
 						});
 	
@@ -155,7 +159,7 @@ public class Statistics implements Page{
 			if (null == value) value = Constants.event_tongji_time_title[0];
 			String time = Constants.eventTongjiMap.get(value);
 			
-			selectButton.setText(value);
+			selectButton.setText(value + btnSuffixTxt);
 			if (null == time) time = Constants.event_tongji_time[0];
 			url = String.format(selectUrl, kind, Configuration.getInstance().getUsername(), time);
 		}

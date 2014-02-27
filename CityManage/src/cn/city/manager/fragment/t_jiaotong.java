@@ -359,16 +359,18 @@ public class t_jiaotong extends BaseFragment implements ImageCacheFactory.OnImag
 	}
 	
 	private void initNewEvent(){
-		((EditText)rootView.findViewById(R.id.et_solvestatus)).setText("未解决");
-		String []status = Configuration.getInstance().getVillageNames();
-		if (null != status && status.length > 0){
-			((EditText)rootView.findViewById(R.id.et_villagename)).setText(status[0]);
-		} 
+		initNewEvent(rootView);
 		
-		status = Configuration.getInstance().getNetNames();
-		if (null != status && status.length > 0){
-			((EditText)rootView.findViewById(R.id.et_netname)).setText(status[0]);
-		}
+		((EditText)rootView.findViewById(R.id.et_solvestatus)).setText("未解决");
+//		String []status = Configuration.getInstance().getVillageNames();
+//		if (null != status && status.length > 0){
+//			((EditText)rootView.findViewById(R.id.et_villagename)).setText(status[0]);
+//		} 
+		
+//		status = Configuration.getInstance().getNetNames();
+//		if (null != status && status.length > 0){
+//			((EditText)rootView.findViewById(R.id.et_netname)).setText(status[0]);
+//		}
 //		((EditText)rootView.findViewById(R.id.et_solvemethod)).setText("新发现");
 		
 		
@@ -443,45 +445,46 @@ public class t_jiaotong extends BaseFragment implements ImageCacheFactory.OnImag
 			
 		case R.id.et_villagename:
 		{
-			// 村
-			String []status = Configuration.getInstance().getVillageNames();
-			if (null == status || status.length == 0){
-//				((EditText)rootView.findViewById(R.id.et_villagename)).setText(Configuration.getInstance().getRegister().getS_villagename());
-			} else if (status.length == 1){
-				((EditText)rootView.findViewById(R.id.et_villagename)).setText(status[0]);
-			} else {
-//				{Configuration.getInstance().getRegister().getS_villagename() , "other"};
-				general.setSingleChoiceItems(context,  R.id.et_villagename, status, 0, new GeneralInformationFragment.OnChangedListener() {
-					@Override
-					public void onChanged(int id, int which, String value) {
-						// TODO Auto-generated method stub
-						((EditText)rootView.findViewById(id)).setText(value);
-					}
-				});
-			}
+			villagenameSingleChoice(context, rootView);
+//			// 村
+//			String []status = Configuration.getInstance().getVillageNames();
+//			if (null == status || status.length == 0){
+////				((EditText)rootView.findViewById(R.id.et_villagename)).setText(Configuration.getInstance().getRegister().getS_villagename());
+//			} else if (status.length == 1){
+//				((EditText)rootView.findViewById(R.id.et_villagename)).setText(status[0]);
+//			} else {
+////				{Configuration.getInstance().getRegister().getS_villagename() , "other"};
+//				general.setSingleChoiceItems(context,  R.id.et_villagename, status, 0, new GeneralInformationFragment.OnChangedListener() {
+//					@Override
+//					public void onChanged(int id, int which, String value) {
+//						// TODO Auto-generated method stub
+//						((EditText)rootView.findViewById(id)).setText(value);
+//					}
+//				});
+//			}
 		}
 
 			break;
 		case R.id.et_netname:
 		{
-			
-			//格
-			String []status = Configuration.getInstance().getNetNames();
-//			String []status = {Configuration.getInstance().getRegister().getS_netname() , "other"};
-			if (null == status || status.length == 0){
-//				((EditText)rootView.findViewById(R.id.et_netname)).setText(Configuration.getInstance().getRegister().getS_netname());
-			} else if (status.length == 1){
-				((EditText)rootView.findViewById(R.id.et_netname)).setText(status[0]);
-			} else {
-
-				general.setSingleChoiceItems(context,  R.id.et_netname, status, 0, new GeneralInformationFragment.OnChangedListener() {
-					@Override
-					public void onChanged(int id, int which, String value) {
-						// TODO Auto-generated method stub
-						((EditText)rootView.findViewById(id)).setText(value);
-					}
-				});
-			}
+			netnameSingleChoice(context, rootView, villagename);
+//			//格
+//			String []status = Configuration.getInstance().getNetNames();
+////			String []status = {Configuration.getInstance().getRegister().getS_netname() , "other"};
+//			if (null == status || status.length == 0){
+////				((EditText)rootView.findViewById(R.id.et_netname)).setText(Configuration.getInstance().getRegister().getS_netname());
+//			} else if (status.length == 1){
+//				((EditText)rootView.findViewById(R.id.et_netname)).setText(status[0]);
+//			} else {
+//
+//				general.setSingleChoiceItems(context,  R.id.et_netname, status, 0, new GeneralInformationFragment.OnChangedListener() {
+//					@Override
+//					public void onChanged(int id, int which, String value) {
+//						// TODO Auto-generated method stub
+//						((EditText)rootView.findViewById(id)).setText(value);
+//					}
+//				});
+//			}
 		}
 
 		break;

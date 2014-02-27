@@ -155,7 +155,7 @@
     <string name="select_browse_order_time_forward">正序▲</string>
     <string name="select_browse_order_time_reversed">倒序▼</string>
     <string name="select_browse_category">分类浏览</string>
-    <string name="select_browse_today">当天</string>
+    <string name="select_browse_today">今日</string>
     <string name="select_browse_week">本周</string>
     <string name="select_browse_month">本月</string>
     <string name="select_browse_season">本季</string>

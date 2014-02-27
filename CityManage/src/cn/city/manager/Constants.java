@@ -128,7 +128,7 @@ public class Constants {
 		"all"
 		};
 	final public static String [] event_tongji_time_title = {
-		"当天",
+		"今日",
 		"本周",
 		"本月",
 		"本年",

@@ -2,17 +2,20 @@ package cn.city.manager;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import cn.city.manager.fragment.event.BaseEvent;
-import cn.city.manager.fragment.event.t_registerEvent;
-import cn.city.manager.model.EventSingletonFactory;
 import android.content.Context;
 import android.content.SharedPreferences;
+import cn.city.manager.fragment.event.t_registerEvent;
 
 public class Configuration {
 	
@@ -39,7 +42,7 @@ public class Configuration {
 	private t_registerEvent register;
 	
 	private String []villageNames;
-	private String []netNames;
+//	private String []netNames;
 	
 	private String eventTongJiTime;
 	
@@ -91,8 +94,9 @@ public class Configuration {
 //				t_registerEvent re = new t_registerEvent();
 //				register = (t_registerEvent) re.fromJSONObject(content);
 //			}
-			villageNames = parse(jObj, "villagename");
-			netNames = parse(jObj, "netname");
+			villageNames = parseVillagename(jObj);
+//			villageNames = parse(jObj, "villagename");
+//			netNames = parse(jObj, "netname");
 			
 			register = parseRegisterEvent(jObj, "content");
 
@@ -118,7 +122,75 @@ public class Configuration {
 		return register;
 		
 	}
+	Map <String, List<String>> netnameMap = new HashMap <String, List<String>>();
+	List<String> villagenameList = new ArrayList<String>();
+	
+	private String[] parseVillagename(JSONObject jObj) throws JSONException{
+		if (null == jObj || !jObj.has("event"))
+			return null;
+		netnameMap.clear();
+		villagenameList.clear();
+		String key = "villagename";
+		JSONObject event = null;
+		event = jObj.getJSONObject("event");
 
+		if (null ==  event || ! event.has(key))
+			return null;
+		JSONArray ja = event.getJSONArray(key);
+		
+		if (null == ja) return null;
+		
+//		List<String> list = new ArrayList<String>();
+		
+		String s_villagename = null;
+		String s_netname = null;
+		for (int i = 0, length = ja.length(); i < length; ++i){
+			s_villagename = ja.getJSONObject(i).getString("s_villagename");
+			s_netname = ja.getJSONObject(i).getString("s_netname");
+
+			if (!villagenameList.contains(s_villagename)){
+				villagenameList.add(s_villagename);
+			}
+			List<String> netnameSet = netnameMap.get(s_villagename);
+			if (null == netnameSet){
+				netnameSet = new ArrayList<String>();
+				netnameMap.put(s_villagename, netnameSet);
+			}
+			if (!netnameSet.contains(s_netname)){
+				netnameSet.add(s_netname);
+			}
+
+		}
+		//TODO: 所属格增加一项"待定格"
+//		if ("netname".equals(key))
+//			list.add(0, "待定格");
+		if (!netnameMap.isEmpty()){
+			Iterator<Entry<String, List<String>>> iterator = netnameMap.entrySet().iterator();
+			while(iterator.hasNext()){
+				Entry<String, List<String>> entry = iterator.next();
+				List<String> list = entry.getValue();
+				if (!(null == list || list.isEmpty())){
+					if (1 < list.size()){
+						list.add(0, "待定格");
+					}
+				}
+			}
+		}
+		
+		
+		String[] array = new String[villagenameList.size()];  
+		villagenameList.toArray(array);
+		villageNames = array;
+		return array;
+	}
+	
+	public String[] getNetNames(String villagename) {
+		List<String> list = netnameMap.get(villagename);
+		if (null == list) return null;
+		String[] array = new String[list.size()];  
+		list.toArray(array);
+		return array;
+	}
 	
 	private String[] parse(JSONObject jObj, String key) throws JSONException{
 		if (null == jObj || !jObj.has("event"))
@@ -138,10 +210,14 @@ public class Configuration {
 		for (int i = 0, length = ja.length(); i < length; ++i){
 			list.add(ja.getJSONObject(i).getString("s_" + key));
 		}
+		//TODO: 所属格增加一项"待定格"
+		if ("netname".equals(key))
+			list.add(0, "待定格");
 		String[] array = new String[list.size()];  
 		list.toArray(array);
 		return array;
 	}
+	
 	
 	public String getUsername() {
 		return username;
@@ -197,13 +273,13 @@ public class Configuration {
 		this.villageNames = villageNames;
 	}
 
-	public String[] getNetNames() {
-		return netNames;
-	}
-
-	public void setNetNames(String[] netNames) {
-		this.netNames = netNames;
-	}
+//	public String[] getNetNames() {
+//		return netNames;
+//	}
+//
+//	public void setNetNames(String[] netNames) {
+//		this.netNames = netNames;
+//	}
 
 	public String getKind() {
 		return kind;
