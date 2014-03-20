@@ -197,6 +197,8 @@ public class SummaryActivity extends BaseBrowseActivity {
 			case 100:
 				if (null != events && ! events.isEmpty()) {
 					tvTitle.setText(eventCategory.getCategoryTitle(category) + "  [" + events.size() + "]");
+				} else {
+					tvTitle.setText(eventCategory.getCategoryTitle(category));
 				}
 				onEventLoad();
 				break;
@@ -216,7 +218,7 @@ public class SummaryActivity extends BaseBrowseActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				if (position > events.size()) {
+				if (position > events.size() || 0 == position) {
 					
 					
 					return;

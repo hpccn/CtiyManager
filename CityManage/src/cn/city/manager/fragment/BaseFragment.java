@@ -178,7 +178,7 @@ public abstract class BaseFragment {
 					// TODO Auto-generated method stub
 					((EditText)rootView.findViewById(id)).setText(value);
 					villagename = value;
-//					netnameSingleChoice(context, rootView, value);
+					netnameSingleChoice(context, rootView, value);
 				}
 			});
 		}

@@ -32,6 +32,7 @@ import cn.city.manager.view.GradeCategory;
 import cn.city.manager.view.More;
 
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.update.UmengUpdateAgent;
 
 public class EntryActivity extends Activity {
 
@@ -46,8 +47,10 @@ public class EntryActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-//		UmengUpdateAgent.setDefault();
-//		UmengUpdateAgent.update(this);
+		UmengUpdateAgent.setDefault();
+		UmengUpdateAgent.update(this);
+		UmengUpdateAgent.setUpdateOnlyWifi(false);
+		
 		com.umeng.common.Log.LOG = true;
 //		MobclickAgent.setDebugMode(true);
 		MobclickAgent.onError(this);

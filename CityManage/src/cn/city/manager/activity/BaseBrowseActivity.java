@@ -496,12 +496,14 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 				
 				viewBrowseMode.setVisibility(View.GONE);
 				viewReload.setVisibility(View.GONE);
+				tvTitle.setText(title);
 				break;
 			case R.id.btn_area:
 				if (! Configuration.getInstance().isVillageLevel()) {
 					Toast.makeText(context, "无权查看 ", Toast.LENGTH_SHORT).show();
 					break;
 				}
+				tvTitle.setText(title);
 				mainFrameLayout.removeAllViews();
 				viewChild = townMap.getView(mainFrameLayout.getWidth() * 100 / Constants.zhenyutu_width);//View.inflate(context, R.layout.more_main_frame, null);
 				mainFrameLayout.addView(viewChild);
@@ -509,6 +511,7 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 				viewReload.setVisibility(View.GONE);
 				break;
 			case R.id.btn_more:
+				tvTitle.setText("更多功能");
 				mainFrameLayout.removeAllViews();
 				viewChild = more.getView(100);//View.inflate(context, R.layout.more_main_frame, null);
 				mainFrameLayout.addView(viewChild);

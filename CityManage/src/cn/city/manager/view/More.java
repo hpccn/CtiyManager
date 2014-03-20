@@ -183,6 +183,7 @@ public class More implements Page{
 		UmengUpdateAgent.setUpdateAutoPopup(true);
 		UmengUpdateAgent.update(context);
 		UmengUpdateAgent.setUpdateListener(listener);
+		UmengUpdateAgent.setUpdateOnlyWifi(false);
 
 	}
 	
@@ -208,20 +209,20 @@ public class More implements Page{
 				UpdateResponse updateInfo) {
 			switch (updateStatus) {
 			case UpdateStatus.Yes:
-//				Toast.makeText(context, "发现更新", Toast.LENGTH_SHORT).show();
-				showDiaglog("检查新版本", "发现更新");
+				Toast.makeText(context, "发现更新", Toast.LENGTH_SHORT).show();
+//				showDiaglog("检查新版本", "发现更新");
 				break;
 			case UpdateStatus.No:
 //				Toast.makeText(context, "没有更新", Toast.LENGTH_SHORT).show();
 				showDiaglog("检查新版本", "无需更新, 当前是最新版本");
 				break;
 			case UpdateStatus.NoneWifi:
-//				Toast.makeText(context, "没有wifi", Toast.LENGTH_SHORT).show();
-				showDiaglog("检查新版本", "请连接Wifi网络,检查更新");
+				Toast.makeText(context, "没有wifi, 请连接Wifi网络,检查更新", Toast.LENGTH_SHORT).show();
+//				showDiaglog("检查新版本", "请连接Wifi网络,检查更新");
 				break;
 			case UpdateStatus.Timeout:
-//				Toast.makeText(context, "超时", Toast.LENGTH_SHORT).show();		
-				showDiaglog("检查新版本", "超时, 网络超时");
+				Toast.makeText(context, "超时, 网络超时", Toast.LENGTH_SHORT).show();		
+//				showDiaglog("检查新版本", "超时, 网络超时");
 				break;
 			}
 		}
