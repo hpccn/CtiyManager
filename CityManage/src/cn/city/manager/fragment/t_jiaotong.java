@@ -1,6 +1,5 @@
 package cn.city.manager.fragment;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import org.json.JSONObject;
@@ -14,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import cn.city.manager.Configuration;
 import cn.city.manager.R;
 import cn.city.manager.fragment.event.BaseEvent;
 import cn.city.manager.fragment.event.t_jiaotongEvent;
@@ -48,7 +46,7 @@ public class t_jiaotong extends BaseFragment implements ImageCacheFactory.OnImag
 //		} else {
 //			v = View.inflate(context, R.layout.detail_shengchan_main, null);
 //		}
-		v = View.inflate(context, R.layout.detail_main_shengchan, null);
+		v = View.inflate(context, R.layout.detail_main_jiaotong, null);
 		
 		initViewTitles(v);
 		return v;
@@ -56,7 +54,7 @@ public class t_jiaotong extends BaseFragment implements ImageCacheFactory.OnImag
 
 	private void initViewTitles(View v){
 		((TextView) v.findViewById(R.id.yinhuanxiangqing_title)).setText("基本情况");
-		((TextView) v.findViewById(R.id.yinhuanaddress_title)).setText("事件地点");
+		((TextView) v.findViewById(R.id.yinhuanaddress_title)).setText("事发地点");
 		((TextView) v.findViewById(R.id.yinhuanren_title)).setText("涉及人");
 //		((TextView) v.findViewById(R.id.yinhuanren_title)).setText(R.string.yinhuandanweiren);
 		((TextView) v.findViewById(R.id.yinhuanlianluo_title)).setText("涉及人电话");
@@ -144,7 +142,8 @@ public class t_jiaotong extends BaseFragment implements ImageCacheFactory.OnImag
 				                        
 //				R.id.et_solvemethod,	    
 				R.id.et_solvestatus,    
-				R.id.et_solvetime,
+				R.id.et_duedate, 
+				R.id.et_solvedate,
 				                        	    
 				R.id.et_unsolvedreason,
 				                        	    
@@ -238,7 +237,8 @@ public class t_jiaotong extends BaseFragment implements ImageCacheFactory.OnImag
 		
 //		((EditText)rootView.findViewById(R.id.et_solvemethod)).setText(content.getS_solvemethod());
 		((EditText)rootView.findViewById(R.id.et_solvestatus)).setText(content.getS_solvestatus());
-		((EditText)rootView.findViewById(R.id.et_solvetime)).setText(content.getT_solvetime());
+		((EditText)rootView.findViewById(R.id.et_solvedate)).setText(content.getT_solvedate());
+		((EditText)rootView.findViewById(R.id.et_duedate)).setText(content.getT_duedate());
 
 		((EditText)rootView.findViewById(R.id.et_unsolvedreason)).setText(content.getS_unsolvedreason());
 		//
@@ -270,6 +270,11 @@ public class t_jiaotong extends BaseFragment implements ImageCacheFactory.OnImag
 		//netleader
 		((EditText)rootView.findViewById(R.id.et_netleadername)).setText(content.getS_netleadername());
 		((EditText)rootView.findViewById(R.id.et_netleadertel)).setText(content.getS_netleadertel());
+
+		
+		((EditText)rootView.findViewById(R.id.et_cheliangtype  )).setText(content.getS_cheliangtype  ());
+		((EditText)rootView.findViewById(R.id.et_cheliangsuoyou)).setText(content.getS_cheliangsuoyou());
+		((EditText)rootView.findViewById(R.id.et_weifaxingwei  )).setText(content.getS_weifaxingwei  ());
 
 	}
 	
@@ -344,12 +349,20 @@ public class t_jiaotong extends BaseFragment implements ImageCacheFactory.OnImag
 		content.setS_updatelevel(((EditText)rootView.findViewById(R.id.et_updatelevel)).getText().toString());
 //		((EditText)rootView.findViewById(R.id.et_updatetime)).getText().toString((millisecondToStringcontent.setUpdatetime()));
 
+		
+		content.setS_cheliangtype  (((EditText)rootView.findViewById(R.id.et_cheliangtype  )).getText().toString());
+		content.setS_cheliangsuoyou(((EditText)rootView.findViewById(R.id.et_cheliangsuoyou)).getText().toString());
+		content.setS_weifaxingwei  (((EditText)rootView.findViewById(R.id.et_weifaxingwei  )).getText().toString());
 	}
 	
 	private void initSelectChanger() {
 //		etTime = (EditText) this.findViewById(R.id.examination_date_time);
 //		int[] ids = { R.id.examination_date_time };
-		int[] ids = {R.id.et_solvetime, R.id.et_solvestatus, R.id.et_villagename, R.id.et_netname};//, R.id.et_solvemethod, R.id.et_buildtime, R.id.et_tijiao, R.id.et_updatetime};
+		int[] ids = {R.id.et_duedate, R.id.et_solvedate, R.id.et_solvestatus, R.id.et_villagename
+				, R.id.et_netname
+				, R.id.et_cheliangtype
+				, R.id.et_weifaxingwei
+				};//, R.id.et_solvemethod, R.id.et_buildtime, R.id.et_tijiao, R.id.et_updatetime};
 
 		for (int id : ids) {
 //			rootView.findViewById(id).setOnClickListener(onClickListener);
@@ -362,6 +375,11 @@ public class t_jiaotong extends BaseFragment implements ImageCacheFactory.OnImag
 		initNewEvent(rootView);
 		
 		((EditText)rootView.findViewById(R.id.et_solvestatus)).setText("未解决");
+		
+		((EditText)rootView.findViewById(R.id.et_cheliangtype)).setText("小客车");
+		((EditText)rootView.findViewById(R.id.et_weifaxingwei)).setText("无证驾驶");
+
+		
 //		String []status = Configuration.getInstance().getVillageNames();
 //		if (null != status && status.length > 0){
 //			((EditText)rootView.findViewById(R.id.et_villagename)).setText(status[0]);
@@ -387,22 +405,35 @@ public class t_jiaotong extends BaseFragment implements ImageCacheFactory.OnImag
 		case R.id.btn_commit:
 			break;
 			
-
-		case R.id.et_solvetime:
-			setDateTime(
+		case R.id.et_duedate:
+			setDateTime(context,
 					new DateTimePickerDialog.OnDateTimeChangedListener() {
 
 						@Override
 						public void onDateTimeChanged(long millisecond) {
 							// TODO Auto-generated method stub
-							content.setT_solvetime(getDateText(millisecond));
-							setViewText(R.id.et_solvetime, millisecond);
+							content.setT_duedate(getDateText(millisecond));
+							setViewText(R.id.et_duedate, millisecond);
 						}
 
-					}, content.getT_solvetime());
+					}, content.getT_duedate());
 			break;
+		case R.id.et_solvedate:
+			setDateTime(context,
+					new DateTimePickerDialog.OnDateTimeChangedListener() {
+
+						@Override
+						public void onDateTimeChanged(long millisecond) {
+							// TODO Auto-generated method stub
+							content.setT_solvedate(getDateText(millisecond));
+							setViewText(R.id.et_solvedate, millisecond);
+						}
+
+					}, content.getT_solvedate());
+			break;
+
 		case R.id.et_tijiao:
-			setDateTime(
+			setDateTime(context,
 					new DateTimePickerDialog.OnDateTimeChangedListener() {
 
 						@Override
@@ -416,7 +447,7 @@ public class t_jiaotong extends BaseFragment implements ImageCacheFactory.OnImag
 
 			break;
 		case R.id.et_updatetime:
-			setDateTime(
+			setDateTime(context,
 					new DateTimePickerDialog.OnDateTimeChangedListener() {
 
 						@Override
@@ -493,6 +524,33 @@ public class t_jiaotong extends BaseFragment implements ImageCacheFactory.OnImag
 //			showVideo();
 			
 			break;
+		case R.id.et_cheliangtype:
+		{
+			// 解决状态
+			String []status = {"小客车", "小货车", "农用车", "摩托车", "其他"};
+			general.setSingleChoiceItems(context,  R.id.et_cheliangtype, status, 0, new GeneralInformationFragment.OnChangedListener() {
+				@Override
+				public void onChanged(int id, int which, String value) {
+					// TODO Auto-generated method stub
+					((EditText)rootView.findViewById(id)).setText(value);
+				}
+			});
+		}
+			break;
+
+		case R.id.et_weifaxingwei:
+		{
+			// 解决状态
+			String []status = {"无证驾驶", "无牌行驶", "超载超员", "酒后驾驶", "遮挡号牌", "其他"};
+			general.setSingleChoiceItems(context,  R.id.et_weifaxingwei, status, 0, new GeneralInformationFragment.OnChangedListener() {
+				@Override
+				public void onChanged(int id, int which, String value) {
+					// TODO Auto-generated method stub
+					((EditText)rootView.findViewById(id)).setText(value);
+				}
+			});
+		}
+			break;
 		default:
 
 		}
@@ -524,22 +582,7 @@ public class t_jiaotong extends BaseFragment implements ImageCacheFactory.OnImag
 	
 	
 	
-	private void setDateTime(DateTimePickerDialog.OnDateTimeChangedListener listener, String strDate) {
-		
-		DateTimePickerDialog dateTimePicKDialog = new DateTimePickerDialog(context);
-		Calendar calendar = Calendar.getInstance();
-		if (null != strDate) {
-			String[] data = strDate.split("-");
-			if (data.length > 2);
-				calendar.set(Integer.parseInt(data[0]), Integer.parseInt(data[1]) - 1, Integer.parseInt(data[2]));
-		}
-//		Date date = new Date();
-//		date.setYear(Integer.parseInt(data[0]));
-//		date.setMonth(Integer.parseInt(data[1]) - 1);
-//		date.setDate(Integer.parseInt(data[2]));
-		dateTimePicKDialog.dateTimePicKDialog(listener, calendar.getTimeInMillis());//date.getTime());//baseContent.getTime());
-		
-	}
+
 	
 //	private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private void setViewText(int id, long millisecond) {
@@ -557,5 +600,12 @@ public class t_jiaotong extends BaseFragment implements ImageCacheFactory.OnImag
 		imc.unregisterOnImageLoadListener(this);
 	}
 
+//	cheliangtype
+//	cheliangsuoyou
+//	weifaxingwei
 
+	
+	
+	
+ 
 }

@@ -26,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.city.manager.Constants;
+import cn.city.manager.MainApplication;
 import cn.city.manager.R;
 import cn.city.manager.fragment.BaseFragment;
 import cn.city.manager.fragment.GeneralInformationFragment;
@@ -81,7 +82,7 @@ public class DetailActivity extends Activity {
 		
 		context = this;
 		general = new GeneralInformationFragment();
-		Log.i("", "" + System.currentTimeMillis());
+//		Log.i("", "" + System.currentTimeMillis());
 		mainView = View.inflate(this, R.layout.detail_main, null);
 		setContentView(mainView);// (R.layout.detail_main);
 		tvTitle = (TextView) mainView.findViewById(R.id.id_titlebar_title);
@@ -91,8 +92,8 @@ public class DetailActivity extends Activity {
 				.findViewById(R.id.id_detail_main_container);
 
 		jsonValue = this.getIntent().getStringExtra("jsonValue");
-		if (null != jsonValue)
-			Log.i("", jsonValue);
+//		if (null != jsonValue)
+//			Log.i("", jsonValue);
 
 		String category = this.getIntent().getStringExtra("category");
 		selectView(category);
@@ -487,7 +488,7 @@ public class DetailActivity extends Activity {
 //			this.findViewById(id).setOnClickListener(onClickListener);
 //		}
 //	}
-	protected final String imgPath = Environment.getExternalStorageDirectory() + "/photo.jpg";
+	protected final String imgPath = MainApplication.dataPath + File.separator + "photo.jpg";
 
 //	protected final String uploadUrl = Constants.weijian_commit_new;//"http://192.168.1.2:8080/upload";//
 	

@@ -1,6 +1,5 @@
 package cn.city.manager.fragment;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import org.json.JSONObject;
@@ -14,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import cn.city.manager.Configuration;
 import cn.city.manager.R;
 import cn.city.manager.fragment.event.BaseEvent;
 import cn.city.manager.fragment.event.t_meiqizhongduEvent;
@@ -22,7 +20,7 @@ import cn.city.manager.view.DateTimePickerDialog;
 import cn.hpc.common.cache.ImageCacheFactory;
 
 /**
- * 生产安全
+ * 煤所中毒
  * @author hpc
  *
  */
@@ -48,7 +46,7 @@ public class t_meiqizhongdu extends BaseFragment implements ImageCacheFactory.On
 //		} else {
 //			v = View.inflate(context, R.layout.detail_shengchan_main, null);
 //		}
-		v = View.inflate(context, R.layout.detail_main_shengchan, null);
+		v = View.inflate(context, R.layout.detail_main_meiqizhongdu, null);
 		
 		initViewTitles(v);
 		return v;
@@ -56,10 +54,10 @@ public class t_meiqizhongdu extends BaseFragment implements ImageCacheFactory.On
 
 	private void initViewTitles(View v){
 		((TextView) v.findViewById(R.id.yinhuanxiangqing_title)).setText("详情描述");
-		((TextView) v.findViewById(R.id.yinhuanaddress_title)).setText("事件地点");
-		((TextView) v.findViewById(R.id.yinhuanren_title)).setText("涉案人");
+		((TextView) v.findViewById(R.id.yinhuanaddress_title)).setText("取暖户地址");
+		((TextView) v.findViewById(R.id.yinhuanren_title)).setText("取暖人姓名");
 //		((TextView) v.findViewById(R.id.yinhuanren_title)).setText(R.string.yinhuandanweiren);
-		((TextView) v.findViewById(R.id.yinhuanlianluo_title)).setText("涉案人联系方式");
+		((TextView) v.findViewById(R.id.yinhuanlianluo_title)).setText("涉及人电话");
 		
 		v.findViewById(R.id.id_yinhuandanwei).setVisibility(View.GONE);
 	}
@@ -144,7 +142,8 @@ public class t_meiqizhongdu extends BaseFragment implements ImageCacheFactory.On
 				                        
 //				R.id.et_solvemethod,	    
 				R.id.et_solvestatus,    
-				R.id.et_solvetime,
+				R.id.et_duedate, 
+				R.id.et_solvedate,
 				                        	    
 				R.id.et_unsolvedreason,
 				                        	    
@@ -238,7 +237,8 @@ public class t_meiqizhongdu extends BaseFragment implements ImageCacheFactory.On
 		
 //		((EditText)rootView.findViewById(R.id.et_solvemethod)).setText(content.getS_solvemethod());
 		((EditText)rootView.findViewById(R.id.et_solvestatus)).setText(content.getS_solvestatus());
-		((EditText)rootView.findViewById(R.id.et_solvetime)).setText(content.getT_solvetime());
+		((EditText)rootView.findViewById(R.id.et_solvedate)).setText(content.getT_solvedate());
+		((EditText)rootView.findViewById(R.id.et_duedate)).setText(content.getT_duedate());
 
 		((EditText)rootView.findViewById(R.id.et_unsolvedreason)).setText(content.getS_unsolvedreason());
 		//
@@ -271,6 +271,18 @@ public class t_meiqizhongdu extends BaseFragment implements ImageCacheFactory.On
 		((EditText)rootView.findViewById(R.id.et_netleadername)).setText(content.getS_netleadername());
 		((EditText)rootView.findViewById(R.id.et_netleadertel)).setText(content.getS_netleadertel());
 
+		
+		((EditText)rootView.findViewById(R.id.et_fangwuxingzhi   )).setText(content.getS_fangwuxingzhi   ());
+		((EditText)rootView.findViewById(R.id.et_qunuanluju      )).setText(content.getS_qunuanluju      ());
+		((EditText)rootView.findViewById(R.id.et_anzhuangshiyong )).setText(content.getS_anzhuangshiyong ());
+		((EditText)rootView.findViewById(R.id.et_yantongwantou   )).setText(content.getS_yantongwantou   ());
+		((EditText)rootView.findViewById(R.id.et_yandaoduse      )).setText(content.getS_yandaoduse      ());
+		((EditText)rootView.findViewById(R.id.et_tongfengsheshi  )).setText(content.getS_tongfengsheshi  ());
+		((EditText)rootView.findViewById(R.id.et_xuanchuancailiao)).setText(content.getS_xuanchuancailiao());
+		((EditText)rootView.findViewById(R.id.et_zerenshu        )).setText(content.getS_zerenshu        ());
+		((EditText)rootView.findViewById(R.id.et_baojingqi       )).setText(content.getS_baojingqi       ());
+		
+		
 	}
 	
 	@Override
@@ -344,12 +356,38 @@ public class t_meiqizhongdu extends BaseFragment implements ImageCacheFactory.On
 		content.setS_updatelevel(((EditText)rootView.findViewById(R.id.et_updatelevel)).getText().toString());
 //		((EditText)rootView.findViewById(R.id.et_updatetime)).getText().toString((millisecondToStringcontent.setUpdatetime()));
 
+		content.setS_fangwuxingzhi   (((EditText)rootView.findViewById(R.id.et_fangwuxingzhi   )).getText().toString());
+		content.setS_qunuanluju      (((EditText)rootView.findViewById(R.id.et_qunuanluju      )).getText().toString());
+		content.setS_anzhuangshiyong (((EditText)rootView.findViewById(R.id.et_anzhuangshiyong )).getText().toString());
+		content.setS_yantongwantou   (((EditText)rootView.findViewById(R.id.et_yantongwantou   )).getText().toString());
+		content.setS_yandaoduse      (((EditText)rootView.findViewById(R.id.et_yandaoduse      )).getText().toString());
+		content.setS_tongfengsheshi  (((EditText)rootView.findViewById(R.id.et_tongfengsheshi  )).getText().toString());
+		content.setS_xuanchuancailiao(((EditText)rootView.findViewById(R.id.et_xuanchuancailiao)).getText().toString());
+		content.setS_zerenshu        (((EditText)rootView.findViewById(R.id.et_zerenshu        )).getText().toString());
+		content.setS_baojingqi       (((EditText)rootView.findViewById(R.id.et_baojingqi       )).getText().toString());
+		
+		
 	}
 	
 	private void initSelectChanger() {
 //		etTime = (EditText) this.findViewById(R.id.examination_date_time);
 //		int[] ids = { R.id.examination_date_time };
-		int[] ids = {R.id.et_solvetime, R.id.et_solvestatus, R.id.et_villagename, R.id.et_netname};//, R.id.et_solvemethod, R.id.et_buildtime, R.id.et_tijiao, R.id.et_updatetime};
+		int[] ids = {R.id.et_duedate
+				, R.id.et_solvedate
+				, R.id.et_solvestatus
+				, R.id.et_villagename
+				, R.id.et_netname
+		        , R.id.et_fangwuxingzhi   
+		        , R.id.et_qunuanluju      
+		        , R.id.et_anzhuangshiyong 
+		        , R.id.et_yantongwantou   
+		        , R.id.et_yandaoduse      
+		        , R.id.et_tongfengsheshi  
+		        , R.id.et_xuanchuancailiao
+		        , R.id.et_zerenshu        
+		        , R.id.et_baojingqi       
+		
+		};//, R.id.et_solvemethod, R.id.et_buildtime, R.id.et_tijiao, R.id.et_updatetime};
 
 		for (int id : ids) {
 //			rootView.findViewById(id).setOnClickListener(onClickListener);
@@ -375,6 +413,22 @@ public class t_meiqizhongdu extends BaseFragment implements ImageCacheFactory.On
 		
 		rootView.findViewById(R.id.id_threeadress).setVisibility(View.GONE);
 		rootView.findViewById(R.id.id_browse_mode).setVisibility(View.GONE);
+		
+		int []ids = {  
+		        R.id.et_qunuanluju      
+		        , R.id.et_anzhuangshiyong 
+		        , R.id.et_yantongwantou   
+		        , R.id.et_yandaoduse      
+		        , R.id.et_tongfengsheshi  
+		        , R.id.et_xuanchuancailiao
+		        , R.id.et_zerenshu        
+		        , R.id.et_baojingqi       
+			};
+		for (int id : ids) {
+			((EditText)rootView.findViewById(id)).setText("否");
+		}
+		((EditText)rootView.findViewById(R.id.et_fangwuxingzhi )).setText("自住房");
+		  
 	}
 	
 	
@@ -387,21 +441,35 @@ public class t_meiqizhongdu extends BaseFragment implements ImageCacheFactory.On
 			break;
 			
 
-		case R.id.et_solvetime:
-			setDateTime(
+		case R.id.et_duedate:
+			setDateTime(context, 
 					new DateTimePickerDialog.OnDateTimeChangedListener() {
 
 						@Override
 						public void onDateTimeChanged(long millisecond) {
 							// TODO Auto-generated method stub
-							content.setT_solvetime(getDateText(millisecond));
-							setViewText(R.id.et_solvetime, millisecond);
+							content.setT_duedate(getDateText(millisecond));
+							setViewText(R.id.et_duedate, millisecond);
 						}
 
-					}, content.getT_solvetime());
+					}, content.getT_duedate());
 			break;
+		case R.id.et_solvedate:
+			setDateTime(context, 
+					new DateTimePickerDialog.OnDateTimeChangedListener() {
+
+						@Override
+						public void onDateTimeChanged(long millisecond) {
+							// TODO Auto-generated method stub
+							content.setT_solvedate(getDateText(millisecond));
+							setViewText(R.id.et_solvedate, millisecond);
+						}
+
+					}, content.getT_solvedate());
+			break;
+
 		case R.id.et_tijiao:
-			setDateTime(
+			setDateTime(context, 
 					new DateTimePickerDialog.OnDateTimeChangedListener() {
 
 						@Override
@@ -415,7 +483,7 @@ public class t_meiqizhongdu extends BaseFragment implements ImageCacheFactory.On
 
 			break;
 		case R.id.et_updatetime:
-			setDateTime(
+			setDateTime(context, 
 					new DateTimePickerDialog.OnDateTimeChangedListener() {
 
 						@Override
@@ -491,6 +559,48 @@ public class t_meiqizhongdu extends BaseFragment implements ImageCacheFactory.On
 //			showVideo();
 			
 			break;
+		case R.id.et_fangwuxingzhi   :
+		{
+			String[] status = { "自住房", "出租房屋", "集体宿舍", "工地工棚", "街边门店", "其他" };
+
+			general.setSingleChoiceItems(context, id, status, 0,
+					new GeneralInformationFragment.OnChangedListener() {
+						@Override
+						public void onChanged(int id, int which, String value) {
+							// TODO Auto-generated method stub
+							((EditText) rootView.findViewById(id))
+									.setText(value);
+						}
+					});
+
+		}			
+			break;
+			
+		case R.id.et_qunuanluju      :
+		case R.id.et_anzhuangshiyong :
+		case R.id.et_yantongwantou   :
+		case R.id.et_yandaoduse      :
+		case R.id.et_tongfengsheshi  :
+		case R.id.et_xuanchuancailiao:
+		case R.id.et_zerenshu        :
+		case R.id.et_baojingqi       :
+
+		{
+			String[] status = { "是", "否" };
+
+			general.setSingleChoiceItems(context, id, status, 0,
+					new GeneralInformationFragment.OnChangedListener() {
+						@Override
+						public void onChanged(int id, int which, String value) {
+							// TODO Auto-generated method stub
+							((EditText) rootView.findViewById(id))
+									.setText(value);
+						}
+					});
+
+		}
+		 break;
+
 		default:
 
 		}
@@ -522,22 +632,7 @@ public class t_meiqizhongdu extends BaseFragment implements ImageCacheFactory.On
 	
 	
 	
-	private void setDateTime(DateTimePickerDialog.OnDateTimeChangedListener listener, String strDate) {
-		
-		DateTimePickerDialog dateTimePicKDialog = new DateTimePickerDialog(context);
-		Calendar calendar = Calendar.getInstance();
-		if (null != strDate) {
-			String[] data = strDate.split("-");
-			if (data.length > 2);
-				calendar.set(Integer.parseInt(data[0]), Integer.parseInt(data[1]) - 1, Integer.parseInt(data[2]));
-		}
-//		Date date = new Date();
-//		date.setYear(Integer.parseInt(data[0]));
-//		date.setMonth(Integer.parseInt(data[1]) - 1);
-//		date.setDate(Integer.parseInt(data[2]));
-		dateTimePicKDialog.dateTimePicKDialog(listener, calendar.getTimeInMillis());//date.getTime());//baseContent.getTime());
-		
-	}
+
 	
 //	private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private void setViewText(int id, long millisecond) {
@@ -555,5 +650,15 @@ public class t_meiqizhongdu extends BaseFragment implements ImageCacheFactory.On
 		imc.unregisterOnImageLoadListener(this);
 	}
 
-
+//	s_yinhuanren
+//	s_fangwuxingzhi
+//	s_qunuanluju
+//	s_anzhuangshiyong
+//	s_yantongwantou
+//	s_yandaoduse
+//	s_tongfengsheshi
+//	s_xuanchuancailiao
+//	s_zerenshu
+//	s_baojingqi
+   
 }

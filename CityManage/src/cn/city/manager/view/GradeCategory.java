@@ -28,6 +28,8 @@ public class GradeCategory implements BaseCategory{
 			c.setTemplate(category[i]);
 			c.setName(gradeCategory[i]);
 			c.setDrawableId(gradeCategoryIconId[i]);
+			c.setUnsolvedEvent(-1);
+			c.setNewEvent(-1);
 			gradeCategorys.add(c);
 		}
 	}

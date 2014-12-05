@@ -64,14 +64,19 @@ public class LaunchActivity extends Activity {
 		Configuration configuration = Configuration.getInstance();
 		
 		configuration.load(this);
-		if (configuration.isAutoLogin()) {
-			startActivity(new Intent(this, EntryActivity.class));
-		} else {
-			startActivity(new Intent(this, LoginActivity.class));
-	//		startActivity(new Intent(this, EntryActivity.class));
-	//		startActivity(new Intent(this, SummaryActivity.class));
-	//		startActivity(new Intent(this, MainActivity.class));
-		}
+		Intent intent = new Intent(this, LoginActivity.class);
+		intent.putExtra("AutoLogin", configuration.isAutoLogin());
+		startActivity(intent);
+
+//		startActivity(new Intent(this, LoginActivity.class));
+//		if (configuration.isAutoLogin()) {
+//			startActivity(new Intent(this, EntryActivity.class));
+//		} else {
+//			startActivity(new Intent(this, LoginActivity.class));
+//	//		startActivity(new Intent(this, EntryActivity.class));
+//	//		startActivity(new Intent(this, SummaryActivity.class));
+//	//		startActivity(new Intent(this, MainActivity.class));
+//		}
 		finish();
 	    overridePendingTransition(R.anim.zoom_in, R.anim.zoom_in);    
 	}

@@ -89,7 +89,7 @@
 	
 	    <include
 	        android:id="@+id/id_solvetime"
-	        layout="@layout/detail_general_solvetime" />
+	        layout="@layout/detail_general_solvedate" />
 	        
         <include
             android:id="@+id/id_unsolvedreason"

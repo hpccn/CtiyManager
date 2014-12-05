@@ -28,7 +28,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:stretchMode="spacingWidth"
-        android:verticalSpacing="10dp" >
+        android:verticalSpacing="20dp" >
     </GridView>
     <!-- android:columnWidth="140dp" -->
 

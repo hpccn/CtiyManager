@@ -6,6 +6,8 @@ import android.content.pm.PackageManager;
 import android.os.Vibrator;
 import android.util.Log;
 
+import cn.city.manager.MainApplication;
+
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.BDNotifyListener;
@@ -37,8 +39,10 @@ public class Location {
 		 */
 //		final String key = getKey(context);
 //		mLocationClient.setAK(key);
-		mLocationClient.setAK("6f194e37ba11d0b8f4c8cefc32cebef6");
+//		mLocationClient.setAK("6f194e37ba11d0b8f4c8cefc32cebef6");
 //		mLocationClient.setAK("37ac672a8f7fbc4c1158cd70969c730e");// demo key
+		
+		mLocationClient.setAK(MainApplication.BAIDU_AK);
 		mLocationClient.registerLocationListener( myListener );
 		mGeofenceClient = new GeofenceClient(context);
 		//位置提醒相关代码

@@ -21,7 +21,10 @@ public abstract class CommonEvent extends BaseEvent {
 	protected String s_discovererlevel;// ":"发现人级别",
 	protected String s_solvestatus;// ": "解决状态",
 	protected String s_result;//解决结果
-	protected String t_solvetime;// ": 1380962998588,
+	protected String t_duedate;// ": 1380962998588,
+
+
+	protected String t_solvedate;// ": 1380962998588,
 	protected String s_unsolvedreason;// ": "未解决原因",
 	
 	protected String s_photo;//"现场照片",
@@ -346,17 +349,25 @@ public abstract class CommonEvent extends BaseEvent {
 	public String getS_solvestatus() {
 		return s_solvestatus;
 	}
+	
+	public String getT_duedate() {
+		return t_duedate;
+	}
 
+	public void setT_duedate(String t_duedate) {
+		this.t_duedate = t_duedate;
+	}
+	
 	public void setS_solvestatus(String solvestatus) {
 		this.s_solvestatus = solvestatus;
 	}
 
-	public String getT_solvetime() {
-		return t_solvetime;
+	public String getT_solvedate() {
+		return t_solvedate;
 	}
 
-	public void setT_solvetime(String solvetime) {
-		this.t_solvetime = solvetime;
+	public void setT_solvedate(String solvetime) {
+		this.t_solvedate = solvetime;
 	}
 
 	public String getS_unsolvedreason() {

@@ -1,8 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     
+    <!-- 
+       <string name="umeng_fb_powered_by">Powered by</string>
+    <string name="umeng_common_icon">icon</string>
+        <color name="umeng_fb_color_btn_pressed">#1495F7</color>
+    <color name="umeng_fb_color_btn_normal">#333333</color>
+     -->
+ <!--umeng_common_strings.xml  - - >
+    <string name="umeng_common_action_info_exist">The app is already in downloading list.</string>
+    <string name="umeng_common_info_interrupt">dowload interrupted.</string>
+    <string name="umeng_common_action_pause">Pause</string>
+    <string name="umeng_common_action_continue">Continue</string>
+    <string name="umeng_common_action_cancel">Cancel</string>
+	<string name="umeng_common_download_notification_prefix">Downloading: </string>
+	<string name="umeng_common_start_download_notification">Download start.</string>
+	<string name="umeng_common_start_patch_notification">Patch start.</string>
+	<string name="umeng_common_network_break_alert">Please make sure you are connected to internet, download failed</string>
+	<string name="umeng_common_download_failed">Download Failed! </string>
+	<string name="umeng_common_download_finish">Download finished,click to install it.</string>
+	<string name="umeng_common_patch_finish">Patch finished,click to install it.</string>
+	<string name="umeng_common_icon">icon</string>
+ 
+ < ! - -end umeng_common_strings.xml  -->    
     
+<!-- umeng_fb_strings.xml - - >
+    <string name="umeng_fb_contact_info_hint">Email, msn, gtalk, or whatever we can find you.</string>
+    <string name="umeng_fb_contact_update_at">Updated at </string>
+    <string name="umeng_fb_back">Back</string>
+    <string name="umeng_fb_title">Feedback</string>
+    <string name="umeng_fb_contact_title">Contact</string>
+    <string name="umeng_fb_contact_info">Contact Info</string>
+    <string name="umeng_fb_reply_content_hint">I want to tell</string>
+    <string name="umeng_fb_send">Send</string>
+    <string name="umeng_fb_reply_content_default">Your precious feedback are appriciated.</string>
+    <string name="umeng_fb_reply_date_default">2013-3-12 13:24:00</string>
+
+    <color name="umeng_fb_color_btn_pressed">#1495F7</color>
+    <color name="umeng_fb_color_btn_normal">#333333</color>
+
+    <string name="umeng_fb_powered_by">Powered by</string>
+    <string name="umeng_fb_notification_ticker_text">Got new reply</string>
+    <string name="umeng_fb_notification_content_formatter_single_msg">New reply: %s</string>
+    <string name="umeng_fb_notification_content_formatter_multiple_msg">You received %d new replies from the app developer.</string>
+
+
+< ! - - end umeng_fb_strings.xml -->    
+
+
+<!-- umeng_update_string.xml - - >
     
+	<string name="UMBreak_Network">Please make sure you are connected to internet,update failed</string>
+	<string name="UMUpdateTitle">New version found</string>
+	<string name="UMNewVersion">Latest version: </string>
+	<string name="UMUpdateContent">Update Content</string>
+	<string name="UMUpdateSize">Update size: </string>
+	<string name="UMTargetSize">Target size: </string>
+	<string name="UMGprsCondition">(Warning: Not WIFI Condition)</string>
+	<string name="UMUpdateNow">Update now</string>
+	<string name="UMAppUpdate">App updating</string>
+	<string name="UMNotNow">Not now</string>
+	<string name="UMIgnore">Ingore this</string>
+	<string name="UMToast_IsUpdating">Updating....</string>
+	<string name="UMDialog_InstallAPK">The lastest version has been downloaded, install now ?</string>
+	<string name="UMUpdateCheck">2.4.0.20131230</string>
+
+
+
+< ! - - end umeng_update_string.xml -->
+
 	<string name="umeng_example_fb_home_btn_simple">Simple Demo</string>
     
     
@@ -240,7 +306,8 @@
     <string name="updatelevel">更新人级别</string>
     <string name="updatetime">最近更新日期</string>
     <string name="solvestatus">解决状态</string>
-    <string name="solvetime">解决日期</string>
+    <string name="duedate">预期解决日期</string>
+    <string name="solvedate">实际解决日期</string>
     <string name="unsolvedreason">未解决原因</string>
     
     <string name="solvemethod">当日新发现和拆除情况</string>
@@ -308,12 +375,105 @@
     <string name="paichadate">排查时间</string>    
     <string name="jiufentype">纠纷类型</string>    
     <string name="jiufenren">纠纷方名称</string>    
-     <!--
-   
     
     
-   
+    <string name="shipinliutongxukezheng">是否有食品流通许可证</string>   
+    <string name="youxiaoqi">食品流通许可证是否在有效期内</string>    
+    <string name="shipinjingyingtaizhang">是否按时记录食品经营台帐</string>    
+    <string name="chaofanweijingying">是否超范围经营</string>    
+    <string name="sanzhuangshushi">是否含散装熟食</string>    
+    <string name="guoqishipin">是否发现含过期食品</string>    
+    <string name="memberjiankangzheng">从业人员是否有健康证</string>    
+    
+    <string name="canyinfuwuxukezheng">是否有餐饮服务许可证</string>    
+    <string name="canyinyouxiaoqi">餐饮服务许可证是否在有效期内</string>    
+    <string name="lenghunliangcai">经营场所是否含冷荤凉菜</string>         
+    <string name="enviornmentclean">操作间环境是否干净整洁</string>    
+    
+    <string name="yingyezhizhao">是否有营业执照</string>    
+    <string name="yaopinchucun">药品储存房间是否干燥通风</string>        
+    
+    <string name="yaopinjingyingxukezheng">是否有药品经营许可证</string>    
+    <string name="yaopinjingyingyouxiaoqi">药品经营许可证是否在有效期内</string>        
+    <string name="gspcertificate">是否通过药品经营质量管理规范（GSP）认证</string>    
+    <string name="baojianpinjingyingxukezheng">是否有保健品经营许可证</string>    
+    <string name="baojianpinyouxiaoqi">保健品经营许可证是否在有效期内</string>    
+    
+    
+    <string name="weishengxukezheng">是否有卫生许可证</string>        
+    <string name="weishengyouxiaoqi">卫生许可证是否在有效期内</string>    
+    <string name="weishengzhidu">是否有卫生管理制度</string>    
+    <string name="weishengenviornmentclean">环境是否干净整洁</string>         
+    <string name="baojiegui">是否有密闭保洁柜</string>      
+    
+
+    <string name="jingfangweishengzhidu">井房是否有卫生管理制度</string>    
+    <string name="gongshuiliuchengtu">井房是否有供水流程图</string>         
+    <string name="fangdaomenchuang">井房是否有防盗门、窗</string>    
+    <string name="xiaodusheshi">井房是否有消毒设施</string>    
+    <string name="jingfangenviornmentclean">井房环境是否干净整洁</string>    
+    	  
+ 
+    <string name="zhiyexukezheng">是否有医疗机构执业许可证</string>        
+    <string name="zhiyeyouxiaoqi">是否在有效期范围内</string>    
+    <string name="memberzhiyexuke">从业人员是否有医疗机构执业许可证</string>    
+    <string name="memberyiliaozige">从业人员是否有医疗机构资格证</string>    
+
+    
+    <string name="schooltype">学校类型（公办/民办/其他）</string>        
+    <string name="studentnumber">学生总数</string>    
+    <string name="girlnumber">女生人数</string>    
+    <string name="boynumber">男生人数</string>    
+    <string name="studentsushe">是否有学生宿舍</string>         
+    <string name="sushestudentnumber">宿舍学生人数</string>    
+    <string name="baojianshi">是否有保健室</string>    	
+    
+    <string name="xiangqingmiaoshu">详情描述</string>        
+    <string name="beijianchadanweidizhi">被检查单位地址</string>        
+    <string name="beijianchadanwei">被检查单位</string>    
+    <string name="beijianchadanweifuzeren">被检查单位负责人</string>    
+    <string name="beijianchadanweidianhua">被检查单位电话</string>    
+    
+    <string name="wuzhaojingying">是否无照经营生产经营</string>    
+    <string name="dianxianluanjie">电线是否私拉乱接</string>    
+    <string name="chejianzangluan">车间是否脏乱</string>    
+    <string name="jiqiposun">机器设备是否破损</string>         
+    <string name="dianzaxiang">电闸箱前是否堆放</string>    
+    <string name="huaxuepin">是否存放、使用危险化学品</string>        
+     
+    <string name="tongdaoduse">车间通道是否堵塞</string>    
+    <string name="qicaisunhuai">消防器材是否损坏、过期</string>    
+    <string name="shusanbiaoshi">未安装疏散警示标识</string>         
+    
+    
+    <string name="fangwuxingzhi">房屋性质</string>    
+    <string name="qunuanluju">是否使用安全的取暖炉具</string>    
+    <string name="anzhuangshiyong">炉具、烟筒安装使用是否正确</string>    
+    <string name="yantongwantou">烟筒是否安装弯头</string>         
+    <string name="yandaoduse">烟道是否堵塞</string>    
+    <string name="tongfengsheshi">是否安装风斗或有其他通风设施</string>    
+    <string name="xuanchuancailiao">是否有宣传材料</string>    
+    <string name="zerenshu">是否签订《预防煤气中毒安全责任书》</string>    
+    <string name="baojingqi">是否按规定数量安装一氧化碳报警器</string>  
+    
+    
+    <string name="cheliangtype">违法车辆类型</string>    
+    <string name="cheliangsuoyou">违法车辆所有人（单位）</string>    
+    <string name="weifaxingwei">违法行为</string>    
+    
+    <!--
     <string name=""></string>    
+    <string name=""></string>    
+    <string name=""></string>    
+    <string name=""></string>         
+    <string name=""></string>    
+    <string name=""></string>    
+    <string name=""></string>    
+    <string name=""></string>    
+    <string name=""></string>    
+    <string name=""></string>    
+    <string name=""></string>    
+    <string name=""></string>         
     <string name=""></string>    
     <string name=""></string>    
     <string name=""></string>    
@@ -324,6 +484,6 @@
     <string name="browse_list_mode">列表模式</string>
     <string name="reload">刷新</string>
  
-    <string name="threeadress">事发地点</string>
+    <string name="threeadress">事发地点(卫星定位与实际位置可能有误差)</string>
     
 </resources>

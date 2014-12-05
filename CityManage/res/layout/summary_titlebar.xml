@@ -2,9 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/title_backguard_repeat"
+    android:background="@drawable/img_title_bg"
     android:orientation="horizontal" >
-
+<!--     android:background="@drawable/title_backguard_repeat"
+ -->
     <TextView
         android:id="@+id/id_titlebar_title"
         android:layout_width="wrap_content"

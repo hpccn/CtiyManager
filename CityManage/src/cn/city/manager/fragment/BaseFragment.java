@@ -50,6 +50,13 @@ public abstract class BaseFragment {
 		}
 	}
 	
+	final protected int string2Int(String str){
+		try{
+			return Integer.parseInt(str);
+		} catch (Exception e ){
+			return 0;
+		}
+	}
 	
 	final protected void setDateTime(final Context context, DateTimePickerDialog.OnDateTimeChangedListener listener, String strDate) {
 		
@@ -57,8 +64,13 @@ public abstract class BaseFragment {
 		Calendar calendar = Calendar.getInstance();
 		if (null != strDate) {
 			String[] data = strDate.split("-");
-			if (data.length > 2);
-				calendar.set(Integer.parseInt(data[0]), Integer.parseInt(data[1]) - 1, Integer.parseInt(data[2]));
+			if (data.length > 2){
+				try{
+					calendar.set(Integer.parseInt(data[0]), Integer.parseInt(data[1]) - 1, Integer.parseInt(data[2]));
+				} catch (Exception e){
+					e.printStackTrace();
+				}
+			}
 		}
 //		Date date = new Date();
 //		date.setYear(Integer.parseInt(data[0]));
@@ -208,6 +220,12 @@ public abstract class BaseFragment {
 					((EditText)rootView.findViewById(id)).setText(value);
 				}
 			});
+		}
+	}
+	
+	protected void onAction(final Context context, int id){
+		switch (id) {
+
 		}
 	}
 }

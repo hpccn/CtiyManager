@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import cn.city.manager.MainApplication;
 import cn.city.manager.R;
 
 /**
@@ -43,7 +44,7 @@ public class BasicVideoCapture extends Activity  {
 	private SurfaceHolder surfaceHolder;
 
 	private boolean isRecording;
-	private String recoderFile = Environment.getExternalStorageDirectory() + "/tmpRecoder.3gp";
+	private String recoderFile = MainApplication.dataPath + File.separator + "tmpRecoder.3gp";
 	
 	private Camera mCamera;
 	private CameraInfo[] mCameraInfo;

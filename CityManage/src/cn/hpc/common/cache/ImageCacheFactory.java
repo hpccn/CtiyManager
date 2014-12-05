@@ -417,8 +417,8 @@ public class ImageCacheFactory extends DiskCache<String, Bitmap> {
 		}
 		if (bmp == null) {
 //			Log.w(TAG, "got null bitmap from request to scale");
-			throw new Exception("got null bitmap from request to scale");
-
+//			throw new Exception("got null bitmap from request to scale");
+			return null;
 
 		}
 //		d = new BitmapDrawable(mRes, bmp);

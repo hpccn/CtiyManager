@@ -345,7 +345,7 @@ public class t_xingshianjian extends BaseFragment implements ImageCacheFactory.O
 
 		case R.id.et_tijiao:
 			if (null == jsonData){
-			setDateTime(
+			setDateTime(context, 
 					new DateTimePickerDialog.OnDateTimeChangedListener() {
 
 						@Override
@@ -359,7 +359,7 @@ public class t_xingshianjian extends BaseFragment implements ImageCacheFactory.O
 			}
 			break;
 		case R.id.et_updatetime:
-			setDateTime(
+			setDateTime(context, 
 					new DateTimePickerDialog.OnDateTimeChangedListener() {
 
 						@Override
@@ -451,23 +451,6 @@ public class t_xingshianjian extends BaseFragment implements ImageCacheFactory.O
 	};
 	
 	
-	
-	private void setDateTime(DateTimePickerDialog.OnDateTimeChangedListener listener, String strDate) {
-		
-		DateTimePickerDialog dateTimePicKDialog = new DateTimePickerDialog(context);
-		Calendar calendar = Calendar.getInstance();
-		if (null != strDate) {
-			String[] data = strDate.split("-");
-			if (data.length > 2);
-				calendar.set(Integer.parseInt(data[0]), Integer.parseInt(data[1]) - 1, Integer.parseInt(data[2]));
-		}
-//		Date date = new Date();
-//		date.setYear(Integer.parseInt(data[0]));
-//		date.setMonth(Integer.parseInt(data[1]) - 1);
-//		date.setDate(Integer.parseInt(data[2]));
-		dateTimePicKDialog.dateTimePicKDialog(listener, calendar.getTimeInMillis());//date.getTime());//baseContent.getTime());
-		
-	}
 	
 //	private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private void setViewText(int id, long millisecond) {

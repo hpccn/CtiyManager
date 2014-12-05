@@ -278,9 +278,10 @@ public class NetBaseInfoActivity extends BaseBrowseActivity {
 //		this.findViewById(R.id.et_titlebar_search).setVisibility(View.VISIBLE);
 		int [] ids = {R.id.btn_home, R.id.btn_statistics, R.id.btn_area, R.id.btn_more
 				};
-		
+		View view = null;
 		for (int id : ids) {
-			this.findViewById(id).setOnClickListener(onClickListener);
+			view = this.findViewById(id);
+			if (null != view) view.setOnClickListener(onClickListener);
 		}
 		
 		

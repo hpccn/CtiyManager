@@ -15,6 +15,7 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
@@ -264,6 +265,7 @@ WebView代码
 	protected void loadUrl(String url){
         session(url);
 
+        Log.v("", "统计:" + url);
         webView.loadUrl(url);     
 		
 //        webView.loadUrl(Constants.weijian_tongji);     

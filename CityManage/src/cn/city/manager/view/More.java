@@ -181,9 +181,10 @@ public class More implements Page{
 	
 	private void showUpgrade(){
 		UmengUpdateAgent.setUpdateAutoPopup(true);
-		UmengUpdateAgent.update(context);
 		UmengUpdateAgent.setUpdateListener(listener);
 		UmengUpdateAgent.setUpdateOnlyWifi(false);
+		UmengUpdateAgent.update(context);
+//		UmengUpdateAgent.forceUpdate(context);
 
 	}
 	

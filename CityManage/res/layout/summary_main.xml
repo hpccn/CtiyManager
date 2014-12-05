@@ -25,12 +25,12 @@
         android:layout_height="fill_parent" 
         android:layout_below="@+id/id_titlebar"
         android:layout_above="@+id/id_bottom_toolbar">
-
+<!--
         <include
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             layout="@layout/summary_layout" />
-<!--
+
         <Button
             android:id="@+id/id_add_event"
             style="@style/generalButtonStyle"

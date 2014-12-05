@@ -1,8 +1,7 @@
 package cn.city.manager;
 
 
-
-import cn.hpc.common.cache.ImageCacheFactory;
+import java.io.File;
 
 import com.baidu.mapapi.BMapManager;
 import com.baidu.mapapi.MKGeneralListener;
@@ -10,6 +9,7 @@ import com.baidu.mapapi.map.MKEvent;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Environment;
 import android.widget.Toast;
 
 public class MainApplication  extends Application {
@@ -18,15 +18,16 @@ public class MainApplication  extends Application {
     public boolean m_bKeyRight = true;
     public BMapManager mBMapManager = null;
 
-    public static final String strKey = "e9U3G5ETq3Du1zo4BD6LA4RI";//"Q4WeSmDL5F8O54mnhhrFteMd";
+    public static final String BAIDU_AK = "IZDtEYVhOW7GC6hjWxO8Yd8r";// baidukey 
   
-   
+    public static final String dataPath = Environment.getExternalStorageDirectory() + File.separator + "Download";
 	@Override
     public void onCreate() {
 	    super.onCreate();
 		mInstance = this;
 		initEngineManager(this);
-		
+		File cacheFile = new File(dataPath);
+		cacheFile.mkdirs();
 	}
 	
 	public void initEngineManager(Context context) {
@@ -34,7 +35,7 @@ public class MainApplication  extends Application {
             mBMapManager = new BMapManager(context);
         }
 
-        if (!mBMapManager.init(strKey,new MyGeneralListener())) {
+        if (!mBMapManager.init(BAIDU_AK,new MyGeneralListener())) {
             Toast.makeText(MainApplication.getInstance().getApplicationContext(), 
                     "BMapManager  初始化错误!", Toast.LENGTH_LONG).show();
         }

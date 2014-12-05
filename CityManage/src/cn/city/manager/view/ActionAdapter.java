@@ -48,6 +48,25 @@ public class ActionAdapter extends BaseAdapter {
 		iv.setImageResource(categoryMetas.get(position).getDrawableId());
 		TextView tv = (TextView) convertView.findViewById(R.id.id_griditem_title);
 		tv.setText(categoryMetas.get(position).getName());
+		
+		tv = (TextView) convertView.findViewById(R.id.id_griditem_unsolved_event);
+		if (null != tv) {
+			if (-1 < categoryMetas.get(position).getUnsolvedEvent()) {
+				tv.setVisibility(View.VISIBLE);
+				tv.setText("" + categoryMetas.get(position).getUnsolvedEvent());
+			} else {
+				tv.setVisibility(View.INVISIBLE);
+			}
+		}
+		tv = (TextView) convertView.findViewById(R.id.id_griditem_new_event);
+		if (null != tv) {
+			if (-1 < categoryMetas.get(position).getNewEvent()) {
+				tv.setVisibility(View.VISIBLE);
+				tv.setText("" + categoryMetas.get(position).getNewEvent());
+			} else {
+				tv.setVisibility(View.INVISIBLE);
+			}
+		}
 		return convertView;
 	}
 

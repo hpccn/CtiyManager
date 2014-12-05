@@ -15,9 +15,9 @@ echo $@ | awk '
 	filename = substr($1, 1, length($1) - 4); 
 	newfile = filename"-platform"suffix;
 	printf("signapk ...\n");
-	system("java -jar signapk.jar -verbose -keystore hpckey.keystore -signedjar "$1" " android "\n");
+	system("java -jar signapk.jar -verbose -keystore hpckey.keystore -signedjar "$1"-sign $1 " android "\n");
 
 
-	printf("install ...\n");
-	system("adb install -r "$1"\n");
+#	printf("install ...\n");
+#	system("adb install -r "$1"\n");
 }'

@@ -2,6 +2,8 @@ package cn.city.manager.activity;
 
 import java.util.List;
 
+import org.apache.http.HttpStatus;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -10,6 +12,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,11 +22,13 @@ import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+import cn.city.manager.Configuration;
 import cn.city.manager.Constants;
 import cn.city.manager.R;
 import cn.city.manager.fragment.t_netbaseinfo;
 import cn.city.manager.fragment.t_netbaseinfoGrid;
 import cn.city.manager.model.CategoryMeta;
+import cn.city.manager.model.EventHttpStreamThread;
 import cn.city.manager.model.Page;
 import cn.city.manager.view.ActionAdapter;
 import cn.city.manager.view.BaseCategory;
@@ -30,6 +36,8 @@ import cn.city.manager.view.DateTimePickerDialog;
 import cn.city.manager.view.EventCategory;
 import cn.city.manager.view.GradeCategory;
 import cn.city.manager.view.More;
+import cn.city.manager.view.ViewSingletonFactory;
+import cn.hpc.common.HttpStreamThread;
 
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
@@ -48,8 +56,8 @@ public class EntryActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		UmengUpdateAgent.setDefault();
-		UmengUpdateAgent.update(this);
 		UmengUpdateAgent.setUpdateOnlyWifi(false);
+		UmengUpdateAgent.update(this);
 		
 		com.umeng.common.Log.LOG = true;
 //		MobclickAgent.setDebugMode(true);
@@ -96,7 +104,8 @@ public class EntryActivity extends Activity {
 	private void init(){
 		eventCategory = new EventCategory();
 		gradeCategory = new GradeCategory();
-		
+		obtianEventCount();
+//		((EventCategory)eventCategory).updateEventCount(Constants.obtainEventCountUrl(Configuration.getInstance().getId()));
 //		statistics = new Statistics(this);
 		more = new More(this);
 //		townMap = new TownMap(this);
@@ -238,11 +247,13 @@ public class EntryActivity extends Activity {
 //
 //	}
 	private GridView liveGridView;
-//	private ActionAdapter actionAdapter;
+	private ActionAdapter actionAdapter;
 
 	private View browse(final Context context, final List<CategoryMeta> categoryMetas){
 //		setMainTitle("分类浏览");
-		final ActionAdapter actionAdapter = new ActionAdapter(context, categoryMetas);//ViewSingletonFactory.getInstance().getEventCategory());
+//		final ActionAdapter 
+		actionAdapter = null;
+		actionAdapter = new ActionAdapter(context, categoryMetas);//ViewSingletonFactory.getInstance().getEventCategory());
 		View rootView = View.inflate(context, R.layout.fragment_live_grid, null);
 		// 获取屏幕密度 
 //		DisplayMetrics dm = new DisplayMetrics();  
@@ -392,4 +403,55 @@ public class EntryActivity extends Activity {
 ////		tvTitle.setText(text);
 //		this.setTitle(text);
 //	}
+	
+	Handler handler = new Handler() {
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case 100:
+				if (null != actionAdapter) actionAdapter.notifyDataSetInvalidated();
+				break;
+			case 200:
+
+				break;
+			default:
+			}
+		}
+
+	};
+	EventHttpStreamThread.OnStringLoadListener onStringLoadListener = new EventHttpStreamThread.OnStringLoadListener() {
+
+		@Override
+		public void onStringLoaded(String uri, String string) {
+
+			if (null == string || string.length() < 10) {// || null == configuration.getRegister()
+			} else {
+				((EventCategory)eventCategory).updateEventCount(string);
+				handler.sendEmptyMessage(100);
+			}
+		}
+
+		@Override
+		public void onMoved(String url) {
+
+
+		}
+
+		@Override
+		public void onResponse(int code) {
+			// TODO Auto-generated method stub
+			if (code != HttpStatus.SC_OK) {
+				handler.sendEmptyMessage(200);
+			}
+		}
+
+	};
+
+	public void obtianEventCount(){
+		
+		HttpStreamThread hst = new EventHttpStreamThread(
+				EntryActivity.this, Constants.obtainEventCountUrl(Configuration.getInstance().getId()),
+				onStringLoadListener);
+		hst.start();
+	}
+	
 }

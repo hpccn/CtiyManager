@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import cn.city.manager.Configuration;
 import cn.city.manager.R;
 import cn.city.manager.fragment.event.BaseEvent;
 import cn.city.manager.fragment.event.t_yaopinEvent;
@@ -143,7 +142,8 @@ public class t_yaopin extends BaseFragment implements ImageCacheFactory.OnImageL
 				                        
 //				R.id.et_solvemethod,	    
 				R.id.et_solvestatus,    
-				R.id.et_solvetime,
+				R.id.et_duedate, 
+				R.id.et_solvedate,
 				                        	    
 				R.id.et_unsolvedreason,
 				                        	    
@@ -241,7 +241,8 @@ public class t_yaopin extends BaseFragment implements ImageCacheFactory.OnImageL
 		
 //		((EditText)rootView.findViewById(R.id.et_solvemethod)).setText(content.getS_solvemethod());
 		((EditText)rootView.findViewById(R.id.et_solvestatus)).setText(content.getS_solvestatus());
-		((EditText)rootView.findViewById(R.id.et_solvetime)).setText(content.getT_solvetime());
+		((EditText)rootView.findViewById(R.id.et_solvedate)).setText(content.getT_solvedate());
+		((EditText)rootView.findViewById(R.id.et_duedate)).setText(content.getT_duedate());
 
 		((EditText)rootView.findViewById(R.id.et_unsolvedreason)).setText(content.getS_unsolvedreason());
 		//
@@ -357,7 +358,7 @@ public class t_yaopin extends BaseFragment implements ImageCacheFactory.OnImageL
 	private void initSelectChanger() {
 //		etTime = (EditText) this.findViewById(R.id.examination_date_time);
 //		int[] ids = { R.id.examination_date_time };
-		int[] ids = {R.id.et_solvetime, R.id.et_solvestatus, R.id.et_villagename, R.id.et_netname, R.id.et_license, R.id.et_weishengxuke, R.id.et_yinhuandanweitype};//, R.id.et_solvemethod, R.id.et_buildtime, R.id.et_tijiao, R.id.et_updatetime};
+		int[] ids = {R.id.et_duedate, R.id.et_solvedate, R.id.et_solvestatus, R.id.et_villagename, R.id.et_netname, R.id.et_license, R.id.et_weishengxuke, R.id.et_yinhuandanweitype};//, R.id.et_solvemethod, R.id.et_buildtime, R.id.et_tijiao, R.id.et_updatetime};
 
 		for (int id : ids) {
 //			rootView.findViewById(id).setOnClickListener(onClickListener);
@@ -397,22 +398,35 @@ public class t_yaopin extends BaseFragment implements ImageCacheFactory.OnImageL
 		case R.id.btn_commit:
 			break;
 			
-
-		case R.id.et_solvetime:
-			setDateTime(
+		case R.id.et_duedate:
+			setDateTime(context, 
 					new DateTimePickerDialog.OnDateTimeChangedListener() {
 
 						@Override
 						public void onDateTimeChanged(long millisecond) {
 							// TODO Auto-generated method stub
-							content.setT_solvetime(getDateText(millisecond));
-							setViewText(R.id.et_solvetime, millisecond);
+							content.setT_duedate(getDateText(millisecond));
+							setViewText(R.id.et_duedate, millisecond);
 						}
 
-					}, content.getT_solvetime());
+					}, content.getT_duedate());
 			break;
+		case R.id.et_solvedate:
+			setDateTime(context, 
+					new DateTimePickerDialog.OnDateTimeChangedListener() {
+
+						@Override
+						public void onDateTimeChanged(long millisecond) {
+							// TODO Auto-generated method stub
+							content.setT_solvedate(getDateText(millisecond));
+							setViewText(R.id.et_solvedate, millisecond);
+						}
+
+					}, content.getT_solvedate());
+			break;
+
 		case R.id.et_tijiao:
-			setDateTime(
+			setDateTime(context, 
 					new DateTimePickerDialog.OnDateTimeChangedListener() {
 
 						@Override
@@ -426,7 +440,7 @@ public class t_yaopin extends BaseFragment implements ImageCacheFactory.OnImageL
 
 			break;
 		case R.id.et_updatetime:
-			setDateTime(
+			setDateTime(context, 
 					new DateTimePickerDialog.OnDateTimeChangedListener() {
 
 						@Override
@@ -578,23 +592,6 @@ public class t_yaopin extends BaseFragment implements ImageCacheFactory.OnImageL
 	};
 	
 	
-	
-	private void setDateTime(DateTimePickerDialog.OnDateTimeChangedListener listener, String strDate) {
-		
-		DateTimePickerDialog dateTimePicKDialog = new DateTimePickerDialog(context);
-		Calendar calendar = Calendar.getInstance();
-		if (null != strDate) {
-			String[] data = strDate.split("-");
-			if (data.length > 2);
-				calendar.set(Integer.parseInt(data[0]), Integer.parseInt(data[1]) - 1, Integer.parseInt(data[2]));
-		}
-//		Date date = new Date();
-//		date.setYear(Integer.parseInt(data[0]));
-//		date.setMonth(Integer.parseInt(data[1]) - 1);
-//		date.setDate(Integer.parseInt(data[2]));
-		dateTimePicKDialog.dateTimePicKDialog(listener, calendar.getTimeInMillis());//date.getTime());//baseContent.getTime());
-		
-	}
 	
 //	private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private void setViewText(int id, long millisecond) {

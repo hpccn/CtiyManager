@@ -12,6 +12,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 import cn.city.manager.Configuration;
 import cn.city.manager.Constants;
 import cn.city.manager.R;
@@ -28,7 +29,7 @@ public class LoginActivity extends Activity {
 	private Animation shake;
 	private Configuration configuration;
 	private CheckBox cbAutoLogin, cbSaveLogin;
-	
+	private boolean autoLogin = false;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -65,6 +66,22 @@ public class LoginActivity extends Activity {
 		userName.setText(configuration.getUsername());
 		password.setText(configuration.getPassword());
 		cbSaveLogin.setChecked(configuration.isSaveLogin());
+		cbAutoLogin.setChecked(configuration.isAutoLogin());
+		
+		autoLogin = this.getIntent().getBooleanExtra("AutoLogin", false);
+		
+		if (autoLogin){
+//			findViewById(R.id.login).performClick();
+			handler.postDelayed(new Runnable(){
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					findViewById(R.id.login).performClick();
+				}
+				
+			}, 400);
+		}
 	}
 
 	@Override
@@ -218,6 +235,7 @@ public class LoginActivity extends Activity {
 	}
 
 	private void passwordError() {
+		Toast.makeText(this, "用户名,密码错误", Toast.LENGTH_LONG).show();
 		ViewSingletonFactory.getInstance().hideProcessDialog();
 		password.startAnimation(shake);
 	}

@@ -84,7 +84,7 @@ public class OverlayNavigation extends Activity {
             /**
              * 如果BMapManager没有初始化则初始化BMapManager
              */
-            app.mBMapManager.init(MainApplication.strKey,new MainApplication.MyGeneralListener());
+            app.mBMapManager.init(MainApplication.BAIDU_AK,new MainApplication.MyGeneralListener());
         }
         /**
           * 由于MapView在setContentView()中初始化,所以它需要在BMapManager初始化之后

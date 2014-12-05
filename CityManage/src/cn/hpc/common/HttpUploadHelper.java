@@ -77,6 +77,7 @@ public class HttpUploadHelper {
 	private int postEvent(String url, final BaseEvent baseEvent) {
 		if (null == baseEvent) return 400;
 
+		Log.d("", "commit : " + baseEvent.toJSONObject());
 		int status = 0;
 		HttpClient client = new DefaultHttpClient();
 

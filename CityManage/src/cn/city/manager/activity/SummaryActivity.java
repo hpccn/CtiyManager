@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import cn.city.manager.Configuration;
@@ -25,10 +27,16 @@ public class SummaryActivity extends BaseBrowseActivity {
 
 	protected EventCategory eventCategory = new EventCategory();
 
+	protected ViewGroup summaryEventsView;
+
 //	String title = "违章建筑 [%d]";
 	@Override
 	protected View obtainView() {
 		View view = View.inflate(this, R.layout.summary_main, null);
+		summaryEventsView = (ViewGroup) View.inflate(context, R.layout.summary_layout, null);
+		mainFrameLayout = (FrameLayout) view.findViewById(R.id.summary_main_container);
+		showEventsView();
+		
 		view.findViewById(R.id.id_reload).setVisibility(View.VISIBLE);
 		if ("t_xingshianjian".equals(category)){
 			view.findViewById(R.id.id_browse_mode).setVisibility(View.GONE);
@@ -240,25 +248,63 @@ public class SummaryActivity extends BaseBrowseActivity {
 
 	}
 
+	
 	@Override
 	protected void updateClickListent() {
-		int [] ids = {R.id.id_add_event, R.id.btn_home, R.id.btn_statistics, R.id.btn_area, R.id.btn_more,
+		int [] ids = {R.id.id_add_event, R.id.btn_statistics, R.id.btn_area, R.id.btn_more,
 				R.id.id_select_browse_category, R.id.id_select_browse_order, R.id.id_browse_mode, R.id.id_reload};
 		
 		for (int id : ids) {
 			View v = findViewById(id);
 			if (null != v) v.setOnClickListener(onClickListener);
-		}		
-	}
+		}	
+		
+		// 个性化
+		int []ids2 = {R.id.btn_home};
+		for (int id : ids2) {
+			View v = findViewById(id);
+			if (null != v) v.setOnClickListener(clickListener);
+		}	
 
-	String date[]= {"day","week","month","year","all"}; 
+	}
+	
+	protected void showEventsView(){
+		mainFrameLayout.removeAllViews();
+		mainFrameLayout.addView(summaryEventsView);
+	}
+	
+	protected View.OnClickListener clickListener = new View.OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			switch (v.getId()){
+			case R.id.btn_home:
+				if  (currentTab == R.id.btn_statistics ||
+						currentTab == R.id.btn_area ||
+						currentTab == R.id.btn_more){
+					currentTab = R.id.btn_home;
+					showEventsView();
+				} else {
+					finishActivity(0);
+					finish();
+				}
+				break;
+			default:
+				finishActivity(0);
+				finish();
+
+			}
+		}
+	};
+
+
+//	String date[]= {"day","week","month","year","all"}; 
 	@Override
 	protected void onSelectDateView(int select) {
 		// TODO Auto-generated method stub
 //		String url = String.format(Constants.weijian_list_option, date[select]);
 		count = 1;
 		Configuration.getInstance().setCount(count);
-		Configuration.getInstance().setTime(date[select]);
+		Configuration.getInstance().setTime(Constants.event_tongji_time[select]);
 		currentUrl = Constants.obtainLastEventsListUrl();//Constants.obtainWeijianListUrl(Configuration.getInstance().getUsername(), date[select]);
 //		HttpStreamThread hst = new EventHttpStreamThread(this, url, onStringLoadListener);
 //		hst.start();

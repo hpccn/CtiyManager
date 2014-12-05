@@ -55,5 +55,5 @@
 
 
 
--keep public class com.umeng.fb.ui.ThreadView {
+-keep public class com.umeng.** {
 }

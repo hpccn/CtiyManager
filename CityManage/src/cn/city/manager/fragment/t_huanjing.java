@@ -142,7 +142,8 @@ public class t_huanjing extends BaseFragment implements ImageCacheFactory.OnImag
 				                        
 //				R.id.et_solvemethod,	    
 				R.id.et_solvestatus,    
-				R.id.et_solvetime,
+				R.id.et_duedate, 
+				R.id.et_solvedate,
 				                        	    
 				R.id.et_unsolvedreason,
 				                        	    
@@ -237,7 +238,8 @@ public class t_huanjing extends BaseFragment implements ImageCacheFactory.OnImag
 		
 //		((EditText)rootView.findViewById(R.id.et_solvemethod)).setText(content.getS_solvemethod());
 		((EditText)rootView.findViewById(R.id.et_solvestatus)).setText(content.getS_solvestatus());
-		((EditText)rootView.findViewById(R.id.et_solvetime)).setText(content.getT_solvetime());
+		((EditText)rootView.findViewById(R.id.et_solvedate)).setText(content.getT_solvedate());
+		((EditText)rootView.findViewById(R.id.et_duedate)).setText(content.getT_duedate());
 
 		((EditText)rootView.findViewById(R.id.et_unsolvedreason)).setText(content.getS_unsolvedreason());
 		//
@@ -348,7 +350,7 @@ public class t_huanjing extends BaseFragment implements ImageCacheFactory.OnImag
 	private void initSelectChanger() {
 //		etTime = (EditText) this.findViewById(R.id.examination_date_time);
 //		int[] ids = { R.id.examination_date_time };
-		int[] ids = {R.id.et_solvetime, R.id.et_solvestatus, R.id.et_villagename, R.id.et_netname, R.id.et_garbagetype};//, R.id.et_solvemethod, R.id.et_buildtime, R.id.et_tijiao, R.id.et_updatetime};
+		int[] ids = {R.id.et_duedate, R.id.et_solvedate, R.id.et_solvestatus, R.id.et_villagename, R.id.et_netname, R.id.et_garbagetype};//, R.id.et_solvemethod, R.id.et_buildtime, R.id.et_tijiao, R.id.et_updatetime};
 
 		for (int id : ids) {
 //			rootView.findViewById(id).setOnClickListener(onClickListener);
@@ -387,19 +389,33 @@ public class t_huanjing extends BaseFragment implements ImageCacheFactory.OnImag
 		case R.id.btn_commit:
 			break;
 			
+		case R.id.et_duedate:
+			setDateTime(
+					context, new DateTimePickerDialog.OnDateTimeChangedListener() {
 
-		case R.id.et_solvetime:
-			setDateTime(context, 
+						@Override
+						public void onDateTimeChanged(long millisecond) {
+							// TODO Auto-generated method stub
+							content.setT_duedate(getDateText(millisecond));
+							setViewText(R.id.et_duedate, millisecond);
+						}
+
+					}, content.getT_duedate());
+			break;
+		case R.id.et_solvedate:
+			setDateTime(
+					context, 
 					new DateTimePickerDialog.OnDateTimeChangedListener() {
 
 						@Override
 						public void onDateTimeChanged(long millisecond) {
 							// TODO Auto-generated method stub
-							content.setT_solvetime(getDateText(millisecond));
-							setViewText(R.id.et_solvetime, millisecond);
+							content.setT_solvedate(getDateText(millisecond));
+							setViewText(R.id.et_solvedate, millisecond);
 						}
 
-					}, content.getT_solvetime());
+					}, 
+					content.getT_solvedate());
 			break;
 		case R.id.et_tijiao:
 			setDateTime(context,

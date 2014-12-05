@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Looper;
+import android.util.Log;
 
 import cn.city.manager.Constants;
 import cn.city.manager.activity.SummaryActivity;
@@ -172,6 +173,7 @@ public class EventSingletonFactory {
 			public void onStringLoaded(String uri, String string) {
 				
 
+//				Log.v("", "reloadEvents " + uri + ", " + string);
 				JSONObject jObj;
 				try {
 					jObj = new JSONObject(string);

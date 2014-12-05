@@ -35,9 +35,17 @@
         <item name="android:layout_marginTop">5dp</item>
     </style>
 
+    <!-- 小标题栏 -->
     <style name="thirdTitle">
-        <item name="android:layout_width">60sp</item>
-        <item name="android:textSize">12dip</item>
+        
+          <item name="android:maxWidth">140sp</item>
+        <item name="android:minWidth">80sp</item> 
+         <!--
+        <item name="android:layout_weight">1</item>
+        -->
+        <item name="android:layout_width">wrap_content</item>
+
+        <item name="android:textSize">12sp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:gravity">left</item>
@@ -47,8 +55,9 @@
     </style>
     
     <style name="baseinfothirdTitle">
-        <item name="android:layout_width">160sp</item>
-        <item name="android:textSize">14dip</item>
+		<item name="android:layout_width">wrap_content</item>
+        <item name="android:minWidth">160sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:gravity">left</item>
@@ -56,11 +65,15 @@
         <item name="android:layout_marginTop">0dp</item>
         <item name="android:layout_marginRight">2dp</item>
     </style>    
+    <!--  输入框 -->
     <style name="baseinfothirdEditText">
+        <!-- 
+        <item name="android:layout_weight">1</item>
+         -->
         <item name="android:ems">10</item>
         <item name="android:background">@drawable/edit_text_holo_dark</item>
         <item name="android:layout_width">fill_parent</item>
-        <item name="android:textSize">14dp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">left</item>
         <item name="android:gravity">left</item>
@@ -82,12 +95,15 @@
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_marginTop">5dp</item>
     </style>
-    
+    <!-- 输入框 -->
     <style name="generalEditText">
+        <!-- 
+        <item name="android:layout_weight">3</item>
+         -->
         <item name="android:ems">10</item>
         <item name="android:background">@drawable/edit_text_holo_dark</item>
         <item name="android:layout_width">fill_parent</item>
-        <item name="android:textSize">12dp</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">left</item>
         <item name="android:gravity">left</item>

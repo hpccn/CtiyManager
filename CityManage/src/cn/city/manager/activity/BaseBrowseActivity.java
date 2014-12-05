@@ -29,6 +29,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
@@ -71,6 +72,7 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 	protected int selectBrowseCategory, selectBrowseOrder;
 	protected Button btnCategory, btnOrder;
 	protected FrameLayout mainFrameLayout;
+
 	protected Page more;
 	protected Statistics statistics, townMap;
 
@@ -117,6 +119,9 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 		try {
 //			init(this);
 			rootView  = obtainView();
+			mainFrameLayout = (FrameLayout) rootView.findViewById(R.id.summary_main_container);
+
+
 			setContentView(rootView);
 //			events = loadEvents();
 			loadEvents(0);
@@ -128,9 +133,11 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 		updateClickListent();
 	}
 	
+
+	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		Log.e("", "onActivityResult : " + requestCode + ", resultCode " + resultCode);
+//		Log.e("", "onActivityResult : " + requestCode + ", resultCode " + resultCode);
 //		if (resultCode == 0 ||  (resultCode != RESULT_OK) ) {
 //			super.onActivityResult(requestCode, resultCode, data);
 //			return;
@@ -302,55 +309,55 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 	protected abstract List <BaseEvent> reloadEvents() throws Exception;
 	protected abstract List <BaseEvent> loadMoreEvents(int start) throws Exception;
 	protected List <BaseEvent> events;
-	protected void init(final Context context) throws JSONException, IOException{
-		
-		tvTitle = (TextView)this.findViewById(R.id.id_titlebar_title);
-//		tvTitle.setText(category);
-
-		StringBuilder sb=new StringBuilder();
-		InputStream is = null;//this.getAssets().open(category + ".json");//("IllegalStructure.json");//("food.txt");//
-// 打开事件文件
-		if (t_netbaseinfoGrid.class.getSimpleName().equals(category)){
-			is = this.getAssets().open("netbaseinfo.json");
-		} else {
-			is = this.getAssets().open(category + ".json");
-		}
-		
-//		InputStream is = this.getAssets().open(category + ".json");//("IllegalStructure.json");//("food.txt");//
-		InputStreamReader isr = new InputStreamReader(is);
-		BufferedReader br = new BufferedReader(isr);
-		String str = null;
-		while (null != (str = br.readLine())){
-			sb.append(str);
-		}
-
-//		System.out.println(sb.toString());
-		
-		XListView summaryView = (XListView) this.findViewById(R.id.summary_xListView); 
-		 setXListView(summaryView);
-		
-		String jsonString = sb.toString();
-
-		JSONObject jObj = new JSONObject(jsonString);
-		events = EventSingletonFactory.getInstance().create(jObj);
-//		Class<?> userClz = Class.forName(category);
-//		BaseFragment fragment = null;
-//		fragment = (BaseFragment) userClz.newInstance();
-//		events = fragment.getBaseContent();
-		
-//		tvTitle.setText(category + " [ " + events.size() + " ]");
-		if (null == events || events.isEmpty()) return;
-		tvTitle.setText(title + " [ " + events.size() + " ]");
-		if (category.equals(t_netbaseinfoGrid.class.getSimpleName())){
-			selectNetGrid(summaryView);
-		} else if (category.equals(t_netbaseinfo.class.getSimpleName())){
+//	protected void init(final Context context) throws JSONException, IOException{
+//		
+//		tvTitle = (TextView)this.findViewById(R.id.id_titlebar_title);
+////		tvTitle.setText(category);
+//
+//		StringBuilder sb=new StringBuilder();
+//		InputStream is = null;//this.getAssets().open(category + ".json");//("IllegalStructure.json");//("food.txt");//
+//// 打开事件文件
+//		if (t_netbaseinfoGrid.class.getSimpleName().equals(category)){
+//			is = this.getAssets().open("netbaseinfo.json");
+//		} else {
+//			is = this.getAssets().open(category + ".json");
+//		}
+//		
+////		InputStream is = this.getAssets().open(category + ".json");//("IllegalStructure.json");//("food.txt");//
+//		InputStreamReader isr = new InputStreamReader(is);
+//		BufferedReader br = new BufferedReader(isr);
+//		String str = null;
+//		while (null != (str = br.readLine())){
+//			sb.append(str);
+//		}
+//
+////		System.out.println(sb.toString());
+//		
+//		XListView summaryView = (XListView) this.findViewById(R.id.summary_xListView); 
+//		 setXListView(summaryView);
+//		
+//		String jsonString = sb.toString();
+//
+//		JSONObject jObj = new JSONObject(jsonString);
+//		events = EventSingletonFactory.getInstance().create(jObj);
+////		Class<?> userClz = Class.forName(category);
+////		BaseFragment fragment = null;
+////		fragment = (BaseFragment) userClz.newInstance();
+////		events = fragment.getBaseContent();
+//		
+////		tvTitle.setText(category + " [ " + events.size() + " ]");
+//		if (null == events || events.isEmpty()) return;
+//		tvTitle.setText(title + " [ " + events.size() + " ]");
+//		if (category.equals(t_netbaseinfoGrid.class.getSimpleName())){
 //			selectNetGrid(summaryView);
-			selectEventSummary(summaryView);
-		}else {
-			selectEventSummary(summaryView);
-		}
-
-	}
+//		} else if (category.equals(t_netbaseinfo.class.getSimpleName())){
+////			selectNetGrid(summaryView);
+//			selectEventSummary(summaryView);
+//		}else {
+//			selectEventSummary(summaryView);
+//		}
+//
+//	}
 	private void selectNetGrid(ListView summaryView){
 		
 		NetBaseInfoNetGridAdapter adapter = new NetBaseInfoNetGridAdapter(context, events); 
@@ -422,23 +429,23 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 		btnCategory = (Button) this.findViewById(R.id.id_select_browse_category);
 		btnOrder = (Button) this.findViewById(R.id.id_select_browse_order);
 		//分类浏览
-		String items[] = {
-				context.getResources().getString(R.string.select_browse_today),
-				context.getResources().getString(R.string.select_browse_week),
-				context.getResources().getString(R.string.select_browse_month),
-//				context.getResources().getString(R.string.select_browse_season),
-				context.getResources().getString(R.string.select_browse_year),
-				context.getResources().getString(R.string.select_browse_all)
-
-		};
-		selectBrowseCategoryItems = items;
+//		String items[] = {
+//				context.getResources().getString(R.string.select_browse_today),
+//				context.getResources().getString(R.string.select_browse_week),
+//				context.getResources().getString(R.string.select_browse_month),
+////				context.getResources().getString(R.string.select_browse_season),
+//				context.getResources().getString(R.string.select_browse_year),
+//				context.getResources().getString(R.string.select_browse_all)
+//
+//		};
+		selectBrowseCategoryItems = Constants.event_tongji_time_title;//items;
 		String OrderItems[]  = {
 //				context.getResources().getString(R.string.select_browse_order_time_forward),
 //				context.getResources().getString(R.string.select_browse_order_time_reversed)
 				"按时间", "按村庄"
 		};
 		selectBrowseOrderItems = OrderItems;
-		selectBrowseCategory = 2;
+		selectBrowseCategory = 3;
 		Configuration.getInstance().setEventTongJiTime(selectBrowseCategoryItems[selectBrowseCategory]);
 		selectBrowseOrder = 0;
 		if (null != btnCategory)
@@ -467,9 +474,12 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 //		statistics = new Statistics(this);
 		more = new More(this);
 //		townMap = new TownMap(this);
-		mainFrameLayout = (FrameLayout) this.findViewById(R.id.summary_main_container);
+
 	}
 	
+	
+	
+	protected int currentTab;
 	private View viewChild;
 	protected View.OnClickListener onClickListener = new View.OnClickListener() {
 		
@@ -481,6 +491,7 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 				finish();
 				break;
 			case R.id.btn_statistics:
+				
 				if (! Configuration.getInstance().isVillageLevel()) {
 					Toast.makeText(context, "无权查看 ", Toast.LENGTH_SHORT).show();
 
@@ -497,6 +508,7 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 				viewBrowseMode.setVisibility(View.GONE);
 				viewReload.setVisibility(View.GONE);
 				tvTitle.setText(title);
+				currentTab = v.getId();
 				break;
 			case R.id.btn_area:
 				if (! Configuration.getInstance().isVillageLevel()) {
@@ -509,6 +521,7 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 				mainFrameLayout.addView(viewChild);
 				viewBrowseMode.setVisibility(View.GONE);
 				viewReload.setVisibility(View.GONE);
+				currentTab = v.getId();
 				break;
 			case R.id.btn_more:
 				tvTitle.setText("更多功能");
@@ -517,6 +530,7 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 				mainFrameLayout.addView(viewChild);
 				viewBrowseMode.setVisibility(View.GONE);
 				viewReload.setVisibility(View.GONE);
+				currentTab = v.getId();
 				break;
 
 			case R.id.id_add_event:
@@ -707,7 +721,7 @@ public abstract class BaseBrowseActivity extends Activity implements ImageCacheF
 	protected void onRestart() {
 		// TODO Auto-generated method stub
 		super.onRestart();
-		Log.e("", "onRestart");
+//		Log.e("", "onRestart");
 //		handler.sendEmptyMessageDelayed(0x1002, 500);
 
 	}

@@ -38,15 +38,28 @@
         <include
             android:id="@+id/id_yinhuandanwei"
             layout="@layout/detail_general_yinhuandanwei" />
+ 
+        <include
+            android:id="@+id/id_jianchadate"
+            layout="@layout/detail_general_jianchadate" />
         
         <include
             android:id="@+id/id_yinhuanren"
             layout="@layout/detail_general_yinhuanren" />
+        
+        
 
         <include
             android:id="@+id/id_yinhuanlianluo"
             layout="@layout/detail_general_yinhuanlianluo" />
         
+        <!-- 新增 -->
+        <include
+            android:id="@+id/id_shengchananquan"
+            layout="@layout/detail_private_shengchananquan" />
+        
+        
+        <!-- end新增 -->
         <include
             android:id="@+id/id_belong_village"
             layout="@layout/detail_general_belong_village" />
@@ -69,7 +82,7 @@
 	
 	    <include
 	        android:id="@+id/id_solvetime"
-	        layout="@layout/detail_general_solvetime" />
+	        layout="@layout/detail_general_solvedate" />
 	        
         <include
             android:id="@+id/id_unsolvedreason"

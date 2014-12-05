@@ -4,19 +4,45 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-    <ImageView
-        android:id="@+id/id_griditem_cover"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_item"
-        android:contentDescription="" />
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/id_griditem_cover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription=""
+            android:src="@drawable/ic_item" />
+        
+        <TextView
+            android:id="@+id/id_griditem_unsolved_event"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@drawable/ic_unread_bg"
+            android:layout_alignParentRight="true"
+             />
+        
+        <TextView
+            android:id="@+id/id_griditem_new_event"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@drawable/ic_unsolved_event_bg"
+            android:layout_alignParentLeft="true"
+            />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/id_griditem_title"
+        android:minLines="2"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:layout_height="wrap_content" />
+        android:gravity="center_horizontal" />
 
 </LinearLayout>

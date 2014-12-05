@@ -125,8 +125,10 @@ public class PinchableImageView extends ImageView {
      * 设置ImageView大小等于显示的内容大小 
      */  
     public void setRect() {  
-        float scale = Math.min((float) getWidth() / (float) bmWidth,  
-                (float) getHeight() / (float) bmHeight);  
+//        float scale = Math.min((float) getWidth() / (float) bmWidth,  
+//                (float) getHeight() / (float) bmHeight);
+        float scale = Math.min((float) screenW / (float) bmWidth,  
+                (float) screenH / (float) bmHeight);  
         int w = (int) ((float) bmWidth * scale) + 1;  
         int h = (int) ((float) bmHeight * scale) + 1;  
         // int t=(screenH-h)/2;  
@@ -158,7 +160,7 @@ public class PinchableImageView extends ImageView {
     /** 
      * 处理各种缩放回弹 
      */  
-    public boolean ReScale() {  
+    public boolean reScale() {  
         float scaleX = 1f;  
         float scaleY = 1f;  
         int width = getWidth();  

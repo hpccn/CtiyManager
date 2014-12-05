@@ -67,9 +67,11 @@
 
         <TextView
             style="@style/baseinfothirdTitle"
+            android:maxWidth="160sp"
             android:text="@string/chuzuyiranyibao" />
 
         <EditText
+            
             android:id="@+id/et_chuzuyiranyibao"
             style="@style/baseinfothirdEditText"
             android:hint="@string/chuzuyiranyibao" />
