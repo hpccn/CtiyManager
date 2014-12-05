@@ -1,0 +1,31 @@
+
+事件管理-07-食品流通监管（新）        t_shipinliutongjianguan
+事件管理-07-餐饮服务监管（新）         t_canyinfuwujianguan
+事件管理-07-医疗机构监管（新）        t_yiliaojigoujianguan
+事件管理-07-药店监管（新）              t_yaodianjianguan
+事件管理-07-公共场所卫生监督（新）   t_gonggongchangsuoweisheng
+事件管理-07-生活饮用水卫生监督（新）  t_shenghuoyinyongshuiweisheng
+事件管理-07-医疗机构卫生监督（新）    t_yiliaojigouweisheng
+事件管理-07-学校卫生监督（新）        t_xuexiaoweisheng
+
+
+4-10 新的需求
+
+8个新模块字段错误修正：看下s_eventtype这个字段，客户把这个字段利用了一下。之前给你的表这个字段并没要求手机端提交，现在有3个事件，要求提交和修改这个字段。我已经修正了跟你通信的php代码。
+
+请对照我给你的新excel。
+
+公共场所卫生监督：s_eventtype，事件类型（理发/美容/洗浴/住宿/游泳馆/歌厅）。提交和更新的时候在t_jianchadate前边加上s_eventtype
+生活饮用水卫生监督：s_eventtype，原来的不对。我在程序里直接使用“小型集中式供水”。
+医疗机构卫生监督：s_eventtype，事件类型（卫生院/服务站/个体诊所）。提交和更新的时候在t_jianchadate前边加上s_eventtype
+学校卫生监督：s_eventtype，事件类型为下拉菜单，分别为（中学/小学/幼儿园）。提交和更新的时候在t_jianchadate前边加上s_eventtype
+
+
+
+http://www.iisale.com/wangge/sites/all/themes/wangge/android/to-android-event-reminder.php?id=010000
+只有一个参数id，就是登录者的s_username
+返回的json格式如下：
+{"event": {"id":"010000","session": 100,"content":[["2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2"],["4","4","4","4","4","4","4","4","4","4","4","4","4","4","4","4"]]}}
+content这里我用的是一个2维数组i_count[2][16]，来依次记录16个事件的“今天提交的事件数量 / 逾期未解决事件数量”。顺序是按照PC端左侧菜单的顺序（PC端和手机端小球都统一为该排列顺序）。
+
+

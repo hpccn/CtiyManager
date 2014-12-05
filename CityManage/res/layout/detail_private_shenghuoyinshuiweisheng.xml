@@ -1,0 +1,104 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".MainActivity$DummySectionFragment" >
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/weishengxukezheng" />
+
+        <EditText
+            android:id="@+id/et_weishengxukezheng"
+            style="@style/generalEditText"
+            android:hint="@string/weishengxukezheng" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/weishengyouxiaoqi" />
+
+        <EditText
+            android:id="@+id/et_youxiaoqi"
+            style="@style/generalEditText"
+            android:hint="@string/weishengyouxiaoqi" />
+    </LinearLayout>
+    
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/memberjiankangzheng" />
+
+        <EditText
+            android:id="@+id/et_memberjiankangzheng"
+            style="@style/generalEditText"
+            android:hint="@string/memberjiankangzheng" />
+    </LinearLayout>
+    
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/jingfangweishengzhidu" />
+
+        <EditText
+            android:id="@+id/et_weishengzhidu"
+            style="@style/generalEditText"
+            android:hint="@string/jingfangweishengzhidu" />
+    </LinearLayout>
+    
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/gongshuiliuchengtu" />
+
+        <EditText
+            android:id="@+id/et_gongshuiliuchengtu"
+            style="@style/generalEditText"
+            android:hint="@string/gongshuiliuchengtu" />
+    </LinearLayout>
+        <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/fangdaomenchuang" />
+
+        <EditText
+            android:id="@+id/et_fangdaomenchuang"
+            style="@style/generalEditText"
+            android:hint="@string/fangdaomenchuang" />
+    </LinearLayout>
+    
+    
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/xiaodusheshi" />
+
+        <EditText
+            android:id="@+id/et_xiaodusheshi"
+            style="@style/generalEditText"
+            android:hint="@string/xiaodusheshi" />
+    </LinearLayout>
+    
+        <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/jingfangenviornmentclean" />
+
+        <EditText
+            android:id="@+id/et_enviornmentclean"
+            style="@style/generalEditText"
+            android:hint="@string/jingfangenviornmentclean" />
+    </LinearLayout>
+
+</LinearLayout>

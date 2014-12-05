@@ -1,0 +1,100 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".MainActivity$DummySectionFragment" >
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/schooltype" />
+
+        <EditText
+            android:id="@+id/et_schooltype"
+            style="@style/generalEditText"
+            android:hint="@string/schooltype" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/studentnumber" />
+
+        <EditText
+            android:id="@+id/et_studentnumber"
+            style="@style/generalEditText"
+            android:hint="@string/studentnumber"
+            android:inputType="number" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/girlnumber" />
+
+        <EditText
+            android:id="@+id/et_girlnumber"
+            style="@style/generalEditText"
+            android:hint="@string/girlnumber"
+            android:inputType="number" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/boynumber" />
+
+        <EditText
+            android:id="@+id/et_boynumber"
+            style="@style/generalEditText"
+            android:hint="@string/boynumber"
+            android:inputType="number" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/studentsushe" />
+
+        <EditText
+            android:id="@+id/et_studentsushe"
+            style="@style/generalEditText"
+            android:hint="@string/studentsushe" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/sushestudentnumber" />
+
+        <EditText
+            android:id="@+id/et_sushestudentnumber"
+            style="@style/generalEditText"
+            android:hint="@string/sushestudentnumber"
+            android:inputType="number" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/baojianshi" />
+
+        <EditText
+            android:id="@+id/et_baojianshi"
+            style="@style/generalEditText"
+            android:hint="@string/baojianshi" />
+    </LinearLayout>
+
+</LinearLayout>

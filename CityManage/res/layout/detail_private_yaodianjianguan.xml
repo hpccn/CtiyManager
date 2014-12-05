@@ -1,0 +1,81 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".MainActivity$DummySectionFragment" >
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/yingyezhizhao" />
+
+        <EditText
+            android:id="@+id/et_yingyezhizhao"
+            style="@style/generalEditText"
+            android:hint="@string/yingyezhizhao" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/yaopinjingyingxukezheng" />
+
+        <EditText
+            android:id="@+id/et_yaopinjingyingxukezheng"
+            style="@style/generalEditText"
+            android:hint="@string/yaopinjingyingxukezheng" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/yaopinjingyingyouxiaoqi" />
+
+        <EditText
+            android:id="@+id/et_youxiaoqi"
+            style="@style/generalEditText"
+            android:hint="@string/yaopinjingyingyouxiaoqi" />
+    </LinearLayout>
+
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/gspcertificate" />
+
+        <EditText
+            android:id="@+id/et_gspcertificate"
+            style="@style/generalEditText"
+            android:hint="@string/gspcertificate" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/baojianpinjingyingxukezheng" />
+
+        <EditText
+            android:id="@+id/et_baojianpinjingyingxukezheng"
+            style="@style/generalEditText"
+            android:hint="@string/baojianpinjingyingxukezheng" />
+    </LinearLayout>
+    
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/baojianpinyouxiaoqi" />
+
+        <EditText
+            android:id="@+id/et_baojianpinyouxiaoqi"
+            style="@style/generalEditText"
+            android:hint="@string/baojianpinyouxiaoqi" />
+    </LinearLayout>
+    
+</LinearLayout>

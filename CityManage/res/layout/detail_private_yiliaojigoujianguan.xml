@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".MainActivity$DummySectionFragment" >
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/yingyezhizhao" />
+
+        <EditText
+            android:id="@+id/et_yingyezhizhao"
+            style="@style/generalEditText"
+            android:hint="@string/yingyezhizhao" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/yaopinchucun" />
+
+        <EditText
+            android:id="@+id/et_yaopinchucun"
+            style="@style/generalEditText"
+            android:hint="@string/yaopinchucun" />
+    </LinearLayout>
+
+</LinearLayout>

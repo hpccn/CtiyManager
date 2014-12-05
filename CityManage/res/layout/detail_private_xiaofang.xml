@@ -1,0 +1,56 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".MainActivity$DummySectionFragment" >
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/tongdaoduse" />
+
+        <EditText
+            android:id="@+id/et_tongdaoduse"
+            style="@style/generalEditText"
+            android:hint="@string/tongdaoduse" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/qicaisunhuai" />
+
+        <EditText
+            android:id="@+id/et_qicaisunhuai"
+            style="@style/generalEditText"
+            android:hint="@string/qicaisunhuai" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/dianxianluanjie" />
+
+        <EditText
+            android:id="@+id/et_dianxianluanjie"
+            style="@style/generalEditText"
+            android:hint="@string/dianxianluanjie" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/shusanbiaoshi" />
+
+        <EditText
+            android:id="@+id/et_shusanbiaoshi"
+            style="@style/generalEditText"
+            android:hint="@string/shusanbiaoshi" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,120 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context=".MainActivity$DummySectionFragment" >
+
+        <!--
+         android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        -->
+
+        <include
+            android:id="@+id/id_layout_picture"
+            android:layout_gravity="center"
+            layout="@layout/detail_general_picture" />
+
+        <include
+            android:id="@+id/id_layout_video"
+            layout="@layout/detail_general_video" />
+
+        <include layout="@layout/divider_horizontal" />
+        
+        <include
+            android:id="@+id/id_yinhuandanwei"
+            layout="@layout/detail_general_yinhuandanwei" />
+        
+
+        <include
+            android:id="@+id/id_yinhuanaddress"
+            layout="@layout/detail_general_yinhuanaddress" />
+        
+        <include
+            android:id="@+id/id_event_type"
+            layout="@layout/detail_general_event_type" />
+        
+<!-- 公有 结束-->        
+
+        <include
+            android:id="@+id/id_private_yiliaojigouweisheng"
+            layout="@layout/detail_private_yiliaojigouweisheng" />
+
+
+
+
+<!-- 公有开始 -->
+         <include
+            android:id="@+id/id_jianchadate"
+            layout="@layout/detail_general_jianchadate" />
+         
+        <include
+            android:id="@+id/id_yinhuanren"
+            layout="@layout/detail_general_yinhuanren" />
+
+        <include
+            android:id="@+id/id_yinhuanlianluo"
+            layout="@layout/detail_general_yinhuanlianluo" />
+        
+        <include
+            android:id="@+id/id_belong_village"
+            layout="@layout/detail_general_belong_village" />
+
+        <include
+            android:id="@+id/id_belong_netgrid"
+            layout="@layout/detail_general_belong_netgrid" />
+
+        <include
+            android:id="@+id/id_eventid"
+            layout="@layout/detail_general_eventid" />
+
+        <include
+            android:id="@+id/id_solvestatus"
+            layout="@layout/detail_general_solvestatus" />
+        
+	    <include
+	        android:id="@+id/id_result"
+	        layout="@layout/detail_general_result" />
+	
+	    <include
+	        android:id="@+id/id_solvetime"
+	        layout="@layout/detail_general_solvedate" />
+	        
+        <include
+            android:id="@+id/id_unsolvedreason"
+            layout="@layout/detail_general_unsolvedreason" />
+
+        <include
+            android:id="@+id/id_discoverer"
+            layout="@layout/detail_general_discoverer" />
+
+        <include
+            android:id="@+id/id_updater"
+            layout="@layout/detail_general_updater" />
+
+        <include
+            android:id="@+id/id_netleader"
+            layout="@layout/detail_general_netleader" />
+
+        <!-- 公有到此 -->
+
+        <!-- 非公有属性 -->
+
+        <FrameLayout
+            android:id="@+id/detail_container"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <!-- 公有属性 -->
+
+        <include
+            android:id="@+id/id_remark"
+            layout="@layout/detail_general_remark" />
+    </LinearLayout>
+
+</ScrollView>

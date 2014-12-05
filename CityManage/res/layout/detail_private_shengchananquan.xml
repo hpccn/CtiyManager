@@ -1,0 +1,80 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".MainActivity$DummySectionFragment" >
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/wuzhaojingying" />
+
+        <EditText
+            android:id="@+id/et_wuzhaojingying"
+            style="@style/generalEditText"
+            android:hint="@string/wuzhaojingying" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/dianxianluanjie" />
+
+        <EditText
+            android:id="@+id/et_dianxianluanjie"
+            style="@style/generalEditText"
+            android:hint="@string/dianxianluanjie" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/chejianzangluan" />
+
+        <EditText
+            android:id="@+id/et_chejianzangluan"
+            style="@style/generalEditText"
+            android:hint="@string/chejianzangluan" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/jiqiposun" />
+
+        <EditText
+            android:id="@+id/et_jiqiposun"
+            style="@style/generalEditText"
+            android:hint="@string/jiqiposun" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/dianzaxiang" />
+
+        <EditText
+            android:id="@+id/et_dianzaxiang"
+            style="@style/generalEditText"
+            android:hint="@string/dianzaxiang" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/huaxuepin" />
+
+        <EditText
+            android:id="@+id/et_huaxuepin"
+            style="@style/generalEditText"
+            android:hint="@string/huaxuepin" />
+    </LinearLayout>
+
+</LinearLayout>

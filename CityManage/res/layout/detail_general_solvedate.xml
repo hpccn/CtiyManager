@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="解决时间" >
+
+    <LinearLayout style="@style/horizontalCenter" 
+        tools:context="预期解决日期">
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/duedate" />
+
+        <EditText
+            android:id="@+id/et_duedate"
+            style="@style/generalEditTextReadonly"
+            android:hint="@string/duedate" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/horizontalCenter"
+        tools:context="实际解决时间" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/solvedate" />
+
+        <EditText
+            android:id="@+id/et_solvedate"
+            style="@style/generalEditTextReadonly"
+            android:hint="@string/solvedate" />
+    </LinearLayout>
+
+</LinearLayout>

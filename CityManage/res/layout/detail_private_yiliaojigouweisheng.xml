@@ -1,0 +1,80 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".MainActivity$DummySectionFragment" >
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/zhiyexukezheng" />
+
+        <EditText
+            android:id="@+id/et_zhiyexukezheng"
+            style="@style/generalEditText"
+            android:hint="@string/zhiyexukezheng" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/zhiyeyouxiaoqi" />
+
+        <EditText
+            android:id="@+id/et_youxiaoqi"
+            style="@style/generalEditText"
+            android:hint="@string/zhiyeyouxiaoqi" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/memberzhiyexuke" />
+
+        <EditText
+            android:id="@+id/et_memberzhiyexuke"
+            style="@style/generalEditText"
+            android:hint="@string/memberzhiyexuke" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/memberyiliaozige" />
+
+        <EditText
+            android:id="@+id/et_memberyiliaozige"
+            style="@style/generalEditText"
+            android:hint="@string/memberyiliaozige" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/weishengzhidu" />
+
+        <EditText
+            android:id="@+id/et_weishengzhidu"
+            style="@style/generalEditText"
+            android:hint="@string/weishengzhidu" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalCenter" >
+
+        <TextView
+            style="@style/thirdTitle"
+            android:text="@string/weishengenviornmentclean" />
+
+        <EditText
+            android:id="@+id/et_enviornmentclean"
+            style="@style/generalEditText"
+            android:hint="@string/weishengenviornmentclean" />
+    </LinearLayout>
+
+</LinearLayout>
